@@ -1,10 +1,10 @@
-ZVSE
+ZVSE2
 A Mod by Perry R
-Created between 2016 until 2020
+Created between 2016 until 2021
 
 
 ********************************************************************************
-                 Advanced Classes Mod for ERA 2.9x
+                 Advanced Classes Mod for ERA 3.x
 
 Content:
 
@@ -127,6 +127,132 @@ Disable Various WoG Options which can conflict with Advanced Classes Mod
 !#UN&-2:N5/-1/1/-2;                     [Write data to WoG.ini to show that Ctrl Message has already been displayed]
 
 
+
+; ==================================================================================================
+
+!#DC(SKILL_MASTER)      = 4;
+!#DC(SKILL_GRANDMASTER) = 5;
+
+!#DC(HL_DISABLE_SKILL)     = -1;
+!#DC(HL_DONT_CHANGE_SKILL) = -2;
+!#DC(HL_USE_ALL_DEFAULTS)  = -3;
+
+!#DC(HL_NUM_MAIN_CLASSES) = 3;
+!#DC(HL_NO_CLASS)         = 0;
+!#DC(HL_FIRST_CLASS)      = 1;
+
+!#DC(HL_CLASS_WARRIOR)    = 1;
+!#DC(HL_CLASS_MAGE)       = 2;
+!#DC(HL_CLASS_ADVENTURER) = 4;
+!#DC(HL_CLASS_HUNTER)     = 5;
+!#DC(HL_CLASS_BATTLEMAGE) = 3;
+!#DC(HL_CLASS_DRUID)      = 6;
+
+!#DC(HL_WARRIOR_CLASS_IND)    = 0;
+!#DC(HL_MAGE_CLASS_IND)       = 1;
+!#DC(HL_ADVENTURER_CLASS_IND) = 2;
+
+!#FU(NewIntArray):P(NUM_SECONDARY_SKILLS)/0/?i^acm_SecSkillsBackup^/(M_STORED);
+
+!?FU(acm_GetRandomSkillToUpgrade);
+; Returns random non-grandmaster secondary skill with at least specified level or (NO_SKILL) in case of failure.
+!#VA(hero:x);
+!#VA(minSkillLevel:x);
+!#VA(result:x);
+!#VA(excludeSkill:x); Optional. Specify skill to exclude from alternatives.
+
+!#VA(skills[28]:y);
+!!VR(numAlts:y):S0;
+!!VR(result):S(NO_SKILL);
+
+!!FU:A?(numArgs:y);
+!!VR(excludeSkill)&(numArgs)<(@excludeSkill):S(NO_SKILL);
+
+!!re i/0/(SEC_SKILL_LAST);
+  !!HE(hero):Si/?(skillLevel:y);
+
+  !!if&(skillLevel)>(SKILL_NOT_LEARNED)/i<>(excludeSkill);
+    !!VR(isMaster:y):S(FALSE);
+    !!VR(isGrandmaster:y):S(FALSE);
+    !!FU(H3_Mod_Check_Skill_Level)&(skillLevel)>=(SKILL_EXPERT):P(hero)/?(isMaster:y)/?(isGrandmaster:y)/i;
+    !!VR(skillLevel):+(isMaster) +(isGrandmaster);
+
+    !!if&(skillLevel)>=(minSkillLevel)/(skillLevel)<(SKILL_GRANDMASTER);
+      !!VR(skills[numAlts]):Si;
+      !!VR(numAlts):+1;
+    !!en;
+  !!en;
+!!en;
+
+!!FU&(numAlts)<=0:E;
+!!VR(randomInd:y):R0/1/(numAlts) -1;
+!!VR(result):S(skills[randomInd]);
+
+!?FU(acm_CountNumUniqueSkillsLearned);
+!#VA(hero:x);
+!#VA(result:x);
+
+!!VR(result):S0;
+
+!!re i/0/(SEC_SKILL_LAST);
+  !!HE(hero):Si/?(skillLevel:y);
+  !!VR(result)&(skillLevel)>(SKILL_NOT_LEARNED):+1;
+!!en;
+
+!?FU(acm_GetSecSkillLevel);
+!#VA(hero:x);
+!#VA(skill:x);
+!#VA(result:x);
+
+!!HE(hero):S(skill)/?(result);
+
+!!if&(result)>=(SKILL_EXPERT);
+  !!FU(H3_Mod_Check_Skill_Level):P(hero)/?(isMaster:y)/?(isGrandmaster:y)/(skill);
+  !!VR(result)&(isMaster)<>(FALSE):S(SKILL_MASTER);
+  !!VR(result)&(isGrandmaster)<>(FALSE):S(SKILL_GRANDMASTER);
+!!en;
+
+!?FU(acm_BackupAndPrepareSecSkills);
+!#VA(hero:x);
+
+!!re i/0/(SEC_SKILL_LAST);
+  !!FU(acm_GetSecSkillLevel):P(hero)/i/?(skillLevel:y);
+  !!SN:Vi^acm_SecSkillsBackup^/i/(skillLevel);
+  !!HE(hero)&(skillLevel)>=(SKILL_EXPERT)/(skillLevel)<(SKILL_GRANDMASTER):Si/(SKILL_ADVANCED);
+!!en;
+
+!?FU(acm_SetSecSkillLevel);
+!#VA(hero:x);
+!#VA(skill:x);
+!#VA(level:x);
+
+!!VR(level):F(SKILL_NOT_LEARNED)/(SKILL_GRANDMASTER);
+!!VR(nativeLevel:y):S(level) F(SKILL_NOT_LEARNED)/(SKILL_EXPERT);
+!!HE(hero):S(skill)/(nativeLevel);
+!!FU(H3_Mod_Set_Skill_ExtraLevel)&(level)=(SKILL_MASTER):P(hero)/(TRUE)/(FALSE)/(skill);
+!!FU(H3_Mod_Set_Skill_ExtraLevel)&(level)=(SKILL_GRANDMASTER):P(hero)/(TRUE)/(TRUE)/(skill);
+
+!?FU(acm_GetHeroClass);
+!#VA(hero:x);   hero ID
+!#VA(result:x); one of HL_CLASS_XXX constants or HL_NO_CLASS
+
+!!VR(result):S(HL_NO_CLASS);
+
+!!VR(isWarrior:y):Si^Master_Warrior_Hero%(hero)^;
+!!VR(isMage:y):Si^Master_Mage_Hero%(hero)^;
+!!VR(isAdventurer:y):Si^Master_Adventurer_Hero%(hero)^;
+
+!!VR(result)&(isWarrior)=(TRUE):S(HL_CLASS_WARRIOR);
+!!VR(result)&(isMage)=(TRUE):S(HL_CLASS_MAGE);
+!!VR(result)&(isAdventurer)=(TRUE):S(HL_CLASS_ADVENTURER);
+!!VR(result)&(isWarrior)=(TRUE)/(isMage)=(TRUE):S(HL_CLASS_BATTLEMAGE);
+!!VR(result)&(isWarrior)=(TRUE)/(isAdventurer)=(TRUE):S(HL_CLASS_HUNTER);
+!!VR(result)&(isMage)=(TRUE)/(isAdventurer)=(TRUE):S(HL_CLASS_DRUID);
+
+; ==================================================================================================
+
+
+
 *** Post-Instruction trigger ***
 !?PI;
 !!FU(ACM_Game_start_Options):P;         [Show additional options at game start. Will be replaced by Dialogue]
@@ -206,7 +332,7 @@ Enable Artefact to appear on the map
   !!SN:W^Grandmaster_Level_Global_Value^/?y93;
 
   !!HE-1:N?y1;
-  !!FU(Calc_Class_Points):Py1/1/?y10/?y20/?y30;
+  !!FU(Calc_Class_Points):Py1/1/?y10/?y20/?y30/(TRUE);
 
   !!SN&y10>=y93:T^AC_Misc.Grandmaster^/?z6; !!SN&y10<y93:T^AC_Misc.Master^/?z6; !!SN&y10<y92:T^AC_Misc.Expert^/?z6; !!SN&y10<y91:T^AC_Misc.Adept^/?z6;
   !!SN&y20>=y93:T^AC_Misc.Grandmaster^/?z7; !!SN&y20<y93:T^AC_Misc.Master^/?z7; !!SN&y20<y92:T^AC_Misc.Expert^/?z7; !!SN&y20<y91:T^AC_Misc.Adept^/?z7;
@@ -528,45 +654,38 @@ This needs to be done to prevent an unkown crash with Kingdom Overview
 
 !$OB6&1000;                             [Pandory Box]
 !!HE-1:N?y1;
-!!FU(H3_Mod_Compare_Fkt):Py1;           [Call Compare Funktion]
-!!FU(H3_Mod_Level_Up_Fkt):Py1;          [Call Level Up Funktion]
-!!SN:W^After_Level_Click^/1;
+!!FU(H3_Mod_Compare_Fkt):Py1;           [Call Compare Function]
+!!FU(H3_Mod_Level_Up_Fkt):Py1;          [Call Level Up Function]
 
 !$OB26&1000;                            [Event]
 !!HE-1:N?y1;
-!!FU(H3_Mod_Compare_Fkt):Py1;           [Call Compare Funktion]
-!!FU(H3_Mod_Level_Up_Fkt):Py1;          [Call Level Up Funktion]
-!!SN:W^After_Level_Click^/1;
+!!FU(H3_Mod_Compare_Fkt):Py1;           [Call Compare Function]
+!!FU(H3_Mod_Level_Up_Fkt):Py1;          [Call Level Up Function]
 
 !$OB81&1000;                            [Scholar]
 !!HE-1:N?y1;
-!!FU(H3_Mod_Compare_Fkt):Py1;           [Call Compare Funktion]
-!!FU(H3_Mod_Level_Up_Fkt):Py1;          [Call Level Up Funktion]
-!!SN:W^After_Level_Click^/1;
+!!FU(H3_Mod_Compare_Fkt):Py1;           [Call Compare Function]
+!!FU(H3_Mod_Level_Up_Fkt):Py1;          [Call Level Up Function]
 
 !$OB83&1000;                            [Quest Hut]
 !!HE-1:N?y1;
-!!FU(H3_Mod_Compare_Fkt):Py1;           [Call Compare Funktion]
-!!FU(H3_Mod_Level_Up_Fkt):Py1;          [Call Level Up Funktion]
-!!SN:W^After_Level_Click^/1;
+!!FU(H3_Mod_Compare_Fkt):Py1;           [Call Compare Function]
+!!FU(H3_Mod_Level_Up_Fkt):Py1;          [Call Level Up Function]
 
 !$OB104&1000;                           [University]
 !!HE-1:N?y1;
-!!FU(H3_Mod_Compare_Fkt):Py1;           [Call Compare Funktion]
-!!FU(H3_Mod_Level_Up_Fkt):Py1;          [Call Level Up Funktion]
-!!SN:W^After_Level_Click^/1;
+!!FU(H3_Mod_Compare_Fkt):Py1;           [Call Compare Function]
+!!FU(H3_Mod_Level_Up_Fkt):Py1;          [Call Level Up Function]
 
 !$OB113&1000;                           [Witch Hut]
 !!HE-1:N?y1;
-!!FU(H3_Mod_Compare_Fkt):Py1;           [Call Compare Funktion]
-!!FU(H3_Mod_Level_Up_Fkt):Py1;          [Call Level Up Funktion]
-!!SN:W^After_Level_Click^/1;
+!!FU(H3_Mod_Compare_Fkt):Py1;           [Call Compare Function]
+!!FU(H3_Mod_Level_Up_Fkt):Py1;          [Call Level Up Function]
 
 !$OB98/8&1000;                          [Conflux]
 !!HE-1:N?y1;
-!!FU(H3_Mod_Compare_Fkt):Py1;           [Call Compare Funktion]
-!!FU(H3_Mod_Level_Up_Fkt):Py1;          [Call Level Up Funktion]
-!!SN:W^After_Level_Click^/1;
+!!FU(H3_Mod_Compare_Fkt):Py1;           [Call Compare Function]
+!!FU(H3_Mod_Level_Up_Fkt):Py1;          [Call Level Up Function]
 
 
 ********************************************************************************
@@ -577,8 +696,98 @@ This needs to be done to prevent an unkown crash with Kingdom Overview
 !!VRx16|y1=1/y1=2:S27;                  [If Skill at Basic or Advanced found exit Loop]
 
 ********************************************************************************
-!?FU(Calc_Class_Points);                [Calculate class points function]
+!?FU(Calc_Class_Points);
+!#VA(hero:x);
+!#VA(dontCopyPointsToGlobals:x);
+!#VA(warriorPoints:x);    OUT
+!#VA(magePoints:x);       OUT
+!#VA(adventurerPoints:x); OUT
+!#VA(showRealPoints:x);   Optional. Do not manipulate class points, return them as is for display only. Default: false.
 
+; Call original function for compatibility reasons, exit if it's called for display only
+!!FU:A?(numArgs:y);
+!!FU(Calc_Class_Points_Original):P(hero)/(dontCopyPointsToGlobals)/?(warriorPoints)/?(magePoints)/?(adventurerPoints);
+!!FU&(showRealPoints)<>(FALSE):E;
+
+; Copy class points to list to operate them in loops
+!#VA(classPoints[HL_NUM_MAIN_CLASSES]:y);
+!!VR(classPoints[HL_WARRIOR_CLASS_IND]):S(warriorPoints);
+!!VR(classPoints[HL_MAGE_CLASS_IND]):S(magePoints);
+!!VR(classPoints[HL_ADVENTURER_CLASS_IND]):S(adventurerPoints);
+
+; Desired class can be selected by player to force upgrading only that class points and ignore non-revevant skills
+!!VR(desiredClass:y):Si^acm_desiredClass_%(hero)^;
+
+!!if&(desiredClass)<>(HL_NO_CLASS);
+  ; Desired class is set, nullify all non-relevant class points
+  !!VR(testClass:y):S(HL_FIRST_CLASS);
+
+  !!re i/0/(HL_NUM_MAIN_CLASSES)/1/-1;
+    ; If tested class is the desired class or is a part of desired multiclass, multiplier will be 1, 0 otherwise
+    !!VR(classPointsMultiplier:y):S(desiredClass) &(testClass) F0/1;
+    !!VR(classPoints[i]):*(classPointsMultiplier);
+    !!VR(testClass):Sd<<1;
+  !!en;
+!!el;
+  ; Desired class is not set, leave two highest points classes and nullify the third
+  ; This is global mod constaints: 3 main classes are not supported. Multiclasses are formed by max 2 main classes
+  !!VR(weakestClassIndex:y):S-1;
+  !!VR(weakestClassPoints:y):S(INT_MAX);
+
+  ; Determine class with lowest points
+  !!re i/0/(HL_NUM_MAIN_CLASSES)/1/-1;
+    !!if&(classPoints[i])<(weakestClassPoints);
+      !!VR(weakestClassIndex):Si;
+      !!VR(weakestClassPoints):S(classPoints[i]);
+    !!en;
+  !!en;
+
+  ; Nullify weakest class points
+  !!VR(classPoints[weakestClassIndex]):S0;
+!!en; else
+
+; Re-evaluate global class variables
+!!VR(masterClassRequiredPoints:y):Si^Master_Level_Global_Value^;
+!!VR(grandmasterClassRequiredPoints:y):Si^Grandmaster_Level_Global_Value^;
+
+!!VRi^Master_Warrior_Hero%(hero)^:S(FALSE);
+!!VRi^Master_Mage_Hero%(hero)^:S(FALSE);
+!!VRi^Master_Adventurer_Hero%(hero)^:S(FALSE);
+!!VRi^Grandmaster_Warrior_Hero%(hero)^:S(FALSE);
+!!VRi^Grandmaster_Mage_Hero%(hero)^:S(FALSE);
+!!VRi^Grandmaster_Adventurer_Hero%(hero)^:S(FALSE);
+
+!!if&(classPoints[HL_WARRIOR_CLASS_IND])>=(masterClassRequiredPoints)/(classPoints[HL_MAGE_CLASS_IND])>=(masterClassRequiredPoints);
+  !!VRi^Master_Warrior_Hero%(hero)^:S(TRUE);
+  !!VRi^Master_Mage_Hero%(hero)^:S(TRUE);
+!!el&(classPoints[HL_WARRIOR_CLASS_IND])>=(masterClassRequiredPoints)/(classPoints[HL_ADVENTURER_CLASS_IND])>=(masterClassRequiredPoints);
+  !!VRi^Master_Warrior_Hero%(hero)^:S(TRUE);
+  !!VRi^Master_Adventurer_Hero%(hero)^:S(TRUE);
+!!el&(classPoints[HL_MAGE_CLASS_IND])>=(masterClassRequiredPoints)/(classPoints[HL_ADVENTURER_CLASS_IND])>=(masterClassRequiredPoints);
+  !!VRi^Master_Mage_Hero%(hero)^:S(TRUE);
+  !!VRi^Master_Adventurer_Hero%(hero)^:S(TRUE);
+!!el;
+  !!VRi^Master_Warrior_Hero%(hero)^&(classPoints[HL_WARRIOR_CLASS_IND])>=(masterClassRequiredPoints):S(TRUE);
+  !!VRi^Master_Mage_Hero%(hero)^&(classPoints[HL_MAGE_CLASS_IND])>=(masterClassRequiredPoints):S(TRUE);
+  !!VRi^Master_Adventurer_Hero%(hero)^&(classPoints[HL_ADVENTURER_CLASS_IND])>=(masterClassRequiredPoints):S(TRUE);
+  !!VRi^Grandmaster_Warrior_Hero%(hero)^&(classPoints[HL_WARRIOR_CLASS_IND])>=(grandmasterClassRequiredPoints):S(TRUE);
+  !!VRi^Grandmaster_Mage_Hero%(hero)^&(classPoints[HL_MAGE_CLASS_IND])>=(grandmasterClassRequiredPoints):S(TRUE);
+  !!VRi^Grandmaster_Adventurer_Hero%(hero)^&(classPoints[HL_ADVENTURER_CLASS_IND])>=(grandmasterClassRequiredPoints):S(TRUE);
+!!en;
+
+; Return updated class points
+!!VR(warriorPoints):S(classPoints[HL_WARRIOR_CLASS_IND]);
+!!VR(magePoints):S(classPoints[HL_MAGE_CLASS_IND]);
+!!VR(adventurerPoints):S(classPoints[HL_ADVENTURER_CLASS_IND]);
+
+; Update global points
+!!if&(dontCopyPointsToGlobals)=(FALSE);
+  !!VRi^Warrior_Value^:S(classPoints[HL_WARRIOR_CLASS_IND]);
+  !!VRi^Mage_Value^:S(classPoints[HL_MAGE_CLASS_IND]);
+  !!VRi^Adventurer_Value^:S(classPoints[HL_ADVENTURER_CLASS_IND]);
+!!en;
+
+!?FU(Calc_Class_Points_Original);                [Calculate class points function]
 *!IF:M^Now runs calc class points fkt %X1 und x2 is %X2^;
 
 !!HEx1:B2/?y2;
@@ -864,7 +1073,7 @@ This needs to be done to prevent an unkown crash with Kingdom Overview
 
 
 ********************************************************************************
-!?FU(H3_Mod_Compare_Fkt);               [Compare Funktion]
+!?FU(H3_Mod_Compare_Fkt);               [Compare Function]
 
 *!IF:M^Now runs compare fkt %X1^;
 
@@ -872,7 +1081,7 @@ This needs to be done to prevent an unkown crash with Kingdom Overview
 !!SN:W^Mage_Value^/?y21;
 !!SN:W^Adventurer_Value^/?y31;
 
-!!FU(Calc_Class_Points):Px1/0;          [Call Calculation Funktion]
+!!FU(Calc_Class_Points):Px1/0;          [Call Calculation Function]
 
 !!SN:W^Warrior_Value^/?y10;
 !!SN:W^Mage_Value^/?y20;
@@ -1049,8 +1258,6 @@ This needs to be done to prevent an unkown crash with Kingdom Overview
 !!en;
 **********************************************
 
-!!SN:W^After_Level_Click^/0;
-
 !!SN:W^Expert_Level_Global_Value^/?y11;
 !!SN:W^Master_Level_Global_Value^/?y21;
 !!SN:W^Grandmaster_Level_Global_Value^/?y31; [Set Global Values for Class Here eg to reach Grandmaster or Master]
@@ -1075,15 +1282,14 @@ This needs to be done to prevent an unkown crash with Kingdom Overview
 
 !!HE-1:N?y1;                            [Give Advanced Level if enough points when closing Hero Screen]
 !!if&y1>=0/y1<=155;
-!!FU(H3_Mod_Compare_Fkt):Py1;           [Call Compare Funktion]
-!!FU(H3_Mod_Level_Up_Fkt):Py1;          [Call Level Up Funktion]
-*!SN:W^After_Level_Click^/1;
+!!FU(H3_Mod_Compare_Fkt):Py1;           [Call Compare Function]
+!!FU(H3_Mod_Level_Up_Fkt):Py1;          [Call Level Up Function]
 !!en;
 
 
 !$OB63/51;                              [Post visit Trigger Market of Time]
 !!HE-1:N?y1;
-!!FU(Calc_Class_Points):Py1/1;          [Call Calculation Funktion to delete Master/Grandmaster Rank if not enough Class Points]
+!!FU(Calc_Class_Points):Py1/1;          [Call Calculation Function to delete Master/Grandmaster Rank if not enough Class Points]
 
 
 !?FU(AC_Set_SS_Names);
@@ -1325,6 +1531,65 @@ x1 - hero id, x2 - return master rank, x3 - return GM rank, x4 - skill id
 
 !!VRx2&y1=1:S1;                         [Master Yes]
 !!VRx3&y2=1:S1;                         [Grandmaster Yes]
+
+!?FU(H3_Mod_Set_Skill_ExtraLevel);
+x1 - hero id, x2 - master rank, x3 - GM rank, x4 - skill id
+!!SN&x4=0:W^H3_Pathfinding_0_Hero%X1^/x2;
+!!SN&x4=0:W^H3_Pathfinding_1_Hero%X1^/x3;
+!!SN&x4=1:W^H3_Archery_0_Hero%X1^/x2;
+!!SN&x4=1:W^H3_Archery_1_Hero%X1^/x3;
+!!SN&x4=2:W^H3_Logistics_0_Hero%X1^/x2;
+!!SN&x4=2:W^H3_Logistics_1_Hero%X1^/x3;
+!!SN&x4=3:W^H3_Scouting_0_Hero%X1^/x2;
+!!SN&x4=3:W^H3_Scouting_1_Hero%X1^/x3;
+!!SN&x4=4:W^H3_Diplomacy_0_Hero%X1^/x2;
+!!SN&x4=4:W^H3_Diplomacy_1_Hero%X1^/x3;
+!!SN&x4=5:W^H3_Nobility_0_Hero%X1^/x2;
+!!SN&x4=5:W^H3_Nobility_1_Hero%X1^/x3;
+!!SN&x4=6:W^H3_Leadership_0_Hero%X1^/x2;
+!!SN&x4=6:W^H3_Leadership_1_Hero%X1^/x3;
+!!SN&x4=7:W^H3_Wisdom_0_Hero%X1^/x2;
+!!SN&x4=7:W^H3_Wisdom_1_Hero%X1^/x3;
+!!SN&x4=8:W^H3_Mysticism_0_Hero%X1^/x2;
+!!SN&x4=8:W^H3_Mysticism_1_Hero%X1^/x3;
+!!SN&x4=9:W^H3_Luck_0_Hero%X1^/x2;
+!!SN&x4=9:W^H3_Luck_1_Hero%X1^/x3;
+!!SN&x4=10:W^H3_Ballistics_0_Hero%X1^/x2;
+!!SN&x4=10:W^H3_Ballistics_1_Hero%X1^/x3;
+!!SN&x4=11:W^H3_Eagle Eye_0_Hero%X1^/x2;
+!!SN&x4=11:W^H3_Eagle Eye_1_Hero%X1^/x3;
+!!SN&x4=12:W^H3_Necromancy_0_Hero%X1^/x2;
+!!SN&x4=12:W^H3_Necromancy_1_Hero%X1^/x3;
+!!SN&x4=13:W^H3_Estates_0_Hero%X1^/x2;
+!!SN&x4=13:W^H3_Estates_1_Hero%X1^/x3;
+!!SN&x4=14:W^H3_Fire Magic_0_Hero%X1^/x2;
+!!SN&x4=14:W^H3_Fire Magic_1_Hero%X1^/x3;
+!!SN&x4=15:W^H3_Air Magic_0_Hero%X1^/x2;
+!!SN&x4=15:W^H3_Air Magic_1_Hero%X1^/x3;
+!!SN&x4=16:W^H3_Water Magic_0_Hero%X1^/x2;
+!!SN&x4=16:W^H3_Water Magic_1_Hero%X1^/x3;
+!!SN&x4=17:W^H3_Earth Magic_0_Hero%X1^/x2;
+!!SN&x4=17:W^H3_Earth Magic_1_Hero%X1^/x3;
+!!SN&x4=18:W^H3_Scholar_0_Hero%X1^/x2;
+!!SN&x4=18:W^H3_Scholar_1_Hero%X1^/x3;
+!!SN&x4=19:W^H3_Tactics_0_Hero%X1^/x2;
+!!SN&x4=19:W^H3_Tactics_1_Hero%X1^/x3;
+!!SN&x4=20:W^H3_Artillery_0_Hero%X1^/x2;
+!!SN&x4=20:W^H3_Artillery_1_Hero%X1^/x3;
+!!SN&x4=21:W^H3_Learning_0_Hero%X1^/x2;
+!!SN&x4=21:W^H3_Learning_1_Hero%X1^/x3;
+!!SN&x4=22:W^H3_Offense_0_Hero%X1^/x2;
+!!SN&x4=22:W^H3_Offense_1_Hero%X1^/x3;
+!!SN&x4=23:W^H3_Armorer_0_Hero%X1^/x2;
+!!SN&x4=23:W^H3_Armorer_1_Hero%X1^/x3;
+!!SN&x4=24:W^H3_Intelligence_0_Hero%X1^/x2;
+!!SN&x4=24:W^H3_Intelligence_1_Hero%X1^/x3;
+!!SN&x4=25:W^H3_Sorcery_0_Hero%X1^/x2;
+!!SN&x4=25:W^H3_Sorcery_1_Hero%X1^/x3;
+!!SN&x4=26:W^H3_Resistance_0_Hero%X1^/x2;
+!!SN&x4=26:W^H3_Resistance_1_Hero%X1^/x3;
+!!SN&x4=27:W^H3_First Aid_0_Hero%X1^/x2;
+!!SN&x4=27:W^H3_First Aid_1_Hero%X1^/x3;
 
 ********************************************************************************
 !?FU(AC_Set_SS_Description);
@@ -1867,403 +2132,49 @@ x1 - hero id, x2 - return master rank, x3 - return GM rank, x4 - skill id
 !!en;
 ***************
 
+!?FU(OnHeroGainLevel);
+!!HE(CURRENT_HERO):N?(hero:y);
+!!FU(AC_Function_1)&(hero)>=(HERO_FIRST)/(hero)<=(HERO_LAST_WOG):P(hero); [Adjust Primary Skills for different classes]
 
+!?FU(OnHeroGainLevel)&(ERM_FLAG_IS_HUMAN)/i^Game_Start_Value^=10;
+!!HE(CURRENT_HERO):N?(hero:y);
+!!FU(Set_SS_Skill_Name_and_Text):P;    [Reset Skill Descriptions to show correct name in level up Screen]
+!!FU(H3_Mod_Level_Up_Routine):P(hero); [Determine Skills to level Up to Master/GM]
 
-********************************************************************************
-!?HL-1;
-*!FU:E; Disabled because of Alfs code
-!!HE-1:N?y99;                           [Get current hero #]
-!!FU(AC_Function_1)&y99>=0/y99<=155:Py99;[Adjust Primary Skills for different classes]
-
-********************************************************************************
-!?HL-1&1000;                            [Level up trigger]
-!!SN:W^Game_Start_Value^/?y2;           [So it only runs after the map has started]
-!!FU&y2<>10:E;
-
-!!SN:W^Number_Of_Hero_Skills^/?y1; !!FU&y1=28:E;
-
-!!FU(Set_SS_Skill_Name_and_Text):P;     [Reset Skill Descriptions to show correct name in level up Screen]
-!!SN:W^After_Level_Click^/1;            [After hero gains a level activate map click to run compare function]
-
-***********************************
-!!SN:W^After_Level_Up_Flag^/?y1;        [This Part runs only if several levels where gained at once]
-!!if&y1>=0;
-
-!!SN:W^LeftSkill^/?y3;
-!!HEy1:Sy3/?y20;                        [Check which Skill was leveled]
-!!FU(H3_Mod_Check_Skill_Level):Py1/?y10/?y11/y3; [Check Skill Level]
-!!FU(H3_Mod_Assign_Level_UP)&y10=0/y20=3:Py1/0/0/y3; [left side for Master Skills, Pass Hero Level and 0 for Master and choosen skill]
-!!FU(H3_Mod_Assign_Level_UP)&y10=1/y20=3:Py1/1/0/y3; [left side for Master Skills, Pass Hero Level and 0 for Master and choosen skill]
-!!HEy1&y20=2:Sy3/3;                     [Set Skills Back to Expert]
-
-*!IF:M^Left Side Assign in HL %Y3 und %Y4 und y11 is %Y11 und y10 is %Y10 und %Y11 und y20 is %Y20 and Hero number is y1 is %Y1^;
-
-!!SN:W^RightSkill^/?y4;
-!!if&y4>=0;
-!!HEy1:Sy4/?y21;
-!!FU(H3_Mod_Check_Skill_Level):Py1/?y12/?y13/y4; [Check Skill Level]
-!!FU(H3_Mod_Assign_Level_UP)&y12=0/y21=3:Py1/0/0/y4; [right side]
-!!FU(H3_Mod_Assign_Level_UP)&y12=1/y21=3:Py1/1/0/y4; [right side]
-!!HEy1&y21=2:Sy4/3;                     [Set Skills Back to Expert]
-!!en;
-
-*!IF:M^Right Side %Y3 und %Y4 und %Y99 und %Y12 und %Y13^;
-
-!!SN:W^LeftSkill^/-3;
-!!SN:W^RightSkill^/-3;
-!!SN:W^After_Level_Up_Flag^/-1;
-!!en;
-***********************************
-
-
-
-
-
-***********************************
-!!HE-1:N?y99;                           [Get current hero #]
-
-!!FU(H3_Mod_Level_Up_Routine):Py99;     [Determine Skills to level Up to Master/GM]
-!!SN:W^LeftSkill^/?y3;
-!!SN:W^RightSkill^/?y4;
-*!IF:M^%Y3 und %Y4 und %Y99^;
-!!FU|y3=-3/y4=-3:E;                     [Exit]
-
-!!SN:W^Global_Skill_Limit^/?y80;
-!!SN:W^Number_Of_Hero_Skills^/?y10;
-!!if&y10<y80;                          [If hero still has other skills to learn  This part is so that a hero not only learns Master and Grandmaster Skills if he still has a free skill to choose from]
-!!HE-1&y3>=0:Sy3/2;                     [Reduce Skill Level so it can be showed in Hero Screen]
-!!HL:S?y77/y3/?y60;                     [Show Left skill to improve to M/GM and right skill set to random]
-!!en;
-
-!!if&y10>=y80;                         [If Hero knows his Max Skills   This part is so that a hero not only learns Master and Grandmaster Skills if he still has basic or advanced skills left to learn]
-!!DO(Check_SS_SKILLS)/0/27/1:Py99/?y50; [Check for Basic or Advanced Skill Level]
-!!HE-1&y3>=0:Sy3/2;                     [Reduce Skill Level so it can be showed in Hero Screen]
-!!HE-1&y4>=0/y50=0:Sy4/2;
-!!HL&y50=0:S?y77/y3/y4;                 [y50=0 means no more Basic or Advanced skills left]
-*!IF:M^Hello2 %Y10 %Y50^;
-*!HE-1&y4>=0/y50=1:Sy4/2;                            If a skill still at Basic or Advanced advance it
-!!HL&y50=1:S?y77/y3/?y60;               [Show Left skill to improve to M/GM and right skill set to random]
-!!SN&y50=1:W^RightSkill^/-2;            [Set right skill to disable if it was replaced with a random skill]
-!!en;
-
-
-!!SN:W^After_Level_Up_Flag^/y99;
-***********************************
-
-
-
-
-********************************************************************************
-!?CM5&1000;                             [This Part runs after Hero gained a Level to assign new Master Skills]
-
-!!SN:W^After_Level_Up_Flag^/?y1;
-!!FU&y1=-1:E;
-
-!!SN:W^LeftSkill^/?y3;
-!!SN:W^RightSkill^/?y4;
-!!FU|y3=-3/y4=-3:E;                     [Exit]
-
-!!if&y3<>-3/y4<>-3;
-!!SN:W^LeftSkill^/?y3;
-!!HEy1:Sy3/?y20;                        [Check which Skill was leveled]
-!!FU(H3_Mod_Check_Skill_Level):Py1/?y10/?y11/y3; [Check Skill Level]
-!!FU(H3_Mod_Assign_Level_UP)&y10=0/y20=3:Py1/0/0/y3; [Assign left side for Master Skills, Pass Hero Level and 0 for Master and choosen skill]
-!!FU(H3_Mod_Assign_Level_UP)&y10=1/y20=3:Py1/1/0/y3; [Assign left side for Master Skills, Pass Hero Level and 0 for Master and choosen skill]
-!!HEy1&y20=2:Sy3/3;                     [Set Skills Back to Expert]
-
-*!IF:M^Assign in CM5 %Y3 und %Y4 und %Y99 und %Y10 und %Y11^;
-
-!!SN:W^RightSkill^/?y4;
-!!if&y4>=0;
-!!HEy1:Sy4/?y21;
-!!FU(H3_Mod_Check_Skill_Level):Py1/?y12/?y13/y4; [Check Skill Level]
-!!FU(H3_Mod_Assign_Level_UP)&y12=0/y21=3:Py1/0/0/y4; [Assign right side]
-!!FU(H3_Mod_Assign_Level_UP)&y12=1/y21=3:Py1/1/0/y4; [Assign right side]
-!!HEy1&y21=2:Sy4/3;                     [Set Skills Back to Expert]
-!!en;
-
-!!SN:W^LeftSkill^/-3;
-!!SN:W^RightSkill^/-3;
-!!SN:W^After_Level_Up_Flag^/-1;
-!!en;
-
-
-
-********************************************************************************
-!?CM5&1000;                             [After Level Up First Click on Adventure Map to Run Class Level Up]
+!?FU(OnGameEnter);
 !!SN:W^Game_Start_Value^/10;            [Activate First Click on Adventure Map activates Dialouge  [Works only after game start]
 
-!!SN:W^After_Level_Click^/?y1;
-!!FU&y1<>1:E;
+!?FU(acm_RestoreSecSkillsAndApplyDetectedUpgrades);
+!#VA(hero:x);
 
-!!HE-1:N?y1;
-!!FU(H3_Mod_Compare_Fkt)&y1>=0/y1<=155:Py1; [Call Compare Funktion]
-!!FU(H3_Mod_Level_Up_Fkt)&y1>=0/y1<=155:Py1; [Call Level Up Funktion]
+!!re i/0/(SEC_SKILL_LAST);
+  !!FU(acm_GetSecSkillLevel):P(hero)/i/?(skillLevel:y);
+  !!SN:Vi^acm_SecSkillsBackup^/i/?(prevSkillLevel:y);
 
-!!SN:W^After_Level_Click^/0;            [Deactivate the Map Click]
-
-
+  !!if&(skillLevel)>=(prevSkillLevel)/(prevSkillLevel)>=(SKILL_EXPERT)/(prevSkillLevel)<(SKILL_GRANDMASTER);
+    !!VR(newSkillLevel:y):S(prevSkillLevel) +1;
+    !!FU(acm_SetSecSkillLevel):P(hero)/i/(newSkillLevel);
+  !!el;
+    !!HE(hero):Si/?(nativeSkillLevel:y);
+    !!FU(acm_SetSecSkillLevel)&(nativeSkillLevel)<(prevSkillLevel):P(hero)/i/(prevSkillLevel);
+  !!en;
+!!en;
 
 !?FU(H3_Mod_Level_Up_Routine);
+!#VA(hero:x);
 
-!!FU(Calc_Class_Points):Px1/1/?y10/?y20/?y30; [Return value for class points from current hero]
-
-*!SN:W^Warrior_Value^/?y10;
-*!SN:W^Mage_Value^/?y20;
-*!SN:W^Adventurer_Value^/?y30;
-
-!!SN:W^Adept_Level_Global_Value^/?y90;
-!!SN:W^Expert_Level_Global_Value^/?y91;
-!!SN:W^Master_Level_Global_Value^/?y92; [Read out global values for Master rank]
-!!SN:W^Grandmaster_Level_Global_Value^/?y93; [Read out global values for GM rank]
-
-!!SN:W^Global_Skill_Limit^/?y40;
-
-!!SN:W^LeftSkill^/-3;
-!!SN:W^RightSkill^/-3;
-
-
-!!FU&y10<y92/y20<y92/y30<y92:E;         [If no requirements met Exit Fkt]
-
-!!VRy70:S0;
-*Decide which Class has highest points*
-!!VRy70&y10>y20/y10>y30:S1;             [Warrior]
-!!VRy70&y20>y10/y20>y30:S2;             [Mage]
-!!VRy70&y30>y20/y30>y10:S3;             [Adventurer]
-
-!!VRy70&y10>=y92/y20>=y92:S4;           [If two Master Ranks choose from both skill pools  Master Warrior and Master Mage]
-!!VRy70&y10>=y92/y30>=y92:S5;           [If two Master Ranks choose from both skill pools  Master Warrior and Master Adventurer]
-!!VRy70&y20>=y92/y30>=y92:S6;           [If two Master Ranks choose from both skill pools  Master Adventurer and Master Mage]
-
-!!FU&y70=0:E;                           [Exit if no requirement met]
-**Choose the Skill Pack which is offered to the Hero
-
-!!if&y10>=y92/y70=1;                   [Warrior]
-!!VRy50:S1;                             [Archery]
-!!VRy51:S6;                             [Leadership]
-!!VRy52:S9;                             [Luck]
-!!VRy53:S10;                            [Ballistics]
-!!VRy54:S19;                            [Tactics]
-!!VRy55:S22;                            [Offense]
-!!VRy56:S23;                            [Armorer]
-!!VRy57:S26;                            [Resistance]
-!!VRy58:S12;                            [Necromancy]
-!!VRy59:S20;                            [Artillery]
-
-!!VRy80:S9;                             [**Laufvariable]
+!!re i/0/(SEC_SKILL_LAST);
+  !!FU(H3_Mod_Skill_Loop10):P(hero)/i;
 !!en;
 
-!!if&y20>=y92/y70=2;                   [Mage]
-!!VRy50:S8;                             [Mysticism]
-!!VRy51:S14;                            [Fire]
-!!VRy52:S15;                            [Air]
-!!VRy53:S16;                            [Water]
-!!VRy54:S17;                            [Earth]
-!!VRy55:S18;                            [Scholar]
-!!VRy56:S24;                            [Intelligence]
-!!VRy57:S25;                            [Sorcery]
-!!VRy58:S12;                            [Necromancy]
-!!VRy59:S7;                             [Wisdom]
+!!FU(acm_BackupAndPrepareSecSkills):P(hero);
+!!FU(Calc_Class_Points):P(hero)/1/?(warriorPoints:y)/?(magePoints:y)/?(adventurerPoints:y);
 
-!!VRy80:S9;                             [**Laufvariable]
-!!en;
-
-!!if&y30>=y92/y70=3;                   [Adventurer]
-!!VRy50:S0;                             [Pathfinding]
-!!VRy51:S2;                             [Logistics]
-!!VRy52:S3;                             [Scouting]
-!!VRy53:S11;                            [Eagle Eye]
-!!VRy54:S13;                            [Estates]
-
-!!VRy55:S21;                            [Learning]
-!!VRy56:S27;                            [First Aid]
-!!VRy57:S12;                            [Necromancy]
-!!VRy58:S5;                             [Nobility/Navigation]
-!!VRy59:S4;                             [Diplomacy]
-
-!!VRy80:S9;                             [**Laufvariable]
-!!en;
-
-!!if&y70=4;                            [**Master Warrior and Master Mage -> Battlemage]
-!!VRy50:S1;                             [Archery]
-!!VRy51:S6;                             [Leadership]
-!!VRy52:S9;                             [Luck]
-!!VRy53:S10;                            [Ballistics]
-!!VRy54:S19;                            [Tactics]
-!!VRy55:S22;                            [Offense]
-!!VRy56:S23;                            [Armorer]
-!!VRy57:S26;                            [Resistance]
-
-!!VRy58:S8;                             [Mysticism]
-!!VRy59:S14;                            [Fire]
-!!VRy60:S15;                            [Air]
-!!VRy61:S16;                            [Water]
-!!VRy62:S17;                            [Earth]
-!!VRy63:S18;                            [Scholar]
-!!VRy64:S24;                            [Intelligence]
-!!VRy65:S25;                            [Sorcery]
-
-!!VRy66:S12;                            [Necromancy]
-!!VRy67:S7;                             [Wisdom]
-!!VRy68:S20;                            [Artillery]
-
-!!VRy80:S18;                            [**Laufvariable]
-!!en;
-
-!!if&y70=5;                            [**Master Warrior and Master Adventurer -> Hunter]
-!!VRy50:S1;                             [Archery]
-!!VRy51:S6;                             [Leadership]
-!!VRy52:S9;                             [Luck]
-!!VRy53:S10;                            [Ballistics]
-!!VRy54:S19;                            [Tactics]
-!!VRy55:S22;                            [Offense]
-!!VRy56:S23;                            [Armorer]
-!!VRy57:S26;                            [Resistance]
-
-!!VRy58:S0;                             [Pathfinding]
-!!VRy59:S2;                             [Logistics]
-!!VRy60:S3;                             [Scouting]
-!!VRy61:S11;                            [Eagle Eye]
-!!VRy62:S13;                            [Estates]
-!!VRy63:S20;                            [Artillery]
-!!VRy64:S21;                            [Learning]
-!!VRy65:S27;                            [First Aid]
-
-!!VRy66:S12;                            [Necromancy]
-!!VRy67:S5;                             [Nobility/Navigation]
-!!VRy68:S4;                             [Diplomacy]
-
-!!VRy80:S18;                            [**Laufvariable]
-!!en;
-
-!!if&y70=6;                            [**Master Adventurer and Master Mage -> Druid]
-!!VRy50:S0;                             [Pathfinding]
-!!VRy51:S2;                             [Logistics]
-!!VRy52:S3;                             [Scouting]
-!!VRy53:S11;                            [Eagle Eye]
-!!VRy54:S13;                            [Estates]
-
-!!VRy55:S21;                            [Learning]
-!!VRy56:S27;                            [First Aid]
-
-!!VRy57:S8;                             [Mysticism]
-!!VRy58:S14;                            [Fire]
-!!VRy59:S15;                            [Air]
-!!VRy60:S16;                            [Water]
-!!VRy61:S17;                            [Earth]
-!!VRy62:S18;                            [Scholar]
-!!VRy63:S24;                            [Intelligence]
-!!VRy64:S25;                            [Sorcery]
-
-!!VRy65:S12;                            [Necromancy]
-!!VRy66:S7;                             [Wisdom]
-!!VRy67:S4;                             [Diplomacy]
-!!VRy68:S5;                             [Nobility/Navigation]
-
-!!VRy80:S18;                            [**Laufvariable]
-!!en;
-
-*!IF:M^2 y10 %Y10  y20 %Y20  y30 %Y30 and            Y70 is%Y70^;
-
-!!if|y10>=y93/y20>=y93/y30>=y93;       [If Grandmaster Rank can be learned start here]
-
-***************
-!!VRy90:S0;
-[:loop5]; loop is label name inside current trigger       Grandmaster Level Loop
-!!VRy2:S50Ry80;
-!!VRy3:Syy2;
-!!HEx1:Sy3/?y1;
-!!FU(H3_Mod_Check_Skill_Level)&y1=3:Px1/?y10/?y11/y3;
-!!VRy90:+1;
-!!SN&y90=100:W^LeftSkill^/-3;           [Exit If no Skill can be found]
-!!SN&y90=100:W^RightSkill^/-3;
-!!FU&y90=100:E;                         [Exit complete Function if no Valid Skill can be found]
-!!SN|y1<3/y11=1:G[loop5];               [Loop until Skill found that Hero knows at Expert and not yet Master/Grandmaster]
-!!SN:W^LeftSkill^/y3;
-*!IF:M^Helloo1   y3 is %Y3 and Number of Skills %Y50^;
-***************
-
-
-
-***************
-!!VRy90:S0;
-[:loop6]; loop is label name inside current trigger
-!!VRy2:S50Ry80;
-!!VRy4:Syy2;
-!!HEx1:Sy4/?y1;
-!!FU(H3_Mod_Check_Skill_Level)&y1=3:Px1/?y12/?y13/y4;
-!!VRy90:+1;                             [Laufvariable um endlos loop zu verhindern]
-!!if&y90=100;                           [falls nichts gefunden wurde zeige den letzten verbleibenden skill zum upgraden an]
-!!FU(H3_Mod_Skill_Loop10):Px1/y3;       [Set Skill Description for first choice to show correct rank]
-!!SN:W^LeftSkill^/y3;
-!!VRy4:S-1;                             [Disable right Skill Choice in Level Up Screeen]
-!!SN:W^RightSkill^/-1;
-!!SN:W^Number_Of_Hero_Skills^/?y50;
-!!SN&y50<=y40:W^RightSkill^/-2;         [If still other Skills available go for it]
-!!en;                                  [Exit complete Function if no Valid Skill can be found]
-*!IF:M^Helloo2    y4 is %Y4 and Number of Skills %Y50 and y90 is%Y90 and y40 is %Y40^;
-!!FU&y90=100:E;
-!!SN|y1<3/y4=y3/y13=1:G[loop6];         [Loop until Skill found that Hero knows at Expert and is not the same as first choice and not yet Master/Grandmaster]
-!!SN:W^RightSkill^/y4;
-!!SN:W^Number_Of_Hero_Skills^/?y50;
-!!SN&y50<y40:W^RightSkill^/-2;          [If still other Skills available go for it]
-*!IF:M^Helloo2    y4 is %Y4 and Number of Skills %Y50^;
-***************
-
-!!FU(H3_Mod_Skill_Loop10):Px1/y3/1;     [Set Skill Description for first choice to show correct rank]
-!!FU(H3_Mod_Skill_Loop10)&y4<>-1:Px1/y4/1; [Set Skill Description for second choice to show correct rank]
-*!IF:M^Zwei y3 is%Y3 und y4 is%Y4^;
-!!en;
-
-
-
-
-********************************************************************************
-!!VRy90:S0;                             [If only Master Rank can be learned start here]
-[:loop3]; loop is label name inside current trigger       Master Level Loop
-!!VRy2:S50Ry80;
-!!VRy3:Syy2;
-*!VRy3:S0; asdas
-!!HEx1:Sy3/?y1;
-!!FU(H3_Mod_Check_Skill_Level)&y1=3:Px1/?y10/?y11/y3;
-!!VRy90:+1;
-!!FU&y90=100:E;                         [Exit complete Function if no Valid Skill can be found]
-!!SN|y1<3/y10=1/y11=1:G[loop3];         [Loop until Skill found that Hero knows at Expert and not yet Master/Grandmaster]
-!!SN:W^LeftSkill^/y3;
-*!IF:M^Helloo3   y3 is %Y3 and Number of Skills %Y50^;
-***************
-
-
-
-
-***************
-!!VRy90:S0;
-[:loop4]; loop is label name inside current trigger            Master Level Loop
-!!VRy2:S50Ry80;
-!!VRy4:Syy2;
-!!HEx1:Sy4/?y1;
-!!FU(H3_Mod_Check_Skill_Level)&y1=3:Px1/?y12/?y13/y4;
-!!VRy90:+1;                             [Laufvariable um endlos loop zu verhindern]
-!!if&y90=100;                           [falls nichts gefunden wurde zeige den letzten verbleibenden skill zum upgraden an]
-!!FU(H3_Mod_Skill_Loop10):Px1/y3;       [Set Skill Description for first choice to show correct rank]
-!!SN:W^LeftSkill^/y3;
-!!VRy4:S-1;                             [Disable right Skill Choice in Level Up Screeen]
-!!SN:W^RightSkill^/-1;
-!!SN:W^Number_Of_Hero_Skills^/?y50;
-!!SN&y50<=y40:W^RightSkill^/-2;         [If still other Skills available go for it]
-!!en;
-!!FU&y90=100:E;
-!!SN|y1<3/y4=y3/y12=1/y13=1:G[loop4];   [Loop until Skill found that Hero knows at Expert and is not the same as first choice and not yet Master/Grandmaster]
-!!SN:W^RightSkill^/y4;
-!!SN:W^Number_Of_Hero_Skills^/?y50;
-!!SN&y50<y40:W^RightSkill^/-2;          [If still other Skills available go for it]
-*!IF:M^Helloo4 y4 is %Y4 and Number of Skills %Y50^;
-***************
-
-!!FU(H3_Mod_Skill_Loop10):Px1/y3;       [Set Skill Description for first choice to show correct rank]
-!!FU(H3_Mod_Skill_Loop10)&y4<>-1:Px1/y4;[Set Skill Description for second choice to show correct rank]
-
-
+!?FU(OnAfterHeroGainLevel)&(ERM_FLAG_IS_HUMAN);
+!#VA(hero:x);
+!!FU(acm_RestoreSecSkillsAndApplyDetectedUpgrades):P(hero);
+!!FU(H3_Mod_Compare_Fkt) &(hero)>=(HERO_FIRST)/(hero)<=(HERO_LAST_WOG):P(hero); [Call Compare Function]
+!!FU(H3_Mod_Level_Up_Fkt)&(hero)>=(HERO_FIRST)/(hero)<=(HERO_LAST_WOG):P(hero); [Call Level Up Function]
 
 !?FU(H3_Mod_Assign_Level_UP);
 
@@ -2825,10 +2736,10 @@ Close Dialouge
 !!SN&y20>=y92/y30>=y92:T^AC_Misc.Druid^/?z-7; [Mage and Adventurer, Druid]
 !!SN&y10>=y92/y30>=y92:T^AC_Misc.Hunter^/?z-7; [Adventurer and Warrior, Hunter]
 
-!!SN|y10>y90/y20>y90/y30>y90:T^AC_Misc.Adept^/?z9; [Get correct level tag]
-!!SN|y10>y91/y20>y91/y30>y91:T^AC_Misc.Expert^/?z9;
-!!SN|y10>y92/y20>y92/y30>y92:T^AC_Misc.Master^/?z9;
-!!SN|y10>y93/y20>y93/y30>y93:T^AC_Misc.Grandmaster^/?z9;
+!!SN|y10>=y90/y20>=y90/y30>=y90:T^AC_Misc.Adept^/?z9; [Get correct level tag]
+!!SN|y10>=y91/y20>=y91/y30>=y91:T^AC_Misc.Expert^/?z9;
+!!SN|y10>=y92/y20>=y92/y30>=y92:T^AC_Misc.Master^/?z9;
+!!SN|y10>=y93/y20>=y93/y30>=y93:T^AC_Misc.Grandmaster^/?z9;
 
 !!VRz9|y70=4/y70=5/y70=6:S^^;           [for Hybrid class delete Master/Grandmaster tag]
 !!VRz-5:S^%Z9 %Z-7^;                    [set z-7 to combination of rank and class]
@@ -2845,9 +2756,10 @@ Close Dialouge
 !!SN:T^AC_Misc.Mage^/?z4;
 !!SN:T^AC_Misc.Adventurer^/?z5;
 
-!!VRz-6:S^%Z6 {~r}%Z3 %Y10{~}
-%Z7 {~DodgerBlue}%Z4 %Y20{~}
-%Z8 {~LimeGreen}%Z5 %Y30{~}^;
+!!FU(Calc_Class_Points):Py1/1/?m/?n/?p/(TRUE);
+!!VRz-6:S^%Z6 {~r}%Z3 %m{~}
+%Z7 {~DodgerBlue}%Z4 %n{~}
+%Z8 {~LimeGreen}%Z5 %p{~}^;
 !!DL667:A33/3/z-6/1;                    [show class points under big picture]
 
 !!VRz-4&y99=0:S^m^; !!VRz-4&y99=1:S^w^; [Set for female or male]
@@ -3434,7 +3346,7 @@ Close Dialouge
 !!SN:W^Leadership_Current_battle_round^/-1;
 !!SN:W^Leadership_Stack_had_Moral^/-1;
 
-!?FU(OnBattleRegeneratePhase);          [Reset Attacking Stacks Funktion]
+!?FU(OnBattleRegeneratePhase);          [Reset Attacking Stacks Function]
 
 !!SN:W^Leadership_Attacking_Stack^/-1;
 *!SN:W^H3_Attacking_Stack^/-1;
@@ -4046,7 +3958,7 @@ Creature speed   Base movement
 !!if&x4=16;                            [16=  Teach Spell]
   !!HEx1:A2/0/d/?y15;                   [Check for Spell Book]
   !!FU&y15=0:E;                         [Exit if no Spell Book]
-  !!FU$spell$:P1/4/0/0/1/1/6/7/8/9;     [Funktion to generate a random level 1-4 spell which skips banned spells]
+  !!FU$spell$:P1/4/0/0/1/1/6/7/8/9;     [Function to generate a random level 1-4 spell which skips banned spells]
   !!HEx1:S7/?y14;                       [7 Wisdom]
   !!SSy-99:L?y5;                        [Spell Level]
   !!if&y-99>=0/y-99<=69;               [Valid Spell]
@@ -7874,7 +7786,7 @@ x3-x5=Town Coordinates
 !!BMx16&x1=2/i>0:Sd-50;
 
 Hunter gets 100% MR in first Battle Round
-!?MR2&1000;                             [Magic Resistance Trigger]
+!?MR2&1000/y1<>y1;                      [DISABLEDagic Resistance Trigger]
 
 !!if&v997=0;                           [Only in First Battleround]
   !!MR:N?y1;                            [Get Creature Number]
@@ -7887,7 +7799,6 @@ Hunter gets 100% MR in first Battle Round
   !!FU|y50=y4/y11=0/y12=0:E;            [Exit for beneficial spells, meaning same hero or no Hunter]
   !!MR:F100;                            [Make temporarily immune]
 !!en;
-
 
 *********************************Druid*****************************************
 **Flat Damage Block 4*Hero Level, Heal Squad look in First Aid Section
@@ -11648,7 +11559,7 @@ x1 - hero id, x2 - spell id, x3 - returns increased damage
 
 !!if&y70=3;                            [Pegasus Harness Set]
 !!SN:W^Speed_MonsterNumber^/0;
-!!DO(AC_Function_49)/0/10/1:P;          [Funktion to recieve slowest unit in Army]
+!!DO(AC_Function_49)/0/10/1:P;          [Function to recieve slowest unit in Army]
 !!SN:W^Speed_MonsterNumber^/?y10;       [Monster Stack with slowest speed]
 !!BMy10&y10>=0:S?y11;
 !!VRy11:+5;                             [+5 Speed for slowest Unit]
@@ -11670,7 +11581,7 @@ x1 - hero id, x2 - spell id, x3 - returns increased damage
 
 !!if&y75=3;                            [Pegasus Harness Set]
 !!SN:W^Speed_MonsterNumber^/0;
-!!DO(AC_Function_49)/21/31/1:P;         [Funktion to recieve slowest unit in Army]
+!!DO(AC_Function_49)/21/31/1:P;         [Function to recieve slowest unit in Army]
 !!SN:W^Speed_MonsterNumber^/?y10;       [Monster Stack with slowest speed]
 !!BMy10&y10>=0:S?y11;
 !!VRy11:+5;                             [+5 Speed for slowest Unit]
@@ -14588,7 +14499,7 @@ Pendant of Courage
 
 
 ********************************************************************************
-!?FU(OnBattleRegeneratePhase)&1000;     [Reset Attacking Stacks Funktion]
+!?FU(OnBattleRegeneratePhase)&1000;     [Reset Attacking Stacks Function]
 
 !!SN:W^Weakness_Attacking_Stack^/-1;
 !!SN:W^Curse_Attacking_Stack^/-1;
@@ -17070,7 +16981,7 @@ Undead stacks heal and with next attack^;                                       
 
 *--------------------------------------------------------------------Give Bonus---------------------------------------------------------------------------------*
 
-!?FU(AC_Function_105);                  [Funktion to give Bonus in first round]
+!?FU(AC_Function_105);                  [Function to give Bonus in first round]
 
 !!HEv9283:Fd/d/?y1/d S24/?y87;          [Save Spellpower aka aka Duration]
 !!HEv9283:A2/76/?y15/?y14 A2/77/?y16/?y14 A2/78/?y17/?y14 A2/139/?y18/?y14; [check for spell duration changing artifacts]
@@ -18459,7 +18370,7 @@ Cant Cleanse That Effect
 *!EAy2:F102/115/?y3;                    [Check for Cast/next available bonus line: y3]
 *!EAy2&y3>=0:By3/0/102/115/1/1/1/1/1/1/1/1/1/1/1; [Battle Monster]
 !!en;
-*--------------------------------------------------------------------Extra Funktion fьr Slow and Heal----------------------------------------------------------------------*
+*--------------------------------------------------------------------Extra Function fьr Slow and Heal----------------------------------------------------------------------*
 
 !?FU(AC_Function_121);
 
@@ -18492,7 +18403,7 @@ Cant Cleanse That Effect
 !!en;
 
 
-*--------------------------------------------------------------------Extra Funktion fьr Bless/Curse -----------------------------------------------------------------------------*
+*--------------------------------------------------------------------Extra Function fьr Bless/Curse -----------------------------------------------------------------------------*
 !?FU(AC_Function_122);
 
 !!if&x16<21;
@@ -18742,7 +18653,7 @@ Cant Cleanse That Effect
 !!BMx16:Q0/y3/1;
 !!en;
 
-!?FU(AC_Function_126);                  [Funktion to calculate neighbouring Hex cells]
+!?FU(AC_Function_126);                  [Function to calculate neighbouring Hex cells]
 !!UN:C6919200/4/?y1;                    [Y1 = combatManager]
 !!VRx2:*2;
 !!VRx1:*12+ y1+ 78952+ x2;
@@ -19015,12 +18926,12 @@ Cant Cleanse That Effect
 !!SN:W^Magic_Arrow_Hero%X16^/0;         [at map start reset counter for magic arrow]
 
 *--------------------------------------------------------------------Magic Mirror -----------------------------------------------------------------------------*
-!?FU(AC_Function_102);                  [Count Funktion]
+!?FU(AC_Function_102);                  [Count Function]
 
 !!BMx16:G36/?y12/?y13;
 !!SN&y12>0:W^Magic_Mirror_Counter^/d+1;
 
-!?FU(AC_Function_103);                  [Apply Funktion]
+!?FU(AC_Function_103);                  [Apply Function]
 
 [:LoopRandomMonster]
 !!VRy5&x4=1:S0T7;
@@ -25890,7 +25801,7 @@ First hit works 100%, the next Arrow only has 20% chance to hit
 !!if&x4>=15/x4<=15;                    [Spell Reward]
   !!HEx1:A2/0/d/?y15;                   [Check for Spell Book]
   !!FU&y15=0:E;                         [Exit if no Spell Book]
-  !!FU$spell$:P1/4/0/0/1/1/6/7/8/9;     [Funktion to generate a random level 1-4 spell which skips banned spells]
+  !!FU$spell$:P1/4/0/0/1/1/6/7/8/9;     [Function to generate a random level 1-4 spell which skips banned spells]
   !!HEx1:S7/?y14;                       [7 Wisdom]
   !!SSy-99:L?y5;                        [Spell Level]
   !!if&y-99>=0/y-99<=69;               [Valid Spell]
@@ -29117,11 +29028,11 @@ Change graphics of Meteor Shower and Implosion when at Master and GM level
 !?FU(OnGameEnter);
 !!FU:E;
 !!rei /0/155;
-    !!FU(ACM_CHEATER):Pi;
+    !!FU(acm_Chear):Pi;
 !!en;
 
 
-!?FU(ACM_CHEATER);
+!?FU(acm_Chear);
 
 *!SN:W^H3_Pathfinding_0_Hero%X1^/1;
 *!SN:W^H3_Pathfinding_1_Hero%X1^/1;
