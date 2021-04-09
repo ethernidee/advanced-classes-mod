@@ -29,10 +29,6 @@ Name on Heroescommunity RerryR
 
 !#SN:W^Advanced_Classes_Mod_Active^/1;  [Set Mod Active]
 
-!#SN:W^LeftSkill^/-3;
-!#SN:W^RightSkill^/-3;
-!#SN:W^After_Level_Up_Flag^/-1;
-!#SN:W^After_Level_Click^/0;
 !#SN:W^Game_Start_Value^/0;
 
 !#SN:W^Adept_Level_Global_Value^/10;
