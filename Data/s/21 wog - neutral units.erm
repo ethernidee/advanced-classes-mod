@@ -309,13 +309,13 @@ Recommendations for Neutral Units Bonuses:
 !!VRy1:Sc0;        [current day: y1] ; Sunday is the bonuses day
 !!VRy1::y50;       [divide by 4 and add one: y1] Modified
 !!BMx16:N?y20;     [Creature Number y20]
-!!if&y20>0:;
+!!if&y20>0;
 !!BMx16:Ady1 Ddy1; [+1.75 attack per week(month+7), +1.75 defense per week(month+7)]
 !!BMx16:H?y2;      [Hit Points of stack: y2]
 !!VRy6:Sy1*5+100;
 !!VRy4:Sy2*y6:100-y2;    [5% of hit points: y3]
 !!BMx16:Hdy4;            [+10.5-12.25% per week;+42-49% of hit points per month]
-!!en:;
+!!en;
 
 ********************************************************************************
 
@@ -363,61 +363,61 @@ Recommendations for Neutral Units Bonuses:
 !!MOv1/v2/v3&y10=0:Gdy61;
 
 ** LEVEL 2 **
-!!MOv1/v2/v3&y10=1:Gdy62; 
+!!MOv1/v2/v3&y10=1:Gdy62;
 
 ** LEVEL 3 **
-!!MOv1/v2/v3&y10=2:Gdy63; 
+!!MOv1/v2/v3&y10=2:Gdy63;
 
 ** LEVEL 4 **
-!!MOv1/v2/v3&y10=3:Gdy64; 
+!!MOv1/v2/v3&y10=3:Gdy64;
 
 ** LEVEL 5 **
-!!MOv1/v2/v3&y10=4:Gdy65; 
+!!MOv1/v2/v3&y10=4:Gdy65;
 
 ** LEVEL 6 **
-!!MOv1/v2/v3&y10=5:Gdy66; 
+!!MOv1/v2/v3&y10=5:Gdy66;
 
 ** LEVEL 7 **
 !!MOv1/v2/v3&y1=12:Gdy67; [Set all Angel stacks to Lots]
 !!MOv1/v2/v3&y1=13:Gdy67; [Set all Archangel stacks to Lots]
-!!MOv1/v2/v3&y1=202:Gdy68; 
+!!MOv1/v2/v3&y1=202:Gdy68;
 
 !!MOv1/v2/v3&y1=26:Gdy67; [Set all Green Dragon stacks to Lots]
 !!MOv1/v2/v3&y1=27:Gdy67; [Set all Gold Dragon stacks to Lots]
-!!MOv1/v2/v3&y1=207:Gdy68; 
+!!MOv1/v2/v3&y1=207:Gdy68;
 
 
 !!MOv1/v2/v3&y1=40:Gdy67; [Set all Giant stacks to Lots]
 !!MOv1/v2/v3&y1=41:Gdy67; [Set all Titan stacks to Lots]
-!!MOv1/v2/v3&y1=212:Gdy68; 
+!!MOv1/v2/v3&y1=212:Gdy68;
 
 
 !!MOv1/v2/v3&y1=54:Gdy67; [Set all Devil stacks to Lots]
 !!MOv1/v2/v3&y1=55:Gdy67; [Set all Archdevil stacks to Lots]
-!!MOv1/v2/v3&y1=219:Gdy68; 
+!!MOv1/v2/v3&y1=219:Gdy68;
 
 !!MOv1/v2/v3&y1=68:Gdy67; [Set all Bone Dragon stacks to Lots]
 !!MOv1/v2/v3&y1=69:Gdy67; [Set all Ghost Dragon stacks to Lots]
-!!MOv1/v2/v3&y1=224:Gdy68; 
+!!MOv1/v2/v3&y1=224:Gdy68;
 
 !!MOv1/v2/v3&y1=82:Gdy67; [Set all Red Dragon stacks to Lots]
 !!MOv1/v2/v3&y1=83:Gdy67; [Set all Black Dragon stacks to Lots]
-!!MOv1/v2/v3&y1=231:Gdy68; 
+!!MOv1/v2/v3&y1=231:Gdy68;
 
 !!MOv1/v2/v3&y1=96:Gdy67; [Set all Behemoth stacks to Lots]
 !!MOv1/v2/v3&y1=97:Gdy67; [Set all Ancient Behemoth stacks to Lots]
-!!MOv1/v2/v3&y1=238:Gdy68; 
+!!MOv1/v2/v3&y1=238:Gdy68;
 
 !!MOv1/v2/v3&y1=110:Gdy67; [Set all Hydra stacks to Lots]
 !!MOv1/v2/v3&y1=111:Gdy67; [Set all Chaos Hydra stacks to Lots]
-!!MOv1/v2/v3&y1=245:Gdy68; 
+!!MOv1/v2/v3&y1=245:Gdy68;
 
 !!MOv1/v2/v3&y1=130:Gdy67; [Set all Firebird stacks to Lots]
 !!MOv1/v2/v3&y1=131:Gdy67; [Set all Phoenix stacks to Lots]
-!!MOv1/v2/v3&y1=252:Gdy68; 
+!!MOv1/v2/v3&y1=252:Gdy68;
 
 !!MOv1/v2/v3&y1=168:Gdy67; [Set all Gorynych stacks to Lots]
-!!MOv1/v2/v3&y1=253:Gdy68; 
+!!MOv1/v2/v3&y1=253:Gdy68;
 
 ** LEVEL 8 **
 !!MOv1/v2/v3&y1=150:Gdy68; [Set all Supreme Archangel stacks to Lots]
@@ -436,10 +436,10 @@ Recommendations for Neutral Units Bonuses:
 !!MOv1/v2/v3&y1=196:Gdy68; [Set all Dracolich stacks to Lots]
 
 !!SN:W^More_Random_Stack_Size^/?y70;
-!!if&y70=1:;
+!!if&y70=1;
 !!VRy3:S-4 R10; [Random additional units: 0..5: y2]
 !!MOv1/v2/v3&y2>4:Gdy3; [Add extra units]
-!!en:;
+!!en;
 
 
 ** Neutral Town and Creature Bank Growth **
@@ -483,7 +483,7 @@ Recommendations for Neutral Units Bonuses:
 !!DO5412/1/y-10/1&y-8>0/i^timerWeekDay^=1:P26/-1; [Loop through all local events]
 !!UN:U6/-1/?y-10; [Number of pandora's boxes on map: y-10]
 !!VRv1:S-1; [Initialize v1 to -1 to work with new faster UN:U syntax]
-!!DO5412/1/y-10/1&y-8>0/i^timerWeekDay^=1:P6/-1; [Loop through all pandora's boxes]  
+!!DO5412/1/y-10/1&y-8>0/i^timerWeekDay^=1:P6/-1; [Loop through all pandora's boxes]
 
 
  [Loop through all towns]
@@ -639,10 +639,10 @@ Recommendations for Neutral Units Bonuses:
 !!VRy3&y3>=500000:S500000;
 !!CBv1/v2/v3&y2>0/y1<174:Gy10/y1/dy3; [Add extra guards to slot y10 but don't increase Commanders]
 !!CBv1/v2/v3&y2>0/y1<174:Gy10/?y98/?y3; [Add extra guards to slot y10 but don't increase Commanders]
-!!if&y3>=500000:;
+!!if&y3>=500000;
 !!VRy3:S500000;
 !!CBv1/v2/v3&y2>0/y1<174:Gy10/?y98/y3; [Add extra guards to slot y10 but don't increase Commanders]
-!!en:;
+!!en;
 
 !!CBv1/v2/v3:Ry10/?y4; [Number of Resource type y10: y4]
 !!VRy5&y4>0:Sy4 :10; [10% of resources: :y5]

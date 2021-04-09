@@ -5,7 +5,7 @@ ZVSE2
 !#VA(showFuzzyNumbers:x) (disablePopup:x) (neutrals:x) (x:x) (y:x) (z:x);
 !!VR(showFuzzyNumbers)&i^mixconf_displayExactStackQuantities^=(TRUE):S(FALSE);
 
-!!if&i^mixconf_showRegularViewDialog^<>(FALSE):;
+!!if&i^mixconf_showRegularViewDialog^<>(FALSE);
   !!VR(disablePopup):S(TRUE);
   !!CM:R(FALSE);
 
@@ -15,9 +15,9 @@ ZVSE2
   !!VR(numMons):*i^mix_neutralStackScaleForHuman^ :100;
   !!SN:H^monname^/(monType)/1/?(monName:z);
 
-  !!if&(showFuzzyNumbers)=(FALSE):;
+  !!if&(showFuzzyNumbers)=(FALSE);
     !!VR(monQuantityStr:z):S^%(numMons)^;
-  !!el:;
+  !!el;
     !!FU(MonCountToFuzzyText):P(numMons)/?(monQuantityStr:z)/(MON_FUZZY_COUNT_HUMAN_FRIENDLY);
   !!en;
 
@@ -118,7 +118,7 @@ ZVSE2
   ^mix_maxRelativeMonLevel^/?i^mix_maxRelativeMonLevel^/1
   ^mixconf_displayExactStackQuantities^/?i^mixconf_displayExactStackQuantities^/(TRUE)/
   ^mixconf_showRegularViewDialog^/?i^mixconf_showRegularViewDialog^/(TRUE);
-  
+
 !!FU(ReadIniInts):P(filePath)/^advanced classes^/
   ^Spell_Trainer_Mod^/?i^Spell_Trainer_Mod^/0/
   ^Easier_Class_option^/?i^Easier_Class_option^/0/
@@ -126,7 +126,7 @@ ZVSE2
   ^Alternative_Necromancy_Mod^/?i^Alternative_Necromancy_Mod^/0;
 
 !!FU(ReadIniInts):P(filePath)/^advanced classes^/
-  ^Spell_Duration_Mod^/?i^Spell_Duration_Mod^/0;  
+  ^Spell_Duration_Mod^/?i^Spell_Duration_Mod^/0;
 
 
 
@@ -220,7 +220,7 @@ ZVSE2
   ^mix_maxRelativeMonLevel^/i^mix_maxRelativeMonLevel^/
   ^mixconf_displayExactStackQuantities^/?i^mixconf_displayExactStackQuantities^/
   ^mixconf_showRegularViewDialog^/?i^mixconf_showRegularViewDialog^;
-  
+
 !!FU(WriteIniInts):P(filePath)/^advanced classes^/
   ^Spell_Trainer_Mod^/i^Spell_Trainer_Mod^/
   ^Easier_Class_option^/i^Easier_Class_option^/

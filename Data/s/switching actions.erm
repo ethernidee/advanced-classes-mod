@@ -10,13 +10,13 @@ ZVSE
 
 !?FU77006;
 !!SN:X?y1/?y2;
-!!VRy3:Sy1 *21 +y2; 
+!!VRy3:Sy1 *21 +y2;
 !!BMy3:U3/?y9 E?y10;
 
 !!SN:W^X_HIDE_AMMO_STACK^/y3;
 
 !!BMy3:T?y99;
-!!FU|y99=182/y99=191:E;     182 Astral Spirit (attacker) 191  Astral Spirit (defender) 
+!!FU|y99=182/y99=191:E;     182 Astral Spirit (attacker) 191  Astral Spirit (defender)
 
 !!SN:W^X_Cast_Move_Old^/?y1;
 !!VRy10&y1>0:Sv786;
@@ -41,7 +41,7 @@ ZVSE
 *!IF:M^hidden shots/casts/stack = %Y9/%Y10/%Y11 action=%Y6^;
 
 !!BMy11:T?y99;
-!!FU|y99=182/y99=191:E;     182 Astral Spirit (attacker) 191  Astral Spirit (defender) 
+!!FU|y99=182/y99=191:E;     182 Astral Spirit (attacker) 191  Astral Spirit (defender)
 
 !!BMy11:T?y7 F?y8 U3/?y3 E?y4;
 !!VRy8:&4;
@@ -58,17 +58,17 @@ ZVSE
 
 !!BA:A?y1; !!FU&y1=1:E;
 !!BMy11&1000:T?y99;
-!!FU|y99=182/y99=191:E;     182 Astral Spirit (attacker) 191  Astral Spirit (defender) 
+!!FU|y99=182/y99=191:E;     182 Astral Spirit (attacker) 191  Astral Spirit (defender)
 
 !!SN:X?y1;
-!!if&y1=49:;
+!!if&y1=49;
 !!BMy11:U3/0 E0;
-!!en:;
-!!if&y1=50:; 
+!!en;
+!!if&y1=50;
 !!SN:W^X_HIDE_AMMO_SHOTS^/?y9;
 !!BMy11:U3/y9 E0;
-!!en:;
-!!if&y1=51:;
+!!en;
+!!if&y1=51;
 !!SN:W^X_HIDE_AMMO_CASTS^/?y10;
 !!BMy11:Ey10;
-!!en:;
+!!en;
