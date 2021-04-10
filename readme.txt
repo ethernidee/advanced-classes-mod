@@ -1,5 +1,5 @@
 
-Advanced Classes Mod 1.06
+Advanced Classes Mod 1.06 Test
 
 A Mod by Perry R, for Heroes 3 ERA 3.3 
 with the help of AlfWithCake, anti-victor, Daemon_n and Sandris
