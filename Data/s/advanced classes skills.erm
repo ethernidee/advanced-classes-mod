@@ -29,6 +29,10 @@ Name on Heroescommunity RerryR
 
 !#SN:W^Advanced_Classes_Mod_Active^/1;  [Set Mod Active]
 
+!#SN:W^LeftSkill^/-3;
+!#SN:W^RightSkill^/-3;
+!#SN:W^After_Level_Up_Flag^/-1;
+!#SN:W^After_Level_Click^/0;
 !#SN:W^Game_Start_Value^/0;
 
 !#SN:W^Adept_Level_Global_Value^/10;
@@ -2969,6 +2973,8 @@ Close Dialouge
 !!SN:W^Tongue_Attacking_Stack^/-1;
 !!SN:W^DragonSet_Attacking_Stack^/-1;
 !!SN:W^Oger_Attacking_Stack^/-1;
+!!SN:W^Commander_Kill_Attacking_Stack^/-1;
+!!SN:W^Damage_Counter_Attacking_Stack^/-1;
 
 
 !?BF;
@@ -3337,6 +3343,7 @@ Creature speed   Base movement
 !?HM-1&1000;                            [continue if scouting is enabled]
 
 !!HE-1:N?y1 O?y2 S3/?y3;                [get #, owner of  and scouting skill]
+!!SN:W^Scouting_Event_Chance_%Y1^/0;    [reset scouting chance]
 !!FU(Count_Set_Pieces_2)&y1>=0/y1<=155/y2>=0:Py1/0/0/0/0/?y90; [Count class Set Pieces function X6]
 !!HEy1&y1>=0:A2/101/0/?y91;             [101 Pendant of Second Sight]
 !!VRy3&y90>=2/y3=0:S1;                  [Activate Scouting Bonus if Adventurer Class Set equipped]
@@ -3377,6 +3384,7 @@ Creature speed   Base movement
 !!VRy5&y3=1:Ty30;                       [set random roll to 3.0% (14/470)]
 !!VRy5&y3=2:Ty30;                       [set random roll to 3.2% (14/430)]
 !!VRy5&y3=3:Ty30;                       [set random roll to 3.5% (14/400)]
+!!SN:W^Scouting_Event_Chance_%Y1^/y30;  [save scouting chance]
 
 !!VRy60:S0T1;                           [Random Coinflip Generator]
 !!VRy5&y5=15/y60=0:S5;                  [Only 50% chance to get an artifact]
@@ -4488,7 +4496,7 @@ Taken from Algor Era Scripts
 *+6 Attack Master
 *+8 Attack GM
 
-!?BF;                                   [Combat Start]
+!?FU(OnCombatRound)&v997=0;             [On First Visible combat round. Trigger goes later to give Bonus when WM are already summoned in the CB]
 
 !!BA:S?y1;
 !!BA:H0/?y2;                            [Attacker]
@@ -4678,8 +4686,14 @@ Vision of the Eagle: If the skill is granted by the Set and not the actual skill
 !!VRy5&y1>0:+y1;                        [Eagle eye skill lvl bonus]
 
 !!VRy11:*4;                             [Spell Power times four]
-
 !!VRy3:S1T49 +y11 *y5;                  [Magic_Artillery damage: (1-50 + spell power*5) x bonus multiplier]
+
+!!VRy30:S1 +y11 *y5;                    [Min Damage]
+!!VRy31:S50  +y11 *y5;                  [Max Damage]
+!!SN:W^EagleEye_Low_Damage_Hero%V7020^/y30; [Save Low Damage to display it in Bonus List]
+!!SN:W^EagleEye_High_Damage_Hero%V7020^/y31; [Save High Damage to display it in Bonus List]
+!!FU&x3=1:E;                            [Exit here to not run the actual shooting fkt]
+
 !!VRy2:S0T6;                            [random slot # to start search from]
 !!SN:W^First_Aid_Heal_Slot^/7;          [7 = slot not found]
 !!DO(AC_Function_11)/0/6/1:Px1/y2/y3/x2;[shoot next slot with >= 2 monsters]
@@ -5056,7 +5070,7 @@ Till here Normal Necromancy
 *+1 Speed in first Battle Round at Expert +3Att/Def
 *+2 Speed in Combat at Grandmaster +4Att/Def +1max dmg
 
-!?BF;
+!?FU(OnCombatRound)&v997=0;
 
 !!BH0:N?y1;                             [Attacker]
 !!HEy1:S19/?y3;                         [Checke ob der Held Tactics hat und Speichere in y10]
@@ -5208,6 +5222,12 @@ Till here Normal Necromancy
 
 !!VRy3:S1T49 +y4 +y9 *y5;               [Artillery damage: (1-50 + hero level*2+ hero attack*3) x bonus multiplier]
 
+!!VRy30:S1 +y4 +y9 *y5;                 [Min Damage]
+!!VRy31:S50 +y4 +y9 *y5;                [Max Damage]
+!!SN:W^Artillery_Low_Damage_Hero%V7020^/y30; [Save Low Damage to display it in Bonus List]
+!!SN:W^Artillery_High_Damage_Hero%V7020^/y31; [Save High Damage to display it in Bonus List]
+!!FU&x2=1:E;                            [Exit here to not run the actual shooting fkt]
+
 !!VRy2:S0T6;                            [random slot # to start search from]
 !!SN:W^First_Aid_Heal_Slot^/7;          [7 = slot not found]
 !!DO(AC_Function_14)/0/6/1:Px1/y2/y3;   [shoot next slot with >= 2 monsters]
@@ -5244,7 +5264,7 @@ Till here Normal Necromancy
 !!VRx2:+1;                              [next slot]
 ** end of function
 
-!?BF;
+!?FU(OnCombatRound)&v997=0;
 !!BA:H0/?y2;                            [Attacker]
 !!HEy2:S10/?y3;                         [Ballistics]
 !!SN:W^H3_Ballistics_0_Hero%Y2^/?y11;   [Checke ob der Held Master Ballistics hat und Speichere in y11]
@@ -5284,54 +5304,57 @@ Till here Normal Necromancy
 !!BMy2:T?y4;
 
 * Master and Grandmaster Artillery
-!!if&y4=146/y1=7;                        [If Ballista and a Ranged Attack]
+!!if&y4=146/y1=7;                       [If Ballista and a Ranged Attack]
   !!BMy2:I?y5;
-  !!BA:Hy5/?y6;                           [Current Hero]
-  !!FU&y6<0:E;                            [Exit if none]
-  !!HEy6:S20/?y10;                        [Check for Artillery]
-  !!SN:W^H3_Artillery_0_Hero%Y6^/?y71;    [Checke ob der Held Master Artillery hat und Speichere in y71]
-  !!SN:W^H3_Artillery_1_Hero%Y6^/?y72;    [Checke ob der Held Grandmaster Artillery hat und Speichere in y72]
+  !!BA:Hy5/?y6;                         [Current Hero]
+  !!FU&y6<0:E;                          [Exit if none]
+  !!HEy6:S20/?y10;                      [Check for Artillery]
+  !!SN:W^H3_Artillery_0_Hero%Y6^/?y71;  [Checke ob der Held Master Artillery hat und Speichere in y71]
+  !!SN:W^H3_Artillery_1_Hero%Y6^/?y72;  [Checke ob der Held Grandmaster Artillery hat und Speichere in y72]
   !!HEy6:X?y81/?y82/?y83/?y84/?y85/?y86/?y87 A2/142/d/?y8; [Check Hero Speciality and hero has a 142 Gold Tower Arrow]
-  !!SN&y10=3/y71=1:W^007.ShootA.Times^/d1;[Add 1 shot for Master]
-  !!SN&y10=3/y72=1:W^007.ShootA.Times^/d1;[Add 1 shot for Grandmaster]
-  !!SN&y8=1:W^007.ShootA.Times^/d1;[Add 1 shot for Gold Tower Arrow]
+  !!SN&y10=3/y71=1:W^007.ShootA.Times^/d1; [Add 1 shot for Master]
+  !!SN&y10=3/y72=1:W^007.ShootA.Times^/d1; [Add 1 shot for Grandmaster]
+  !!SN&y8=1:W^007.ShootA.Times^/d1;     [Add 1 shot for Gold Tower Arrow]
 
   * Artillery Specialists
   6 Christian 54 Pyre 81 Arlach 97 Gurnisson
   !!if|y6=6/y6=97/y6=54/y6=81;
     !!HEy6:E?y86/?y87/1;
-    !!SN:W^007.ShootA.Times^/d1;            [Add 1 Artillery Specialist]
-    !!SN&y87>=20:W^007.ShootA.Times^/d1;    [Add 1 Artillery Specialist above level 20]
-    !!SN&y87>=40:W^007.ShootA.Times^/d1;    [Add 1 Artillery Specialist above level 40]
+    !!SN:W^007.ShootA.Times^/d1;        [Add 1 Artillery Specialist]
+    !!SN&y87>=20:W^007.ShootA.Times^/d1;[Add 1 Artillery Specialist above level 20]
+    !!SN&y87>=40:W^007.ShootA.Times^/d1;[Add 1 Artillery Specialist above level 40]
+    !!SN&y87>=60:W^007.ShootA.Times^/d1;[Add 1 Artillery Specialist above level 60]
+    !!SN&y87>=80:W^007.ShootA.Times^/d1;[Add 1 Artillery Specialist above level 80]
+    !!SN&y87>=100:W^007.ShootA.Times^/d1;[Add 1 Artillery Specialist above level 100]
   !!en;
 
   *Ballista Upgrade at Blacksmith can give +1 Shot
   !!SN:W^Ballista_Add_Shots_%Y6^/?y11;
-  !!SN&y11=1:W^007.ShootA.Times^/d1;     [Add 1 Artillery Shot for Upgrade]
+  !!SN&y11=1:W^007.ShootA.Times^/d1;    [Add 1 Artillery Shot for Upgrade]
 !!en;
 
 * Commander Specialists can get chance for extra Strike
 36 Torosar
-!!if&y4>=174/y4<=191;                  [If Commander and A melee Attack]
-  !!if|y1=6/y1=7;                        [If melee or Shoot]
+!!if&y4>=174/y4<=191;                   [If Commander and A melee Attack]
+  !!if|y1=6/y1=7;                       [If melee or Shoot]
   !!BMy2:I?y5;
-  !!BA:Hy5/?y6;                           [Current Hero]
-  !!FU&y6<0:E;                            [Exit if none]
+  !!BA:Hy5/?y6;                         [Current Hero]
+  !!FU&y6<0:E;                          [Exit if none]
 
-  !!SN:W^Zulu_Mod_On^/?y79; Check for Zulu Mod Active
+  !!SN:W^Zulu_Mod_On^/?y79;             [Check for Zulu Mod Active]
 
   !!if&y79=0;
-    !!if|y6=36/y6=105/y6=128;              [Pasis, Vey, Torosar]
+    !!if|y6=36/y6=105/y6=128;           [Pasis, Vey, Torosar]
     !!VRy50:S0T2;
-    !!SN&y50=2/y1=6:W^007.AttackA.Times^/d1;[add one strike if success]
+    !!SN&y50=2/y1=6:W^007.AttackA.Times^/d1; [add one strike if success]
     !!SN&y50=2/y1=7:W^007.ShootA.Times^/d1; [add one strike if success]
     !!en;
   !!en;
 
   !!if&y79=1;
-    !!if|y6=36/y6=105;              [Pasis, Vey, Torosar]
+    !!if|y6=36/y6=105;                  [Pasis, Vey, Torosar]
     !!VRy50:S0T2;
-    !!SN&y50=2/y1=6:W^007.AttackA.Times^/d1;[add one strike if success]
+    !!SN&y50=2/y1=6:W^007.AttackA.Times^/d1; [add one strike if success]
     !!SN&y50=2/y1=7:W^007.ShootA.Times^/d1; [add one strike if success]
     !!en;
   !!en;
@@ -5637,6 +5660,12 @@ Till here Normal Necromancy
 
 !!VRy1:S5T35+y4*y5;                     [first aid tent heal: (5-40 + hero level*2) x bonus multiplier]
 
+!!VRy30:S5 +y4*y5;                      [Min Damage]
+!!VRy31:S40 +y4*y5;                     [Max Damage]
+!!SN:W^Heal_After_Fight_Low_Hero%V7020^/y30; [Save Low Damage to display it in Bonus List]
+!!SN:W^Heal_After_Fight_High_Hero%V7020^/y31; [Save High Damage to display it in Bonus List]
+!!FU&x3=1:E;                            [Exit here to not run the actual fkt]
+
 !!VRy2:S0T6;                            [random slot # to start search from]
 !!SN:W^First_Aid_Heal_Slot^/7;          [7 = slot not found]
 !!DO(AC_Function_15)/0/6/1:Px1/y1/y2/x2;[heal next slot with >= 1 monster killed, x2 holds if Druid Heal 1-Yes 0-No]
@@ -5838,16 +5867,25 @@ Till here Normal Necromancy
 
 !?FU(AC_Function_35);                   [*Restore HP of Healed creatures*]
 
-!!BMx1:N?y1 H?y2 L?y3 B?y4;
+!!if&x4=0:;                             [This part only runs in combat]
+  !!BMx1:N?y1 H?y2 L?y3 B?y4;           [Get Battle Monsters parameters]
 
-!!FU&y4=0:E;
-!!FU&y2=0:E;
-!!FU&y1=y4/y3=0:E;
+  !!FU&y4=0:E;
+  !!FU&y2=0:E;
+  !!FU&y1=y4/y3=0:E;                    [Exit if monster was not damaged]
 
-!!BMx1:I?y60;                           [Acting Side Monster]
-!!BA:Hy60/?y61;                         [Current Hero]
-!!SN:W^H3_First Aid_0_Hero%Y61^/?y71;   [Checke ob der Held Master First Aid hat und Speichere in y71]
-!!SN:W^H3_First Aid_1_Hero%Y61^/?y72;   [Checke ob der Held Grandmaster First Aid hat und Speichere in y72]
+  !!BMx1:I?y60;                         [Acting Side Monster]
+  !!BA:Hy60/?y61;                       [Current Hero]
+  !!SN:W^H3_First Aid_0_Hero%Y61^/?y71; [Checke ob der Held Master First Aid hat und Speichere in y71]
+  !!SN:W^H3_First Aid_1_Hero%Y61^/?y72; [Checke ob der Held Grandmaster First Aid hat und Speichere in y72]
+!!en:;
+
+!!if&x4=1:;                             [This part runs when clicking bonus list]
+  !!VRy61:Sv7020;
+  !!SN:W^H3_First Aid_0_Hero%Y61^/?y71; [Checke ob der Held Master First Aid hat und Speichere in y71]
+  !!SN:W^H3_First Aid_1_Hero%Y61^/?y72; [Checke ob der Held Grandmaster First Aid hat und Speichere in y72]
+!!en:;
+
 !!HEy61:X?y81/?y82/?y83/?y84/?y85/?y86/?y87; [Check Hero Speciality]
 !!HEy61:E?y73/?y74/1;
 !!VRy75:Sy74*10;                        [10 times the Hero Level additional heal]
@@ -5863,20 +5901,25 @@ Till here Normal Necromancy
 
 !!CO-1:D?y40;                           [Check if Commander of Hero is still alive]
 !!CO-1:T?y41;                           [Check if Commander Type]
-!!if&y40=0/y41=1;                      [If Commander alive and is a Hierophant]
+!!if&y40=0/y41=1;                       [If Commander alive and is a Hierophant]
   !!CO-1:X2/?y42;                       [Get Commander Level]
   !!VRy43:Sy42*10;                      [Multiply level of Commander with 10]
   !!VRy10:+y43;                         [Add level*10 HP to heal for the First Aid Tent]
 !!en;
 
-!!VRy10::2; !!VRy10:Sy10Ry10;           [Divide Heal trough 2 and Set range to half + R(half)]
-
 !!SN:W^Tent_Improved_%Y61^/?y70;
-!!if&y70=1;                            [If WM upgrade bought]
+!!if&y70=1;                             [If WM upgrade bought]
   !!VRy10:*125:100;                     [Increase Heal Amount by 25%]
 !!en;
 
-*!VRy10:S1000; Test
+!!VRy70:Sy10:2;
+!!SN:W^Heal_InCombat_Low_Hero%V7020^/y70;[Save Low Heal to display it in Bonus List]
+!!SN:W^Heal_InCombat_High_Hero%V7020^/y10; [Save High Heal to display it in Bonus List]
+!!FU&x4=1:E;                            [Exit here to not run the actual fkt]
+
+!!VRy10::2; !!VRy10:Sy10Ry10;           [Divide Heal trough 2 and Set range to half + R(half)]
+
+*!VRy10:S1000; Test set heal to 1000
 
 !!SN&f=0:T^AC_Misc.Battle Heal^/?z2/^Heal^/y10;
 !!BU&f=0:Mz2;
@@ -5980,7 +6023,7 @@ and creature is %X1^;
 !!en;
 
 
-!?BF;
+!?FU(OnCombatRound)&v997=0;
 
 !!SN:W^Total_Healed_Amount_Att^/0;      [Reset value before any fight]
 !!SN:W^Total_Healed_Amount_Def^/0;
@@ -6007,6 +6050,7 @@ and creature is %X1^;
 !!SN:W^Tent_Capacity_Upgrade_%Y1^/?y11; [For Blacksmith Upgrade at +500 capacity to heal]
 !!VRy10&y11=1:+500;
 !!SN:W^Tent_Capacity_Att^/y10;
+!!SN:W^Tent_Capacity_Att_Hero%Y1^/y10;  [Save HC from hero to show in bonus list]
 !!BMy2:U1/y10 U2/y10;                   [Set Tent damage]
 !!en;
 
@@ -6025,6 +6069,7 @@ and creature is %X1^;
 !!SN:W^Tent_Capacity_Upgrade_%Y1^/?y11; [For Blacksmith Upgrade at +500 capacity to heal]
 !!VRy10&y11=1:+500;
 !!SN:W^Tent_Capacity_Def^/y10;
+!!SN:W^Tent_Capacity_Def_Hero%Y1^/y10;  [Save HC from hero to show in bonus list]
 !!BMy2:U1/y10 U2/y10;                   [Set Tent damage]
 !!en;
 !!en;
@@ -7226,6 +7271,8 @@ x3-x5=Town Coordinates
 !!FU&y6=1:E;
 !!BA:Hy2/?y4;                           [Current Hero]
 !!FU&y4<0:E;                            [Exit if none]
+!!VRy40:S0;
+!!VRy40&y2=0:S21; !!VRy40&y2=1:S0;      [Set creatures to search for target]
 !!SN:W^Master_Warrior_Hero%Y4^/?y9;
 !!SN:W^Master_Mage_Hero%Y4^/?y10;
 !!FU|y9=0/y10=0:E;                      [Exit if no Battlemage]
@@ -7248,14 +7295,11 @@ x3-x5=Town Coordinates
 !!VRy50:S0;
 [:find_target]
 !!VRy50:+1;
-!!VRy10:S21R6;
-!!BMy10:P?y5;
-!!BMy10:N?y6;
-!!BMy10:T?y7;
+!!VRy10:Sy40R6;                         [Seach attacker or defender]
+!!BMy10:P?y5 N?y6 T?y7 I?y8;      
 !!FU&y50=100:E;                         [Exit if no valid Target can be found]
 !!SN|y6=0/y7=145/y7=146/y7=147/y7=148/y7=149:G[find_target]; [Loop]
-*!SN&1000/f=0:T^AC_Misc.Precast ability^/?z2;
-*!IF&1000/f=0:L^%Z2^;
+
 !!BHy2:Cy11/y5/3/1;                     [Cast Spell at Target]
 !!BHy2:M0;                              [Reenable Spell Book after cast]
 
@@ -7285,12 +7329,10 @@ x3-x5=Town Coordinates
 !!MR:Fy10;
 
 
-!?BF;                                   [Warcry]
+!?BF;                                   [Warcry Reduce HP by 10%]
 !!BA:H0/?y4;                            [Attacker]
 !!SN:W^Master_Warrior_Hero%Y4^/?y9;
 !!SN:W^Master_Mage_Hero%Y4^/?y10;
-*!VRy11:S90R5;                          [Reduce HP by -5-10%]
-*!VRy12:S100-90;
 
 !!BA:Q?f;
 !!DO(AC_Function_38)/21/41/1&y9=1/y10=1:P90; [Run if Battlemage]
@@ -7302,8 +7344,6 @@ x3-x5=Town Coordinates
 !!FU&y4<0:E;
 !!SN:W^Master_Warrior_Hero%Y4^/?y9;
 !!SN:W^Master_Mage_Hero%Y4^/?y10;
-*!VRy11:S90R5;                          [Reduce HP by -5-10%]
-*!VRy12:S100-90;                        [Reduce HP by 10%]
 
 !!DO(AC_Function_38)/0/20/1&y9=1/y10=1:P90; [Run if Battlemage]
 !!HEy4&y9=1/y10=1:B0/?z-10;             [get hero name]
@@ -8683,40 +8723,40 @@ Caitlin, Aine, Grindan, Jenova, Octavia, (Damacon removed), Sephinroth
 
 
 ***************************Hierophant and Ogre Leader***************************
-!?BF;                                   [Increases HP of First Aid Tent or Ballista by +10 per Level]
+!?FU(OnCombatRound)&v997=0;                      [Increases HP of First Aid Tent or Ballista by +10 per Level]
 
-!!BA:H0/?y1;                            [Attacker]
-!!COy1:D?y10;                           [Get Commander Alive]
-!!COy1:T?y11;                           [Get Commander Type]
-!!if&y10=0;                            [If Alive]
-!!COy1:X2/?y12;                         [Get Commander Level]
-!!VRy13:Sy12*10;                        [10*Commander Level to HP]
-!!VRy14:Sy12:6;                         [Commander Level/6 to Min+Max Damage]
-!!DO(AC_Function_39)/0/10/1&y11=1:P147/y13; [Hierophant pass 147 for First Aid Tent and Commander Level]
-!!DO(AC_Function_39)/0/10/1&y11=6:P146/y13/y14; [Ogre Leader pass 146 for Ballista and Commander Level]
+!!BA:H0/?y1;                                     [Attacker]
+!!COy1:D?y10;                                    [Get Commander Alive]
+!!COy1:T?y11;                                    [Get Commander Type]
+!!if&y10=0;                                      [If Alive]
+!!COy1:X2/?y12;                                  [Get Commander Level]
+!!VRy13:Sy12*10;                                 [10*Commander Level to HP]
+!!VRy14:Sy12:6;                                  [Commander Level/6 to Min+Max Damage]
+!!DO(AC_Function_39)/0/10/1&y11=1:P147/y13;      [Hierophant pass 147 for First Aid Tent and Commander Level]
+!!DO(AC_Function_39)/0/10/1&y11=6:P146/y13/y14;  [Ogre Leader pass 146 for Ballista and Commander Level]
 !!en;
 
-!!BA:H1/?y1;                            [Defender]
+!!BA:H1/?y1;                                     [Defender]
 !!FU&y1<0:E;
-!!COy1:D?y10;                           [Get Commander Alive]
-!!COy1:T?y11;                           [Get Commander Type]
-!!if&y10=0;                            [If Alive ]
-!!COy1:X2/?y12;                         [Get Commander Level]
-!!VRy13:Sy12*10;                        [10*Commander Level to HP]
-!!VRy14:Sy12:6;                         [Commander Level/6 to Min+Max Damage]
-!!DO(AC_Function_39)/21/31/1&y11=1:P147/y13; [Hierophant pass 147 for First Aid Tent and Commander Level]
+!!COy1:D?y10;                                    [Get Commander Alive]
+!!COy1:T?y11;                                    [Get Commander Type]
+!!if&y10=0;                                      [If Alive ]
+!!COy1:X2/?y12;                                  [Get Commander Level]
+!!VRy13:Sy12*10;                                 [10*Commander Level to HP]
+!!VRy14:Sy12:6;                                  [Commander Level/6 to Min+Max Damage]
+!!DO(AC_Function_39)/21/31/1&y11=1:P147/y13;     [Hierophant pass 147 for First Aid Tent and Commander Level]
 !!DO(AC_Function_39)/21/31/1&y11=6:P146/y13/y14; [Ogre Leader pass 146 for Ballista and Commander Level]
 !!en;
 
 
-!?FU(AC_Function_39);                   [increase Units Stats]
+!?FU(AC_Function_39);                            [increase Units Stats]
 
 !!BMx16:T?y1;
 !!if&y1=x1;
-!!BMx16:N?y2;                           [Creature Number y20]
-!!FU&y2=0:E;                            [Exit if zero]
-!!BMx16:Hdx2;                           [Add fix HP to Ballista or First Aid Tent]
-!!BMx16&x1=146:U1/dx3 U2/dx3;           [Min+Max Damage add only for Ballista]
+!!BMx16:N?y2;                                    [Creature Number y20]
+!!FU&y2=0:E;                                     [Exit if zero]
+!!BMx16:Hdx2;                                    [Add fix HP to Ballista or First Aid Tent]
+!!BMx16&x1=146:U1/dx3 U2/dx3;                    [Min+Max Damage add only for Ballista]
 !!en;
 
 ***************************Hierophantr***************************
@@ -9353,6 +9393,132 @@ Caitlin, Aine, Grindan, Jenova, Octavia, (Damacon removed), Sephinroth
 !!HEy50:I?y11/1;                        [Check Spell Points again]
 !!HEy50&y11<=0:I0/1;                    [Set Spell Points to zero if negative]
 !!en;
+
+
+****************************************************************************************************
+*Kill Counter for all Commanders to show in Bonus list*
+!?MF1;
+
+!!UN:C42149568/4/?y10;                  [Get Physical Damage type]
+!!if|y10=4462398/y10=4455011/y10=4456676:; [Only run when melee or shooting damage or Strikes all enemys around]
+
+!!BG:A?y1;                              [Aktion in y1]
+!!if&y1=6|y1=7:;                        [Attack or Shoot]
+
+  !!BG:N?y1;                              [Attacking Stack]
+  !!MF:N?y4;                              [damage receiving stack]
+  !!SN:W^Commander_Kill_Attacking_Stack^/?y50;
+  !!VRy1&y4=y1/y50>=0/y50<=41:Sy50;       [If Attacking Stack gleich Damage Recieving Stack it means Retaliation]
+  !!SN:W^Commander_Kill_Attacking_Stack^/y4;
+
+  !!BMy1:T?y2;                            [Creature Type]
+  !!FU|y2<180/y2>191:E;                   [Exit if no Commander]
+  !!MF:F?y3;                              [Get damage]
+  !!FU&y3=0:E;                            [Exit if Zero damage]
+  !!BG:H?y10;                             [Get Hero Number]
+  !!if&y10>=0/y10<=155:;
+    !!BMy4:N?y5 H?y6 L?y7;                [Get Number and Life of attacked Stack and lost Hitpoints]
+    !!VRy5:*y6-y7;                        [Get total Life of attacked stack]
+    !!FU&y5>y3:E;                         [Exit if not enough damage was dealt]    
+    !!SN:W^Commander_Kill_Counter_%Y10^/d1;[Increase counter by one if kill happened]
+    !!SN:W^Commander_Kill_Counter_Temp_%Y10^/d1;[Increase temp counter by one if kill happened]
+  !!en:;
+!!en:;
+!!en:;
+
+*Physical Damage Counter to show in Hero bonus list*
+!?MF1;
+
+!!BG:A?y1;                              [Aktion in y1]
+!!if&y1=6|y1=7:;                        [Attack or Shoot]
+  !!BG:N?y1;                            [Attacking Stack]
+  !!MF:N?y4;                            [damage receiving stack]
+  !!SN:W^Damage_Counter_Attacking_Stack^/?y50;
+  !!VRy1&y4=y1/y50>=0/y50<=41:Sy50;     [If Attacking Stack gleich Damage Recieving Stack it means Retaliation]
+  !!SN:W^Damage_Counter_Attacking_Stack^/y4;
+
+  !!MF:F?y3;                            [Get damage]
+  !!FU&y3=0:E;                          [Exit if Zero damage]
+  !!BG:H?y10;                           [Get Hero Number]
+  !!if&y10>=0/y10<=155:;
+    !!BMy4:N?y5 H?y6 L?y7;              [Get Number and Life of attacked Stack and lost Hitpoints]
+    !!VRy5:*y6-y7;                      [Get total Life of attacked stack]
+    !!VRy3&y3>y5:Sy5;                   [Only count the real damage applied]
+    *!IF:L^Damage that is added to the counter %Y3^;
+    !!SN:W^Damage_Counter_Hero_%Y10^/dy3;[Increase damage counter]
+    !!SN:W^Damage_Counter_Hero_Temp_%Y10^/dy3;[Increase counter by one if kill happened]
+  !!en:;
+!!en:;
+
+*Magic damage Counter to show in Hero bonus list*
+!?MR1;
+
+!!BG:A?y1;                              [Aktion in y1]
+!!if&y1=1:;                             [If Hero cast]
+
+  !!MR:N?y4 F?y3;                       [damage receiving stack and get damage]
+
+  !!FU&y3=0:E;                          [Exit if Zero damage]
+  !!BG:H?y10;                           [Get Hero Number]
+  !!if&y10>=0/y10<=155:;
+    !!BMy4:N?y5 H?y6 L?y7;              [Get Number and Life of attacked Stack and lost Hitpoints]
+    !!VRy5:*y6-y7;                      [Get total Life of attacked stack]
+    !!VRy3&y3>y5:Sy5;                   [Only count the real damage applied]
+    *!IF:L^Damage that is added to the counter %Y3 and current hero is %Y10^;
+
+    !!SN:W^Magic_Damage_Counter_Hero_%Y10^/dy3; [Increase damage counter]
+    !!SN:W^Magic_Damage_Counter_Hero_Temp_%Y10^/dy3; [Increase counter by one if kill happened]
+  !!en:;
+!!en:;
+
+!?FU(OnCombatRound)&v997=0;             [On First visible combat round]
+!!re y10/0/155:;                        [Reset Temp vars before every fight for every hero]
+  !!SN:W^Damage_Counter_Hero_Temp_%Y10^/0;
+  !!SN:W^Commander_Kill_Counter_Temp_%Y10^/0;
+  !!SN:W^Magic_Damage_Counter_Hero_Temp_%Y10^/0;
+!!en:;
+
+
+!?FU870520;
+*?FU(OnBattleReplay);
+
+!!BA:H0/?y1;                            [Attacker]
+!!if&y1>=0/y1<=155:;
+  !!SN:W^Damage_Counter_Hero_%Y1^/?y12;
+  !!SN:W^Damage_Counter_Hero_Temp_%Y1^/?y10;
+
+  !!SN:W^Commander_Kill_Counter_%Y1^/?y13;
+  !!SN:W^Commander_Kill_Counter_Temp_%Y1^/?y11;  
+
+  !!SN:W^Magic_Damage_Counter_Hero_%Y1^/?y14;  
+  !!SN:W^Magic_Damage_Counter_Hero_Temp_%Y1^/?y15;  
+  
+  !!VRy12:-y10;                         [Substract temp value from real value]
+  !!VRy13:-y11;
+  !!VRy14:-y15;  
+  !!SN:W^Damage_Counter_Hero_%Y1^/y12;  [apply new value again]
+  !!SN:W^Commander_Kill_Counter_%Y1^/y13;
+  !!SN:W^Magic_Damage_Counter_Hero_%Y1^/y14;  
+!!en:;
+
+!!BA:H1/?y1;                            [Defender]
+!!if&y1>=0/y1<=155:;
+  !!SN:W^Damage_Counter_Hero_%Y1^/?y12;
+  !!SN:W^Damage_Counter_Hero_Temp_%Y1^/?y10;
+
+  !!SN:W^Commander_Kill_Counter_%Y1^/?y13;
+  !!SN:W^Commander_Kill_Counter_Temp_%Y1^/?y11;  
+
+  !!SN:W^Magic_Damage_Counter_Hero_%Y1^/?y14;  
+  !!SN:W^Magic_Damage_Counter_Hero_Temp_%Y1^/?y15;  
+  
+  !!VRy12:-y10;                         [Substract temp value from real value]
+  !!VRy13:-y11;
+  !!VRy14:-y15;  
+  !!SN:W^Damage_Counter_Hero_%Y1^/y12;  [apply new value again]
+  !!SN:W^Commander_Kill_Counter_%Y1^/y13;
+  !!SN:W^Magic_Damage_Counter_Hero_%Y1^/y14; 
+!!en:;
 
 
 ********************************************************************************
@@ -11405,13 +11571,77 @@ Show Bonus Table when clicking on Knowledge Icon in Hero Screen
 !!VRy15:+y12;                           [+Creature Growth Chance from Set]
 *!VRy16:+y11;                           [+Spell Crit Chance from Set already handeld before]
 
+!!SN:W^Damage_Counter_Hero_%Y4^/?y40; [Increase damage counter]
+!!SN:W^Magic_Damage_Counter_Hero_%Y4^/?y41;[Increase damage counter]
+!!SN:W^Commander_Kill_Counter_%Y4^/?y42;[Get commander kill counter from hero]
+
 !!FU(Spell_Trainer_Calc):Py4/?y95/?y96;[Pass Hero Number and return Number of Spell Upgrades and Chance for Spell Upgrade]
+
+!!VRv7020:Sy4; Set v7020 so it has correct hero number
+!!FU(Artillery_Bonus0):P0/1;
+!!SN:W^Artillery_Low_Damage_Hero%V7020^/?y60; [Save Low Damage to display it in Bonus List]
+!!SN:W^Artillery_High_Damage_Hero%V7020^/?y61; [Save High Damage to display it in Bonus List]
+!!VRz4:S^Artillery Pre-damage: %Y60 - %Y61^;
+
+!!FU(Magic_Artillery_Shoot1):P0/y4/1;
+!!SN:W^EagleEye_Low_Damage_Hero%V7020^/?y62; [Save Low Damage to display it in Bonus List]
+!!SN:W^EagleEye_High_Damage_Hero%V7020^/?y63; [Save High Damage to display it in Bonus List]
+
+
+!!FU(Improved_FirstAid_Bonus):P1/0/1;
+!!SN:W^Heal_After_Fight_Low_Hero%V7020^/?y64; [Save Low Damage to display it in Bonus List]
+!!SN:W^Heal_After_Fight_High_Hero%V7020^/?y65; [Save High Damage to display it in Bonus List]
+
+!!HEy4:S27/?y80; 
+!!FU(AC_Function_35):P0/y80/1/1;
+!!SN:W^Heal_InCombat_Low_Hero%V7020^/?y66; [Save Low Damage to display it in Bonus List]
+!!SN:W^Heal_InCombat_High_Hero%V7020^/?y67; [Save High Damage to display it in Bonus List]
+
+!!SN:W^Tent_Capacity_Att_Hero%Y4^/?y68;
+!!SN:W^Scouting_Event_Chance_%Y4^/?y69;  [save scouting chance]
+!!VRy69&y69=0:S9999;
+
+!!HEy4:E?y90/?y91/1; Get Hero level
+!!HEy4:A2/31/?y30/?y81; 31  Armor of Wonder 
+!!HEy4:A2/25/?y30/?y82; 25  Breastplate of Petrified Wood
+!!HEy4:A2/163/?y30/?y83; 163 Round Shield of Commander
+
+!!VRy92:Sy91*4; 4 times hero level flat damage block for Druid
+
+!!VRy70:S0; !!VRy70&y81=1:Sy91*2+20; !!VRy70&y83=1:+50; !!VRy70&y23=1/y24=1:+y92;   
+!!VRy71:S0; !!VRy71&y82=1:Sy91*2+15; !!VRy71&y83=1:+50; !!VRy71&y23=1/y24=1:+y92;
+!!VRy72:S0;
+!!VRy73:S0;
+!!VRy74:S0; !!VRy74&y23=1:+15; !!VRy74&y21=1:+10;
+*!SN:W^Master_Warrior_Hero%Y4^/?y19;
+*!SN:W^Master_Mage_Hero%Y4^/?y23;            
+*!SN:W^Master_Adventurer_Hero%Y4^/?y24;
+*!SN:W^Grandmaster_Warrior_Hero%Y4^/?y20;
+*!SN:W^Grandmaster_Mage_Hero%Y4^/?y21;
+*!SN:W^Grandmaster_Adventurer_Hero%Y4^/?y22;
+
+!!VRz4:S^
+Artillery Pre-damage %Y60 - %Y61
+Eagle Eye Pre-damage: %Y62 - %Y63
+Heal after combat: %Y64 - %Y65
+Heal in combat %Y66 - %Y67
+Heal Capacity %Y68
+Chance for Scouting event: 17/%Y69
+Flat range damage block: %Y70
+Flat melee damage block: %Y71
+Flat magic damage block: %Y72
+Chance to evade: %Y73
+Magic Pierce: %Y74%
+^;
+
 
 !!SN:T^AC_Misc.Bonus Table 1^/?z1; !!SN:Iz1/?z1;
 !!SN:T^AC_Misc.Spell_Upgrades^/?z2; !!SN:Iz2/?z2;
 
 !!DL89:A1/3/z1/1;
 !!DL89:A2/3/z2/1;
+!!DL89:A3/3/z4/1;
+!!DL89:A4/3/z3/1;
 !!DL89:S1;                              [Show complete Dialogue number 89]
 
 
@@ -12684,7 +12914,7 @@ Glittering Surcoat of Quicksand 168
 !!HEx16&y2=1:Ed1000;                    [give 1000 experience each week]
 
 *******************************
-!?BF;                                   [Combat Start]
+!?FU(OnCombatRound)&v997=0;             [Combat Start]
 *Pendant of Dispassion increases damage by 1 of equipped
 !!BA:H0/?y2;                            [Attacker]
 !!HEy2:A2/100/0/?y3;                    [100 Pendant of Dispassion]
@@ -13491,7 +13721,8 @@ The Champions Honor full set grants Warmachine Upgrades at level up with a 20%/5
 
 ********************************************************************************
 *Set Artifact Descriptions at Map Start*
-!?FU(OnGameEnter);
+*?FU(OnGameEnter);
+!?FU(OnEveryDay);                       [Test, for TCP/IP MP set descriptions new every day]
 
 !!UN:P102/?y2;                          [Check for Artifact Boost]
 !!UN:P71/?y3;                           [Check for Enhanced Artifacts]

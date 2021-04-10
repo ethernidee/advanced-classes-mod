@@ -1,8 +1,8 @@
 
 Advanced Classes Mod 1.06
 
-A Mod by Perry R, for Heroes 3 ERA 3.3 
-with the help of AlfWithCake, anti-victor, Daemon_n and Sandris
+A Mod by Perry R, for Heroes 3 ERA 3.4 
+with the help of AlfWithCake, anti-victor, Daemon_n, Sandris and Berserker
 _________________________________________________
  
  CONTENTS
