@@ -121,10 +121,6 @@ Disable Various WoG Options which can conflict with Advanced Classes Mod
 !#DC(SKILL_MASTER)      = 4;
 !#DC(SKILL_GRANDMASTER) = 5;
 
-!#DC(HL_DISABLE_SKILL)     = -1;
-!#DC(HL_DONT_CHANGE_SKILL) = -2;
-!#DC(HL_USE_ALL_DEFAULTS)  = -3;
-
 !#DC(HL_NUM_MAIN_CLASSES) = 3;
 !#DC(HL_NO_CLASS)         = 0;
 !#DC(HL_FIRST_CLASS)      = 1;
@@ -142,40 +138,6 @@ Disable Various WoG Options which can conflict with Advanced Classes Mod
 
 !#FU(NewIntArray):P(NUM_SECONDARY_SKILLS)/0/?i^acm_SecSkillsBackup^/(M_STORED);
 
-!?FU(acm_GetRandomSkillToUpgrade);
-; Returns random non-grandmaster secondary skill with at least specified level or (NO_SKILL) in case of failure.
-!#VA(hero:x);
-!#VA(minSkillLevel:x);
-!#VA(result:x);
-!#VA(excludeSkill:x); Optional. Specify skill to exclude from alternatives.
-
-!#VA(skills[28]:y);
-!!VR(numAlts:y):S0;
-!!VR(result):S(NO_SKILL);
-
-!!FU:A?(numArgs:y);
-!!VR(excludeSkill)&(numArgs)<(@excludeSkill):S(NO_SKILL);
-
-!!re i/0/(SEC_SKILL_LAST);
-  !!HE(hero):Si/?(skillLevel:y);
-
-  !!if&(skillLevel)>(SKILL_NOT_LEARNED)/i<>(excludeSkill);
-    !!VR(isMaster:y):S(FALSE);
-    !!VR(isGrandmaster:y):S(FALSE);
-    !!FU(H3_Mod_Check_Skill_Level)&(skillLevel)>=(SKILL_EXPERT):P(hero)/?(isMaster:y)/?(isGrandmaster:y)/i;
-    !!VR(skillLevel):+(isMaster) +(isGrandmaster);
-
-    !!if&(skillLevel)>=(minSkillLevel)/(skillLevel)<(SKILL_GRANDMASTER);
-      !!VR(skills[numAlts]):Si;
-      !!VR(numAlts):+1;
-    !!en;
-  !!en;
-!!en;
-
-!!FU&(numAlts)<=0:E;
-!!VR(randomInd:y):R0/1/(numAlts) -1;
-!!VR(result):S(skills[randomInd]);
-
 !?FU(acm_CountNumUniqueSkillsLearned);
 !#VA(hero:x);
 !#VA(result:x);
@@ -190,7 +152,7 @@ Disable Various WoG Options which can conflict with Advanced Classes Mod
 !?FU(acm_GetSecSkillLevel);
 !#VA(hero:x);
 !#VA(skill:x);
-!#VA(result:x);
+!#VA(result:x); Result is in (SKILL_NOT_LEARNED) .. (SKILL_GRANDMASTER) range
 
 !!HE(hero):S(skill)/?(result);
 
@@ -200,7 +162,18 @@ Disable Various WoG Options which can conflict with Advanced Classes Mod
   !!VR(result)&(isGrandmaster)<>(FALSE):S(SKILL_GRANDMASTER);
 !!en;
 
-!?FU(acm_BackupAndPrepareSecSkills);
+!?FU(acm_SetSecSkillLevel);
+!#VA(hero:x);
+!#VA(skill:x);
+!#VA(level:x); Level must be in (SKILL_NOT_LEARNED) .. (SKILL_GRANDMASTER) range
+
+!!VR(level):F(SKILL_NOT_LEARNED)/(SKILL_GRANDMASTER);
+!!VR(nativeLevel:y):S(level) F(SKILL_NOT_LEARNED)/(SKILL_EXPERT);
+!!HE(hero):S(skill)/(nativeLevel);
+!!FU(H3_Mod_Set_Skill_ExtraLevel)&(level)=(SKILL_MASTER):P(hero)/(TRUE)/(FALSE)/(skill);
+!!FU(H3_Mod_Set_Skill_ExtraLevel)&(level)=(SKILL_GRANDMASTER):P(hero)/(TRUE)/(TRUE)/(skill);
+
+!?FU(acm_BackupAndPrepareSecSkillsForLevelUp);
 !#VA(hero:x);
 
 !!re i/0/(SEC_SKILL_LAST);
@@ -208,17 +181,6 @@ Disable Various WoG Options which can conflict with Advanced Classes Mod
   !!SN:Vi^acm_SecSkillsBackup^/i/(skillLevel);
   !!HE(hero)&(skillLevel)>=(SKILL_EXPERT)/(skillLevel)<(SKILL_GRANDMASTER):Si/(SKILL_ADVANCED);
 !!en;
-
-!?FU(acm_SetSecSkillLevel);
-!#VA(hero:x);
-!#VA(skill:x);
-!#VA(level:x);
-
-!!VR(level):F(SKILL_NOT_LEARNED)/(SKILL_GRANDMASTER);
-!!VR(nativeLevel:y):S(level) F(SKILL_NOT_LEARNED)/(SKILL_EXPERT);
-!!HE(hero):S(skill)/(nativeLevel);
-!!FU(H3_Mod_Set_Skill_ExtraLevel)&(level)=(SKILL_MASTER):P(hero)/(TRUE)/(FALSE)/(skill);
-!!FU(H3_Mod_Set_Skill_ExtraLevel)&(level)=(SKILL_GRANDMASTER):P(hero)/(TRUE)/(TRUE)/(skill);
 
 !?FU(acm_GetHeroClass);
 !#VA(hero:x);   hero ID
@@ -1771,7 +1733,7 @@ x1 - hero id, x2 - master rank, x3 - GM rank, x4 - skill id
   !!FU(H3_Mod_Skill_Loop10):P(hero)/i;
 !!en;
 
-!!FU(acm_BackupAndPrepareSecSkills):P(hero);
+!!FU(acm_BackupAndPrepareSecSkillsForLevelUp):P(hero);
 !!FU(acm_RecalcClassPoints):P(hero)/?(warriorPoints:y)/?(magePoints:y)/?(adventurerPoints:y);
 
 !?FU(H3_Mod_Assign_Level_UP);
