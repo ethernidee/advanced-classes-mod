@@ -29,10 +29,6 @@ Name on Heroescommunity RerryR
 
 !#SN:W^Advanced_Classes_Mod_Active^/1;  [Set Mod Active]
 
-!#SN:W^LeftSkill^/-3;
-!#SN:W^RightSkill^/-3;
-!#SN:W^After_Level_Up_Flag^/-1;
-!#SN:W^After_Level_Click^/0;
 !#SN:W^Game_Start_Value^/0;
 
 !#SN:W^Adept_Level_Global_Value^/10;
@@ -7296,7 +7292,7 @@ x3-x5=Town Coordinates
 [:find_target]
 !!VRy50:+1;
 !!VRy10:Sy40R6;                         [Seach attacker or defender]
-!!BMy10:P?y5 N?y6 T?y7 I?y8;      
+!!BMy10:P?y5 N?y6 T?y7 I?y8;
 !!FU&y50=100:E;                         [Exit if no valid Target can be found]
 !!SN|y6=0/y7=145/y7=146/y7=147/y7=148/y7=149:G[find_target]; [Loop]
 
@@ -9419,7 +9415,7 @@ Caitlin, Aine, Grindan, Jenova, Octavia, (Damacon removed), Sephinroth
   !!if&y10>=0/y10<=155:;
     !!BMy4:N?y5 H?y6 L?y7;                [Get Number and Life of attacked Stack and lost Hitpoints]
     !!VRy5:*y6-y7;                        [Get total Life of attacked stack]
-    !!FU&y5>y3:E;                         [Exit if not enough damage was dealt]    
+    !!FU&y5>y3:E;                         [Exit if not enough damage was dealt]
     !!SN:W^Commander_Kill_Counter_%Y10^/d1;[Increase counter by one if kill happened]
     !!SN:W^Commander_Kill_Counter_Temp_%Y10^/d1;[Increase temp counter by one if kill happened]
   !!en:;
@@ -9488,17 +9484,17 @@ Caitlin, Aine, Grindan, Jenova, Octavia, (Damacon removed), Sephinroth
   !!SN:W^Damage_Counter_Hero_Temp_%Y1^/?y10;
 
   !!SN:W^Commander_Kill_Counter_%Y1^/?y13;
-  !!SN:W^Commander_Kill_Counter_Temp_%Y1^/?y11;  
+  !!SN:W^Commander_Kill_Counter_Temp_%Y1^/?y11;
 
-  !!SN:W^Magic_Damage_Counter_Hero_%Y1^/?y14;  
-  !!SN:W^Magic_Damage_Counter_Hero_Temp_%Y1^/?y15;  
-  
+  !!SN:W^Magic_Damage_Counter_Hero_%Y1^/?y14;
+  !!SN:W^Magic_Damage_Counter_Hero_Temp_%Y1^/?y15;
+
   !!VRy12:-y10;                         [Substract temp value from real value]
   !!VRy13:-y11;
-  !!VRy14:-y15;  
+  !!VRy14:-y15;
   !!SN:W^Damage_Counter_Hero_%Y1^/y12;  [apply new value again]
   !!SN:W^Commander_Kill_Counter_%Y1^/y13;
-  !!SN:W^Magic_Damage_Counter_Hero_%Y1^/y14;  
+  !!SN:W^Magic_Damage_Counter_Hero_%Y1^/y14;
 !!en:;
 
 !!BA:H1/?y1;                            [Defender]
@@ -9507,17 +9503,17 @@ Caitlin, Aine, Grindan, Jenova, Octavia, (Damacon removed), Sephinroth
   !!SN:W^Damage_Counter_Hero_Temp_%Y1^/?y10;
 
   !!SN:W^Commander_Kill_Counter_%Y1^/?y13;
-  !!SN:W^Commander_Kill_Counter_Temp_%Y1^/?y11;  
+  !!SN:W^Commander_Kill_Counter_Temp_%Y1^/?y11;
 
-  !!SN:W^Magic_Damage_Counter_Hero_%Y1^/?y14;  
-  !!SN:W^Magic_Damage_Counter_Hero_Temp_%Y1^/?y15;  
-  
+  !!SN:W^Magic_Damage_Counter_Hero_%Y1^/?y14;
+  !!SN:W^Magic_Damage_Counter_Hero_Temp_%Y1^/?y15;
+
   !!VRy12:-y10;                         [Substract temp value from real value]
   !!VRy13:-y11;
-  !!VRy14:-y15;  
+  !!VRy14:-y15;
   !!SN:W^Damage_Counter_Hero_%Y1^/y12;  [apply new value again]
   !!SN:W^Commander_Kill_Counter_%Y1^/y13;
-  !!SN:W^Magic_Damage_Counter_Hero_%Y1^/y14; 
+  !!SN:W^Magic_Damage_Counter_Hero_%Y1^/y14;
 !!en:;
 
 
@@ -11592,7 +11588,7 @@ Show Bonus Table when clicking on Knowledge Icon in Hero Screen
 !!SN:W^Heal_After_Fight_Low_Hero%V7020^/?y64; [Save Low Damage to display it in Bonus List]
 !!SN:W^Heal_After_Fight_High_Hero%V7020^/?y65; [Save High Damage to display it in Bonus List]
 
-!!HEy4:S27/?y80; 
+!!HEy4:S27/?y80;
 !!FU(AC_Function_35):P0/y80/1/1;
 !!SN:W^Heal_InCombat_Low_Hero%V7020^/?y66; [Save Low Damage to display it in Bonus List]
 !!SN:W^Heal_InCombat_High_Hero%V7020^/?y67; [Save High Damage to display it in Bonus List]
@@ -11602,19 +11598,19 @@ Show Bonus Table when clicking on Knowledge Icon in Hero Screen
 !!VRy69&y69=0:S9999;
 
 !!HEy4:E?y90/?y91/1; Get Hero level
-!!HEy4:A2/31/?y30/?y81; 31  Armor of Wonder 
+!!HEy4:A2/31/?y30/?y81; 31  Armor of Wonder
 !!HEy4:A2/25/?y30/?y82; 25  Breastplate of Petrified Wood
 !!HEy4:A2/163/?y30/?y83; 163 Round Shield of Commander
 
 !!VRy92:Sy91*4; 4 times hero level flat damage block for Druid
 
-!!VRy70:S0; !!VRy70&y81=1:Sy91*2+20; !!VRy70&y83=1:+50; !!VRy70&y23=1/y24=1:+y92;   
+!!VRy70:S0; !!VRy70&y81=1:Sy91*2+20; !!VRy70&y83=1:+50; !!VRy70&y23=1/y24=1:+y92;
 !!VRy71:S0; !!VRy71&y82=1:Sy91*2+15; !!VRy71&y83=1:+50; !!VRy71&y23=1/y24=1:+y92;
 !!VRy72:S0;
 !!VRy73:S0;
 !!VRy74:S0; !!VRy74&y23=1:+15; !!VRy74&y21=1:+10;
 *!SN:W^Master_Warrior_Hero%Y4^/?y19;
-*!SN:W^Master_Mage_Hero%Y4^/?y23;            
+*!SN:W^Master_Mage_Hero%Y4^/?y23;
 *!SN:W^Master_Adventurer_Hero%Y4^/?y24;
 *!SN:W^Grandmaster_Warrior_Hero%Y4^/?y20;
 *!SN:W^Grandmaster_Mage_Hero%Y4^/?y21;
