@@ -1,10 +1,11 @@
 ZVSE2
-A Mod by Perry R
-Created between 2016 until 2021
-
 
 ********************************************************************************
                  Advanced Classes Mod for ERA 3.x
+********************************************************************************
+
+A Mod by Perry R. 2016-2021.
+Contributors: Berserker.
 
 Content:
 
@@ -23,7 +24,8 @@ Content:
 
 For feedback, bug reports and updates
 Visit http://heroescommunity.com Advanced Classes Mod
-Name on Heroescommunity RerryR
+Name on Heroescommunity: RerryR
+
 ********************************************************************************
 
 
@@ -42,6 +44,9 @@ Name on Heroescommunity RerryR
 
 !#VRi^acm_optionChooseClass^:S0; Option allows to delay class selection and choose desired class when enough points are accumulated
                                ; If it's off, class selection occurs automaticlly based on highest points.
+
+!#VRi^acm_optionNoSkillDependenciesOnClass^:S0; Option allow to disable restriction, according to which you need master/grandmaster level class
+                                              ; in order to upgrade fixed set of skills to master/grandmaster.
 
 Disable Various WoG Options which can conflict with Advanced Classes Mod
 
@@ -106,7 +111,7 @@ Disable Various WoG Options which can conflict with Advanced Classes Mod
 
 !#UN:V?y1/?y2;                          [Check ERA version]
 !#SN:T^AC_Misc.ATTENTION GRANDPA^/?z2;
-!#IF&y2<3400:M^%Z2^;                    [Updated to version 3.4]
+!#IF&y2<3402:M^%Z2^;                    [Updated to version 3.4.2]
 
 !#VRz-2:S^ACM Update 1.05^;             [User-defined section of WoG.ini file ("ACM Update 1.0X")]
 !#UN:N6/-1/1/-2;                        [Check if ACM Update 1.0X Message has already been displayed]
@@ -145,6 +150,8 @@ Disable Various WoG Options which can conflict with Advanced Classes Mod
 !#DC(ACM_CLASS_LEVEL_MASTER)      = 4;
 !#DC(ACM_CLASS_LEVEL_GRANDMASTER) = 5;
 
+!#DC(ACM_BACKUPED_SKILL_WAS_DECREASED_FLAG) = (BIT_31);
+
 !#FU(NewIntArray):P(NUM_SECONDARY_SKILLS)/0/?i^acm_SecSkillsBackup^/(M_STORED);
 
 !?FU(acm_CountNumUniqueSkillsLearned);
@@ -157,6 +164,48 @@ Disable Various WoG Options which can conflict with Advanced Classes Mod
   !!HE(hero):Si/?(skillLevel:y);
   !!VR(result)&(skillLevel)>(SKILL_NOT_LEARNED):+1;
 !!en;
+
+!?FU(acm_GetSkillDependenciesOnClass);
+; Originally mod allows to master/grandmaster skills, depending on class and class level (master/grandmaster).
+; Return ID of array with NUM_SECONDARY_SKILLS items, each contains allowed classes mask.
+!#VA(result:x);
+
+!!VR(result):Si^acm_skillDependenciesOnClass^;
+
+!!if&(result)=(NULL);
+  !!FU(NewIntArray):P(NUM_SECONDARY_SKILLS)/(ACM_NO_CLASS)/?(result)/(M_STORED);
+
+  !!if&i^acm_optionNoSkillDependenciesOnClass^=(FALSE);
+    !!SN:V(result)/(SKILL_PATHFINDING)/(ACM_CLASS_ADVENTURER);
+    !!SN:V(result)/(SKILL_ARCHERY)/(ACM_CLASS_WARRIOR);
+    !!SN:V(result)/(SKILL_LOGISTICS)/(ACM_CLASS_ADVENTURER);
+    !!SN:V(result)/(SKILL_SCOUTING)/(ACM_CLASS_ADVENTURER);
+    !!SN:V(result)/(SKILL_DIPLOMACY)/(ACM_CLASS_ADVENTURER);
+    !!SN:V(result)/(SKILL_NAVIGATION)/(ACM_CLASS_ADVENTURER);
+    !!SN:V(result)/(SKILL_LEADERSHIP)/(ACM_CLASS_WARRIOR);
+    !!SN:V(result)/(SKILL_WISDOM)/(ACM_CLASS_MAGE);
+    !!SN:V(result)/(SKILL_MYSTICISM)/(ACM_CLASS_MAGE);
+    !!SN:V(result)/(SKILL_LUCK)/(ACM_CLASS_WARRIOR);
+    !!SN:V(result)/(SKILL_BALLISTICS)/(ACM_CLASS_WARRIOR);
+    !!SN:V(result)/(SKILL_EAGLE_EYE)/(ACM_CLASS_ADVENTURER);
+    !!SN:V(result)/(SKILL_NECROMANCY)/(ACM_NO_CLASS);
+    !!SN:V(result)/(SKILL_ESTATES)/(ACM_CLASS_ADVENTURER);
+    !!SN:V(result)/(SKILL_FIRE_MAGIC)/(ACM_CLASS_MAGE);
+    !!SN:V(result)/(SKILL_AIR_MAGIC)/(ACM_CLASS_MAGE);
+    !!SN:V(result)/(SKILL_WATER_MAGIC)/(ACM_CLASS_MAGE);
+    !!SN:V(result)/(SKILL_EARTH_MAGIC)/(ACM_CLASS_MAGE);
+    !!SN:V(result)/(SKILL_SCHOLAR)/(ACM_CLASS_MAGE);
+    !!SN:V(result)/(SKILL_TACTICS)/(ACM_CLASS_WARRIOR);
+    !!SN:V(result)/(SKILL_ARTILLERY)/(ACM_CLASS_WARRIOR);
+    !!SN:V(result)/(SKILL_LEARNING)/(ACM_CLASS_ADVENTURER);
+    !!SN:V(result)/(SKILL_OFFENCE)/(ACM_CLASS_WARRIOR);
+    !!SN:V(result)/(SKILL_ARMORER)/(ACM_CLASS_WARRIOR);
+    !!SN:V(result)/(SKILL_INTELLIGENCE)/(ACM_CLASS_MAGE);
+    !!SN:V(result)/(SKILL_SORCERY)/(ACM_CLASS_MAGE);
+    !!SN:V(result)/(SKILL_RESISTANCE)/(ACM_CLASS_WARRIOR);
+    !!SN:V(result)/(SKILL_FIRST_AID)/(ACM_CLASS_ADVENTURER);
+  !!en; if
+!!en; acm_GetSkillDependenciesOnClass
 
 !?FU(acm_GetSecSkillLevel);
 !#VA(hero:x);
@@ -188,31 +237,80 @@ Disable Various WoG Options which can conflict with Advanced Classes Mod
   !!FU(H3_Mod_Set_Skill_ExtraLevel):P(hero)/(TRUE)/(TRUE)/(skill);
 !!en;
 
-!?FU(acm_BackupAndPrepareSecSkillsForLevelUp);
-!#VA(hero:x);
-
-!!re i/0/(SEC_SKILL_LAST);
-  !!FU(acm_GetSecSkillLevel):P(hero)/i/?(skillLevel:y);
-  !!SN:Vi^acm_SecSkillsBackup^/i/(skillLevel);
-  !!HE(hero)&(skillLevel)>=(SKILL_EXPERT)/(skillLevel)<(ACM_SKILL_GRANDMASTER):Si/(SKILL_ADVANCED);
-!!en;
-
 !?FU(acm_GetHeroClass);
-!#VA(hero:x);   hero ID
-!#VA(result:x); one of HL_CLASS_XXX constants or HL_NO_CLASS
+!#VA(hero:x);       hero ID
+!#VA(class:x);      OUT. One of ACM_CLASS_XXX constants or ACM_NO_CLASS
+!#VA(classLevel:x); OUT. One of ACM_CLASS_LEVEL_XXX constants or ACM_NO_CLASS_LEVEL. Levels till Master are ignored and not used in the mod.
 
-!!VR(result):S(ACM_NO_CLASS);
+!!VR(class):S(ACM_NO_CLASS);
+!!VR(classLevel):S(ACM_NO_CLASS_LEVEL);
 
 !!VR(isWarrior:y):Si^Master_Warrior_Hero%(hero)^;
 !!VR(isMage:y):Si^Master_Mage_Hero%(hero)^;
 !!VR(isAdventurer:y):Si^Master_Adventurer_Hero%(hero)^;
 
-!!VR(result)&(isWarrior)=(TRUE):S(ACM_CLASS_WARRIOR);
-!!VR(result)&(isMage)=(TRUE):S(ACM_CLASS_MAGE);
-!!VR(result)&(isAdventurer)=(TRUE):S(ACM_CLASS_ADVENTURER);
-!!VR(result)&(isWarrior)=(TRUE)/(isMage)=(TRUE):S(ACM_CLASS_BATTLEMAGE);
-!!VR(result)&(isWarrior)=(TRUE)/(isAdventurer)=(TRUE):S(ACM_CLASS_HUNTER);
-!!VR(result)&(isMage)=(TRUE)/(isAdventurer)=(TRUE):S(ACM_CLASS_DRUID);
+!!VR(class)&(isWarrior)=(TRUE):S(ACM_CLASS_WARRIOR);
+!!VR(class)&(isMage)=(TRUE):S(ACM_CLASS_MAGE);
+!!VR(class)&(isAdventurer)=(TRUE):S(ACM_CLASS_ADVENTURER);
+!!VR(class)&(isWarrior)=(TRUE)/(isMage)=(TRUE):S(ACM_CLASS_BATTLEMAGE);
+!!VR(class)&(isWarrior)=(TRUE)/(isAdventurer)=(TRUE):S(ACM_CLASS_HUNTER);
+!!VR(class)&(isMage)=(TRUE)/(isAdventurer)=(TRUE):S(ACM_CLASS_DRUID);
+
+!!if&(class)<>(ACM_NO_CLASS);
+  !!VR(classLevel):S(ACM_CLASS_LEVEL_MASTER);
+  !!VR(classLevel)|i^Grandmaster_Warrior_Hero%(hero)^=(TRUE)/i^Grandmaster_Mage_Hero%(hero)^=(TRUE)/i^Grandmaster_Adventurer_Hero%(hero)^=(TRUE):S(ACM_CLASS_LEVEL_GRANDMASTER);
+!!en;
+
+!?FU(acm_BackupAndPrepareSecSkillsForLevelUp);
+; Saves all hero native skill levels in global var. Reduces expert skills to advanced for skills, which hero is able to promote.
+; Thus H3 engine will be used to determine, which skill to display in level-up dialog.
+!#VA(hero:x);
+
+!!VR(noSkillLevelRestriction:y):Si^acm_optionNoSkillDependenciesOnClass^;
+!!FU(acm_GetHeroClass):P(hero)/?(heroClass:y)/?(heroClassLevel:y);
+!!FU(acm_GetSkillDependenciesOnClass):P?(skillDeps:y);
+
+; For all skills
+!!re i/(SEC_SKILL_FIRST)/(SEC_SKILL_LAST);
+  ; Get skill level and save
+  !!FU(acm_GetSecSkillLevel):P(hero)/i/?(skillLevel:y);
+
+  ; If skill can be upgraded to master/grandmaster
+  !!if&(skillLevel)>=(SKILL_EXPERT)/(skillLevel)<(ACM_SKILL_GRANDMASTER);
+    !!SN:V(skillDeps)/i/?(requiredClass:y);
+    !!VRt:S(heroClass) &(requiredClass);
+
+    !!if|t<>(ACM_NO_CLASS)/(requiredClass)=(ACM_NO_CLASS);
+      !!if|(skillLevel)<(heroClassLevel)/(noSkillLevelRestriction)=(TRUE);
+        !!HE(hero):Si/(SKILL_ADVANCED);
+        !!VR(skillLevel):|(ACM_BACKUPED_SKILL_WAS_DECREASED_FLAG);
+      !!en;
+    !!en;
+  !!en; if
+
+  !!SN:Vi^acm_SecSkillsBackup^/i/(skillLevel);
+!!en; re
+
+!?FU(acm_RestoreSecSkillsAndApplyDetectedUpgrades);
+; Restores original expert skills from advanced level to expert after level up. Detects which skills were promoted to master/grandmaster level.
+!#VA(hero:x);
+
+!!FU(acm_GetHeroClass):P(hero)/?(heroClass:y)/?(heroClassLevel:y);
+!!FU(acm_GetSkillDependenciesOnClass):P?(skillDeps:y);
+
+!!re i/(SEC_SKILL_FIRST)/(SEC_SKILL_LAST);
+  !!FU(acm_GetSecSkillLevel):P(hero)/i/?(skillLevel:y);
+  !!SN:Vi^acm_SecSkillsBackup^/i/?(prevSkillLevel:y);
+
+  !!VR(skillLevelWasDecreased:y):S(prevSkillLevel) &(ACM_BACKUPED_SKILL_WAS_DECREASED_FLAG) B;
+  !!VR(prevSkillLevel):Sd~(ACM_BACKUPED_SKILL_WAS_DECREASED_FLAG);
+
+  !!if&(skillLevelWasDecreased)=(TRUE);
+    !!VR(newSkillLevel:y):S(prevSkillLevel);
+    !!VR(newSkillLevel)&(skillLevel)>=(prevSkillLevel):S(prevSkillLevel) +1;
+    !!FU(acm_SetSecSkillLevel):P(hero)/i/(newSkillLevel);
+  !!en;
+!!en;
 
 ; ==================================================================================================
 
@@ -1803,22 +1901,6 @@ x1 - hero id, x2 - master rank, x3 - GM rank, x4 - skill id
 
 !?FU(OnGameEnter);
 !!SN:W^Game_Start_Value^/10; [Activate First Click on Adventure Map activates Dialouge  [Works only after game start]
-
-!?FU(acm_RestoreSecSkillsAndApplyDetectedUpgrades);
-!#VA(hero:x);
-
-!!re i/0/(SEC_SKILL_LAST);
-  !!FU(acm_GetSecSkillLevel):P(hero)/i/?(skillLevel:y);
-  !!SN:Vi^acm_SecSkillsBackup^/i/?(prevSkillLevel:y);
-
-  !!if&(skillLevel)>=(prevSkillLevel)/(prevSkillLevel)>=(SKILL_EXPERT)/(prevSkillLevel)<(ACM_SKILL_GRANDMASTER);
-    !!VR(newSkillLevel:y):S(prevSkillLevel) +1;
-    !!FU(acm_SetSecSkillLevel):P(hero)/i/(newSkillLevel);
-  !!el;
-    !!HE(hero):Si/?(nativeSkillLevel:y);
-    !!FU(acm_SetSecSkillLevel)&(nativeSkillLevel)<(prevSkillLevel):P(hero)/i/(prevSkillLevel);
-  !!en;
-!!en;
 
 !?FU(H3_Mod_Assign_Level_UP);
 
@@ -3692,9 +3774,9 @@ Creature speed   Base movement
 
 !!UN:U54/-1/?y2;
 !!VRv1:S-1;
-!!DO(ACM_Monster_Agression)/1/y2/1:P;       [Loop through all monsters on the map]
+!!DO(acm_Monster_Agression)/1/y2/1:P;       [Loop through all monsters on the map]
 
-!?FU(ACM_Monster_Agression);
+!?FU(acm_Monster_Agression);
 
 !!VRv1&x16=1:S-1;
 !!UN:U54/-1/-1/1;
@@ -28898,83 +28980,3 @@ Change graphics of Meteor Shower and Implosion when at Master and GM level
   !!BMi:E0;
   !!en;
 !!en;
-
-
-********************************************************************************
-
-
-
-                                      TEST SECTION
-
-
-
-
-********************************************************************************
-
-
-*********************
-!?FU(OnGameEnter);
-!!FU:E;
-!!rei /0/155;
-    !!FU(acm_Chear):Pi;
-!!en;
-
-
-!?FU(acm_Chear);
-
-*!SN:W^H3_Pathfinding_0_Hero%X1^/1;
-*!SN:W^H3_Pathfinding_1_Hero%X1^/1;
-*!SN:W^H3_Archery_0_Hero%X1^/1;
-*!SN:W^H3_Archery_1_Hero%X1^/1;
-*!SN:W^H3_Logistics_0_Hero%X1^/1;
-*!SN:W^H3_Logistics_1_Hero%X1^/1;
-*!SN:W^H3_Scouting_0_Hero%X1^/1;
-*!SN:W^H3_Scouting_1_Hero%X1^/1;
-*!SN:W^H3_Diplomacy_0_Hero%X1^/1;
-*!SN:W^H3_Diplomacy_1_Hero%X1^/1;
-*!SN:W^H3_Nobility_0_Hero%X1^/1;
-*!SN:W^H3_Nobility_1_Hero%X1^/1;
-*!SN:W^H3_Leadership_0_Hero%X1^/1;
-*!SN:W^H3_Leadership_1_Hero%X1^/1;
-*!SN:W^H3_Wisdom_0_Hero%X1^/1;
-*!SN:W^H3_Wisdom_1_Hero%X1^/1;
-*!SN:W^H3_Mysticism_0_Hero%X1^/1;
-*!SN:W^H3_Mysticism_1_Hero%X1^/1;
-*!SN:W^H3_Luck_0_Hero%X1^/1;
-*!SN:W^H3_Luck_1_Hero%X1^/1;
-!!SN:W^H3_Ballistics_0_Hero%X1^/1;
-!!SN:W^H3_Ballistics_1_Hero%X1^/1;
-*!SN:W^H3_Eagle Eye_0_Hero%X1^/1;
-*!SN:W^H3_Eagle Eye_1_Hero%X1^/1;
-*!SN:W^H3_Necromancy_0_Hero%X1^/1;
-*!SN:W^H3_Necromancy_1_Hero%X1^/1;
-*!SN:W^H3_Estates_0_Hero%X1^/1;
-*!SN:W^H3_Estates_1_Hero%X1^/1;
-*!SN:W^H3_Fire Magic_0_Hero%X1^/1;
-*!SN:W^H3_Fire Magic_1_Hero%X1^/1;
-*!SN:W^H3_Air Magic_0_Hero%X1^/1;
-*!SN:W^H3_Air Magic_1_Hero%X1^/1;
-*!SN:W^H3_Water Magic_0_Hero%X1^/1;
-*!SN:W^H3_Water Magic_1_Hero%X1^/1;
-*!SN:W^H3_Earth Magic_0_Hero%X1^/1;
-*!SN:W^H3_Earth Magic_1_Hero%X1^/1;
-*!SN:W^H3_Scholar_0_Hero%X1^/1;
-*!SN:W^H3_Scholar_1_Hero%X1^/1;
-*!SN:W^H3_Tactics_0_Hero%X1^/1;
-*!SN:W^H3_Tactics_1_Hero%X1^/1;
-*!SN:W^H3_Artillery_0_Hero%X1^/1;
-*!SN:W^H3_Artillery_1_Hero%X1^/1;
-*!SN:W^H3_Learning_0_Hero%X1^/1;
-*!SN:W^H3_Learning_1_Hero%X1^/1;
-*!SN:W^H3_Offense_0_Hero%X1^/1;
-*!SN:W^H3_Offense_1_Hero%X1^/1;
-*!SN:W^H3_Armorer_0_Hero%X1^/1;
-*!SN:W^H3_Armorer_1_Hero%X1^/1;
-*!SN:W^H3_Intelligence_0_Hero%X1^/1;
-*!SN:W^H3_Intelligence_1_Hero%X1^/1;
-*!SN:W^H3_Sorcery_0_Hero%X1^/1;
-*!SN:W^H3_Sorcery_1_Hero%X1^/1;
-*!SN:W^H3_Resistance_0_Hero%X1^/1;
-*!SN:W^H3_Resistance_1_Hero%X1^/1;
-*!SN:W^H3_First Aid_0_Hero%X1^/1;
-*!SN:W^H3_First Aid_1_Hero%X1^/1;
