@@ -1,48 +1,69 @@
 {
+	"acm": {
+		// Convert ACM_CLASS_XXX constant to class name
+		"class_name_0": "No class",
+		"class_name_1": "Warrior",
+		"class_name_2": "Mage",
+		"class_name_3": "Battlemage",
+		"class_name_4": "Adventurer",
+		"class_name_5": "Hunter",
+		"class_name_6": "Druid",
+
+		// Convert class level constants ACM_CLASS_LEVEL_XXX into class level string prefix
+		"class_level_0": "",
+		"class_level_1": "",
+		"class_level_2": "Adept",
+		"class_level_3": "Expert",
+		"class_level_4": "Master",
+		"class_level_5": "Grandmaster",
+
+		"class_selection_dlg": {
+			"title":               "Choose your hero path:",
+			"delay_selection_for": "Delay choice for @levels@ levels",
+			"never_ask":           "Freeze current class (@class_name@) and never ask again"
+		}
+	},
 
   "AC_Misc": {
-			"gold_amount_report": 				"You have @gold@ gold and @diamonds@ diamonds left. Not bad!",
-			"some_other_msg": 					"Advanced Classes rocks!",
-			
 			"ATTENTION GRANDPA": 				"{~r}ATTENTION GRANDPA{~}
 
 												looks like you are using an outdated version of ERA, consult your local dealer if he has a new version for you!",
-												
+
 			"First_Time": 						"{~r}Welcome to Advanced Classes Mod{~}
-			
-			
+
+
 												It looks like this is your first time playing ACM, very good :)
-												To give you the best possible experience, please read the manual at least once before you play your first game. 
-												ACM is a complex modification and there are many new mechanics so that even the most die-hard WoG Verteran will be surprised. 
+												To give you the best possible experience, please read the manual at least once before you play your first game.
+												ACM is a complex modification and there are many new mechanics so that even the most die-hard WoG Verteran will be surprised.
 												Important information about compatible mods, the graphics settings in the HD-Launcher, the difficulty system, the class system, WoG options and changes in the magic system can all be found in the mod description.
 
-												All right, now have fun!",												
-											
+												All right, now have fun!",
+
 			"Grandmaster": 						"Grandmaster",
-			
+
 			"Master": 							"Master",
-						
+
 			"Expert": 							"Expert",
-			
+
 			"Adept": 							"Adept",
-			
+
 			"Advanced": 						"Advanced",
 
 			"Basic": 							"Basic",
 
-			"Normal": 							"Normal",			
-			
+			"Normal": 							"Normal",
+
 			"Warrior": 							"Warrior",
-			
+
 			"Mage": 							"Mage",
-			
+
 			"Adventurer": 						"Adventurer",
 
 			"Battlemage":						"Battlemage",
-			
+
 			"Druid":							"Druid",
 
-			"Hunter":							"Hunter",			
+			"Hunter":							"Hunter",
 
 			"Warrior Table": 					"   {~r}Bonus Table for Warriors{~}
 
@@ -55,7 +76,7 @@
 												@Master@ points:{Master}
 												- Hard Training
 												- Critical Hit I
-												",			
+												",
 
 			"Adventurer Table": 				"   {~LimeGreen}Bonus Table for Adventurer{~}
 
@@ -66,10 +87,10 @@
 												- Unified Attack
 
 												@Master@ points:{Master}
-												- Pillage Ability 
+												- Pillage Ability
 												- Lord
 												",
-												
+
 			"Mages Table": 						"   {~DodgerBlue}Bonus Table for Mages{~}
 
 												@Grandmaster@ points:{Grandmaster}
@@ -77,12 +98,12 @@
 												- Magic Pierce II
 												- Arcane Prophet
 												- Channeling
-												
+
 
 												@Master@ points:{Master}
 												- Extra Cast
 												- Magic Pierce
-												",												
+												",
 
 
 			"Hunter Table": 					" {~Yellow}Bonus Table for Hunter{~}
@@ -94,8 +115,8 @@
 
 
 												requires: M. Warrior and M. Adventurer
-												",			
-			
+												",
+
 			"Druid Table": 						" {~Cyan}Bonus Table for Druid{~}
 
 												- Natural Healer
@@ -112,7 +133,7 @@
 												- Pre-Cast
 												- Extra Cast
 												- Master Training I
-												
+
 
 												requires: M. Warrior and M. Mage
 												",
@@ -125,40 +146,40 @@
 
 												%Z-1 regnerates {%Y48} additional spell points when meeting with allied heroes.
 												Also his spells have a 10% increases chance for critical hits and deal 10% more crit damage.",
-			
+
 			"Pathfinding Specialist": 			"{~r}Pathfinding Specialist{~}
 
 												%Z-1 further removes the movement costs of any rough terrain by {+%Y49%%} and all his creatures have {+%Y47} additional speed in the first battle round.",
-			
+
 			"Crit Damage Specialist": 			"{~r}Crit Damage Specialist{~}
 
 												%Z-1 gains additional 2% crit damage per level and increases his total crit damage by 50% but has a 50% lower chance for critical spells.",
-															
+
 			"Learning Specialist": 				"{~r}Learning Specialist{~}
 
 												%Z-1 receives a 3% per level bonus to %Z-5 Learning skill percentage. Also has an +15% extra chance to receive one additional primary skill point when leveling up.
 
 												Current bonus:+{~r}%Y71%%{~}",
-			
+
 			"Firebird Specialist": 				"{~r}Firebird Specialist{~}
 
 												%Z-1 gets one Firebird per week.
 												All Firebirds under her command have {+%Y47} additional HP.",
-			
+
 			"First Aid Specialist": 			"{~r}First Aid Specialist{~}
 
 												%Z-1 has a stronger First Aid skill.
 												Healing in and after combat is increased by {+%Y47%%}.
 												Also all troops receive {+%Y48%%} additional HP in combat.
 												After level 20, heals one additional squad after combat.",
-			
+
 			"Estates Specialist": 				"{~r}Estates Specialist{~}
 
 												%Z-1 receives a 3% bonus per level to his Estate skill and generates random resources per day.
-												
+
 												Current bonus:+{~r}%Y71{~} Gold
 												Random resources per day:+{~r}%Y50{~}",
-															
+
 			"Diplomacy Specialist": 			"{~r}Diplomacy Specialist{~}
 
 												%Z-1 has a stronger Diplomancy skill.
@@ -166,16 +187,16 @@
 												Chance to attract {+%Y48%%}.
 												Number of creatures {+%Y49%%}.
 												Reduced hiring costs {+%Y50%%}.",
-			
+
 			"Nobility Specialist": 				"{~r}Nobility Specialist{~}
 
 												%Z-1 has a {%Y48%%} stronger Nobility skill. For every hero level 3% more creatures will be available to recruit in town.",
-															
+
 			"Artillery Specialist": 			"{~r}Artillery Specialist{~}
 
 												%Z-1 increases the attack, defense and base damage of Ballistas. Bonus increases with hero level.
 												Also gets {%Y48} additional shots and his Ballista deals more damage prior to combat.",
-			
+
 			"Warfare Specialist": 				"{~r}Warfare Specialist{~}
 
 												%Z-1 has a stronger Warfare skill.
@@ -183,15 +204,15 @@
 												+1 Attack and Defense for every 7 levels
 												+1 damage above hero level 10
 												+1 combat speed above hero level 20",
-			
+
 			"Summoning Earth Specialist": 		"{~r}Summoning Earth Specialist{~}
 
 												If %Z-1 summons Earth Elements during combat, he has a chance that some of them stay and join his army after combat.",
-															
+
 			"Cure Specialist": 					"{~r}Cure Specialist{~}
 
 												Casts Cure with increased effekt, doubles Cure Master effect. Starts with +2 Spell Power.",
-						
+
 			"Hypnotize Specialist": 			"{~r}Hypnotize Specialist{~}
 
 												Casts Hypnotize with increased effekt.
@@ -202,7 +223,7 @@
 												%Z-1 receives a 3% per level bonus to %Z-5 %Z-3 skill percentage.
 
 												Current bonus:+{~r}%Y71%%{~}
-												",			
+												",
 
 			"Specialist 2": 					"{~r}%Z-3 Specialist{~}
 
@@ -215,7 +236,7 @@
 												Current bonus:+{~r}%Y71%%{~}
 
 												Also can spend additional spell points to increase the power of spells.",
-												
+
 			"SirMullich_Specialist": 			"{~r}Speed Specialist{~}
 
 												%Z-1 increases the speed of all his units by +{2}."
@@ -230,8 +251,8 @@
 
 			"Mutare_Specialist": 				"{~r}Dragon Specialist{~}
 
-												%Z-1 increases the power of all dragons under his command."												
-												
+												%Z-1 increases the power of all dragons under his command."
+
 			"Luck_Specialists": 				"{~r}%Z-3 Specialist{~}
 
 												%Z-1 receives 10%+1% bonus damage per level to Luck Strikes in combat.
@@ -259,8 +280,8 @@
 												When in combat %Z-1 further improves %Z-5 creatures with:
 												Att/Def: {+@attack@}
 												Damage: {+@damage@}
-												Health: {+@health@%%}",										
-												
+												Health: {+@health@%%}",
+
 			"Creature Specialist_1": 			"{~r}Creature Specialist{~}
 
 												Increases the Attack, Defense and Speed skills of any %Z-3, %Z-4 or %Z-6 for each level attained after @level@th level.
@@ -268,46 +289,46 @@
 												When in combat %Z-1 further improves %Z-5 creatures with:
 												Att/Def: {+@attack@}
 												Damage: {+@damage@}
-												Health: {+@health@%%}",												
-												
+												Health: {+@health@%%}",
+
 			"Spell Specialist": 				"{~r}%Z3 Specialist{~}
 
 												 %Z-1 casts %Z3 with increased effect, based on hero level compared to the level of the target unit. Can also cast one additional %Z3 for every @casts@ heroes level.
 
 												 Currently {~r}%Y16{~} extra casts.",
-												 
+
 			"Magic Arrow Specialist": 			"{~r}%Z3 Specialist{~}
 
 												 %Z-1s %Z3 damage is increased by 50%.
 												 Can also cast one additional %Z3 for every @casts@ heroes level.
 
 												 Currently {~r}%Y16{~} extra casts.",
-												 
+
 			"Fire Wall Specialist": 			"{~r}%Z3 Specialist{~}
 
 												 %Z-1s %Z3 damage is doubled.
 												 Can also cast one additional %Z3 for every @casts@ heroes level.
 
 												 Currently {~r}%Y16{~} extra casts.",
-												 
+
 			"Sorcery Specialist": 				"{~r}Sorcery Specialist{~}
 
 												%Z-1 receives a 3% per level bonus to Sorcery skill percentage.
-												Also has a {~r}%Y16%%{~} chance to cast an additional damage spell. 
-												Up to {~r}%Y17{~} times per battle. 
+												Also has a {~r}%Y16%%{~} chance to cast an additional damage spell.
+												Up to {~r}%Y17{~} times per battle.
 
 												Current bonus:+{~r}%Y71%%{~}",
-												
+
 			"Elemental Specialist": 			"{~r}%Z3 Magic Specialist{~}
 
 												%Z-1s %Z3 Spells deal 15% more damage.
-												Also has a {~r}%Y16%%{~} chance to cast an additional %Z3 spells. 
+												Also has a {~r}%Y16%%{~} chance to cast an additional %Z3 spells.
 												Up to {~r}%Y17{~} times per battle.",
 
 			"Mysticism Specialist": 			"{~r}Mysticism Specialist{~}
 
 												%Z-1s Mysticism skill regenerates additional {%Y50} spell points per day.
-												 
+
 												Can spent additional spell points to increase the power of spells.",
 
 			"Bless Specialist": 				"{~r}Bless Specialist{~}
@@ -315,7 +336,7 @@
 												Casts Bless with increased effect, based on hero level compared to the level of the target unit.
 
 												%Z-1s Bless will increase the damage of %Z-2 units by additional {~r}%Y16{~} points.
-												
+
 												Receives one additional spell cast at hero level 20 and level 40.",
 
 			"Curse Specialist": 				"{~r}Curse Specialist{~}
@@ -323,41 +344,41 @@
 												Casts Curse with increased effect, based on hero level compared to the level of the target unit.
 
 												%Z-1s Curse will decrease the damage of %Z-2 units by additional {~r}%Y16{~} points.
-												
+
 												Receives one additional spell cast at hero level 20 and level 40.",
 
 			"Bloodlust Specialist": 			"{~r}Bloodlust Specialist{~}
 
 												%Z-1 casts Bloodlust with increased effect:
-												
+
 												+{~r}%Y17{~} for 1-2 level creatures
 												+{~r}%Y18{~} for 3-4 level creatures
 												+{~r}%Y19{~} for 5-6 level creatures
 												+{~r}%Y16{~} for 7-8 level creatures
-												
+
 												Receives one additional spell cast at hero level 20 and level 40.",
 
 			"Stoneskin Specialist": 			"{~r}Stone Skin Specialist{~}
 
 												%Z-1 casts Stone Skin with increased effect:
-												
+
 												+{~r}%Y17{~} for 1-2 level creatures
 												+{~r}%Y18{~} for 3-4 level creatures
 												+{~r}%Y19{~} for 5-6 level creatures
 												+{~r}%Y16{~} for 7-8 level creatures
-												
+
 												Receives one additional spell cast at hero level 20 and level 40.",
-												
-												
+
+
 			"Haste Specialist": 				"{~r}Haste Specialist{~}
 
 												%Z-1 casts Haste with increased effect:
-												
+
 												+{~r}%Y17{~} for 1-2 level creatures
 												+{~r}%Y18{~} for 3-4 level creatures
 												+{~r}%Y19{~} for 5-6 level creatures
 												+{~r}%Y16{~} for 7-8 level creatures
-												
+
 												Receives one additional spell cast at hero level 20 and level 40.",
 
 			"Disrupting Ray Specialist": 		"{~r}Disrupting Ray Specialist{~}
@@ -369,34 +390,34 @@
 			"Precision Specialist": 			"{~r}Precision Specialist{~}
 
 												%Z-1 casts Precision with increased effect:
-												
+
 												+{~r}%Y17{~} for 1-2 level creatures
 												+{~r}%Y18{~} for 3-4 level creatures
 												+{~r}%Y19{~} for 5-6 level creatures
 												+{~r}%Y16{~} for 7-8 level creatures
-												
+
 												Receives one additional spell cast at hero level 20 and level 40.",
 
 			"Weakness Specialist": 				"{~r}Weakness Specialist{~}
 
 												%Z-1 casts Weakness with increased effect:
-												
+
 												+{~r}%Y17{~} for 1-2 level creatures
 												+{~r}%Y18{~} for 3-4 level creatures
 												+{~r}%Y19{~} for 5-6 level creatures
 												+{~r}%Y16{~} for 7-8 level creatures
-												
+
 												Receives one additional spell cast at hero level 20 and level 40.",
 
 			"Prayer Specialist": 				"{~r}Prayer Specialist{~}
 
 												%Z-1 casts Prayer with increased effect:
-												
+
 												+{~r}%Y17{~} for 1-2 level creatures
 												+{~r}%Y18{~} for 3-4 level creatures
 												+{~r}%Y19{~} for 5-6 level creatures
 												+{~r}%Y16{~} for 7-8 level creatures
-												
+
 												Receives one additional spell cast at hero level 20 and level 40.",
 
 			"Resurrection Specialist": 			"{~r}Resurrection Specialist{~}
@@ -417,24 +438,24 @@
 
 												%Z-1s Slayer will increase the attack of %Z-2 units by additional {~r}%Y16{~} points.
 
-												Receives one additional spell cast at hero level 20 and level 40.",	
-												
+												Receives one additional spell cast at hero level 20 and level 40.",
+
 			"play_with_10_skills": 				"{~r}Greetings Hero!{~}
 
 												You have choosen the 10 secondary skills option
 												nice :)
-												
+
 												Please use 10-Skill-Plugin from Igrik and disable (Secondary Skill Scrolling Mod) if enabled, the {~DodgerBlue}Faerie Dragon{~} will take care of the rest.
-												
+
 												Points needed to reach master are increased to {@Master@} and for grandmaster level to {@Grandmaster@}. As usual, each master skill gives 2 class points.
 
 												Let's go!",
-												
-			"Play_with_10":						"Play with 10 Skills instead of 8",																				 
-										
+
+			"Play_with_10":						"Play with 10 Skills instead of 8",
+
 			"additionals options1": 			"Choose additional options",
 
-			"New Level": 						"%Z4, you advanced to a new class!", 
+			"New Level": 						"%Z4, you advanced to a new class!",
 
 			"Diplomacy 1": 						"{Diplomacy}
 
@@ -457,11 +478,11 @@
 												+{%Y11} %Z-1",
 
 			"Magic Artillery 1": 				"{Eagle Eye}
-												
+
 												From a distance, %Z1's ray of magic energy hits the enemy before they can react, dealing {%Y1} damage and killing {%X3} creatures! %Z1 gains experience.",
 
 			"Magic Artillery 2": 				"{Eagle Eye}
-			
+
 												From a distance, %Z1's ray of magic energy hits the enemy before they can react, dealing {%Y1} damage and killing one creature! %Z1 gains experience.",
 
 			"Estates Bonus": 					"{Estates Bonus}
@@ -469,7 +490,7 @@
 												walking over the battlefield and looking between the dead bodies %Z-10 finds:",
 
 			"Artillery 1": 						"{Artillery}
-												
+
 												From a distance, %Z1's Ballista kills a creature!
 
 												%Z1 has gained
@@ -477,7 +498,7 @@
 												experience.",
 
 			"Artillery 2": 						"{Artillery}
-			
+
 												From a distance, %Z1's Ballista kills %X3 creatures!
 
 												%Z1 has gained
@@ -487,37 +508,37 @@
 			"Learning 1": 						"With the help of Learning %Z-10 learns:",
 
 			"Learning 2": 						"%Z-10s {~r}specialisation{~} in learning allows her to additionally learn:",
-			
+
 			"Learning 3":						"{Learning}
-			
-												Thanks to profound learning capabilities @HeroName@ recieves an additional skill point.",	
+
+												Thanks to profound learning capabilities @HeroName@ recieves an additional skill point.",
 
 			"First Aid 1": 						"{First Aid}
-			
+
 												After the battle, %Z1 used the First Aid Tent to revive a creature!",
 
 			"First Aid 2": 						"{First Aid}
-			
+
 												After the battle, %Z1 used the First Aid Tent to revive %Y5 creatures!",
-												
+
 			"First Aid 3": 						"{~Cyan}Natural Healer{~}
-			
-												After the battle, %Z1 Druid-ability is used to revive %Y5 creatures!",												
+
+												After the battle, %Z1 Druid-ability is used to revive %Y5 creatures!",
 
 			"Battle Heal": 						"First Aid tent heals additional {@Heal@} HP",
 
 			"Nobility Town": 					"{Nobility}
-			
+
 												%Z-1, thanks to your presence in this town, additional creatures are available to recruit immediately!
-												
+
 												Do you agree?",
-												
+
 			"Nobility Town Fail": 				"{Nobility}
-			
-												%Z-1, thanks to your most noble nobility skills, you nobly tell town council that recruiting more creatures is futile. Counsil members are disappointed by you",											
+
+												%Z-1, thanks to your most noble nobility skills, you nobly tell town council that recruiting more creatures is futile. Counsil members are disappointed by you",
 
 			"Counterstrike_Avoid": 				"Counterstrike increases {@damage1@} physical damage.",
-			
+
 			"Damage Avoid": 					"Grandmaster Warrior avoids {@damage1@} physical damage.",
 
 			"Critical Hit": 					"Critical hit deals {@damage2@} extra damage.",
@@ -541,11 +562,11 @@
 			"Brute": 							"{Brute gathered @gold@ Gold already}",
 
 			"Gained Gold": 						"{Brute Bonus}
-			
+
 												Gained Gold is @gold@",
 
 			"Paladin": 							"{Paladin Bonus}
-			
+
 												You get additional @Experience@ experience points.",
 
 			"Paladin 2": 						"{Gained Experience is @Experience@}",
@@ -553,21 +574,21 @@
 			"Class Sets": 						"You lucky bastard, these creatures carried a valuable artifact with them.",
 
 			"Spend Spell Points": 				"Do you want to spend {%Y19} extra spell points %Z3?",
-			
+
 			"Cast Damage": 						" to increase damage of your spell by {%Y2}",
-			
+
 			"Cast Percentage": 					" to increase power of your spell by {%Y2}{%}",
-			
+
 			"Cast Stat": 						" to increase power of your spell by {%Y2}",
-			
+
 			"Cast Summon": 						" to increase health of summoned elementals by {%Y2} HP",
-			
+
 			"Failed Spend Spell Points": 		"Your speciality will not make difference for this spell cast right now",
 
-			"Red Dragon Flame": 				"Red Dragon Flame Tongue adds {~r}@damage3@{~} fire damage to the attack.",			
-			
+			"Red Dragon Flame": 				"Red Dragon Flame Tongue adds {~r}@damage3@{~} fire damage to the attack.",
+
 			"Arrow damage increase": 			"Magic Arrow damage increased by 10%!",
-			
+
 			"Sorrow reduce": 					"Sorrow reduces your damage by {@damage@}.",
 
 			"Ray Damage": 						"Through Disruption Ray your attack deals additional {@damage@} damage.",
@@ -614,13 +635,13 @@
 
 			"Obstacle cast": 					"Your knowledge of magic allows you to cast again.",
 
-			"Specialists Extra Cast": 			"{Spell Specialists Extra Cast!}",			
+			"Specialists Extra Cast": 			"{Spell Specialists Extra Cast!}",
 
 			"Sorcery Specialists Extra": 		"{Sorcery Specialists Extra Cast!}",
 
 			"Elemental Specialists Extra": 		"{Elemental Specialists Extra Cast!}",
-			
-			"Elemental Sets Extra": 		    "{Elemental Set Bonus Extra Cast!}",			
+
+			"Elemental Sets Extra": 		    "{Elemental Set Bonus Extra Cast!}",
 
 			"Prepare for Battle": 				"{Prepare for Battle}
 
@@ -644,10 +665,10 @@
 			"Battle Mages Set": 				"{Battle Mages War Dress Set Bonus}
 
 												Learning from the battle %Z-10 collects a battle trophy:",
-												
+
 			"Statesman's Medal Bonus": 			"{Statesman's Medal Bonus}
 
-												After successfully clearing this creature bank the Statesman's Medal increases your gold reward by {@gold@} gold.",												
+												After successfully clearing this creature bank the Statesman's Medal increases your gold reward by {@gold@} gold.",
 
 			"Bonus Table 1": 					"{~r}Bonus Table{~}
 
@@ -656,24 +677,24 @@
 												Spell Crit Chance: {%Y16%%}
 												Spell Crit Damage: {%Y99%%}
 												Spell Upgrades per Combat: {%Y95}
-												Chance for Spell Upgrade: {%Y96%%}												
-												
+												Chance for Spell Upgrade: {%Y96%%}
+
 												Physical Crit Chance: {%Y13%%}
 												Physical Crit Damage: {%Y14%%}
 												Army Creature Growth: {%Y15%%}",
-												
+
 			"Spell_Upgrades": 					"{~r}Warrior{~} Set Bonus: {%Y10%%}
 												{~DodgerBlue}Mage{~} Set Bonus: {%Y11%%}
-												{~LimeGreen}Adventurer{~} Set Bonus: {%Y12%%}",												
-												
-			"Bonus Table 3": 					"Class Experience and class point table:",												
+												{~LimeGreen}Adventurer{~} Set Bonus: {%Y12%%}",
+
+			"Bonus Table 3": 					"Class Experience and class point table:",
 
 			"Bonus Table 20": 					"%Z6 %Z3 %Y10",
-			
+
 			"Bonus Table 21": 					"%Z7 %Z4 %Y20",
 
 			"Bonus Table 22": 					"%Z8 %Z5 %Y30",
-			
+
 			"Bonus Table 40":					"{~r}Warrior{~} skills:",
 
 			"Bonus Table 41":					"{Offense}:",
@@ -715,10 +736,10 @@
 			"Bonus Table 59":					"W+6 M+4 A+3",
 
 			"Bonus Table 60":					"W+4 M+4 A+4",
-			
+
 			"Bonus Table 61":					"M+4 W+4 A+4",
 
-			"Bonus Table 62":					"A+4 W+4 M+4",	
+			"Bonus Table 62":					"A+4 W+4 M+4",
 
 			"Bonus Table 70":					"{~DodgerBlue}Mage{~} skills:",
 
@@ -738,8 +759,8 @@
 
 			"Bonus Table 78":					"{Water Magic}:",
 
-			"Bonus Table 79":					"{Earth Magic}:",			
-			
+			"Bonus Table 79":					"{Earth Magic}:",
+
 			"Bonus Table 81":					"M+8 W+1 A+2",
 
 			"Bonus Table 82":					"M+7 W+4 A+2",
@@ -776,8 +797,8 @@
 
 			"Bonus Table 98":					"{Estates}:",
 
-			"Bonus Table 99":					"{Nobility}:",			
-			
+			"Bonus Table 99":					"{Nobility}:",
+
 			"Bonus Table 101":					"A+6 W+2 M+2",
 
 			"Bonus Table 102":					"A+7 W+3 M+3",
@@ -794,16 +815,16 @@
 
 			"Bonus Table 108":					"A+6 W+4 M+2",
 
-			"Bonus Table 109":					"A+7 W+4 M+2",			
-	
-			"Bonus Table 11":					"Each Master level gives +2 class points for the respective class.",												
+			"Bonus Table 109":					"A+7 W+4 M+2",
+
+			"Bonus Table 11":					"Each Master level gives +2 class points for the respective class.",
 
 			"Grandmaster 1": 					"Grandmaster %Z9",
-			
+
 			"Master 1": 						"Master %Z9",
-						
+
 			"Expert 1": 						"Expert %Z9",
-			
+
 			"Adept 1": 							"Adept %Z9",
 
 			"Fire": 							"Fire",
@@ -838,20 +859,20 @@
 
 			"Intelligence": 					"Intelligence",
 
-			"Resistance": 						"Resistance", 
+			"Resistance": 						"Resistance",
 
 			"Goodluck": 						"Attacks with good luck!",
-			
+
 			"Badluck":							"Attacks with bad luck!",
-			
+
 			"Polarity_Boots_Bonus":				"{Boots of Polarity}
 
-												The boots have absorbed enough magic energy during this combat to increase your movement by +250 points!", 	
+												The boots have absorbed enough magic energy during this combat to increase your movement by +250 points!",
 
 			"Scout_Attack":						"Attack",
 
 			"Scout_Defense":					"Defense",
-	
+
 			"Scout_Health":						"% Health",
 
 			"Scout_Speed":						"Speed",
@@ -859,342 +880,342 @@
 			"Scout_Attack1":					"For your victory you gain 1 attack!",
 
 			"Scout_Defense1":					"For your victory you gain 1 defense!",
-	
+
 			"Scout_SP1":						"For your victory you gain 1 spell power!",
 
-			"Scout_Knowledge1":					"For your victory you gain 1 knowledge!",				
+			"Scout_Knowledge1":					"For your victory you gain 1 knowledge!",
 
 			"Spellcasting_Restored":			"Spellcasting for Commander restored.",
-			
+
 			"his":								"his",
-			
+
 			"her":								"her",
 
 			"Summon_1":							"{%Z1 is casting %Z2.}",
-			
+
 			"Summon_2":							"{Too many troops on the battlefield. Summon failed.}",
-			
+
 			"Summon_3":							"{There is no space to summon elementals near the hero.}",
-			
+
 			"Pendant_of_Recall":				"{Pendant of Total Recall}
-			
+
 												The Pendant of Total Recall lets you remember all sort of stuff, but you already forgot what you just remembered, anyway, here are 1000 Experience points.",
-			
+
 			"Town_Plunder":						"{Grandlord}
-			
-												You conquer the city and liberate all people. You gain @gold@ gold. 
+
+												You conquer the city and liberate all people. You gain @gold@ gold.
 												Happy about the liberation, new recruits are available immediately.",
 
 			"Master_Training":					"{~r}Hard Training{~}
 
 												Skilled in the arts of fighting warriors can train their troops. All creatures receive +10% to maximum damage.",
-			
+
 			"Critical_Hit_1":					"{~r}Critical Hit I{~}
 
 												your troops are able to find the weak spots of your enemies. +10% chance to perform a Critical Strike with attacks.",
-												
+
 			"Critical_Hit_2":					"{~r}Critical Hit II{~}
 
-												your troops are able to find the weak spots of your enemies. +20% chance to perform a Critical Strike with attacks.",												
+												your troops are able to find the weak spots of your enemies. +20% chance to perform a Critical Strike with attacks.",
 
 			"Elite_Soldier":					"{~r}Elite Soldier{~}
-			
+
 												endless training and an unmatched discipline makes your troops feared fighters. All creatures receive +20% to maximum damage.",
 
 			"Endure_Retaliation":				"{~r}Endure Retaliation{~}
-			
+
 												Attack is the best defense, your troops know how to strike hard and aviod counterattacks. -50% damage from all retaliations.",
-			
+
 			"Commander_1":						"{~r}Commander{~}
-			
+
 												Inspiried by your combat skills, your Commander learns from the best. +20% to all combat stats for your Commander and Henchmen.",
 
 			"Extra_Cast_1":						"{~r}Extra Cast I{~}
-			
+
 												Years of training in the Arkane arts allow you to cast 1 additional time during combat.",
-			
+
 			"Elemental_Resistance_1":			"{~r}Magic Pierce{~}
-			
+
 												Your spells are able to break any magic immunity. -15% (-25% with GM) Magic Resistance for enemies. Additional practice with elemental magic gives you a certain resistance agains these spells. -20% damage from spells.",
 
 			"Extra_Cast_2":						"{~r}Spell Grandmaster{~}
-			
+
 												Devoting your whole life to the Arcane arts you gain the ability to perform 1 extra cast per battle round.",
-			
+
 			"Arkane_Prophet":					"{~r}Arcane Prophet{~}
-			
+
 												By looking in the future you are able to see which spells are favored by the gods. Arkane Prophets will cast certain spells with increased damage.",
 
 			"Channeling":						"{~r}Channeling{~}
-			
+
 												Focus and concentration allow you to cast spells with increased effect when having equal or more than your maximum spell points. Channeled spells are cast with +15 Magic Strength or deal +15% damage.",
-			
+
 			"Plunder_1":						"{~r}Plunder I{~}
-			
+
 												Heroes with the Plunder ability can pick up gold, resources and artifacts without loosig movement points. Flaggin mines and taking creature banks is also free.",
 
 			"Horsemaster":						"{~r}Lord{~}
-			
+
 												Heroes with the Lord titel gain gold when capturing towns, they also increase the amount of available creatures to hire in that town.",
-			
+
 			"Plunder_2":						"{~r}Plunder II{~}
-			
-												Heroes with the Plunder ability can pick up gold, resources and artifacts without loosig movement points. Flaggin mines and taking creature banks is also free. With Plunder II taking fights also costs no movement.",	
+
+												Heroes with the Plunder ability can pick up gold, resources and artifacts without loosig movement points. Flaggin mines and taking creature banks is also free. With Plunder II taking fights also costs no movement.",
 
 			"Nobility_1":						"{~r}Nobility{~}",
 
 			"Landlord_1":						"{~r}Grandlord{~}
-			
+
 												Heroes with the Landlord titel gain gold when capturing towns, they also increase the amount of available creatures to hire in that town.",
-			
+
 			"Strength_Numbers":					"{~r}Strength in Numbers{~}
-			
+
 												Grandmaster Adventurer gain additional troops every week on every occupied slot in the heroes army.",
 
 			"Coordinated_Attack":				"{~r}Coordinated Attack{~}
-			
+
 												The troops in an Adventurers army deal +1 additional damage for every unit in the stack.",
-												
-			"Coordinated_Damage": 				"Your coordinated attack deals {@damage@} bonus damage.",												
+
+			"Coordinated_Damage": 				"Your coordinated attack deals {@damage@} bonus damage.",
 
 			"First_Shot":						"{~r}First Shot{~}
-			
+
 												All your ranged troops act first in battle.",
-			
-			"Magic_Block":						"{~r}Magic Block{~}	
-			
+
+			"Magic_Block":						"{~r}Magic Block{~}
+
 												Surprise attacks leaves your enemies in fear, while your troops are prepared for any battle. All your creatures have 100% Magic Resistance against all hostile spells in the first battle round.",
-			
+
 			"Precast":							"{~r}Pre-Cast{~}
-			
+
 												A devastating and unavoidable spell hits your enemies before they can react. This spell costs no spell points.",
 
 			"Intimidation":						"{~r}Intimidation{~}
-			
+
 												An intimidating warcry reduces the life off all enemies by 10%.",
 
 			"Natural_Healer":					"{~r}Natural Healer{~}
-			
+
 												Druids are able to heal one additional stack after combat. Does not require First Aid tent.",
-			
+
 			"Natural_Resistance":				"{~r}Natural Resistance{~}
-			
+
 												Over time Druids have developed a natural resistance against all physical attacks. They reduce 4*Hero level of damage points from all attacks.",
 
 			"Concentration":					"{~r}Concentration{~}
-			
+
 												This special Druid ability allows to transfer active buffs on your troops to the next combat. Up to 3 spells can be transfered. Transfered spells only last 1 battleround.",
 
 			"Warrior_Description":				"{~r}Warrior Class{~}
-			
+
 												Fight, destroy, conquer. Power is everything and strength is a must to achieve the state of power. And strength is not in numbers, but in fighting skill and willpower. You will have impossibly strong army, maiming enemies with a single blow while shaking off any hit taken like a scratch.",
-			
+
 			"Mage_Description":					"{~r}Mage Class{~}
-			
+
 												Weaken you enemies, bless your allies, blast to pieces anyone you want, everything is possible for a mage. Shock those who think they're brave, block those who think they're fast, curse those who think they're strong, explode those who're fool enough to flock. Alter the battlefield; with immense flexibility of magic you can be creative and it will pay off, or you can be straightforward and implode vitals of everything that moves.",
 
 			"Adventurer_Description":			"{~r}Adventurer Class{~}
-			
-												What does strength mean when there're no people to fight for you? What does magic mean if you can't afford even a simple spell? Does it matter how strong you're if you get stuck in the swamp? For adventurers, simple rules do not apply. Locate resources where other will not, gather soldiers when others are not wise enought to do so, change your rules as you go, bind adventure map to your cause. Smother enemies with your numerous army before they can call to arms.",	
+
+												What does strength mean when there're no people to fight for you? What does magic mean if you can't afford even a simple spell? Does it matter how strong you're if you get stuck in the swamp? For adventurers, simple rules do not apply. Locate resources where other will not, gather soldiers when others are not wise enought to do so, change your rules as you go, bind adventure map to your cause. Smother enemies with your numerous army before they can call to arms.",
 
 			"Battlemage_Description":			"{~r}Battlemage Class{~}
-			
-												Those who can't ignore neither might nor magic will eventually learn how to use them both succefully. Decades of fighting made you realize how valuable it is to overwhelm your opponents and ways of doing so. Your magic will surprise, your warcry will make enemies falter.",	
+
+												Those who can't ignore neither might nor magic will eventually learn how to use them both succefully. Decades of fighting made you realize how valuable it is to overwhelm your opponents and ways of doing so. Your magic will surprise, your warcry will make enemies falter.",
 
 			"Hunter_Description":				"{~r}Hunter Class{~}
-			
-												Hunt down animals, hunt down enemies, everything is your prey. Long and numerous hunting sessions turned you into a quick and agile killer, merciless. You surrounded your prey, you negated any unusual moves, first strike is all that matters, wounded prey can't retaliate. And your results are surprising.",	
+
+												Hunt down animals, hunt down enemies, everything is your prey. Long and numerous hunting sessions turned you into a quick and agile killer, merciless. You surrounded your prey, you negated any unusual moves, first strike is all that matters, wounded prey can't retaliate. And your results are surprising.",
 
 			"Druid_Description":				"{~r}Druid Class{~}
-			
-												You've used your wits, you've worked for brighter future, but you can't save them all. No amount of diplomacy can solve that. Yet you always have searched for a way to protect everything what is precious to you. You were searching for years and found nothing; the answer always lied before you: Nature. It opened it's secrets to you, it taught you how to be as everlasting as it is, as durable, and it taught you magic. March with your immortal army to your dream: peace.",			
+
+												You've used your wits, you've worked for brighter future, but you can't save them all. No amount of diplomacy can solve that. Yet you always have searched for a way to protect everything what is precious to you. You were searching for years and found nothing; the answer always lied before you: Nature. It opened it's secrets to you, it taught you how to be as everlasting as it is, as durable, and it taught you magic. March with your immortal army to your dream: peace.",
 
 			"No_advance":						"{~r}Advanced Classes Mod{~}
-			
+
 												You don't have advanced in any class so far.",
-			
-			"Bonus_Level":						"They receive the following bonus skills:",		
+
+			"Bonus_Level":						"They receive the following bonus skills:",
 
 			"Luck_Positive":					"{Good Luck}
-			
+
 												Good Luck sometimes lets your army get lucky attacks in combat which deal more damage.
-												
+
 												Damage: {~r}@damage@%{~}
 												Chance: {~r}@chance@%{~}
-												
-												
+
+
 												{Current Luck Modifiers:}
 												Luck +@value@",
-			
+
 			"Luck_Neutral":						"{Neutral Luck}
-			
+
 												With neutral Luck your armies will never have lucky or unlucky attacks on your enemies.
-																								
-												
+
+
 												{Current Luck Modifiers:}
-												None",	
+												None",
 
 			"Luck_Negative":					"{Bad Luck}
-			
+
 												Bad Luck sometimes lets your army get unlucky attacks in combat which less damage.
-												
+
 												Damage: {~r}50%{~}
 												Chance: {~r}@chance@%{~}
-												
-												
+
+
 												{Current Luck Modifiers:}
 												Luck @value@",
-			
+
 			"Morale_Positive":					"{Good Morale}
-			
+
 												Good Morale may give your armies extra attacks in combat.
-												
+
 												Damage: {~r}@damage@%{~}
 												Chance: {~r}@chance@%{~}
-												
-												
+
+
 												{Current Morale Modifiers:}
 												Morale +@value@",
 
 			"Morale_Neutral":					"{Neutral Morale}
-			
+
 												Neutral Morale means your troops will neither be blessed with extra attacks or freeze in combat.
-																								
-												
+
+
 												{Current Morale Modifiers:}
 												None",
-			
+
 			"Morale_Negative":					"{Bad Morale}
-			
+
 												Bad Morale may cause your armies to freeze in combat.
-												
+
 												Damage: {~r}@damage@%{~}
 												Chance: {~r}@chance@%{~}
-												
-												
+
+
 												{Current Morale Modifiers:}
-												Morale @value@",	
+												Morale @value@",
 
 			"Eagle_Eye_Spell":					"{Eagle Eye Skill}
-			
+
 												Through eagled-eyed observation, %Z1 gains +{@value@} Spell Power and is able to learn:",
 
 			"Class_Knight":						"Knight",
-			
-			"Class_Cleric":						"Cleric",	
-			
-			"Class_Ranger":						"Ranger",	
-			
-			"Class_Druid":						"Druid",			
-			
-			"Class_Alchemist":					"Alchemist",	
-			
+
+			"Class_Cleric":						"Cleric",
+
+			"Class_Ranger":						"Ranger",
+
+			"Class_Druid":						"Druid",
+
+			"Class_Alchemist":					"Alchemist",
+
 			"Class_Wizard":						"Wizard",
-			
-			"Class_Demoniac":					"Demoniac",				
-			
-			"Class_Heretic":					"Heretic",	
-			
-			"Class_Death Knight":				"Death Knight",	
-			
+
+			"Class_Demoniac":					"Demoniac",
+
+			"Class_Heretic":					"Heretic",
+
+			"Class_Death Knight":				"Death Knight",
+
 			"Class_Necromancer":				"Necromancer",
 
 			"Class_Warlock":					"Overlord",
-			
-			"Class_Overlord":					"Warlock",	
-			
-			"Class_Barbarian":					"Barbarian",	
-			
-			"Class_Battle Mage":				"Battle Mage",	
-			
-			"Class_Beastmaster":				"Beastmaster",		
-			
-			"Class_Witch":						"Witch",	
-			
-			"Class_Planeswalker":				"Planeswalker",	
-			
-			"Class_Elementalist":				"Elementalist",	
 
-			"Attack1":							"Attack",	
-			
-			"Defense":							"Defense",	
+			"Class_Overlord":					"Warlock",
 
-			"Power":							"Power",	
+			"Class_Barbarian":					"Barbarian",
+
+			"Class_Battle Mage":				"Battle Mage",
+
+			"Class_Beastmaster":				"Beastmaster",
+
+			"Class_Witch":						"Witch",
+
+			"Class_Planeswalker":				"Planeswalker",
+
+			"Class_Elementalist":				"Elementalist",
+
+			"Attack1":							"Attack",
+
+			"Defense":							"Defense",
+
+			"Power":							"Power",
 
 			"Knowledge":						"Knowledge",
 
 			"HS_Level":							"Level %Y5 %Z-7",
 
 			"Oger_Damage":						"Your Bloodlust deals additional {@damage@} damage.",
-			
+
 			"Play_10_skills":		  			"{~red}10 Secondary Skills{~}
-			
+
 												Activation of this option requires the {10-SSkill} mod to be enabled. This will allow your hero to learn 10 instead of the only 8 secondary skills. Class points needed to reach master level are increased to {@Master@} and for grandmaster level to {@Grandmaster@}. As usual, each master skill gives 2 class points. For various reasons, having more than 10 secondary skills is not supported in the Advanced Classes mod.",
 
 			"Play_Classic_Skin":		 		"{~red}Classic Skin{~}
-			
-												Reverts the new class skill icons back to the looks from version 1.04. Choose as you like. ACM is the first heroes 3 mod with a skin pack thanks to {Sandris}.",			
-			
+
+												Reverts the new class skill icons back to the looks from version 1.04. Choose as you like. ACM is the first heroes 3 mod with a skin pack thanks to {Sandris}.",
+
 			"Play_Spell_Trainer":				"{~red}Spell Trainer{~}
-			
+
 												Level up your magic! Using Spells in combat will make them more effective. Spell Trainer is a super fun modification which makes the use of spells and magic to a unique experience. To keep balance your Magic Strength will be reduced by 25%. There are serveral rules and mechanics that you need to know when playing with Spell Trainer. For example not every class has the same chance to level up spells during combat. For furhter informations check out the help file in your mod folder.",
 
 			"Play_Spell_Duration":				"{~red}Alternative Spell Duration{~}
-			
-												This mod uses a different formula to calculate how long spells lasts on creatures. A feature often asked for in the forums and implemented by {AlfwithCake}. Usually you can ignore spell duration once your spell power reaches 5 or more, which is reached after one game week. 
-												
+
+												This mod uses a different formula to calculate how long spells lasts on creatures. A feature often asked for in the forums and implemented by {AlfwithCake}. Usually you can ignore spell duration once your spell power reaches 5 or more, which is reached after one game week.
+
 												The new formula for spell duration is (spellpower+13)/8, rounded down.
 												Collar of Conjuring gives 5 effective SP
 												Ring of Conjuring gives 10 effective SP
 												Cape of Conjuring gives 15 effective SP
 												Ring of the Magi gives 100 effective SP
-												Grandmaster Sorcery gives extra 10 effective SP.", 
+												Grandmaster Sorcery gives extra 10 effective SP.",
 
 			"Play_Necro_Balancing":				"{~red}Alternative Necromancy Balancing{~}
-			
+
 												Choose what creatures you want to raise by right-clicking the Necromancy skill icon in your hero screen. Raising high level creatures will require Master or Grandmaster rank, it also reduces your Necromancy skill value significantly.
-												
-												Note: Does not work when using Amethyst or Typhon plugin.",				
-			
+
+												Note: Does not work when using Amethyst or Typhon plugin.",
+
 			"Play_Necro_Balancing2":			"{~red}Alternative Necromancy Balancing{~}
-			
+
 												One problem with Necromancy is that on very large map with big creature stacks it always gets out of control and your hero ends up with ten-thousands of skeletons, one-shotting everything and completly breaking balance and fun of the game.
 												This skill was just not made with this big maps and stacks in mind, especially now that neutral stacks can grow over the limit of 4000 units. This option is my take on providing an alternative balance for Necromancy to keep balance even in later stages of the game.",
 
 			"Play_Easier_Class":				"{~red}Easier Classes{~}
-			
+
 												Play with bonus class points. This option makes it easier to reach Master and Grandmaster level by providing {5} extra class points for all classes. One point is given for every two level starting at level 20 until level 30.",
-						
+
 			"GameOpt_Text":						"{~red}Additional Game Options{~}",
 
 			"GameOpt_Hint_0":					"Spell Trainer Option",
-			
+
 			"GameOpt_Hint_1":					"10 Skills Option",
 
 			"GameOpt_Hint_2":					"Easy Classes Option",
-			
-			"GameOpt_Hint_3":					"Classic Skin Option",	
+
+			"GameOpt_Hint_3":					"Classic Skin Option",
 
 			"GameOpt_Hint_4":					"Alternative Necromancy Option",
-			
+
 			"GameOpt_Hint_5":					"Spell Duration Option",
 
 			"GameOpt_Hint_6":					"Play",
 
 			"GameOpt_0":						"Spell Trainer",
-			
+
 			"GameOpt_1":						"10 Skills",
 
 			"GameOpt_2":						"Easy Classes",
-					
-			"GameOpt_3":						"Classic Skin",	
+
+			"GameOpt_3":						"Classic Skin",
 
 			"GameOpt_4":						"Necromancy",
-			
-			"GameOpt_5":						"Spell Duration",			
+
+			"GameOpt_5":						"Spell Duration",
 
 			"No_Kingdom_Overview":				"{~r}Poor Kingdom Overview{~}
-			
+
 												  Compared to last day you got these resources:
 												  (includes all spending and all income)
 												  %Y40 {~>SMALRES.def:0}
@@ -1203,8 +1224,8 @@
 												  %Y43 {~>SMALRES.def:3}
 												  %Y44 {~>SMALRES.def:4}
 												  %Y45 {~>SMALRES.def:5}
-												  %Y46 {~>SMALRES.def:6}",	
-			
+												  %Y46 {~>SMALRES.def:6}",
+
 			"Necromancy_Text":					"Choose what creatures you want to raise with Necromancy",
 
 			"Necromancy_Creature_1":			"Skeletons",
@@ -1221,7 +1242,7 @@
 
 			"Necromancy_Creature_7":			"Donald Trump",
 
-			"Necromancy_Creature_8":			"Free",	
+			"Necromancy_Creature_8":			"Free",
 
 			"Necromancy_Creature_11":			"Skeleton Knights",
 
@@ -1232,10 +1253,10 @@
 			"Necromancy_Creature_14":			"Donald Trump",
 
 			"Necromancy_Creature_15":			"Vampires, requires Grandmaster Necromancy value down to 2%",
-			
+
 			"Necromancy_Creature_16":			"Liches, requires Grandmaster Necromancy value down to 2%",
-			
-			"Necromancy_Creature_17":			"Black Knights, requires Grandmaster Necromancy value down to 1%",			
+
+			"Necromancy_Creature_17":			"Black Knights, requires Grandmaster Necromancy value down to 1%",
 
 			"M_Warrior_Skill_1":				"Hard Training",
 
@@ -1248,7 +1269,7 @@
 			"GM_Warrior_Skill_3":				"Ironside",
 
 			"GM_Warrior_Skill_4":				"Commander",
-			
+
 			"M_Mage_Skill_1":					"Extra Cast",
 
 			"M_Mage_Skill_2":					"Magic Pierce I",
@@ -1296,37 +1317,37 @@
 			"Druid_Skill_3":					"Natural Resist",
 
 			"Druid_Skill_4":					"Concentration",
-			
-			"Bless_SP_Damage":					"Blessed attacks deal additional {@damage@} damage."			
-				
-			
-				},												
-			
-												 
+
+			"Bless_SP_Damage":					"Blessed attacks deal additional {@damage@} damage."
+
+
+				},
 
 
 
 
-			 
+
+
+
   "AC_Spells": {
-  
+
 			"Spell_Grandmaster": 				"Grandmaster",
-			
+
 			"Spell_Master": 					"Master",
-						
-			"Spell_Expert": 					"Expert",	
+
+			"Spell_Expert": 					"Expert",
 
 			"Spell_Advanced": 					"Advanced",
 
 			"Spell_Basic": 						"Basic",
 
 			"Spell_Normal": 					"",
-			
+
 			"Basic_female": 					"",
-			
+
 			"Basic_male": 						"",
-						
-			"Basic_plural": 					"",	
+
+			"Basic_plural": 					"",
 
 			"Basic_neutral": 					"",
 
@@ -1335,10 +1356,10 @@
 			"Advanced_male": 					"",
 
 			"Advanced_plural": 					"",
-			
+
 			"Advanced_neutral": 				"",
-						
-			"Expert_female": 					"",	
+
+			"Expert_female": 					"",
 
 			"Expert_male": 						"",
 
@@ -1351,24 +1372,24 @@
 			"Master_male": 						"",
 
 			"Master_plural": 					"",
-			
+
 			"Master_neutral": 					"",
-						
-			"Grandmaster_female": 				"",	
+
+			"Grandmaster_female": 				"",
 
 			"Grandmaster_male": 				"",
 
 			"Grandmaster_plural": 				"",
 
-			"Grandmaster_neutral": 				"",					
-			
-			
+			"Grandmaster_neutral": 				"",
+
+
 			"Magic_Arrow_0": 					"{~%Z6}%Z5 Magic Arrow{~}
 
-												Causes a bolt of magical energy to strike the selected stack.												
+												Causes a bolt of magical energy to strike the selected stack.
 												",
 
-			"Magic_Arrow_1": 					"{~%Z6}%Z5 Magic Arrow{~} 
+			"Magic_Arrow_1": 					"{~%Z6}%Z5 Magic Arrow{~}
 
 												Causes a bolt of magical energy to strike the selected stack.
 
@@ -1382,36 +1403,36 @@
 
 												Creatures stepping on a Land Mine lose speed. Also, deploys one deadly mine, that deals {1000} and {%Y7%} of total HP extra damage.
 												",
-			
+
 			"Land_Mine_1": 						"{~%Z6}%Z5%Z-9 Land Mine{~}
 
 												Randomly places {%Y6} landmines on the battlefield which are only visible to the caster and creatures native to the terrain.  It inflicts damage to any stack walking over it.
 												",
-			
+
 			"Fire_Wall_0": 						"{~%Z6}%Z5%Z-6 Fire Wall{~}
 
 												Places wildfire on the battlefield at a point specified by the caster. Any stacks passing through the wall take damage.
 
 												Doubles damage for enemies that walked through fire wall once, quadruples for enemies that walked through it at least twice.
 												",
-			
+
 			"Fire_Wall_1": 						"{~%Z6}%Z5%Z-6 Fire Wall{~}
 
 												Places wildfire on the battlefield at a point specified by the caster. Any stacks passing through the wall take damage.
 												",
-			
+
 			"Fire_Ball_0": 						"{~%Z6}%Z5%Z-7 Fireball{~}
 
 												Causes the selected target to burst into flames, inflicting fire damage to the target and any adjacent stacks.
 
 												Fire spells burn with everlasting hellfire, not loosening hold on enemies easily. Burning creatures take extra {%Y8%} damage at the end of a round for 1 turn.
 												",
-			
+
 			"Fire_Ball_1": 						"{~%Z6}%Z5%Z-7 Fireball{~}
 
 												Causes the selected target to burst into flames, inflicting fire damage to the target and any adjacent stacks.
 												",
-			
+
 			"Inferno_0": 						"{~%Z6}%Z5%Z-9 Inferno{~}
 
 												Causes a huge blast of fire to strike the selected target.  Don't be near this when it goes off!
@@ -1435,7 +1456,7 @@
 
 												Rains {~r}fire{~} down upon the battlefield, damaging all stacks.
 												",
-												
+
 			"Fire_Shield_0": 					"{~%Z6}%Z5%Z-7 Fire Shield{~}
 
 												The Fire Shield envelops one allied unit with burning fire. Any unit attacking trough the Fire Shield in close combat suffers 10% {(+%Y29)} of the inflicted damage as fire damage.
@@ -1450,7 +1471,7 @@
 
 												Protects all stacks, reducing damage received from Fire spells by {%Y31%%}.
 
-												Has a {%Y16%%} chance to shake off bad effects from Fire Spells each battle round.",	
+												Has a {%Y16%%} chance to shake off bad effects from Fire Spells each battle round.",
 
 			"Fire_Protection_1": 				"{~%Z6}%Z5%Z-6 Protection from Fire{~}
 
@@ -1483,7 +1504,7 @@
 			"Curse_2": 							"{~%Z6}%Z5%Z-9 Curse{~}
 
 												Causes one enemy stack to inflict less than their normal minimum damage in combat {-(%Y42)}.",
-	
+
 
 			"Bloodlust_0": 						"{~%Z6}%Z5%Z-6 Bloodlust{~}
 
@@ -1757,7 +1778,7 @@
 												Summons a stack of fast %Z7 Elementals with a total of {%Y10}HP.
 
 												The Elementals grow by {%Y69%%} after each summoning spell in the next battle round.",
-												
+
 
 			"Summon_Air_1": 					"{~%Z6}%Z5%Z-7 Summon %Z7 Elemental{~}
 
@@ -1872,7 +1893,7 @@
 												Bestows a bonus to the attack rating, defense rating and speed of all allied stacks by {%Y48} points.
 
 												Your creatures deal additional {%Y11%%} holy damage against undead troops.",
-	
+
 			"Prayer_1": 						"{~%Z6}%Z5%Z-6 Prayer{~}
 
 												Bestows a bonus to the attack rating, defense rating and speed of all allied stacks by {%Y48} points.",
@@ -1926,7 +1947,7 @@
 			"Teleport_2": 						"{~%Z6}%Z5%Z-6 Teleport{~}
 
 												Teleports any allied stack to any unoccupied spot on the battlefield. Cannot teleport over castle walls..",
-												
+
 			"Teleport_3": 						"{~%Z6}%Z5%Z-6 Teleport{~}
 
 												Teleports any allied stack to any unoccupied spot on the battlefield. Cannot teleport over moats and castle walls.",
@@ -1986,7 +2007,7 @@
 			"Earthquake_0": 					"{~%Z6}%Z5%Z-9 Earthquake{~}
 
 												Randomly damages {%Y7} sections of castle wall in combat.
-												
+
 												Extra {%Y14%%} chance that enemy creatures miss the current battle round and shooters loose ammunition.",
 
 			"Earthquake_1": 					"{~%Z6}%Z5%Z-9 Earthquake{~}
@@ -2112,7 +2133,7 @@
 												Your enemies deal less damage if they attack bigger creatures. {5%} less damage for every level difference.",
 
 			"Sorrow_1": 						"{~%Z6}%Z5%Z-6 Sorrow{~}
-	
+
 												Reduces the morale of all enemy stacks by {%Y50}.",
 
 			"Sorrow_2": 						"{~%Z6}%Z5%Z-6 Sorrow{~}
@@ -2192,10 +2213,10 @@
 			"SP10_Week": 						"{Week of Magic}
 
 												This week all your spells deal {+10%} damage.",
-												
+
 			"Implosion_Week": 					"{~Red}Special Week of Magic{~}
 
-												This week {~Red}Implosion{~} spell will deal more damage.",												
+												This week {~Red}Implosion{~} spell will deal more damage.",
 
 			"MagicArrow3X_Week": 				"{~Red}Special Week of Magic{~}
 
@@ -2304,7 +2325,7 @@
 			"Mana_Week": 						"{Week of Magic}
 
 												This week you get +{10} bonus spell points when engaging in combat.",
-	
+
 			"LvLDmg_Week": 						"{Week of Magic}
 
 												This week you will deal +{1}% extra spell damage for every hero level.",
@@ -2375,171 +2396,171 @@
 												{~MediumPurple}spell training adds: +@damage@ extra damage
 												casts:@casts@{~}
 												",
-												
+
 			"Trainer_Damage": 	 				"
 												{~MediumPurple}spell training adds: +@damage@% damage{~}
 												",
 
 			"Trainer_Reduction_Casts": 	 		"
-			
+
 												{~MediumPurple}spell training adds: +@damage@% reduction casts:@casts@{~}
 												",
 
 			"Trainer_MinDmg_Casts": 	 		"
-			
+
 												{~MediumPurple}spell training adds: -@damage@ min.damage casts:@casts@{~}
 												",
-												
+
 			"Trainer_MaxDmg_Casts": 	 		"
-			
+
 												{~MediumPurple}spell training adds: +@damage@ max.damage casts:@casts@{~}
-												",												
+												",
 
 			"Trainer_Attack_Casts": 	 		"
-			
+
 												{~MediumPurple}spell training adds: +@damage@ Attack casts:@casts@{~}
 												",
-												
+
 			"Trainer_Attack2_Casts": 	 		"
-			
+
 												{~MediumPurple}spell training adds: -@damage@ Attack casts:@casts@{~}
 												",
 
 			"Trainer_Defense_Casts": 	 		"
-			
+
 												{~MediumPurple}spell training adds: +@damage@ Defense casts:@casts@{~}
-												",												
+												",
 
 			"Trainer_Luck1_Casts": 	 			"
-			
+
 												{~MediumPurple}spell training adds: -@damage@ Luck casts:@casts@{~}
 												",
 
 			"Trainer_HP_Casts": 	 			"
-			
+
 												{~MediumPurple}spell training adds: +@damage@ HP casts:@casts@{~}
 												",
 
 			"Trainer_reduce_Casts": 	 		"
-			
+
 												{~MediumPurple}spell training adds: -@damage@ Defense casts:@casts@{~}
 												",
 
 			"Trainer_Luck2_Casts": 	 			"
-			
+
 												{~MediumPurple}spell training adds: +@damage@ Luck casts:@casts@{~}
 												",
 
 			"Trainer_Haste_Casts": 	 			"
-			
+
 												{~MediumPurple}spell training adds: +@damage@ Speed casts:@casts@{~}
 												",
 
 			"Trainer_Prayer_Casts": 	 		"
-			
+
 												{~MediumPurple}spell training adds: +@damage@ Stats casts:@casts@{~}
 												",
 
 			"Trainer_Morale_Casts": 	 		"
-			
+
 												{~MediumPurple}spell training adds: @damage@ Morale casts:@casts@{~}
-												"									
-														
+												"
+
 				},
-				
-				
+
+
   "AC_Warmachine": {
-  
-			
+
+
 			"Header_Text_1": 					"{~RoyalBlue}Enchantments{~}",
 
 			"Upgrade": 							"",
 
-			"Enchantment": 						"",			
+			"Enchantment": 						"",
 
 			"Ballista_0": 						"Ballista",
 
 			"Cart_0": 							"Ammo Cart",
 
 			"Tent_0": 							"First Aid Tent",
-			
-			"Warmachines_0": 					"War Machines",			
+
+			"Warmachines_0": 					"War Machines",
 
 			"Say_Hello_Upg": 					"Exit",
 
-			"Say_Hello_Ench": 					"Exit",			
+			"Say_Hello_Ench": 					"Exit",
 
-			"All_Machines": 					"War Machines",			
+			"All_Machines": 					"War Machines",
 
 			"Already_Bought": 					"You have already bought this upgrade, morron!
-												I bet you would like me to upgrade your war machine to the next level, yes? 
-													
+												I bet you would like me to upgrade your war machine to the next level, yes?
+
 												Give me {2000} Gold and come back in one week hehe",
-	
-			"Next_Time": 						"You dont want to upgrade? Why not? I'am like Donald Trump, Nobody knows more about improving war machines than I do!",													
+
+			"Next_Time": 						"You dont want to upgrade? Why not? I'am like Donald Trump, Nobody knows more about improving war machines than I do!",
 
 			"Purchased": 						"Upgrade purchased",
 
 			"cant_afford": 						"You cant buy this upgrade",
 
-			"No_Ballista": 						"How about you first BUY a Ballista before I can start working on it... damn these stupid people nowadays.",	
+			"No_Ballista": 						"How about you first BUY a Ballista before I can start working on it... damn these stupid people nowadays.",
 
-			"No_Ammo": 							"How about you first BUY an Ammo Cart before I can start improving it... you are wasting my time here.",	
+			"No_Ammo": 							"How about you first BUY an Ammo Cart before I can start improving it... you are wasting my time here.",
 
 			"No_Tent": 							"How about you first BUY a First Aid Tent before I can start upgrading it... I will now charge you double for the Upgrade.",
 
-			"No_Machines": 						"You need to have all Warmachines bought before I can start upgrading them.",			
+			"No_Machines": 						"You need to have all Warmachines bought before I can start upgrading them.",
 
 			"Bal_Upg_1": 						"Artificial Glory",
-				
+
 			"Bal_Upg_2": 						"Additional Shot",
-					
+
 			"Bal_Upg_3": 						"Crippling Blow",
-			
+
 			"Bal_Ench_1": 						"Fireball Attack",
 
 			"Bal_Ench_2": 						"Magic Arrow",
-			
+
 			"Bal_Ench_3": 						"Spell Trigger",
-			
+
 			"Cart_Upg_1": 						"Supply Cart",
 
 			"Cart_Upg_2": 						"Goblin Support",
-			
+
 			"Cart_Upg_3": 						"Enhanced Arrows",
 
 			"Cart_Ench_1": 						"Booby trap",
-			
+
 			"Cart_Ench_2": 						"Replenish SP",
 
 			"Cart_Ench_3": 						"Fire Arrow",
-			
+
 			"Tent_Upg_1": 						"Improved Tent",
 
 			"Tent_Upg_2": 						"Heal Capacity",
-			
+
 			"Tent_Upg_3": 						"Treatment",
 
 			"Tent_Ench_1": 						"Herbalism",
-			
+
 			"Tent_Ench_2": 						"Overheal",
 
 			"Tent_Ench_3": 						"Life Aura",
-			
+
 			"All_Upg_1": 						"Fortification",
 
 			"All_Upg_2": 						"Maintainability",
-			
+
 			"All_Upg_3": 						"Versatility",
 
 			"All_Ench_1": 						"Shield Enchantment",
 
 			"All_Ench_2": 						"Magic Resistance",
-			
+
 			"All_Ench_3": 						"Resistance Aura",
-			
+
 			"Solid_Choice_1":					"Solid choice, I will make you a good price:",
-			
+
 			"Solid_Choice_2":					"Excellent choice, I will make you friendship price:",
 
 			"Solid_Choice_3":					"I'am happy, my best offer, I will make you a special price",
@@ -2554,190 +2575,190 @@
 
 			"Buying_2":							"Are you still interested in buying this improvement?",
 
-			"Buying_3":							"Are you manly enough to buy this upgrade?",				
-			
+			"Buying_3":							"Are you manly enough to buy this upgrade?",
+
 
 			"Upgrade_Costs":					"{~r}%Z-1 Upgrade{~}
-			
-													
-												%Z-2
-												
-												{%Y26} Gold, {%Y20} Wood, {%Y22} Ore, {%Y21} Mercury, {%Y23} Sulfur, {%Y24} Crystal, {%Y25} Gems
-												
-												%Z-4											
 
-												%Z-5",			
-												
-													
+
+												%Z-2
+
+												{%Y26} Gold, {%Y20} Wood, {%Y22} Ore, {%Y21} Mercury, {%Y23} Sulfur, {%Y24} Crystal, {%Y25} Gems
+
+												%Z-4
+
+												%Z-5",
+
+
 			"Bal_Upg_1_Description":			"{~r}%Z-1 Upgrade{~}
-			
-													
-												The Ballista is affected by positive morale and has a {10%%} chance to act again in combat.",	
-													
+
+
+												The Ballista is affected by positive morale and has a {10%%} chance to act again in combat.",
+
 			"Bal_Upg_2_Description":			"{~r}%Z-1 Upgrade{~}
-			
-													
-												This upgrade will increase the maximum number of shots by +{1} for the Ballista.",	
+
+
+												This upgrade will increase the maximum number of shots by +{1} for the Ballista.",
 
 			"Bal_Upg_3_Description":			"{~r}%Z-1 Upgrade{~}
-			
-													
-												With this upgrade, your Ballista is able to perform a fatal hit that cripples and weakens the target. The first hit to any target will always trigger the crippling blow. Each successive hit after the first has a lower chance of further weakening the target.",	
+
+
+												With this upgrade, your Ballista is able to perform a fatal hit that cripples and weakens the target. The first hit to any target will always trigger the crippling blow. Each successive hit after the first has a lower chance of further weakening the target.",
 
 			"Bal_Ench_1_Description":			"{~r}%Z-1 Enchantment{~}
-			
-													
-												This powerful enchantment turns your arrows into exploding projectiles. Each hit also deals {25%%} damage to surrounding units.",	
+
+
+												This powerful enchantment turns your arrows into exploding projectiles. Each hit also deals {25%%} damage to surrounding units.",
 
 			"Bal_Ench_2_Description":			"{~r}%Z-1 Enchantment{~}
-			
-													
-												This enchantment turns bullets into magic arrows. These projectiles deal additional magic damage based on your spell power.",	
+
+
+												This enchantment turns bullets into magic arrows. These projectiles deal additional magic damage based on your spell power.",
 
 			"Bal_Ench_3_Description":			"{~r}%Z-1 Enchantment{~}
-			
-													
+
+
 												This powerful enchantment binds the hero's magic power to the Ballista. Damage caused by the Ballista provides a chance for a powerful spell of the Hero to be cast on the target.",
-												
+
 			"Cart_Upg_1_Description":			"{~r}%Z-1 Upgrade{~}
-			
-													
-												Enlarges the Ammunition Cart so that more food and equipment can be transported. This upgrade increases the movement of the army by {100} points and increases the speed in the first combat round by +{1}.",	
+
+
+												Enlarges the Ammunition Cart so that more food and equipment can be transported. This upgrade increases the movement of the army by {100} points and increases the speed in the first combat round by +{1}.",
 
 			"Cart_Upg_2_Description":			"{~r}%Z-1 Upgrade{~}
-			
-													
-												This upgrade provides a specially trained goblin to support you. This goblin is specialized in finding gold, resources and other items. It is said that he also has other abilities...",	
+
+
+												This upgrade provides a specially trained goblin to support you. This goblin is specialized in finding gold, resources and other items. It is said that he also has other abilities...",
 
 			"Cart_Upg_3_Description":			"{~r}%Z-1 Upgrade{~}
-			
-													
+
+
 												This upgrade equips the Ammunition Cart with improved weapons for your army. +1 maximum damage for all your creatures.",
 
 			"Cart_Ench_1_Description":			"{~r}%Z-1 Enchantment{~}
-			
-													
-												This enchantment places a magical booby trap on the Ammunition Cart. If the Ammunition Cart is destroyed by an attack, the trap is triggered, dealing {massive magic damage} to the attacker.",	
+
+
+												This enchantment places a magical booby trap on the Ammunition Cart. If the Ammunition Cart is destroyed by an attack, the trap is triggered, dealing {massive magic damage} to the attacker.",
 
 			"Cart_Ench_2_Description":			"{~r}%Z-1 Enchantment{~}
-			
-													
-												This enchantment allows you to regenerate a small amount of your spell points after each battle.",	
+
+
+												This enchantment allows you to regenerate a small amount of your spell points after each battle.",
 
 			"Cart_Ench_3_Description":			"{~r}%Z-1 Enchantment{~}
-			
-													
+
+
 												This powerful fire spell sets all your projectiles on fire, so that all ranged attacks ignite your enemies. Burning enemies take {10%%} of the damage taken as additional fire damage in the next round. Creatures immune to Fire Magic take no additional damage."
 
 			"Tent_Upg_1_Description":			"{~r}%Z-1 Upgrade{~}
-			
-													
-												This upgrade improves the healing rate of your First Aid Tent by +{25%%} so that it can better heal wounded units.",	
+
+
+												This upgrade improves the healing rate of your First Aid Tent by +{25%%} so that it can better heal wounded units.",
 
 			"Tent_Upg_2_Description":			"{~r}%Z-1 Upgrade{~}
-			
-													
-												With this upgrade the healing capacity of your First Aid Tent is increased by +{500} hit points. Bigger healing capacity allows for more resurrection of killed troops during combat.",	
+
+
+												With this upgrade the healing capacity of your First Aid Tent is increased by +{500} hit points. Bigger healing capacity allows for more resurrection of killed troops during combat.",
 
 			"Tent_Upg_3_Description":			"{~r}%Z-1 Upgrade{~}
-			
-													
-												With this upgrade your creatures have to pay you gold for every healing they receive during combat. The amount of healing is muliplied by 5. The gold is added to your personal stash after combat. 
+
+
+												With this upgrade your creatures have to pay you gold for every healing they receive during combat. The amount of healing is muliplied by 5. The gold is added to your personal stash after combat.
 												Although this upgrade is not entirely legal in Erathia, I still recommend buying it. Most creatures are too stupid and have no idea about laws and their rights, but with some you have to be careful not to take too much from them, be careful with Dwarves, Monks but also some others. If a lawsuit should arise, I will deny that I installed this upgrade for you.",
 
 			"Tent_Ench_1_Description":			"{~r}%Z-1 Enchantment{~}
-			
-													
-												This First Aid Tent enchantment will allow you to remove negative status effects in addition to restoring hit points. Debuffs like Age, Rooting or Poisoned will also be cured.",	
+
+
+												This First Aid Tent enchantment will allow you to remove negative status effects in addition to restoring hit points. Debuffs like Age, Rooting or Poisoned will also be cured.",
 
 			"Tent_Ench_2_Description":			"{~r}%Z-1 Enchantment{~}
-			
-													
-												This enchantment of the First Aid Tent magically improves the healing process, so that it can happen that additional creatures can be resurrected, which remain in the army even after the battle. Resurrecting creatures over their limit will consume healing capacity.",	
+
+
+												This enchantment of the First Aid Tent magically improves the healing process, so that it can happen that additional creatures can be resurrected, which remain in the army even after the battle. Resurrecting creatures over their limit will consume healing capacity.",
 
 			"Tent_Ench_3_Description":			"{~r}%Z-1 Enchantment{~}
-			
-													
+
+
 												This powerful enchantment gives the First Aid Tent a magical aura that increases the hit points of all your living creatures on the battlefield by +{5%%}.",
 
 			"All_WM_Upg_1_Description":			"{~r}%Z-1 Upgrade{~}
-			
-													
-												This upgrade strengthens all your war machines, making them more durable in combat. This upgrade adds {250} hit points and increases the defense by +{5} points for all war machines.",	
+
+
+												This upgrade strengthens all your war machines, making them more durable in combat. This upgrade adds {250} hit points and increases the defense by +{5} points for all war machines.",
 
 			"All_WM_Upg_2_Description":			"{~r}%Z-1 Upgrade{~}
-			
-													
+
+
 												This modification allows war machines to be repaired very easily. Now it is possible to repair war machines immediately after each battle if they are destroyed.
-												The repair is free of charge, but costs a few movement points.",	
+												The repair is free of charge, but costs a few movement points.",
 
 			"All_WM_Upg_3_Description":			"{~r}%Z-1 Upgrade{~}
-			
-													
+
+
 												Flexible and modular design allows war machines to be set up and used even in confined battlefields such as creatures banks or ships.",
 
 			"All_WM_Ench_1_Description":		"{~r}%Z-1{~}
-			
-													
+
+
 												This useful enchantment will cast a random Shield spell on all war machines at the beginning of the battle.
-												
-												{Air-Shield, Fire-Shield or Shield}",	
+
+												{Air-Shield, Fire-Shield or Shield}",
 
 			"All_WM_Ench_2_Description":		"{~r}%Z-1 Enchantment{~}
-			
-													
-												This enchantment makes all war machines immune to direct damage spells.",	
+
+
+												This enchantment makes all war machines immune to direct damage spells.",
 
 			"All_WM_Ench_3_Description":		"{~r}%Z-1 Enchantment{~}
-			
-													
-												This powerful enchantment will make your war machines emit a Magic Resistance aura. Creatures standing next to war machines will have a {15%%} chance to resists hostile magic. Standing between two war machines will double the effect.",												
 
-			
+
+												This powerful enchantment will make your war machines emit a Magic Resistance aura. Creatures standing next to war machines will have a {15%%} chance to resists hostile magic. Standing between two war machines will double the effect.",
+
+
 			"Goblin_Support_Gold_0":			"A treasure chest filled with Gold.",
 			"Goblin_Support_Gold_1":			"You open the box and find:",
-			
+
 			"Goblin_Support_Res_0":				"Someone left resources behind.",
 			"Goblin_Support_Res_1":				"You come closer and inspect what the goblin found:",
-			
+
 			"Goblin_Support_Creature_0":		"I found some poor creatures that are willing to join us.",
 			"Goblin_Support_Creature_1":		"Do you accept the creautres in your army:",
-			
+
 			"Goblin_Support_Exp_0":				"A scroll with old knowledge, maybe there is something valuable written on it.",
 			"Goblin_Support_Exp_1":				"You take the scroll and read it.",
-			
+
 			"Goblin_Support_Artifact_0":		"Looks like an artifact, I found it burried in the ground.",
 			"Goblin_Support_Artifact_1":		"This is indeed an artifact, you inspect it to find about the properties of the artifact:",
-			
+
 			"Goblin_Support_Spell_0":			"You take the spell scroll and read it.",
 			"Goblin_Support_Spell_1":			"With the help of the scroll you are able to learn a new spell:",
-			
-			"Goblin_Support_Skill_0":			"A scroll with ancient knowledge. You should read it my Master.",
-			"Goblin_Support_Skill_1":			"You take the scroll and read it. It contains some tricks you did not know about:",			
 
-			"Goblin_Support_XXX_0":				"Open",												
+			"Goblin_Support_Skill_0":			"A scroll with ancient knowledge. You should read it my Master.",
+			"Goblin_Support_Skill_1":			"You take the scroll and read it. It contains some tricks you did not know about:",
+
+			"Goblin_Support_XXX_0":				"Open",
 			"Goblin_Support_XXX_1":				"Open",
 
 			"Champions_Honor_Set_WM":			"{Champions Honor Set Bonus}
-			
-												Your glory and fame are legendary all over the continent. A talented blacksmith approaches you and offers you the following upgrade for your Warmachines for free:",			
-		
+
+												Your glory and fame are legendary all over the continent. A talented blacksmith approaches you and offers you the following upgrade for your Warmachines for free:",
+
 			"Champions_Honor_Set_Skill":		"{Champions Honor Set Bonus}
-			
+
 												The power of the set grants you an additional primary skill point.",
 
 			"Glyph_of_Gal_Creatures":			"{Glyph of Gallantry}
-			
-												On there search for glory a few {~Gold}@crname@{~} join @heroname@s army." 												
-														
+
+												On there search for glory a few {~Gold}@crname@{~} join @heroname@s army."
+
 				},
-				
-				
-				
-  
+
+
+
+
   "AC_Artifacts": {
-  
-			"some_other_msg": 					"Advanced Classes rocks!",	
-			
-  }  
+
+			"some_other_msg": 					"Advanced Classes rocks!",
+
+  }
 }
