@@ -111,7 +111,7 @@ Disable Various WoG Options which can conflict with Advanced Classes Mod
 
 !#UN:V?y1/?y2;                          [Check ERA version]
 !#SN:T^AC_Misc.ATTENTION GRANDPA^/?z2;
-!#IF&y2<3402:M^%Z2^;                    [Updated to version 3.4.2]
+!#IF&y2<3403:M^%Z2^;                    [Updated to version 3.4.3]
 
 !#VRz-2:S^ACM Update 1.05^;             [User-defined section of WoG.ini file ("ACM Update 1.0X")]
 !#UN:N6/-1/1/-2;                        [Check if ACM Update 1.0X Message has already been displayed]
