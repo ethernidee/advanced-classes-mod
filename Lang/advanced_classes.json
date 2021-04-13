@@ -18,7 +18,7 @@
 		"class_level_5": "Grandmaster",
 
 		"class_selection_dlg": {
-			"title":               "Choose your hero path:",
+			"title":               "Choose @hero_name@ path:",
 			"delay_selection_for": "Delay choice for @levels@ levels",
 			"never_ask":           "Freeze current class (@class_name@) and never ask again"
 		}

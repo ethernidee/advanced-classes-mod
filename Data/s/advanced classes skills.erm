@@ -782,7 +782,7 @@ This needs to be done to prevent an unkown crash with Kingdom Overview
 !!VR(grandmasterClassRequiredPoints:y):Si^Grandmaster_Level_Global_Value^;
 
 ; Get more info about current hero
-!!HE(hero):Ed/?(heroLevel:y) O?(heroOwner:y);
+!!HE(hero):Ed/?(heroLevel:y) O?(heroOwner:y) B0/?(heroName:z);
 !!OW:I(heroOwner)/?(isAi:y);
 
 ; Desired class can be selected by player to force upgrading only that class points and ignore non-revevant skills
@@ -838,7 +838,8 @@ This needs to be done to prevent an unkown crash with Kingdom Overview
   !!if&(numProposedClasses)>0;
     !!if&i^acm_optionChooseClass^=(TRUE);
       !!if&(isAi)=(FALSE)/(ERM_FLAG_IS_HUMAN);
-        !!FU(RadioDlg_SetTitle):P^%T(acm.class_selection_dlg.title)^;
+        !!SN:T^acm.class_selection_dlg.title^/?(text:z)/^hero_name^/(heroName);
+        !!FU(RadioDlg_SetTitle):P(text);
         !!FU(RadioDlg_AddCancelButton):P;
 
         !!SN:T^acm.class_selection_dlg.delay_selection_for^/?(text:z)/^levels^/5;
