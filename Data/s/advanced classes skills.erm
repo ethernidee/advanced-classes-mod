@@ -1,10 +1,11 @@
 ZVSE2
-A Mod by Perry R
-Created between 2016 until 2021
-
 
 ********************************************************************************
                  Advanced Classes Mod for ERA 3.x
+********************************************************************************
+
+A Mod by Perry R. 2016-2021.
+Contributors: Berserker.
 
 Content:
 
@@ -23,7 +24,8 @@ Content:
 
 For feedback, bug reports and updates
 Visit http://heroescommunity.com Advanced Classes Mod
-Name on Heroescommunity RerryR
+Name on Heroescommunity: RerryR
+
 ********************************************************************************
 
 
@@ -40,6 +42,11 @@ Name on Heroescommunity RerryR
 
 !#SN:W^Spell_Trainer_Mod^/1;            [Spell Trainer Mod is enabled by default]
 
+!#VRi^acm_optionChooseClass^:S0; Option allows to delay class selection and choose desired class when enough points are accumulated
+                               ; If it's off, class selection occurs automaticlly based on highest points.
+
+!#VRi^acm_optionNoSkillDependenciesOnClass^:S0; Option allow to disable restriction, according to which you need master/grandmaster level class
+                                              ; in order to upgrade fixed set of skills to master/grandmaster.
 
 Disable Various WoG Options which can conflict with Advanced Classes Mod
 
@@ -104,7 +111,7 @@ Disable Various WoG Options which can conflict with Advanced Classes Mod
 
 !#UN:V?y1/?y2;                          [Check ERA version]
 !#SN:T^AC_Misc.ATTENTION GRANDPA^/?z2;
-!#IF&y2<3200:M^%Z2^;                    [Updated to version 3.2]
+!#IF&y2<3403:M^%Z2^;                    [Updated to version 3.4.3]
 
 !#VRz-2:S^ACM Update 1.05^;             [User-defined section of WoG.ini file ("ACM Update 1.0X")]
 !#UN:N6/-1/1/-2;                        [Check if ACM Update 1.0X Message has already been displayed]
@@ -118,63 +125,34 @@ Disable Various WoG Options which can conflict with Advanced Classes Mod
 
 ; ==================================================================================================
 
-!#DC(SKILL_MASTER)      = 4;
-!#DC(SKILL_GRANDMASTER) = 5;
+!#DC(ACM_SKILL_MASTER)      = 4;
+!#DC(ACM_SKILL_GRANDMASTER) = 5;
 
-!#DC(HL_DISABLE_SKILL)     = -1;
-!#DC(HL_DONT_CHANGE_SKILL) = -2;
-!#DC(HL_USE_ALL_DEFAULTS)  = -3;
+!#DC(ACM_NUM_MAIN_CLASSES) = 3;
+!#DC(ACM_NO_CLASS)         = 0;
+!#DC(ACM_FIRST_CLASS)      = 1;
 
-!#DC(HL_NUM_MAIN_CLASSES) = 3;
-!#DC(HL_NO_CLASS)         = 0;
-!#DC(HL_FIRST_CLASS)      = 1;
+!#DC(ACM_CLASS_WARRIOR)    = 1;
+!#DC(ACM_CLASS_MAGE)       = 2;
+!#DC(ACM_CLASS_ADVENTURER) = 4;
+!#DC(ACM_CLASS_HUNTER)     = 5;
+!#DC(ACM_CLASS_BATTLEMAGE) = 3;
+!#DC(ACM_CLASS_DRUID)      = 6;
 
-!#DC(HL_CLASS_WARRIOR)    = 1;
-!#DC(HL_CLASS_MAGE)       = 2;
-!#DC(HL_CLASS_ADVENTURER) = 4;
-!#DC(HL_CLASS_HUNTER)     = 5;
-!#DC(HL_CLASS_BATTLEMAGE) = 3;
-!#DC(HL_CLASS_DRUID)      = 6;
+!#DC(ACM_WARRIOR_CLASS_IND)    = 0;
+!#DC(ACM_MAGE_CLASS_IND)       = 1;
+!#DC(ACM_ADVENTURER_CLASS_IND) = 2;
 
-!#DC(HL_WARRIOR_CLASS_IND)    = 0;
-!#DC(HL_MAGE_CLASS_IND)       = 1;
-!#DC(HL_ADVENTURER_CLASS_IND) = 2;
+!#DC(ACM_NO_CLASS_LEVEL)          = 0;
+!#DC(ACM_CLASS_LEVEL_NORMAL)      = 1;
+!#DC(ACM_CLASS_LEVEL_ADEPT)       = 2;
+!#DC(ACM_CLASS_LEVEL_EXPERT)      = 3;
+!#DC(ACM_CLASS_LEVEL_MASTER)      = 4;
+!#DC(ACM_CLASS_LEVEL_GRANDMASTER) = 5;
+
+!#DC(ACM_BACKUPED_SKILL_WAS_DECREASED_FLAG) = (BIT_31);
 
 !#FU(NewIntArray):P(NUM_SECONDARY_SKILLS)/0/?i^acm_SecSkillsBackup^/(M_STORED);
-
-!?FU(acm_GetRandomSkillToUpgrade);
-; Returns random non-grandmaster secondary skill with at least specified level or (NO_SKILL) in case of failure.
-!#VA(hero:x);
-!#VA(minSkillLevel:x);
-!#VA(result:x);
-!#VA(excludeSkill:x); Optional. Specify skill to exclude from alternatives.
-
-!#VA(skills[28]:y);
-!!VR(numAlts:y):S0;
-!!VR(result):S(NO_SKILL);
-
-!!FU:A?(numArgs:y);
-!!VR(excludeSkill)&(numArgs)<(@excludeSkill):S(NO_SKILL);
-
-!!re i/0/(SEC_SKILL_LAST);
-  !!HE(hero):Si/?(skillLevel:y);
-
-  !!if&(skillLevel)>(SKILL_NOT_LEARNED)/i<>(excludeSkill);
-    !!VR(isMaster:y):S(FALSE);
-    !!VR(isGrandmaster:y):S(FALSE);
-    !!FU(H3_Mod_Check_Skill_Level)&(skillLevel)>=(SKILL_EXPERT):P(hero)/?(isMaster:y)/?(isGrandmaster:y)/i;
-    !!VR(skillLevel):+(isMaster) +(isGrandmaster);
-
-    !!if&(skillLevel)>=(minSkillLevel)/(skillLevel)<(SKILL_GRANDMASTER);
-      !!VR(skills[numAlts]):Si;
-      !!VR(numAlts):+1;
-    !!en;
-  !!en;
-!!en;
-
-!!FU&(numAlts)<=0:E;
-!!VR(randomInd:y):R0/1/(numAlts) -1;
-!!VR(result):S(skills[randomInd]);
 
 !?FU(acm_CountNumUniqueSkillsLearned);
 !#VA(hero:x);
@@ -187,55 +165,152 @@ Disable Various WoG Options which can conflict with Advanced Classes Mod
   !!VR(result)&(skillLevel)>(SKILL_NOT_LEARNED):+1;
 !!en;
 
+!?FU(acm_GetSkillDependenciesOnClass);
+; Originally mod allows to master/grandmaster skills, depending on class and class level (master/grandmaster).
+; Return ID of array with NUM_SECONDARY_SKILLS items, each contains allowed classes mask.
+!#VA(result:x);
+
+!!VR(result):Si^acm_skillDependenciesOnClass^;
+
+!!if&(result)=(NULL);
+  !!FU(NewIntArray):P(NUM_SECONDARY_SKILLS)/(ACM_NO_CLASS)/?(result)/(M_STORED);
+
+  !!if&i^acm_optionNoSkillDependenciesOnClass^=(FALSE);
+    !!SN:V(result)/(SKILL_PATHFINDING)/(ACM_CLASS_ADVENTURER);
+    !!SN:V(result)/(SKILL_ARCHERY)/(ACM_CLASS_WARRIOR);
+    !!SN:V(result)/(SKILL_LOGISTICS)/(ACM_CLASS_ADVENTURER);
+    !!SN:V(result)/(SKILL_SCOUTING)/(ACM_CLASS_ADVENTURER);
+    !!SN:V(result)/(SKILL_DIPLOMACY)/(ACM_CLASS_ADVENTURER);
+    !!SN:V(result)/(SKILL_NAVIGATION)/(ACM_CLASS_ADVENTURER);
+    !!SN:V(result)/(SKILL_LEADERSHIP)/(ACM_CLASS_WARRIOR);
+    !!SN:V(result)/(SKILL_WISDOM)/(ACM_CLASS_MAGE);
+    !!SN:V(result)/(SKILL_MYSTICISM)/(ACM_CLASS_MAGE);
+    !!SN:V(result)/(SKILL_LUCK)/(ACM_CLASS_WARRIOR);
+    !!SN:V(result)/(SKILL_BALLISTICS)/(ACM_CLASS_WARRIOR);
+    !!SN:V(result)/(SKILL_EAGLE_EYE)/(ACM_CLASS_ADVENTURER);
+    !!SN:V(result)/(SKILL_NECROMANCY)/(ACM_NO_CLASS);
+    !!SN:V(result)/(SKILL_ESTATES)/(ACM_CLASS_ADVENTURER);
+    !!SN:V(result)/(SKILL_FIRE_MAGIC)/(ACM_CLASS_MAGE);
+    !!SN:V(result)/(SKILL_AIR_MAGIC)/(ACM_CLASS_MAGE);
+    !!SN:V(result)/(SKILL_WATER_MAGIC)/(ACM_CLASS_MAGE);
+    !!SN:V(result)/(SKILL_EARTH_MAGIC)/(ACM_CLASS_MAGE);
+    !!SN:V(result)/(SKILL_SCHOLAR)/(ACM_CLASS_MAGE);
+    !!SN:V(result)/(SKILL_TACTICS)/(ACM_CLASS_WARRIOR);
+    !!SN:V(result)/(SKILL_ARTILLERY)/(ACM_CLASS_WARRIOR);
+    !!SN:V(result)/(SKILL_LEARNING)/(ACM_CLASS_ADVENTURER);
+    !!SN:V(result)/(SKILL_OFFENCE)/(ACM_CLASS_WARRIOR);
+    !!SN:V(result)/(SKILL_ARMORER)/(ACM_CLASS_WARRIOR);
+    !!SN:V(result)/(SKILL_INTELLIGENCE)/(ACM_CLASS_MAGE);
+    !!SN:V(result)/(SKILL_SORCERY)/(ACM_CLASS_MAGE);
+    !!SN:V(result)/(SKILL_RESISTANCE)/(ACM_CLASS_WARRIOR);
+    !!SN:V(result)/(SKILL_FIRST_AID)/(ACM_CLASS_ADVENTURER);
+  !!en; if
+!!en; acm_GetSkillDependenciesOnClass
+
 !?FU(acm_GetSecSkillLevel);
 !#VA(hero:x);
 !#VA(skill:x);
-!#VA(result:x);
+!#VA(result:x); Result is in (SKILL_NOT_LEARNED) .. (ACM_SKILL_GRANDMASTER) range
 
 !!HE(hero):S(skill)/?(result);
 
 !!if&(result)>=(SKILL_EXPERT);
   !!FU(H3_Mod_Check_Skill_Level):P(hero)/?(isMaster:y)/?(isGrandmaster:y)/(skill);
-  !!VR(result)&(isMaster)<>(FALSE):S(SKILL_MASTER);
-  !!VR(result)&(isGrandmaster)<>(FALSE):S(SKILL_GRANDMASTER);
-!!en;
-
-!?FU(acm_BackupAndPrepareSecSkills);
-!#VA(hero:x);
-
-!!re i/0/(SEC_SKILL_LAST);
-  !!FU(acm_GetSecSkillLevel):P(hero)/i/?(skillLevel:y);
-  !!SN:Vi^acm_SecSkillsBackup^/i/(skillLevel);
-  !!HE(hero)&(skillLevel)>=(SKILL_EXPERT)/(skillLevel)<(SKILL_GRANDMASTER):Si/(SKILL_ADVANCED);
+  !!VR(result)&(isMaster)<>(FALSE):S(ACM_SKILL_MASTER);
+  !!VR(result)&(isGrandmaster)<>(FALSE):S(ACM_SKILL_GRANDMASTER);
 !!en;
 
 !?FU(acm_SetSecSkillLevel);
 !#VA(hero:x);
 !#VA(skill:x);
-!#VA(level:x);
+!#VA(level:x); Level must be in (SKILL_NOT_LEARNED) .. (ACM_SKILL_GRANDMASTER) range
 
-!!VR(level):F(SKILL_NOT_LEARNED)/(SKILL_GRANDMASTER);
+!!VR(level):F(SKILL_NOT_LEARNED)/(ACM_SKILL_GRANDMASTER);
 !!VR(nativeLevel:y):S(level) F(SKILL_NOT_LEARNED)/(SKILL_EXPERT);
 !!HE(hero):S(skill)/(nativeLevel);
-!!FU(H3_Mod_Set_Skill_ExtraLevel)&(level)=(SKILL_MASTER):P(hero)/(TRUE)/(FALSE)/(skill);
-!!FU(H3_Mod_Set_Skill_ExtraLevel)&(level)=(SKILL_GRANDMASTER):P(hero)/(TRUE)/(TRUE)/(skill);
+
+!!if&(level)<(ACM_SKILL_MASTER);
+  !!FU(H3_Mod_Set_Skill_ExtraLevel):P(hero)/(FALSE)/(FALSE)/(skill);
+!!el&(level)=(ACM_SKILL_MASTER);
+  !!FU(H3_Mod_Set_Skill_ExtraLevel):P(hero)/(TRUE)/(FALSE)/(skill);
+!!el&(level)=(ACM_SKILL_GRANDMASTER);
+  !!FU(H3_Mod_Set_Skill_ExtraLevel):P(hero)/(TRUE)/(TRUE)/(skill);
+!!en;
 
 !?FU(acm_GetHeroClass);
-!#VA(hero:x);   hero ID
-!#VA(result:x); one of HL_CLASS_XXX constants or HL_NO_CLASS
+!#VA(hero:x);       hero ID
+!#VA(class:x);      OUT. One of ACM_CLASS_XXX constants or ACM_NO_CLASS
+!#VA(classLevel:x); OUT. One of ACM_CLASS_LEVEL_XXX constants or ACM_NO_CLASS_LEVEL. Levels till Master are ignored and not used in the mod.
 
-!!VR(result):S(HL_NO_CLASS);
+!!VR(class):S(ACM_NO_CLASS);
+!!VR(classLevel):S(ACM_NO_CLASS_LEVEL);
 
 !!VR(isWarrior:y):Si^Master_Warrior_Hero%(hero)^;
 !!VR(isMage:y):Si^Master_Mage_Hero%(hero)^;
 !!VR(isAdventurer:y):Si^Master_Adventurer_Hero%(hero)^;
 
-!!VR(result)&(isWarrior)=(TRUE):S(HL_CLASS_WARRIOR);
-!!VR(result)&(isMage)=(TRUE):S(HL_CLASS_MAGE);
-!!VR(result)&(isAdventurer)=(TRUE):S(HL_CLASS_ADVENTURER);
-!!VR(result)&(isWarrior)=(TRUE)/(isMage)=(TRUE):S(HL_CLASS_BATTLEMAGE);
-!!VR(result)&(isWarrior)=(TRUE)/(isAdventurer)=(TRUE):S(HL_CLASS_HUNTER);
-!!VR(result)&(isMage)=(TRUE)/(isAdventurer)=(TRUE):S(HL_CLASS_DRUID);
+!!VR(class)&(isWarrior)=(TRUE):S(ACM_CLASS_WARRIOR);
+!!VR(class)&(isMage)=(TRUE):S(ACM_CLASS_MAGE);
+!!VR(class)&(isAdventurer)=(TRUE):S(ACM_CLASS_ADVENTURER);
+!!VR(class)&(isWarrior)=(TRUE)/(isMage)=(TRUE):S(ACM_CLASS_BATTLEMAGE);
+!!VR(class)&(isWarrior)=(TRUE)/(isAdventurer)=(TRUE):S(ACM_CLASS_HUNTER);
+!!VR(class)&(isMage)=(TRUE)/(isAdventurer)=(TRUE):S(ACM_CLASS_DRUID);
+
+!!if&(class)<>(ACM_NO_CLASS);
+  !!VR(classLevel):S(ACM_CLASS_LEVEL_MASTER);
+  !!VR(classLevel)|i^Grandmaster_Warrior_Hero%(hero)^=(TRUE)/i^Grandmaster_Mage_Hero%(hero)^=(TRUE)/i^Grandmaster_Adventurer_Hero%(hero)^=(TRUE):S(ACM_CLASS_LEVEL_GRANDMASTER);
+!!en;
+
+!?FU(acm_BackupAndPrepareSecSkillsForLevelUp);
+; Saves all hero native skill levels in global var. Reduces expert skills to advanced for skills, which hero is able to promote.
+; Thus H3 engine will be used to determine, which skill to display in level-up dialog.
+!#VA(hero:x);
+
+!!VR(noSkillLevelRestriction:y):Si^acm_optionNoSkillDependenciesOnClass^;
+!!FU(acm_GetHeroClass):P(hero)/?(heroClass:y)/?(heroClassLevel:y);
+!!FU(acm_GetSkillDependenciesOnClass):P?(skillDeps:y);
+
+; For all skills
+!!re i/(SEC_SKILL_FIRST)/(SEC_SKILL_LAST);
+  ; Get skill level and save
+  !!FU(acm_GetSecSkillLevel):P(hero)/i/?(skillLevel:y);
+
+  ; If skill can be upgraded to master/grandmaster
+  !!if&(skillLevel)>=(SKILL_EXPERT)/(skillLevel)<(ACM_SKILL_GRANDMASTER);
+    !!SN:V(skillDeps)/i/?(requiredClass:y);
+    !!VRt:S(heroClass) &(requiredClass);
+
+    !!if|t<>(ACM_NO_CLASS)/(requiredClass)=(ACM_NO_CLASS);
+      !!if|(skillLevel)<(heroClassLevel)/(noSkillLevelRestriction)=(TRUE);
+        !!HE(hero):Si/(SKILL_ADVANCED);
+        !!VR(skillLevel):|(ACM_BACKUPED_SKILL_WAS_DECREASED_FLAG);
+      !!en;
+    !!en;
+  !!en; if
+
+  !!SN:Vi^acm_SecSkillsBackup^/i/(skillLevel);
+!!en; re
+
+!?FU(acm_RestoreSecSkillsAndApplyDetectedUpgrades);
+; Restores original expert skills from advanced level to expert after level up. Detects which skills were promoted to master/grandmaster level.
+!#VA(hero:x);
+
+!!FU(acm_GetHeroClass):P(hero)/?(heroClass:y)/?(heroClassLevel:y);
+!!FU(acm_GetSkillDependenciesOnClass):P?(skillDeps:y);
+
+!!re i/(SEC_SKILL_FIRST)/(SEC_SKILL_LAST);
+  !!FU(acm_GetSecSkillLevel):P(hero)/i/?(skillLevel:y);
+  !!SN:Vi^acm_SecSkillsBackup^/i/?(prevSkillLevel:y);
+
+  !!VR(skillLevelWasDecreased:y):S(prevSkillLevel) &(ACM_BACKUPED_SKILL_WAS_DECREASED_FLAG) B;
+  !!VR(prevSkillLevel):Sd~(ACM_BACKUPED_SKILL_WAS_DECREASED_FLAG);
+
+  !!if&(skillLevelWasDecreased)=(TRUE);
+    !!VR(newSkillLevel:y):S(prevSkillLevel);
+    !!VR(newSkillLevel)&(skillLevel)>=(prevSkillLevel):S(prevSkillLevel) +1;
+    !!FU(acm_SetSecSkillLevel):P(hero)/i/(newSkillLevel);
+  !!en;
+!!en;
 
 ; ==================================================================================================
 
@@ -640,33 +715,33 @@ This needs to be done to prevent an unkown crash with Kingdom Overview
 ***************************Level Up Section*************************************
 **Check for changed Class Points after visiting certain objects that can change secondary skills
 
-!$OB6&1000;                             [Pandory Box]
-!!HE-1:N?y1;
-!!FU(acm_ShowClassPromotionDlgIfMarked):Py1;          [Call Level Up Function]
+!$OB(OBJ_PANDORAS_BOX)&(ERM_FLAG_IS_HUMAN);
+!!HE-1:N?(hero:y);
+!!FU(acm_RecalcClassPoints):P(hero);
 
-!$OB26&1000;                            [Event]
-!!HE-1:N?y1;
-!!FU(acm_ShowClassPromotionDlgIfMarked):Py1;          [Call Level Up Function]
+!$OB(OBJ_EVENT)&(ERM_FLAG_IS_HUMAN);
+!!HE-1:N?(hero:y);
+!!FU(acm_RecalcClassPoints):P(hero);
 
-!$OB81&1000;                            [Scholar]
-!!HE-1:N?y1;
-!!FU(acm_ShowClassPromotionDlgIfMarked):Py1;          [Call Level Up Function]
+!$OB(OBJ_SCHOLAR)&(ERM_FLAG_IS_HUMAN);
+!!HE-1:N?(hero:y);
+!!FU(acm_RecalcClassPoints):P(hero);
 
-!$OB83&1000;                            [Quest Hut]
-!!HE-1:N?y1;
-!!FU(acm_ShowClassPromotionDlgIfMarked):Py1;          [Call Level Up Function]
+!$OB(OBJ_SEERS_HUT)&(ERM_FLAG_IS_HUMAN);
+!!HE-1:N?(hero:y);
+!!FU(acm_RecalcClassPoints):P(hero);
 
-!$OB104&1000;                           [University]
-!!HE-1:N?y1;
-!!FU(acm_ShowClassPromotionDlgIfMarked):Py1;          [Call Level Up Function]
+!$OB(OBJ_UNIVERSITY)&(ERM_FLAG_IS_HUMAN);
+!!HE-1:N?(hero:y);
+!!FU(acm_RecalcClassPoints):P(hero);
 
-!$OB113&1000;                           [Witch Hut]
-!!HE-1:N?y1;
-!!FU(acm_ShowClassPromotionDlgIfMarked):Py1;          [Call Level Up Function]
+!$OB(OBJ_WITCH_HUT)&(ERM_FLAG_IS_HUMAN);
+!!HE-1:N?(hero:y);
+!!FU(acm_RecalcClassPoints):P(hero);
 
-!$OB98/8&1000;                          [Conflux]
-!!HE-1:N?y1;
-!!FU(acm_ShowClassPromotionDlgIfMarked):Py1;          [Call Level Up Function]
+!$OB(OBJ_TOWN)/(TOWN_CONFLUX)&(ERM_FLAG_IS_HUMAN);
+!!HE-1:N?(hero:y);
+!!FU(acm_RecalcClassPoints):P(hero);
 
 
 ********************************************************************************
@@ -697,46 +772,118 @@ This needs to be done to prevent an unkown crash with Kingdom Overview
 !!FU(Calc_Class_Points_Original):P(hero)/(NULL)/?(warriorPoints)/?(magePoints)/?(adventurerPoints);
 
 ; Copy class points to list to operate them in loops
-!#VA(classPoints[HL_NUM_MAIN_CLASSES]:y);
-!!VR(classPoints[HL_WARRIOR_CLASS_IND]):S(warriorPoints);
-!!VR(classPoints[HL_MAGE_CLASS_IND]):S(magePoints);
-!!VR(classPoints[HL_ADVENTURER_CLASS_IND]):S(adventurerPoints);
+!#VA(classPoints[ACM_NUM_MAIN_CLASSES]:y);
+!!VR(classPoints[ACM_WARRIOR_CLASS_IND]):S(warriorPoints);
+!!VR(classPoints[ACM_MAGE_CLASS_IND]):S(magePoints);
+!!VR(classPoints[ACM_ADVENTURER_CLASS_IND]):S(adventurerPoints);
+
+; Fetch global settings
+!!VR(masterClassRequiredPoints:y):Si^Master_Level_Global_Value^;
+!!VR(grandmasterClassRequiredPoints:y):Si^Grandmaster_Level_Global_Value^;
+
+; Get more info about current hero
+!!HE(hero):Ed/?(heroLevel:y) O?(heroOwner:y);
+!!OW:I(heroOwner)/?(isAi:y);
 
 ; Desired class can be selected by player to force upgrading only that class points and ignore non-revevant skills
 !!VR(chosenClass:y):Si^acm_chosenClass_%(hero)^;
 
-!!if&(chosenClass)<>(HL_NO_CLASS);
-  ; Desired class is set, nullify all non-relevant class points
-  !!VR(testClass:y):S(HL_FIRST_CLASS);
+!!if&(heroLevel)>=i^acm_dontAskToChooseClassTillLevel_%(hero)^;
+  !!FU(RadioDlg_Reset):P;
 
-  !!re i/0/(HL_NUM_MAIN_CLASSES)/1/-1;
+  !!if&(classPoints[ACM_WARRIOR_CLASS_IND])>=(masterClassRequiredPoints)/(chosenClass)=(ACM_NO_CLASS);
+    !!SN:T^acm.class_name_%(ACM_CLASS_WARRIOR)^/?(text:z);
+    !!FU(RadioDlg_AddItem):P^%(text) (%(classPoints[ACM_WARRIOR_CLASS_IND])/%(masterClassRequiredPoints))^/(ACM_CLASS_WARRIOR);
+  !!en;
+
+  !!if&(classPoints[ACM_MAGE_CLASS_IND])>=(masterClassRequiredPoints)/(chosenClass)=(ACM_NO_CLASS);
+    !!SN:T^acm.class_name_%(ACM_CLASS_MAGE)^/?(text:z);
+    !!FU(RadioDlg_AddItem):P^%(text) (%(classPoints[ACM_MAGE_CLASS_IND])/%(masterClassRequiredPoints))^/(ACM_CLASS_MAGE);
+  !!en;
+
+  !!if&(classPoints[ACM_ADVENTURER_CLASS_IND])>=(masterClassRequiredPoints)/(chosenClass)=(ACM_NO_CLASS);
+    !!SN:T^acm.class_name_%(ACM_CLASS_ADVENTURER)^/?(text:z);
+    !!FU(RadioDlg_AddItem):P^%(text) (%(classPoints[ACM_ADVENTURER_CLASS_IND])/%(masterClassRequiredPoints))^/(ACM_CLASS_ADVENTURER);
+  !!en;
+
+  !!if&(classPoints[ACM_WARRIOR_CLASS_IND])>=(masterClassRequiredPoints)/(classPoints[ACM_MAGE_CLASS_IND])>=(masterClassRequiredPoints)/(chosenClass)<>(ACM_CLASS_BATTLEMAGE);
+    !!VR(incompatibleClasses:y):S(chosenClass) Sd~(ACM_CLASS_BATTLEMAGE);
+
+    !!if&(incompatibleClasses)=(ACM_NO_CLASS);
+      !!SN:T^acm.class_name_%(ACM_CLASS_BATTLEMAGE)^/?(text:z);
+      !!FU(RadioDlg_AddItem):P^%(text) (%(classPoints[ACM_WARRIOR_CLASS_IND])/%(masterClassRequiredPoints), %(classPoints[ACM_MAGE_CLASS_IND])/%(masterClassRequiredPoints))^/(ACM_CLASS_BATTLEMAGE);
+    !!en;
+  !!en;
+
+  !!if&(classPoints[ACM_WARRIOR_CLASS_IND])>=(masterClassRequiredPoints)/(classPoints[ACM_ADVENTURER_CLASS_IND])>=(masterClassRequiredPoints)/(chosenClass)<>(ACM_CLASS_HUNTER);
+    !!VR(incompatibleClasses:y):S(chosenClass) Sd~(ACM_CLASS_HUNTER);
+
+    !!if&(incompatibleClasses)=(ACM_NO_CLASS);
+      !!SN:T^acm.class_name_%(ACM_CLASS_HUNTER)^/?(text:z);
+      !!FU(RadioDlg_AddItem):P^%(text) (%(classPoints[ACM_WARRIOR_CLASS_IND])/%(masterClassRequiredPoints), %(classPoints[ACM_ADVENTURER_CLASS_IND])/%(masterClassRequiredPoints))^/(ACM_CLASS_HUNTER);
+    !!en;
+  !!en;
+
+  !!if&(classPoints[ACM_MAGE_CLASS_IND])>=(masterClassRequiredPoints)/(classPoints[ACM_ADVENTURER_CLASS_IND])>=(masterClassRequiredPoints)/(chosenClass)<>(ACM_CLASS_DRUID);
+    !!VR(incompatibleClasses:y):S(chosenClass) Sd~(ACM_CLASS_DRUID);
+
+    !!if&(incompatibleClasses)=(ACM_NO_CLASS);
+      !!SN:T^acm.class_name_%(ACM_CLASS_DRUID)^/?(text:z);
+      !!FU(RadioDlg_AddItem):P^%(text) (%(classPoints[ACM_MAGE_CLASS_IND])/%(masterClassRequiredPoints), %(classPoints[ACM_ADVENTURER_CLASS_IND])/%(masterClassRequiredPoints))^/(ACM_CLASS_DRUID);
+    !!en;
+  !!en;
+
+  !!FU(RadioDlg_GetNumItems):P?(numProposedClasses:y);
+
+  !!if&(numProposedClasses)>0;
+    !!if&i^acm_optionChooseClass^=(TRUE);
+      !!if&(isAi)=(FALSE)/(ERM_FLAG_IS_HUMAN);
+        !!FU(RadioDlg_SetTitle):P^%T(acm.class_selection_dlg.title)^;
+        !!FU(RadioDlg_AddCancelButton):P;
+
+        !!SN:T^acm.class_selection_dlg.delay_selection_for^/?(text:z)/^levels^/5;
+        !!FU(RadioDlg_AddItem):P(text)/-5;
+
+        !!SN:T^acm.class_name_%(chosenClass)^/?(className:z);
+        !!SN:T^acm.class_selection_dlg.never_ask^/?(text:z)/^class_name^/(className);
+        !!FU(RadioDlg_AddItem):P(text)/-1000;
+
+        !!FU(RadioDlg_Show):P?(itemInd:y)/?(dlgRes:y);
+
+        !!if&(dlgRes)<0;
+          !!VRi^acm_dontAskToChooseClassTillLevel_%(hero)^:S(heroLevel) -(dlgRes);
+        !!el;
+          !!VR(chosenClass):S(dlgRes);
+          !!VRi^acm_chosenClass_%(hero)^:S(chosenClass);
+        !!en;
+      !!en; // if
+    !!el;
+      ; Select the last class automatically
+      !!VR(lastDlgItemInd:y):S(numProposedClasses) -1;
+      !!FU(RadioDlg_GetItemValue):P(lastDlgItemInd)/?(chosenClass);
+      !!VRi^acm_chosenClass_%(hero)^:S(chosenClass);
+    !!en; else
+  !!en; if
+!!en; if
+
+!!if&(chosenClass)<>(ACM_NO_CLASS);
+  ; Desired class is set, nullify all non-relevant class points
+  !!VR(testClass:y):S(ACM_FIRST_CLASS);
+
+  !!re i/0/(ACM_NUM_MAIN_CLASSES)/1/-1;
     ; If tested class is the desired class or is a part of desired multiclass, multiplier will be 1, 0 otherwise
     !!VR(classPointsMultiplier:y):S(chosenClass) &(testClass) F0/1;
     !!VR(classPoints[i]):*(classPointsMultiplier);
     !!VR(testClass):Sd<<1;
   !!en;
 !!el;
-  ; Desired class is not set, leave two highest points classes and nullify the third
-  ; This is global mod constaints: 3 main classes are not supported. Multiclasses are formed by max 2 main classes
-  !!VR(weakestClassIndex:y):S-1;
-  !!VR(weakestClassPoints:y):S(INT_MAX);
-
-  ; Determine class with lowest points
-  !!re i/0/(HL_NUM_MAIN_CLASSES)/1/-1;
-    !!if&(classPoints[i])<(weakestClassPoints);
-      !!VR(weakestClassIndex):Si;
-      !!VR(weakestClassPoints):S(classPoints[i]);
-    !!en;
+  ; Desired class is not set, nullify all points
+  !!re i/0/(ACM_NUM_MAIN_CLASSES)/1/-1;
+    !!VR(classPoints[i]):S0;
   !!en;
-
-  ; Nullify weakest class points
-  !!VR(classPoints[weakestClassIndex]):S0;
 !!en; else
 
 ; Re-evaluate global class variables
-!!VR(masterClassRequiredPoints:y):Si^Master_Level_Global_Value^;
-!!VR(grandmasterClassRequiredPoints:y):Si^Grandmaster_Level_Global_Value^;
-
 !!VRi^Master_Warrior_Hero%(hero)^:S(FALSE);
 !!VRi^Master_Mage_Hero%(hero)^:S(FALSE);
 !!VRi^Master_Adventurer_Hero%(hero)^:S(FALSE);
@@ -744,39 +891,39 @@ This needs to be done to prevent an unkown crash with Kingdom Overview
 !!VRi^Grandmaster_Mage_Hero%(hero)^:S(FALSE);
 !!VRi^Grandmaster_Adventurer_Hero%(hero)^:S(FALSE);
 
-!!if&(classPoints[HL_WARRIOR_CLASS_IND])>=(masterClassRequiredPoints)/(classPoints[HL_MAGE_CLASS_IND])>=(masterClassRequiredPoints);
+!!if&(classPoints[ACM_WARRIOR_CLASS_IND])>=(masterClassRequiredPoints)/(classPoints[ACM_MAGE_CLASS_IND])>=(masterClassRequiredPoints);
   !!VRi^Master_Warrior_Hero%(hero)^:S(TRUE);
   !!VRi^Master_Mage_Hero%(hero)^:S(TRUE);
-!!el&(classPoints[HL_WARRIOR_CLASS_IND])>=(masterClassRequiredPoints)/(classPoints[HL_ADVENTURER_CLASS_IND])>=(masterClassRequiredPoints);
+!!el&(classPoints[ACM_WARRIOR_CLASS_IND])>=(masterClassRequiredPoints)/(classPoints[ACM_ADVENTURER_CLASS_IND])>=(masterClassRequiredPoints);
   !!VRi^Master_Warrior_Hero%(hero)^:S(TRUE);
   !!VRi^Master_Adventurer_Hero%(hero)^:S(TRUE);
-!!el&(classPoints[HL_MAGE_CLASS_IND])>=(masterClassRequiredPoints)/(classPoints[HL_ADVENTURER_CLASS_IND])>=(masterClassRequiredPoints);
+!!el&(classPoints[ACM_MAGE_CLASS_IND])>=(masterClassRequiredPoints)/(classPoints[ACM_ADVENTURER_CLASS_IND])>=(masterClassRequiredPoints);
   !!VRi^Master_Mage_Hero%(hero)^:S(TRUE);
   !!VRi^Master_Adventurer_Hero%(hero)^:S(TRUE);
 !!el;
-  !!VRi^Master_Warrior_Hero%(hero)^&(classPoints[HL_WARRIOR_CLASS_IND])>=(masterClassRequiredPoints):S(TRUE);
-  !!VRi^Master_Mage_Hero%(hero)^&(classPoints[HL_MAGE_CLASS_IND])>=(masterClassRequiredPoints):S(TRUE);
-  !!VRi^Master_Adventurer_Hero%(hero)^&(classPoints[HL_ADVENTURER_CLASS_IND])>=(masterClassRequiredPoints):S(TRUE);
-  !!VRi^Grandmaster_Warrior_Hero%(hero)^&(classPoints[HL_WARRIOR_CLASS_IND])>=(grandmasterClassRequiredPoints):S(TRUE);
-  !!VRi^Grandmaster_Mage_Hero%(hero)^&(classPoints[HL_MAGE_CLASS_IND])>=(grandmasterClassRequiredPoints):S(TRUE);
-  !!VRi^Grandmaster_Adventurer_Hero%(hero)^&(classPoints[HL_ADVENTURER_CLASS_IND])>=(grandmasterClassRequiredPoints):S(TRUE);
+  !!VRi^Master_Warrior_Hero%(hero)^&(classPoints[ACM_WARRIOR_CLASS_IND])>=(masterClassRequiredPoints):S(TRUE);
+  !!VRi^Master_Mage_Hero%(hero)^&(classPoints[ACM_MAGE_CLASS_IND])>=(masterClassRequiredPoints):S(TRUE);
+  !!VRi^Master_Adventurer_Hero%(hero)^&(classPoints[ACM_ADVENTURER_CLASS_IND])>=(masterClassRequiredPoints):S(TRUE);
+  !!VRi^Grandmaster_Warrior_Hero%(hero)^&(classPoints[ACM_WARRIOR_CLASS_IND])>=(grandmasterClassRequiredPoints):S(TRUE);
+  !!VRi^Grandmaster_Mage_Hero%(hero)^&(classPoints[ACM_MAGE_CLASS_IND])>=(grandmasterClassRequiredPoints):S(TRUE);
+  !!VRi^Grandmaster_Adventurer_Hero%(hero)^&(classPoints[ACM_ADVENTURER_CLASS_IND])>=(grandmasterClassRequiredPoints):S(TRUE);
 !!en;
 
 ; Return updated class points
 !!if&(returnRealPoints)=(FALSE);
-  !!VR(warriorPoints):S(classPoints[HL_WARRIOR_CLASS_IND]);
-  !!VR(magePoints):S(classPoints[HL_MAGE_CLASS_IND]);
-  !!VR(adventurerPoints):S(classPoints[HL_ADVENTURER_CLASS_IND]);
+  !!VR(warriorPoints):S(classPoints[ACM_WARRIOR_CLASS_IND]);
+  !!VR(magePoints):S(classPoints[ACM_MAGE_CLASS_IND]);
+  !!VR(adventurerPoints):S(classPoints[ACM_ADVENTURER_CLASS_IND]);
 !!en;
 
-; Mark hero as "promoted" if any main class is changed
+; Show class promotion dialog if any main class is changed and a class is chosen to promote to
 !!if|i^Master_Warrior_Hero%(hero)^<>(prevWasMasterWarrior)/
      i^Master_Mage_Hero%(hero)^<>(prevWasMasterMage)/
      i^Master_Adventurer_Hero%(hero)^<>(prevWasMasterAdventurer)/
      i^Grandmaster_Warrior_Hero%(hero)^<>(prevWasGrandmasterWarrior)/
      i^Grandmaster_Mage_Hero%(hero)^<>(prevWasGrandmasterMage)/
      i^Grandmaster_Adventurer_Hero%(hero)^<>(prevWasGrandmasterAdventurer);
-  !!VRi^acm_promotedClassMark_%(hero)^:S(TRUE);
+  !!FU(acm_ShowClassPromotionDlg)&(chosenClass)<>(ACM_NO_CLASS):P(hero)/(classPoints[ACM_WARRIOR_CLASS_IND])/(classPoints[ACM_MAGE_CLASS_IND])/(classPoints[ACM_ADVENTURER_CLASS_IND]);
 !!en;
 
 !?FU(Calc_Class_Points_Original);                [Calculate class points function]
@@ -1057,22 +1204,22 @@ This needs to be done to prevent an unkown crash with Kingdom Overview
 ***********************Skill Description Section********************************
 
 !?FU(OnPreHeroScreen);
-!!SN:X?y1;
-!!FU(acm_RecalcClassPoints):Py1;            [Calculate class points]
-!!DO(AC_Function_23)/0/27/1:Py1;        [Call this function to delete Master and Grandmaster Level if Hero no longer knows this skill]
-!!DO(AC_Set_SS_Description)/0/27/1:Py1; [Set new Skill descriptions]
-!!DO(AC_Set_SS_Names)/0/27/1:Py1;       [Set new Skill names]
+!#VA(hero:x);
 
+!!FU(acm_RecalcClassPoints):P(hero);                                      [Calculate class points]
+!!FU(acm_SyncSkillsNativeAndExtraLevels):P(hero);                         [Call this function to delete Master and Grandmaster Level if native skill level was
+                                                ;                          changed from expert to something else]
+!!DO(AC_Set_SS_Description)/(SEC_SKILL_FIRST)/(SEC_SKILL_LAST)/1:P(hero); [Set new Skill descriptions]
+!!DO(AC_Set_SS_Names)/(SEC_SKILL_FIRST)/(SEC_SKILL_LAST)/1:P(hero);       [Set new Skill names]
 
 !?FU(OnCloseHeroScreen);
-!!FU(Set_SS_Skill_Name_and_Text):P;              [Reset Skill Descriptions to show correct name in in Which Huts and Stuff]
-!!HE-1:N?(hero:y);                               [Give Advanced Level if enough points when closing Hero Screen]
-!!FU(acm_ShowClassPromotionDlgIfMarked):P(hero); [Call Level Up Function]
+!!FU(Set_SS_Skill_Name_and_Text):P;  [Reset Skill Descriptions to show correct name in in Which Huts and Stuff]
+!!HE-1:N?(hero:y);                   [Give Advanced Level if enough points when closing Hero Screen]
+!!FU(acm_RecalcClassPoints):P(hero);
 
-
-!$OB63/51;                              [Post visit Trigger Market of Time]
-!!HE-1:N?y1;
-!!FU(acm_RecalcClassPoints):Py1;            [Call Calculation Function to delete Master/Grandmaster Rank if not enough Class Points]
+!$OB(OBJ_NEW_WOG_OBJECTS)/51;         [Post visit Trigger Market of Time]
+!!HE-1:N?(hero:y);
+!!FU(acm_RecalcClassPoints):P(hero);  [Call Calculation Function to delete Master/Grandmaster Rank if not enough Class Points]
 
 
 !?FU(AC_Set_SS_Names);
@@ -1738,41 +1885,22 @@ x1 - hero id, x2 - master rank, x3 - GM rank, x4 - skill id
 !!HE(CURRENT_HERO):N?(hero:y);
 !!FU(acm_AdjustLevelUpPrimarySkills):P(hero); [Adjust Primary Skills for different classes]
 !!FU(Set_SS_Skill_Name_and_Text)&(ERM_FLAG_IS_HUMAN):P;                                    [Reset Skill Descriptions to show correct name in level up Screen]
-!!FU(H3_Mod_Level_Up_Routine):P(hero);                                                     [Determine Skills to level Up to Master/GM]
 
-!?FU(OnAfterHeroGainLevel);
-!#VA(hero:x);
-!!FU(acm_RestoreSecSkillsAndApplyDetectedUpgrades):P(hero);
-!!FU(acm_ShowClassPromotionDlgIfMarked):P(hero); [Call Level Up Function]
-
-!?FU(OnGameEnter);
-!!SN:W^Game_Start_Value^/10; [Activate First Click on Adventure Map activates Dialouge  [Works only after game start]
-
-!?FU(acm_RestoreSecSkillsAndApplyDetectedUpgrades);
-!#VA(hero:x);
-
-!!re i/0/(SEC_SKILL_LAST);
-  !!FU(acm_GetSecSkillLevel):P(hero)/i/?(skillLevel:y);
-  !!SN:Vi^acm_SecSkillsBackup^/i/?(prevSkillLevel:y);
-
-  !!if&(skillLevel)>=(prevSkillLevel)/(prevSkillLevel)>=(SKILL_EXPERT)/(prevSkillLevel)<(SKILL_GRANDMASTER);
-    !!VR(newSkillLevel:y):S(prevSkillLevel) +1;
-    !!FU(acm_SetSecSkillLevel):P(hero)/i/(newSkillLevel);
-  !!el;
-    !!HE(hero):Si/?(nativeSkillLevel:y);
-    !!FU(acm_SetSecSkillLevel)&(nativeSkillLevel)<(prevSkillLevel):P(hero)/i/(prevSkillLevel);
-  !!en;
-!!en;
-
-!?FU(H3_Mod_Level_Up_Routine);
-!#VA(hero:x);
-
+; Set new skill descriptions to display in level-up dialog
 !!re i/0/(SEC_SKILL_LAST);
   !!FU(H3_Mod_Skill_Loop10):P(hero)/i;
 !!en;
 
-!!FU(acm_BackupAndPrepareSecSkills):P(hero);
-!!FU(acm_RecalcClassPoints):P(hero)/?(warriorPoints:y)/?(magePoints:y)/?(adventurerPoints:y);
+!!FU(acm_BackupAndPrepareSecSkillsForLevelUp):P(hero);
+!!FU(acm_RecalcClassPoints):P(hero);
+
+!?FU(OnAfterHeroGainLevel);
+!#VA(hero:x);
+!!FU(acm_RestoreSecSkillsAndApplyDetectedUpgrades):P(hero);
+!!FU(acm_RecalcClassPoints):P(hero);
+
+!?FU(OnGameEnter);
+!!SN:W^Game_Start_Value^/10; [Activate First Click on Adventure Map activates Dialouge  [Works only after game start]
 
 !?FU(H3_Mod_Assign_Level_UP);
 
@@ -1836,66 +1964,71 @@ x1 - hero id, x2 - master rank, x3 - GM rank, x4 - skill id
 !!SN&x2=1/x4=27:W^H3_First Aid_1_Hero%X1^/1;
 
 ********************************************************************************
-!?FU(AC_Function_23);
+!?FU(acm_SyncSkillsNativeAndExtraLevels);
+; Ensures, that if any native skill is not on expert level, it loses master/grandmaster levels too
+!#VA(hero:x);
 
-!!HEx1:Sx16/?y1;
-!!FU&y1>0:E;
-!!SN&x16=0:W^H3_Pathfinding_0_Hero%X1^/0;
-!!SN&x16=0:W^H3_Pathfinding_1_Hero%X1^/0;
-!!SN&x16=1:W^H3_Archery_0_Hero%X1^/0;
-!!SN&x16=1:W^H3_Archery_1_Hero%X1^/0;
-!!SN&x16=2:W^H3_Logistics_0_Hero%X1^/0;
-!!SN&x16=2:W^H3_Logistics_1_Hero%X1^/0;
-!!SN&x16=3:W^H3_Scouting_0_Hero%X1^/0;
-!!SN&x16=3:W^H3_Scouting_1_Hero%X1^/0;
-!!SN&x16=4:W^H3_Diplomacy_0_Hero%X1^/0;
-!!SN&x16=4:W^H3_Diplomacy_1_Hero%X1^/0;
-!!SN&x16=5:W^H3_Nobility_0_Hero%X1^/0;
-!!SN&x16=5:W^H3_Nobility_1_Hero%X1^/0;
-!!SN&x16=6:W^H3_Leadership_0_Hero%X1^/0;
-!!SN&x16=6:W^H3_Leadership_1_Hero%X1^/0;
-!!SN&x16=7:W^H3_Wisdom_0_Hero%X1^/0;
-!!SN&x16=7:W^H3_Wisdom_1_Hero%X1^/0;
-!!SN&x16=8:W^H3_Mysticism_0_Hero%X1^/0;
-!!SN&x16=8:W^H3_Mysticism_1_Hero%X1^/0;
-!!SN&x16=9:W^H3_Luck_0_Hero%X1^/0;
-!!SN&x16=9:W^H3_Luck_1_Hero%X1^/0;
-!!SN&x16=10:W^H3_Ballistics_0_Hero%X1^/0;
-!!SN&x16=10:W^H3_Ballistics_1_Hero%X1^/0;
-!!SN&x16=11:W^H3_Eagle Eye_0_Hero%X1^/0;
-!!SN&x16=11:W^H3_Eagle Eye_1_Hero%X1^/0;
-!!SN&x16=12:W^H3_Necromancy_0_Hero%X1^/0;
-!!SN&x16=12:W^H3_Necromancy_1_Hero%X1^/0;
-!!SN&x16=13:W^H3_Estates_0_Hero%X1^/0;
-!!SN&x16=13:W^H3_Estates_1_Hero%X1^/0;
-!!SN&x16=14:W^H3_Fire Magic_0_Hero%X1^/0;
-!!SN&x16=14:W^H3_Fire Magic_1_Hero%X1^/0;
-!!SN&x16=15:W^H3_Air Magic_0_Hero%X1^/0;
-!!SN&x16=15:W^H3_Air Magic_1_Hero%X1^/0;
-!!SN&x16=16:W^H3_Water Magic_0_Hero%X1^/0;
-!!SN&x16=16:W^H3_Water Magic_1_Hero%X1^/0;
-!!SN&x16=17:W^H3_Earth Magic_0_Hero%X1^/0;
-!!SN&x16=17:W^H3_Earth Magic_1_Hero%X1^/0;
-!!SN&x16=18:W^H3_Scholar_0_Hero%X1^/0;
-!!SN&x16=18:W^H3_Scholar_1_Hero%X1^/0;
-!!SN&x16=19:W^H3_Tactics_0_Hero%X1^/0;
-!!SN&x16=19:W^H3_Tactics_1_Hero%X1^/0;
-!!SN&x16=20:W^H3_Artillery_0_Hero%X1^/0;
-!!SN&x16=20:W^H3_Artillery_1_Hero%X1^/0;
-!!SN&x16=21:W^H3_Learning_0_Hero%X1^/0;
-!!SN&x16=21:W^H3_Learning_1_Hero%X1^/0;
-!!SN&x16=22:W^H3_Offense_0_Hero%X1^/0;
-!!SN&x16=22:W^H3_Offense_1_Hero%X1^/0;
-!!SN&x16=23:W^H3_Armorer_0_Hero%X1^/0;
-!!SN&x16=23:W^H3_Armorer_1_Hero%X1^/0;
-!!SN&x16=24:W^H3_Intelligence_0_Hero%X1^/0;
-!!SN&x16=24:W^H3_Intelligence_1_Hero%X1^/0;
-!!SN&x16=25:W^H3_Sorcery_0_Hero%X1^/0;
-!!SN&x16=25:W^H3_Sorcery_1_Hero%X1^/0;
-!!SN&x16=26:W^H3_Resistance_0_Hero%X1^/0;
-!!SN&x16=26:W^H3_Resistance_1_Hero%X1^/0;
-!!SN&x16=27:W^H3_First Aid_0_Hero%X1^/0;
-!!SN&x16=27:W^H3_First Aid_1_Hero%X1^/0;
+!!re i/(SEC_SKILL_FIRST)/(SEC_SKILL_LAST);
+  !!HE(hero):Si/?(skillLevel:y);
+  !!co&(skillLevel)=(SKILL_EXPERT);
+
+  !!VRi^H3_Pathfinding_0_Hero%(hero)^&i=0:S0;
+  !!VRi^H3_Pathfinding_1_Hero%(hero)^&i=0:S0;
+  !!VRi^H3_Archery_0_Hero%(hero)^&i=1:S0;
+  !!VRi^H3_Archery_1_Hero%(hero)^&i=1:S0;
+  !!VRi^H3_Logistics_0_Hero%(hero)^&i=2:S0;
+  !!VRi^H3_Logistics_1_Hero%(hero)^&i=2:S0;
+  !!VRi^H3_Scouting_0_Hero%(hero)^&i=3:S0;
+  !!VRi^H3_Scouting_1_Hero%(hero)^&i=3:S0;
+  !!VRi^H3_Diplomacy_0_Hero%(hero)^&i=4:S0;
+  !!VRi^H3_Diplomacy_1_Hero%(hero)^&i=4:S0;
+  !!VRi^H3_Nobility_0_Hero%(hero)^&i=5:S0;
+  !!VRi^H3_Nobility_1_Hero%(hero)^&i=5:S0;
+  !!VRi^H3_Leadership_0_Hero%(hero)^&i=6:S0;
+  !!VRi^H3_Leadership_1_Hero%(hero)^&i=6:S0;
+  !!VRi^H3_Wisdom_0_Hero%(hero)^&i=7:S0;
+  !!VRi^H3_Wisdom_1_Hero%(hero)^&i=7:S0;
+  !!VRi^H3_Mysticism_0_Hero%(hero)^&i=8:S0;
+  !!VRi^H3_Mysticism_1_Hero%(hero)^&i=8:S0;
+  !!VRi^H3_Luck_0_Hero%(hero)^&i=9:S0;
+  !!VRi^H3_Luck_1_Hero%(hero)^&i=9:S0;
+  !!VRi^H3_Ballistics_0_Hero%(hero)^&i=10:S0;
+  !!VRi^H3_Ballistics_1_Hero%(hero)^&i=10:S0;
+  !!VRi^H3_Eagle Eye_0_Hero%(hero)^&i=11:S0;
+  !!VRi^H3_Eagle Eye_1_Hero%(hero)^&i=11:S0;
+  !!VRi^H3_Necromancy_0_Hero%(hero)^&i=12:S0;
+  !!VRi^H3_Necromancy_1_Hero%(hero)^&i=12:S0;
+  !!VRi^H3_Estates_0_Hero%(hero)^&i=13:S0;
+  !!VRi^H3_Estates_1_Hero%(hero)^&i=13:S0;
+  !!VRi^H3_Fire Magic_0_Hero%(hero)^&i=14:S0;
+  !!VRi^H3_Fire Magic_1_Hero%(hero)^&i=14:S0;
+  !!VRi^H3_Air Magic_0_Hero%(hero)^&i=15:S0;
+  !!VRi^H3_Air Magic_1_Hero%(hero)^&i=15:S0;
+  !!VRi^H3_Water Magic_0_Hero%(hero)^&i=16:S0;
+  !!VRi^H3_Water Magic_1_Hero%(hero)^&i=16:S0;
+  !!VRi^H3_Earth Magic_0_Hero%(hero)^&i=17:S0;
+  !!VRi^H3_Earth Magic_1_Hero%(hero)^&i=17:S0;
+  !!VRi^H3_Scholar_0_Hero%(hero)^&i=18:S0;
+  !!VRi^H3_Scholar_1_Hero%(hero)^&i=18:S0;
+  !!VRi^H3_Tactics_0_Hero%(hero)^&i=19:S0;
+  !!VRi^H3_Tactics_1_Hero%(hero)^&i=19:S0;
+  !!VRi^H3_Artillery_0_Hero%(hero)^&i=20:S0;
+  !!VRi^H3_Artillery_1_Hero%(hero)^&i=20:S0;
+  !!VRi^H3_Learning_0_Hero%(hero)^&i=21:S0;
+  !!VRi^H3_Learning_1_Hero%(hero)^&i=21:S0;
+  !!VRi^H3_Offense_0_Hero%(hero)^&i=22:S0;
+  !!VRi^H3_Offense_1_Hero%(hero)^&i=22:S0;
+  !!VRi^H3_Armorer_0_Hero%(hero)^&i=23:S0;
+  !!VRi^H3_Armorer_1_Hero%(hero)^&i=23:S0;
+  !!VRi^H3_Intelligence_0_Hero%(hero)^&i=24:S0;
+  !!VRi^H3_Intelligence_1_Hero%(hero)^&i=24:S0;
+  !!VRi^H3_Sorcery_0_Hero%(hero)^&i=25:S0;
+  !!VRi^H3_Sorcery_1_Hero%(hero)^&i=25:S0;
+  !!VRi^H3_Resistance_0_Hero%(hero)^&i=26:S0;
+  !!VRi^H3_Resistance_1_Hero%(hero)^&i=26:S0;
+  !!VRi^H3_First Aid_0_Hero%(hero)^&i=27:S0;
+  !!VRi^H3_First Aid_1_Hero%(hero)^&i=27:S0;
+!!en;
 
 ************************Adjust Primary Skills when level up*********************
 Fixes the Primary skill level up for Mage Class after level 10. Now they keep higher chance to gain Spell Power and Knowledge
@@ -1921,27 +2054,32 @@ Fixes the Primary skill level up for Mage Class after level 10. Now they keep hi
 
 ****************** ADVANCED LEVELS MASTER DIALOGUE *****************************
 
-!?FU(acm_ShowClassPromotionDlgIfMarked);
+!?FU(acm_ShowClassPromotionDlg)&(ERM_FLAG_IS_HUMAN);
 !#VA(hero:x);
-!!FU(acm_ShowClassPromotionDlg)&i^acm_promotedClassMark_%(hero)^<>(FALSE):P(hero);
+!#VA(warriorPoints:x);    Optional. If not specified, points will be recalculated
+!#VA(magePoints:x);       Optional. If not specified, points will be recalculated
+!#VA(adventurerPoints:x); Optional. If not specified, points will be recalculated
 
-!?FU(acm_ShowClassPromotionDlg)&(ERM_FLAG_IS_HUMAN);  [DL must be embedded in function otherwise give errors]
-!#VA(hero:x);
+!!HE(hero):O?y1; [Checke Hero Owner]
+!!OW:Iy1/?y1;    [AI/Human        1 : AI        0 : Human]
+!!FU&y1=1:E;     [Exit if AI or player Killed]
 
-!!VRi^acm_promotedClassMark_%(hero)^:S(FALSE);
+!!FU:A?k;
 
-!!HEx1:O?y1;                            [Checke Hero Owner]
-!!OW:Iy1/?y1;                           [AI/Human        1 : AI        0 : Human]
-!!FU&y1=1:E;                            [Exit if AI or player Killed]
+!!if&k>=(@adventurerPoints);
+  !!VRy10:S(warriorPoints);
+  !!VRy20:S(magePoints);
+  !!VRy30:S(adventurerPoints);
+!!el;
+  !!FU(acm_RecalcClassPoints):P(hero)/?y10/?y20/?y30; [Return value for class points from current hero]
+!!en;
 
 !!DL266:N^adv_clas.txt^;                [parse dialogue]
-!!HEx1:B2/?y2 R2/?y99 B0/?z4;           [class? / sex?]
+!!HE(hero):B2/?y2 R2/?y99 B0/?z4;       [class? / sex?]
 !!SN:T^AC_Misc.New Level^/?z-1 Iz-1/?z-1;
 !!DL266:A1/3/z-1/1;                     [update text for hero name]
 !!SN:T^AC_Misc.Bonus_Level^/?z-2;
 !!DL266:A2/3/z-2/1;                     [update text for hero name]
-
-!!FU(acm_RecalcClassPoints):Px1/?y10/?y20/?y30; [Return value for class points from current hero]
 
 !!SN:W^Adept_Level_Global_Value^/?y90;
 !!SN:W^Expert_Level_Global_Value^/?y91;
@@ -3636,9 +3774,9 @@ Creature speed   Base movement
 
 !!UN:U54/-1/?y2;
 !!VRv1:S-1;
-!!DO(ACM_Monster_Agression)/1/y2/1:P;       [Loop through all monsters on the map]
+!!DO(acm_Monster_Agression)/1/y2/1:P;       [Loop through all monsters on the map]
 
-!?FU(ACM_Monster_Agression);
+!?FU(acm_Monster_Agression);
 
 !!VRv1&x16=1:S-1;
 !!UN:U54/-1/-1/1;
@@ -28874,83 +29012,3 @@ Change graphics of Meteor Shower and Implosion when at Master and GM level
   !!BMi:E0;
   !!en;
 !!en;
-
-
-********************************************************************************
-
-
-
-                                      TEST SECTION
-
-
-
-
-********************************************************************************
-
-
-*********************
-!?FU(OnGameEnter);
-!!FU:E;
-!!rei /0/155;
-    !!FU(acm_Chear):Pi;
-!!en;
-
-
-!?FU(acm_Chear);
-
-*!SN:W^H3_Pathfinding_0_Hero%X1^/1;
-*!SN:W^H3_Pathfinding_1_Hero%X1^/1;
-*!SN:W^H3_Archery_0_Hero%X1^/1;
-*!SN:W^H3_Archery_1_Hero%X1^/1;
-*!SN:W^H3_Logistics_0_Hero%X1^/1;
-*!SN:W^H3_Logistics_1_Hero%X1^/1;
-*!SN:W^H3_Scouting_0_Hero%X1^/1;
-*!SN:W^H3_Scouting_1_Hero%X1^/1;
-*!SN:W^H3_Diplomacy_0_Hero%X1^/1;
-*!SN:W^H3_Diplomacy_1_Hero%X1^/1;
-*!SN:W^H3_Nobility_0_Hero%X1^/1;
-*!SN:W^H3_Nobility_1_Hero%X1^/1;
-*!SN:W^H3_Leadership_0_Hero%X1^/1;
-*!SN:W^H3_Leadership_1_Hero%X1^/1;
-*!SN:W^H3_Wisdom_0_Hero%X1^/1;
-*!SN:W^H3_Wisdom_1_Hero%X1^/1;
-*!SN:W^H3_Mysticism_0_Hero%X1^/1;
-*!SN:W^H3_Mysticism_1_Hero%X1^/1;
-*!SN:W^H3_Luck_0_Hero%X1^/1;
-*!SN:W^H3_Luck_1_Hero%X1^/1;
-!!SN:W^H3_Ballistics_0_Hero%X1^/1;
-!!SN:W^H3_Ballistics_1_Hero%X1^/1;
-*!SN:W^H3_Eagle Eye_0_Hero%X1^/1;
-*!SN:W^H3_Eagle Eye_1_Hero%X1^/1;
-*!SN:W^H3_Necromancy_0_Hero%X1^/1;
-*!SN:W^H3_Necromancy_1_Hero%X1^/1;
-*!SN:W^H3_Estates_0_Hero%X1^/1;
-*!SN:W^H3_Estates_1_Hero%X1^/1;
-*!SN:W^H3_Fire Magic_0_Hero%X1^/1;
-*!SN:W^H3_Fire Magic_1_Hero%X1^/1;
-*!SN:W^H3_Air Magic_0_Hero%X1^/1;
-*!SN:W^H3_Air Magic_1_Hero%X1^/1;
-*!SN:W^H3_Water Magic_0_Hero%X1^/1;
-*!SN:W^H3_Water Magic_1_Hero%X1^/1;
-*!SN:W^H3_Earth Magic_0_Hero%X1^/1;
-*!SN:W^H3_Earth Magic_1_Hero%X1^/1;
-*!SN:W^H3_Scholar_0_Hero%X1^/1;
-*!SN:W^H3_Scholar_1_Hero%X1^/1;
-*!SN:W^H3_Tactics_0_Hero%X1^/1;
-*!SN:W^H3_Tactics_1_Hero%X1^/1;
-*!SN:W^H3_Artillery_0_Hero%X1^/1;
-*!SN:W^H3_Artillery_1_Hero%X1^/1;
-*!SN:W^H3_Learning_0_Hero%X1^/1;
-*!SN:W^H3_Learning_1_Hero%X1^/1;
-*!SN:W^H3_Offense_0_Hero%X1^/1;
-*!SN:W^H3_Offense_1_Hero%X1^/1;
-*!SN:W^H3_Armorer_0_Hero%X1^/1;
-*!SN:W^H3_Armorer_1_Hero%X1^/1;
-*!SN:W^H3_Intelligence_0_Hero%X1^/1;
-*!SN:W^H3_Intelligence_1_Hero%X1^/1;
-*!SN:W^H3_Sorcery_0_Hero%X1^/1;
-*!SN:W^H3_Sorcery_1_Hero%X1^/1;
-*!SN:W^H3_Resistance_0_Hero%X1^/1;
-*!SN:W^H3_Resistance_1_Hero%X1^/1;
-*!SN:W^H3_First Aid_0_Hero%X1^/1;
-*!SN:W^H3_First Aid_1_Hero%X1^/1;
