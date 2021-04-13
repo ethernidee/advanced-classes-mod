@@ -6180,49 +6180,64 @@ and creature is %X1^;
 !!SN:W^Army_Att^/?y10;
 !!SN:W^Tent_Number_Att^/?y2;
 !!if&y2>=0/y2<=20;
-!!VRy10::50 +y5;                        [Take 2% of total army strength + bonus based on First Aid level]
-!!SN:W^Tent_Capacity_Upgrade_%Y1^/?y11; [For Blacksmith Upgrade at +500 capacity to heal]
-!!VRy10&y11=1:+500;
-!!SN:W^Tent_Capacity_Att^/y10;
-!!SN:W^Tent_Capacity_Att_Hero%Y1^/y10;  [Save HC from hero to show in bonus list]
-!!BMy2:U1/y10 U2/y10;                   [Set Tent damage]
+  !!VRy10::50 +y5;                      [Take 2% of total army strength + bonus based on First Aid level]
+  !!SN:W^Tent_Capacity_Upgrade_%Y1^/?y11;[For Blacksmith Upgrade at +500 capacity to heal]
+  !!VRy10&y11=1:+500;                   [Add capacity from upgradae]
+  !!COy1:D?y50;                         [Get Commander Alive]
+  !!COy1:T?y51;                         [Get Commander Type]
+  !!VRy53:S0;
+  !!if&y50=0/y51=1;                     [If Alive and Hierophant]
+    !!COy1:X2/?y52;                     [Get Commander Level]
+    !!VRy53:Sy52*10;                    [10*Commander Level to HP]
+  !!en;
+  !!VRy10:+y53;                         [Add Bonus Capacity from Commander]
+  !!SN:W^Tent_Capacity_Att^/y10;        [Set Heal Capacity]
+  !!SN:W^Tent_Capacity_Att_Hero%Y1^/y10;[Save HC from hero to show in bonus list]
+  !!BMy2:U1/y10 U2/y10;                 [Set Tent damage]
 !!en;
 
 !!BA:H1/?y1;                            [Defender Hero]
 !!if&y1>0;
-!!HEy1:S27/?y3;                         [Checke ob der First Aid hat]
-!!SN:W^H3_First Aid_0_Hero%Y1^/?y30;    [Checke ob der Held Master First Aid hat und Speichere in y30]
-!!SN:W^H3_First Aid_1_Hero%Y1^/?y31;    [Checke ob der Held Grandmaster First Aid hat und Speichere in y31]
-!!VRy5:S0;
-!!VRy5&y3=1:S100; !!VRy5&y3=2:S200; !!VRy5&y3=3/y30=0/y31=0:S300; !!VRy5&y3=3/y30=1/y31=0:S500; !!VRy5&y3=3/y30=1/y31=1:S1000;
+  !!HEy1:S27/?y3;                       [Checke ob der First Aid hat]
+  !!SN:W^H3_First Aid_0_Hero%Y1^/?y30;  [Checke ob der Held Master First Aid hat und Speichere in y30]
+  !!SN:W^H3_First Aid_1_Hero%Y1^/?y31;  [Checke ob der Held Grandmaster First Aid hat und Speichere in y31]
+  !!VRy5:S0;
+  !!VRy5&y3=1:S100; !!VRy5&y3=2:S200; !!VRy5&y3=3/y30=0/y31=0:S300; !!VRy5&y3=3/y30=1/y31=0:S500; !!VRy5&y3=3/y30=1/y31=1:S1000;
 
-!!SN:W^Army_Def^/?y10;
-!!SN:W^Tent_Number_Def^/?y2;
-!!if&y2>=21/y2<=41;
-!!VRy10::50 +y5;                        [Take 2% of total army strength + bonus based on First Aid level]
-!!SN:W^Tent_Capacity_Upgrade_%Y1^/?y11; [For Blacksmith Upgrade at +500 capacity to heal]
-!!VRy10&y11=1:+500;
-!!SN:W^Tent_Capacity_Def^/y10;
-!!SN:W^Tent_Capacity_Def_Hero%Y1^/y10;  [Save HC from hero to show in bonus list]
-!!BMy2:U1/y10 U2/y10;                   [Set Tent damage]
-!!en;
+  !!SN:W^Army_Def^/?y10;
+  !!SN:W^Tent_Number_Def^/?y2;
+  !!if&y2>=21/y2<=41;
+    !!VRy10::50 +y5;                    [Take 2% of total army strength + bonus based on First Aid level]
+    !!SN:W^Tent_Capacity_Upgrade_%Y1^/?y11; [For Blacksmith Upgrade at +500 capacity to heal]
+    !!VRy10&y11=1:+500;
+    !!COy1:D?y50;                       [Get Commander Alive]
+    !!COy1:T?y51;                       [Get Commander Type]
+    !!VRy53:S0;
+    !!if&y50=0/y51=1;                   [If Alive and Hierophant]
+      !!COy1:X2/?y52;                   [Get Commander Level]
+      !!VRy53:Sy52*10;                  [10*Commander Level to HP]
+    !!en;
+    !!VRy10:+y53;                       [Add Bonus Capacity from Commander]
+    !!SN:W^Tent_Capacity_Def^/y10;      [Set Heal Capacity]
+    !!SN:W^Tent_Capacity_Def_Hero%Y1^/y10; [Save HC from hero to show in bonus list]
+    !!BMy2:U1/y10 U2/y10;               [Set Tent damage]
+  !!en;
 !!en;
 
 
 !?FU(AC_Function_27);                   [increase Units Stats]
 !!BMx16:T?y1 N?y2 H?y3;
 !!if&x1=2;
-!!BMx16|y1=146/y1=147/y1=148:N1 B1;     [Set all Warmachines to 1]
-!!SN&x16<=20/y1=147:W^Tent_Number_Att^/x16;
-!!SN&x16>20/y1=147:W^Tent_Number_Def^/x16;
+  !!BMx16|y1=146/y1=147/y1=148:N1 B1;   [Set all Warmachines to 1]
+  !!SN&x16<=20/y1=147:W^Tent_Number_Att^/x16;
+  !!SN&x16>20/y1=147:W^Tent_Number_Def^/x16;
 !!en;
 
 !!FU|y1=146/y1=147/y1=148/y1=149:E;     [Dont count Warmachines to total army strength]
-!!if&y2>0;                             [calc total Army Strength]
-!!VRy10:Sy2*y3;
-!!SN&x16<=20:W^Army_Att^/dy10;
-!!SN&x16>=21:W^Army_Def^/dy10;
-!!SN&x16<=20:W^Army_Att^/?y11;
+!!if&y2>0;                              [calc total Army Strength]
+  !!VRy10:Sy2*y3;                       [Number times HP to get amount of Health]
+  !!SN&x16<=20:W^Army_Att^/dy10;
+  !!SN&x16>=21:W^Army_Def^/dy10;
 !!en;
 
 
@@ -8866,6 +8881,8 @@ Caitlin, Aine, Grindan, Jenova, Octavia, (Damacon removed), Sephinroth
 !!COy1:X2/?y12;                                  [Get Commander Level]
 !!VRy13:Sy12*10;                                 [10*Commander Level to HP]
 !!VRy14:Sy12:6;                                  [Commander Level/6 to Min+Max Damage]
+!!SN:W^Commander_WM_Health_Bonus_%Y1^/y13;       [Tent Ballista HP Bonus]
+!!SN:W^Commander_Ballista_Bonus_%Y1^/y14;        [Ballista Bonus]
 !!DO(AC_Function_39)/0/10/1&y11=1:P147/y13;      [Hierophant pass 147 for First Aid Tent and Commander Level]
 !!DO(AC_Function_39)/0/10/1&y11=6:P146/y13/y14;  [Ogre Leader pass 146 for Ballista and Commander Level]
 !!en;
@@ -8878,6 +8895,8 @@ Caitlin, Aine, Grindan, Jenova, Octavia, (Damacon removed), Sephinroth
 !!COy1:X2/?y12;                                  [Get Commander Level]
 !!VRy13:Sy12*10;                                 [10*Commander Level to HP]
 !!VRy14:Sy12:6;                                  [Commander Level/6 to Min+Max Damage]
+!!SN:W^Commander_WM_Health_Bonus_%Y1^/y13;       [Tent Ballista HP Bonus]
+!!SN:W^Commander_Ballista_Bonus_%Y1^/y14;        [Ballista Bonus]
 !!DO(AC_Function_39)/21/31/1&y11=1:P147/y13;     [Hierophant pass 147 for First Aid Tent and Commander Level]
 !!DO(AC_Function_39)/21/31/1&y11=6:P146/y13/y14; [Ogre Leader pass 146 for Ballista and Commander Level]
 !!en;
@@ -8988,14 +9007,14 @@ Caitlin, Aine, Grindan, Jenova, Octavia, (Damacon removed), Sephinroth
 !!en;
 
 
-***************************Oger Leader***************************
-!?BG0;                                  [Oger Leader casting Bloodlust will add fixed amount of damage to attacks]
+***************************Ogre Leader***************************
+!?BG0;                                  [Ogre Leader casting Bloodlust will add fixed amount of damage to attacks]
 
 !!BG:A?y1;
 !!FU&y1<>10:E;                          [Exit if No Creature Cast]
 !!BG:N?y1;                              [Attacking Stack Commander]
 !!BMy1:T?y2;
-!!if|y2=180/y2=189;                    [if Oger]
+!!if|y2=180/y2=189;                    [if Ogre]
 !!BG:S?y2 E?y4;                         [Spell and Destination Poistion]
 !!FU&y4=-1:E;                           [Exit if no Monster there]
 !!if&y2=-1/y4>=0/y4<=41;
@@ -9367,118 +9386,125 @@ Caitlin, Aine, Grindan, Jenova, Octavia, (Damacon removed), Sephinroth
 !!en;
 
 
-*--------------Astral Spirit----Shaman Damage absorb --------------------------*
-* gain 1 to max damage when killing complete stack max 3 times per combat-Shaman*
-* gain 5 to max healt when killing complete stack max 3 times per combat-Spirit*
+*--------------Commanders gain varius bonus when killing stacks in combat --------------------------*
+* Paladin (Castle) gain 1 to attack when killing complete stack max 3 times per combat*
+
+* Hierophant (Rampart) gain 1 to defense when killing complete stack max 3 times per combat*
+
+* Temple Guardian (Tower) gain 1 to defense when killing complete stack max 3 times per combat*
+
+* Succubus (Inferno) gain 1 to health when killing complete stack max 3 times per combat*
+
+* Brute (Dungeon) gain 1 to damage when killing complete stack max 3 times per combat*
+
+* Soul Eater (Necropolis) gain 1 to health when killing complete stack max 3 times per combat*
+
+* Ogre Leader (Stronghold) gain 1 to attack when killing complete stack max 3 times per combat*
+
+* Shaman (Fortress) gain 1 to max damage when killing complete stack max 3 times per combat*
+
+* Astral Spirit (Conflux) gain 5 to max health when killing complete stack max 3 times per combat*
 
 !?MF1;
 
 !!UN:C42149568/4/?y10;                  [Get Physical Damage type]
-!!if|y10=4462398/y10=4455011/y10=4456676; [Only run when melee or shooting damage or Strikes all enemys around]
+!!if|y10=4462398/y10=4455011/y10=4456676;[Only run when melee or shooting damage or Strikes all enemys around]
 
 !!BG:A?y1;                              [Aktion in y1]
-!!if&y1=6|y1=7;                        [Attack or Shoot]
+!!if&y1=6|y1=7;                         [Attack or Shoot]
 
 !!BG:N?y1;                              [Attacking Stack]
 !!MF:N?y4;                              [damage receiving stack]
-!!SN:W^Shaman1_Attacking_Stack^/?y50;
+!!SN:W^Commander_Kill_Attacking_Stack^/?y50;
 !!VRy1&y4=y1/y50>=0/y50<=41:Sy50;       [If Attacking Stack gleich Damage Recieving Stack it means Retaliation]
-!!SN:W^Shaman1_Attacking_Stack^/y4;
+!!SN:W^Commander_Kill_Attacking_Stack^/y4;
 
 !!BMy1:T?y2;                            [Creature Type]
 !!FU|y2<180/y2>191:E;                   [Exit if no Commander]
 !!MF:F?y3;
 !!FU&y3=0:E;                            [Exit if Zero damage]
-!!BG:H?y10;
+!!BG:H?y10;                             [Get current hero]
 !!BMy4:N?y5 H?y6 L?y7;                  [Get Number and Life of attacked Stack and lost Hitpoints]
 !!VRy5:*y6-y7;                          [Get total Life of attacked stack]
 !!FU&y5>y3:E;                           [Exit if not enough damage was dealt]
 
-*!IF:L^HP of Attacked Stack is %Y5 and damage is %Y3  and shaman stack number is %Y1 and %Y4^;
-!!if|y2=181/y2=190;                    [if Shaman]
-!!SN:W^Shaman_Damage_Round_Counter^/?y11;
-!!FU&y11>=3:E;                          [Exit so increase cannot happen more than 3 times per combat]
-!!BMy1:U2/d1;
-!!BA:Q?f;
-!!VRz1&f=0:S^MAGCHDRN^;
-!!SN&f=0:Pz1;
-!!SN:W^Shaman_Damage_Counter%Y10^/d1;
-!!SN:W^Shaman_Damage_Round_Counter^/d1;
+!!if&y2>=174/y2<=191;                   [if any commander]
+  !!SN:W^Commander_Kill_Counter_%Y10^/?y50;[Increase counter by one if kill happened]
+  !!SN:W^Commander_Round_Counter^/?y11;
+  !!FU&y11>=3:E;                        [Exit so increase cannot happen more than 3 times per combat]
+  !!BMy1|y2=174/y2=183:Ad1;             [for Paladin (Castle) increase attack by 1]
+  !!BMy1|y2=175/y2=184:Dd1;             [for Hierophant (Rampart) increase defense by 1]
+  !!BMy1|y2=176/y2=185:Dd1;             [for Temple Guardian (Tower) increase defense by 1]
+  !!BMy1|y2=177/y2=186:Hd5;             [for Succubus (Inferno) increase health by 5]
+  !!BMy1|y2=178/y2=187:U2/d1;           [for Brute (Dungeon) increase damage by 1]
+  !!BMy1|y2=179/y2=188:Hd5;             [for Soul Eater (Necropolis) increase health by 5]
+  !!BMy1|y2=180/y2=189:Ad1;             [for Ogre Leader (Stronghold) increase attack by 1]
+  !!BMy1|y2=181/y2=190:U2/d1;           [for Shaman (Fortress) increase damage by 1]
+  !!BMy1|y2=182/y2=191:Hd5;             [for Astral Spirit (Conflux) increase health by 5]
+  !!BA:Q?f;
+  !!VRz1&f=0:S^MAGCHDRN^;
+  !!SN&f=0:Pz1;
+  !!SN:W^Commander_Round_Counter^/d1;
+  !!SN:W^Commander_Kill_Counter_%Y10^/d1;[Increase counter by one if kill happened]
+  !!SN:W^Commander_Kill_Counter_Temp_%Y10^/d1; [Increase temp counter by one if kill happened]
 !!en;
-
-!!if|y2=182/y2=191;                    [191 Astral Spirit (defender) ]
-!!SN:W^Spirit_Damage_Round_Counter^/?y11;
-!!FU&y11>=3:E;                          [Exit so increase cannot happen more than 3 times per combat]
-!!BMy1:Hd5;
-!!BA:Q?f;
-!!VRz1&f=0:S^MAGCHDRN^;
-!!SN&f=0:Pz1;
-!!SN:W^Spirit_Damage_Counter%Y10^/d1;
-!!SN:W^Spirit_Damage_Round_Counter^/d1;
-!!en;
-
 !!en;
 !!en;
 
 
-!?FU(OnCombatRound)&v997=0;
-*Reduce casts of all Commanders by -1 so with no Magic Skill they cannot cast
-*Apply Shaman and Astral Spirit combat buff
-!!DO(Shaman_Damage)/0/41/1:P;           [loop through Stacks]
+!?FU(Apply_Commander_Kill_Bonus);
+*Apply Bonus and recude casts by 1 for all commanders*
 
-!!SN:W^Spirit_Damage_Round_Counter^/0;  [Reset Round Counter]
-!!SN:W^Shaman_Damage_Round_Counter^/0;
-
-
-!?FU(Shaman_Damage);
-!!BMx16:T?y1;                           [Creature Type]
-!!BMx16:I?y2;                           [Side Index]
+!!BMx16:T?y1 I?y2 N?y20;                [Creature Type]
 !!BHy2:N?y10;                           [Hero Number]
-!!BMx16:N?y20;
-!!FU&y20=0:E;
+!!FU|y20=0/y10<0:E;                     [Exit if no creature or Hero]
 
-!!if|y1=181/y1=190;                    [if Shaman]
-!!SN:W^This_Is_Replay_Battle^/?y30;
-!!SN:W^Shaman_Damage_Round_Counter^/?y31;
-!!SN&y30=1:W^Shaman_Damage_Counter%Y10^/d-y31;
-!!SN:W^Shaman_Damage_Counter%Y10^/?y5;
-!!BMx16&y5>0:U2/dy5;
+!!if&y1>=174/y1<=191;                   [if any commander]
+  !!SN:W^Commander_Kill_Counter_%Y10^/?y5; [Get number of total kills from commander]
+  !!VRy5::5;                            [For 5 kills get 1 att or def]
+  !!BMx16|y1=174/y1=183:Ady5;           [for Paladin (Castle) increase attack by 1]
+  !!BMx16|y1=180/y1=189:Ady5;           [for Ogre Leader (Stronghold) increase attack by 1]
+  !!BMx16|y1=175/y1=184:Ddy5;           [for Hierophant (Rampart) increase defense by 1]
+  !!BMx16|y1=176/y1=185:Ddy5;           [for Temple Guardian (Tower) increase defense by 1]
+
+  !!SN:W^Commander_Kill_Counter_%Y10^/?y5; [Get number of total kills from commander]
+  !!VRy5:*5;                            [Each kill gives 5HP]
+  !!BMx16|y1=177/y1=186:Hdy5;           [for Succubus (Inferno) increase health by 5]
+  !!BMx16|y1=182/y1=191:Hdy5;           [for Astral Spirit (Conflux) increase health by 5]
+  !!BMx16|y1=179/y1=188:Hdy5;           [for Soul Eater (Necropolis) increase health by 5]
+
+  !!SN:W^Commander_Kill_Counter_%Y10^/?y5; [Get number of total kills from commander]
+  !!BMx16|y1=178/y1=187:U2/dy5;         [for Brute (Dungeon) increase damage by 1]
+  !!BMx16|y1=181/y1=190:U2/dy5;         [for Shaman (Fortress) increase damage by 1]
 !!en;
 
-!!if|y1=182/y1=191;                    [Astral Spirit]
-!!SN:W^This_Is_Replay_Battle^/?y30;
-!!SN:W^Spirit_Damage_Round_Counter^/?y31;
-!!SN&y30=1:W^Spirit_Damage_Counter%Y10^/d-y31;
-!!SN:W^Spirit_Damage_Counter%Y10^/?y5;
-!!VRy5:*5;
-!!BMx16&y5>0:Hdy5;
-!!en;
-
-!!if&y1>173/y1<193;
-!!BMx16:E?y10;
-!!VRy10&y10>0:-1;
-!!BMx16:Ey10;
+!!if&y1>=174/y1<=191;                   [if any commander]
+  !!BMx16:E?y20;                        [get casts]
+  !!VRy20&y20>0:-1;                     [Reduce casts by 1 for all commanders]
+  !!BMx16:Ey20;                         [Set new casts for commander]
 !!en;
 
 
 *************
-*Astral Spirit*
+*Astral Spirit and Brute casting damage*
 !?MR1&1000;
 *casting with commander costs the Hero 2+1*Spell Point for each rank of Magic
+*Damage is set and can be increased by hero and artifacts*
 
 !!BG:A?y1;                              [Aktion in y1]
 !!FU&y1<>10:E;                          [Exit if no cast]
 
 !!BG:N?y1;                              [Attacking Stack]
 !!BMy1:T?y2;                            [Creature Type]
-!!if|y2=176/y2=185/y2=179/y2=188;      [if Temple Guardian Attacker/Defender or Brute Attacker/Defender]
+!!if|y2=176/y2=185/y2=179/y2=188;       [if Temple Guardian Attacker/Defender or Brute Attacker/Defender]
 !!BG:H?y50;
 !!FU&y50<0:E;                           [Exit if no Hero]
 !!COy50:S4/?y60;                        [Get Magic Level of Commander]
 !!HEy50:I?y10/1;                        [Get Hero Spell Points]
 !!COy50:X2/?y40;                        [Get Commander Level]
 
-!!VRy20:S60; !!VRy20&y60=1:S60; !!VRy20&y60=2:S120; !!VRy20&y60=3:S200; !!VRy20&y60=4:S300; !!VRy20&y60=5:S500;
+!!VRy20:S50; !!VRy20&y60=1:S50; !!VRy20&y60=2:S100; !!VRy20&y60=3:S150; !!VRy20&y60=4:S250; !!VRy20&y60=5:S500; [Set Base damage of cast 60 for basic 500 for GM]
+!!SN:W^Commander_Base_Spell_%Y50^/y20;  [Base Spell damage]
 
 !!VRy60:+2;
 !!HEy50:S25/?y30;
@@ -9491,7 +9517,7 @@ Caitlin, Aine, Grindan, Jenova, Octavia, (Damacon removed), Sephinroth
 !!FU(H3_Calc_Normal_Spell_Damage):Py50/?y99/?y98/1/y2/0; [Pass Hero Number and Give Back Damage in y99 and Extra Damage Option and Spell Number]
 !!VRy20:*y99:100;
 
-!!VRy20&y10<y60::2;                     [If Hero has not enough Mana cast deals only 50% damage]
+!!VRy20&y10<y60::2;                     [If Hero has not enough Mana cast deals only 50% damage. Each level of Commander magic incerases the cost to cast the spell]
 
 ************
 !!BG:Q?y4;
@@ -9499,7 +9525,7 @@ Caitlin, Aine, Grindan, Jenova, Octavia, (Damacon removed), Sephinroth
 !!FU&y4<=0:E;                           [Exit if no Hero]
 !!BG:Q?y30;
 !!VRy30:-1 *-1;
-!!BA:Hy30/?y31;                         [Enemy Hero for resistance Calculation]
+!!BA:Hy30/?y31;                         [Enemy Hero]
 !!BG:S?y2;                              [Falls Aktion ein Cast ist dann Speichere 1 in y2]
 !!FU|y2=15/y2=17:E;
 !!FU&y20<=0:E;
@@ -9507,17 +9533,17 @@ Caitlin, Aine, Grindan, Jenova, Octavia, (Damacon removed), Sephinroth
 !!BG:Q?y13;
 !!BMy5:I?y12;
 !!if&y13<>y12;
-!!if&y5>=0/y5<=41;
-!!FU(H3_Calc_Crit_Chance_and_Damage):Py4/?y16/?y99/1/y31/y2/y5; [(Pass Hero Number/Returns Crit chance/Crit damage/Battle State/Enemy Hero/Spell/Target)]
-!!VRy9:S0T99;                           [y9 chance to crit (0..99)]
-!!if&y9<y16;
-!!VRy20:*y99:100;
-*!IF:M^Returened Crit Chance %Y16 and Damage %Y99  and Random Roll %Y9 and Spell Damage y3 is %Y3^;
-!!MR:Fy20;                              [apply new damage]
-!!BA:Q?f;
-!!BMy5&f=0:V82;                         [show crit animation]
-!!en;
-!!en;
+  !!if&y5>=0/y5<=41;
+    !!FU(H3_Calc_Crit_Chance_and_Damage):Py4/?y16/?y99/1/y31/y2/y5; [(Pass Hero Number/Returns Crit chance/Crit damage/Battle State/Enemy Hero/Spell/Target)]
+    !!VRy9:S0T99;                           [y9 chance to crit (0..99)]
+    !!if&y9<y16; if crit
+      !!VRy20:*y99:100;
+      *!IF:M^Returened Crit Chance %Y16 and Damage %Y99  and Random Roll %Y9 and Spell Damage y3 is %Y3^;
+      !!MR:Fy20;                              [apply new damage]
+      !!BA:Q?f;
+      !!BMy5&f=0:V82;                         [show crit animation]
+    !!en;
+  !!en;
 !!en;
 *********
 *!IF:M^y20 is %Y20 and level is %Y40 and %Y41^;
@@ -9538,24 +9564,23 @@ Caitlin, Aine, Grindan, Jenova, Octavia, (Damacon removed), Sephinroth
 
 !!BG:A?y1;                              [Aktion in y1]
 !!if&y1=6|y1=7:;                        [Attack or Shoot]
-
-  !!BG:N?y1;                              [Attacking Stack]
-  !!MF:N?y4;                              [damage receiving stack]
+  !!BG:N?y1;                            [Attacking Stack]
+  !!MF:N?y4;                            [damage receiving stack]
   !!SN:W^Commander_Kill_Attacking_Stack^/?y50;
-  !!VRy1&y4=y1/y50>=0/y50<=41:Sy50;       [If Attacking Stack gleich Damage Recieving Stack it means Retaliation]
+  !!VRy1&y4=y1/y50>=0/y50<=41:Sy50;     [If Attacking Stack gleich Damage Recieving Stack it means Retaliation]
   !!SN:W^Commander_Kill_Attacking_Stack^/y4;
 
-  !!BMy1:T?y2;                            [Creature Type]
-  !!FU|y2<180/y2>191:E;                   [Exit if no Commander]
-  !!MF:F?y3;                              [Get damage]
-  !!FU&y3=0:E;                            [Exit if Zero damage]
-  !!BG:H?y10;                             [Get Hero Number]
+  !!BMy1:T?y2;                          [Creature Type]
+  !!FU|y2<180/y2>191:E;                 [Exit if no Commander]
+  !!MF:F?y3;                            [Get damage]
+  !!FU&y3=0:E;                          [Exit if Zero damage]
+  !!BG:H?y10;                           [Get Hero Number]
   !!if&y10>=0/y10<=155:;
-    !!BMy4:N?y5 H?y6 L?y7;                [Get Number and Life of attacked Stack and lost Hitpoints]
-    !!VRy5:*y6-y7;                        [Get total Life of attacked stack]
-    !!FU&y5>y3:E;                         [Exit if not enough damage was dealt]
-    !!SN:W^Commander_Kill_Counter_%Y10^/d1;[Increase counter by one if kill happened]
-    !!SN:W^Commander_Kill_Counter_Temp_%Y10^/d1;[Increase temp counter by one if kill happened]
+    !!BMy4:N?y5 H?y6 L?y7;              [Get Number and Life of attacked Stack and lost Hitpoints]
+    !!VRy5:*y6-y7;                      [Get total Life of attacked stack]
+    !!FU&y5>y3:E;                       [Exit if not enough damage was dealt]
+    !!SN:W^Commander_Kill_Counter_%Y10^/d1; [Increase counter by one if kill happened]
+    !!SN:W^Commander_Kill_Counter_Temp_%Y10^/d1; [Increase temp counter by one if kill happened]
   !!en:;
 !!en:;
 !!en:;
@@ -9580,7 +9605,7 @@ Caitlin, Aine, Grindan, Jenova, Octavia, (Damacon removed), Sephinroth
     !!VRy3&y3>y5:Sy5;                   [Only count the real damage applied]
     *!IF:L^Damage that is added to the counter %Y3^;
     !!SN:W^Damage_Counter_Hero_%Y10^/dy3;[Increase damage counter]
-    !!SN:W^Damage_Counter_Hero_Temp_%Y10^/dy3;[Increase counter by one if kill happened]
+    !!SN:W^Damage_Counter_Hero_Temp_%Y10^/dy3; [Increase counter by one if kill happened]
   !!en:;
 !!en:;
 
@@ -9589,22 +9614,21 @@ Caitlin, Aine, Grindan, Jenova, Octavia, (Damacon removed), Sephinroth
 
 !!BG:A?y1;                              [Aktion in y1]
 !!if&y1=1:;                             [If Hero cast]
-
   !!MR:N?y4 F?y3;                       [damage receiving stack and get damage]
-
   !!FU&y3=0:E;                          [Exit if Zero damage]
   !!BG:H?y10;                           [Get Hero Number]
   !!if&y10>=0/y10<=155:;
     !!BMy4:N?y5 H?y6 L?y7;              [Get Number and Life of attacked Stack and lost Hitpoints]
     !!VRy5:*y6-y7;                      [Get total Life of attacked stack]
     !!VRy3&y3>y5:Sy5;                   [Only count the real damage applied]
-    *!IF:L^Damage that is added to the counter %Y3 and current hero is %Y10^;
-
     !!SN:W^Magic_Damage_Counter_Hero_%Y10^/dy3; [Increase damage counter]
     !!SN:W^Magic_Damage_Counter_Hero_Temp_%Y10^/dy3; [Increase counter by one if kill happened]
   !!en:;
 !!en:;
 
+
+*Reduce casts of all Commanders by -1 so with no Magic Skill they cannot cast
+*Apply Commander combat buff
 !?FU(OnCombatRound)&v997=0;             [On First visible combat round]
 !!re y10/0/155:;                        [Reset Temp vars before every fight for every hero]
   !!SN:W^Damage_Counter_Hero_Temp_%Y10^/0;
@@ -9612,9 +9636,13 @@ Caitlin, Aine, Grindan, Jenova, Octavia, (Damacon removed), Sephinroth
   !!SN:W^Magic_Damage_Counter_Hero_Temp_%Y10^/0;
 !!en:;
 
+!!DO(Apply_Commander_Kill_Bonus)/0/41/1:P;           [loop through Stacks]
+!!SN:W^Commander_Round_Counter^/0;
+
 
 !?FU870520;
 *?FU(OnBattleReplay);
+!!SN:W^Commander_Round_Counter^/0; Reset round counter for max 3 gains per battle
 
 !!BA:H0/?y1;                            [Attacker]
 !!if&y1>=0/y1<=155:;
@@ -9689,7 +9717,7 @@ Caitlin, Aine, Grindan, Jenova, Octavia, (Damacon removed), Sephinroth
   !!BMi:T?y1;                           [Creature Type]
   !!BMi|y1=176/y1=185:U4/17;            [if Temple Guardian Attacker/Defender set to Lightning]
   !!BMi|y1=179/y1=188:U4/15;            [if Brute Attacker/Defender set to Magic Arrow]
-  !!BMi|y1=180/y1=189:U4/43;            [if Oger Leader Attacker/Defender set to Bloodlust]
+  !!BMi|y1=180/y1=189:U4/43;            [if Ogre Leader Attacker/Defender set to Bloodlust]
   !!BMi|y1=182/y1=191:U4/69;            [if Astral Spirit Attacker/Defender set to Summon Air]
 !!en;
 
@@ -10560,6 +10588,15 @@ Here all variables should be reset before a repeated fight
 !!SN:W^WM_Maintain_Att_Ammo^/0; !!SN:W^WM_Maintain_Def_Ammo^/0;
 !!SN:W^WM_Maintain_Att_Tent^/0; !!SN:W^WM_Maintain_Def_Tent^/0;
 !!SN:W^Att_HP_Army_Value^/0;            [Reset Fight Value]
+
+!!SN:W^Total_Healed_Amount_Att^/0;      [Reset value before any fight]
+!!SN:W^Total_Healed_Amount_Def^/0;
+!!SN:W^Tent_Number_Att^/-1;
+!!SN:W^Tent_Number_Def^/-1;
+!!SN:W^Tent_Capacity_Att^/0;
+!!SN:W^Tent_Capacity_Def^/0;
+!!SN:W^Army_Att^/1;
+!!SN:W^Army_Def^/1;
 
 
 !?FU(OnBeforeBattleUniversal);
@@ -11705,22 +11742,20 @@ Show Bonus Table when clicking on Knowledge Icon in Hero Screen
 !!VRy15:+y12;                           [+Creature Growth Chance from Set]
 *!VRy16:+y11;                           [+Spell Crit Chance from Set already handeld before]
 
-!!SN:W^Damage_Counter_Hero_%Y4^/?y40; [Increase damage counter]
-!!SN:W^Magic_Damage_Counter_Hero_%Y4^/?y41;[Increase damage counter]
+!!SN:W^Damage_Counter_Hero_%Y4^/?y40;   [Increase damage counter]
+!!SN:W^Magic_Damage_Counter_Hero_%Y4^/?y41; [Increase damage counter]
 !!SN:W^Commander_Kill_Counter_%Y4^/?y42;[Get commander kill counter from hero]
 
-!!FU(Spell_Trainer_Calc):Py4/?y95/?y96;[Pass Hero Number and return Number of Spell Upgrades and Chance for Spell Upgrade]
+!!FU(Spell_Trainer_Calc):Py4/?y95/?y96; [Pass Hero Number and return Number of Spell Upgrades and Chance for Spell Upgrade]
 
-!!VRv7020:Sy4; Set v7020 so it has correct hero number
+!!VRv7020:Sy4;                          [Set v7020 so it has correct hero number]
 !!FU(Artillery_Bonus0):P0/1;
-!!SN:W^Artillery_Low_Damage_Hero%V7020^/?y60; [Save Low Damage to display it in Bonus List]
-!!SN:W^Artillery_High_Damage_Hero%V7020^/?y61; [Save High Damage to display it in Bonus List]
-!!VRz4:S^Artillery Pre-damage: %Y60 - %Y61^;
+!!SN:W^Artillery_Low_Damage_Hero%V7020^/?y58; [Save Low Damage to display it in Bonus List]
+!!SN:W^Artillery_High_Damage_Hero%V7020^/?y59; [Save High Damage to display it in Bonus List]
 
 !!FU(Magic_Artillery_Shoot1):P0/y4/1;
 !!SN:W^EagleEye_Low_Damage_Hero%V7020^/?y62; [Save Low Damage to display it in Bonus List]
 !!SN:W^EagleEye_High_Damage_Hero%V7020^/?y63; [Save High Damage to display it in Bonus List]
-
 
 !!FU(Improved_FirstAid_Bonus):P1/0/1;
 !!SN:W^Heal_After_Fight_Low_Hero%V7020^/?y64; [Save Low Damage to display it in Bonus List]
@@ -11732,50 +11767,47 @@ Show Bonus Table when clicking on Knowledge Icon in Hero Screen
 !!SN:W^Heal_InCombat_High_Hero%V7020^/?y67; [Save High Damage to display it in Bonus List]
 
 !!SN:W^Tent_Capacity_Att_Hero%Y4^/?y68;
-!!SN:W^Scouting_Event_Chance_%Y4^/?y69;  [save scouting chance]
+!!SN:W^Scouting_Event_Chance_%Y4^/?y69; [save scouting chance]
 !!VRy69&y69=0:S9999;
 
-!!HEy4:E?y90/?y91/1; Get Hero level
-!!HEy4:A2/31/?y30/?y81; 31  Armor of Wonder
-!!HEy4:A2/25/?y30/?y82; 25  Breastplate of Petrified Wood
-!!HEy4:A2/163/?y30/?y83; 163 Round Shield of Commander
+!!HEy4:E?y90/?y91/1;                    [Get Hero level]
+!!HEy4:A2/31/?y30/?y81;                 [31  Armor of Wonder]
+!!HEy4:A2/25/?y30/?y82;                 [25  Breastplate of Petrified Wood]
+!!HEy4:A2/163/?y30/?y83;                [163 Round Shield of Commander]
 
-!!VRy92:Sy91*4; 4 times hero level flat damage block for Druid
+!!VRy92:Sy91*4;                         [4 times hero level flat damage block for Druid]
 
-!!VRy70:S0; !!VRy70&y81=1:Sy91*2+20; !!VRy70&y83=1:+50; !!VRy70&y23=1/y24=1:+y92;
-!!VRy71:S0; !!VRy71&y82=1:Sy91*2+15; !!VRy71&y83=1:+50; !!VRy71&y23=1/y24=1:+y92;
-!!VRy72:S0;
-!!VRy73:S0;
-!!VRy74:S0; !!VRy74&y23=1:+15; !!VRy74&y21=1:+10;
-*!SN:W^Master_Warrior_Hero%Y4^/?y19;
-*!SN:W^Master_Mage_Hero%Y4^/?y23;
-*!SN:W^Master_Adventurer_Hero%Y4^/?y24;
-*!SN:W^Grandmaster_Warrior_Hero%Y4^/?y20;
-*!SN:W^Grandmaster_Mage_Hero%Y4^/?y21;
-*!SN:W^Grandmaster_Adventurer_Hero%Y4^/?y22;
+!!VRy70:S0; !!VRy70&y81=1:Sy91*2+20; !!VRy70&y83=1:+50; !!VRy70&y23=1/y24=1:+y92; [Range damage]
+!!VRy71:S0; !!VRy71&y82=1:Sy91*2+15; !!VRy71&y83=1:+50; !!VRy71&y23=1/y24=1:+y92; [Melee damage]
+!!VRy72:S0;                             [Magic damage]
+!!VRy73:S0;                             [Evade]
+!!VRy74:S0; !!VRy74&y23=1:+15; !!VRy74&y21=1:+10; [Magic Pierce]
 
-!!VRz4:S^
-Artillery Pre-damage %Y60 - %Y61
-Eagle Eye Pre-damage: %Y62 - %Y63
-Heal after combat: %Y64 - %Y65
-Heal in combat %Y66 - %Y67
-Heal Capacity %Y68
-Chance for Scouting event: 17/%Y69
-Flat range damage block: %Y70
-Flat melee damage block: %Y71
-Flat magic damage block: %Y72
-Chance to evade: %Y73
-Magic Pierce: %Y74%
-^;
+!!COy4:T?y50 N?z10;                     [Get commander type and name]
+!!VRy51:S0;
+!!COy4:S4/?y55;                         [Get Magic Level of Commander]
+!!COy4:X2/?y56;                         [Get Commander Level]
 
+*!if|y50=2/y50=5; If Temple Guardian or Brute
+*!VRy51:S50; *!VRy51&y55=1:S50; *!VRy51&y55=2:S100; *!VRy51&y55=3:S150; *!VRy51&y55=4:S250; *!VRy51&y55=5:S500; [Set Base damage of cast 60 for basic 500 for GM]
+*!en;
 
-!!SN:T^AC_Misc.Bonus Table 1^/?z1; !!SN:Iz1/?z1;
-!!SN:T^AC_Misc.Spell_Upgrades^/?z2; !!SN:Iz2/?z2;
+!!SN:W^Commander_Base_Spell_%Y4^/?y51;  [Base Spell damage]
+!!SN:W^Commander_WM_Health_Bonus_%Y4^/?y52;  [Tent Bonus]
+!!SN:W^Commander_Ballista_Bonus_%Y4^/?y53; [Ballista Bonus]
+!!SN:W^Commander_Special_Ability_%Y4^/?y54; [Special Ability]
+
+!!SN:T^AC_Misc.Bonus_Table_Magic^/?z1; !!SN:Iz1/?z1;
+!!SN:T^AC_Misc.Bonus_Table_Battle^/?z2; !!SN:Iz2/?z2;
+!!SN:T^AC_Misc.Bonus_Table_Skills^/?z3; !!SN:Iz3/?z3;
+!!SN:T^AC_Misc.Bonus_Table_Commander^/?z4; !!SN:Iz4/?z4;
+!!SN:T^AC_Misc.Bonus_Table_Header^/?z5; !!SN:Iz5/?z5;
 
 !!DL89:A1/3/z1/1;
 !!DL89:A2/3/z2/1;
-!!DL89:A3/3/z4/1;
-!!DL89:A4/3/z3/1;
+!!DL89:A3/3/z3/1;
+!!DL89:A4/3/z4/1;
+!!DL89:A5/3/z5/1;
 !!DL89:S1;                              [Show complete Dialogue number 89]
 
 
@@ -22995,7 +23027,7 @@ ERMS_ScriptAuthor=PerryR
 
 !#HE99:C0/2/92/1;                       [99 Shiva starts with one Bird]
 
-!#VRy10:S2T1;                           [starts with 1 stack of 2-3 Ogers]
+!#VRy10:S2T1;                           [starts with 1 stack of 2-3 Ogres]
 !#HE101:C0/2/90/y10;
 
 !#HE104:M16/1;                          [Gird starts with Ice bolt instead of Bloodlust]
@@ -23200,7 +23232,7 @@ Extension Heroes
 *#HE151&y1=0:X1/14;                     [151 Mutare Dragons]
 !#HE152&y1=0:X1/6;                      [152 Roland Crusaders]
 *#HE153&y1=0:X1/14;                     [153 Mutare Drake Dragons]
-*#HE154&y1=0:X0/14;                     [154 Boragus Ogers]
+*#HE154&y1=0:X0/14;                     [154 Boragus Ogres]
 !#HE155&y1=0:X1/54;                     [155 Xeron Devils]
 
 *Pictures
