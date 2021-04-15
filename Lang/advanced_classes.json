@@ -18,7 +18,7 @@
 		"class_level_5": "Grandmaster",
 
 		"class_selection_dlg": {
-			"title":               "Choose your hero path:",
+			"title":               "@hero_name@ choose your hero path:",
 			"delay_selection_for": "Delay choice for @levels@ levels",
 			"never_ask":           "Freeze current class (@class_name@) and never ask again"
 		}
@@ -2749,7 +2749,13 @@
 
 			"Glyph_of_Gal_Creatures":			"{Glyph of Gallantry}
 
-												On there search for glory a few {~Gold}@crname@{~} join @heroname@s army."
+												On there search for glory a few {~Gold}@crname@{~} join @heroname@s army.",
+												
+												
+			"Ammo_Cart_Extra_Descr":			"Increases healing of First Aid tent after combat.
+												Increases Artillery/Eagle Eye damage before combat.
+												Gives +2 Spell Points after combat."
+
 
 				},
 
