@@ -24,7 +24,7 @@ Content:
 
 For feedback, bug reports and updates
 Visit http://heroescommunity.com Advanced Classes Mod
-Name on Heroescommunity: RerryR
+Name on Heroescommunity: RerryR (but please, call me Perry)
 
 ********************************************************************************
 
@@ -3775,9 +3775,9 @@ Creature speed   Base movement
 
 !!UN:U54/-1/?y2;
 !!VRv1:S-1;
-!!DO(acm_Monster_Agression)/1/y2/1:P;       [Loop through all monsters on the map]
+!!DO(ACM_Monster_Agression)/1/y2/1:P;       [Loop through all monsters on the map]
 
-!?FU(acm_Monster_Agression);
+!?FU(ACM_Monster_Agression);
 
 !!VRv1&x16=1:S-1;
 !!UN:U54/-1/-1/1;
@@ -6088,8 +6088,7 @@ Till here Normal Necromancy
 
 !!SN:W^Tent_Overheal_%Y61^/?y80;        [Overheal gives chance to additional raise troops when you heal them, over the current limit]
 !!BMx1:N?y8 B?y9 T?y10 H?y17 G4/?y18/?y19; [Check Monster Parameters and for Disguise]
-
-!!BMx1:Ny6 Ly16;                        [Set Number and apply rest life]
+!!BMx1:Ny6 Ly16;                        [Heal happens Set Number and apply rest life]
 
 *!IF:L^y8 is %Y8 and y9 is %Y9 und y80 is %Y80 Disguse %Y18 und %Y19^;
 
@@ -6111,10 +6110,13 @@ Till here Normal Necromancy
     !!SN&y60=1:W^Tent_Capacity_Def^/?y21;
     !!SN&y60=0/y21<=0:W^Tent_Capacity_Att^/0; [If below zero set zero]
     !!SN&y60=1/y21<=0:W^Tent_Capacity_Def^/0;
+  !!en:;
     *!IF:M^%Y8 %Y9 %Y10 Number:%Y13 Chance:%Y16 Roll:%Y15
     New Capacity is %Y21 and deduceted amount is %Y20^;
 !!en;
 !!en;
+!!BA:Q?f;
+!!BU&f=0:R;
 
 !!SN:W^Tent_Gold_Gain_%Y61^/?y1;
 !!SN&y1=1/y60=0:W^Total_Healed_Amount_Att^/dy10; [Save value for attacker]
@@ -6137,24 +6139,24 @@ and creature is %X1^;
 
 !!BA:O?y1/?y20;                         [Check both Owners after Battle]
 !!SN:W^Hero_Attacker_Owner0^/?y10;      [check saved owner]
-!!if&y1=y10;                           [run if the same]
-!!BA:H0/?y2;                            [get battle hero]
-!!HEy2:A2/6/?y5/?y6;                    [check 6  First Aid Tent]
-!!SN:W^Tent_Gold_Gain_%Y2^/?y3;         [check upgarde]
-!!SN:W^Total_Healed_Amount_Att^/?y4;    [check healed amount]
-!!VRy4:*3;                              [3 times the amount heal in gold]
-!!OW&y6=1/y3=1/y4>0:Ry1/6/dy4;          [Give gold to player if He has First Aid Tent and Upgrade Bought]
+!!if&y1=y10;                            [run if the same]
+  !!BA:H0/?y2;                          [get battle hero]
+  !!HEy2:A2/6/?y5/?y6;                  [check 6  First Aid Tent]
+  !!SN:W^Tent_Gold_Gain_%Y2^/?y3;       [check upgarde]
+  !!SN:W^Total_Healed_Amount_Att^/?y4;  [check healed amount]
+  !!VRy4:*3;                            [3 times the amount heal in gold]
+  !!OW&y6=1/y3=1/y4>0:Ry1/6/dy4;        [Give gold to player if He has First Aid Tent and Upgrade Bought]
 !!en;
 
 !!BA:H1/?y2;                            [Defender]
 !!FU|y2<0/y20<0:E;
 !!SN:W^Hero_Defender_Owner0^/?y30;
 !!if&y20=y30;
-!!HEy2:A2/6/?y5/?y6;                    [6  First Aid Tent]
-!!SN:W^Tent_Gold_Gain_%Y2^/?y3;
-!!SN:W^Total_Healed_Amount_Def^/?y4;    [check healed amount]
-!!VRy4:*3;                              [3 times the amount heal in gold]
-!!OW&y6=1/y3=1/y4>0:Ry20/6/dy4;         [Give gold to player if He has First Aid Tent and Upgrade Bought]
+  !!HEy2:A2/6/?y5/?y6;                  [6  First Aid Tent]
+  !!SN:W^Tent_Gold_Gain_%Y2^/?y3;
+  !!SN:W^Total_Healed_Amount_Def^/?y4;  [check healed amount]
+  !!VRy4:*3;                            [3 times the amount heal in gold]
+  !!OW&y6=1/y3=1/y4>0:Ry20/6/dy4;       [Give gold to player if He has First Aid Tent and Upgrade Bought]
 !!en;
 
 
@@ -9410,7 +9412,6 @@ Caitlin, Aine, Grindan, Jenova, Octavia, (Damacon removed), Sephinroth
 
 !!UN:C42149568/4/?y10;                  [Get Physical Damage type]
 !!if|y10=4462398/y10=4455011/y10=4456676;[Only run when melee or shooting damage or Strikes all enemys around]
-
 !!BG:A?y1;                              [Aktion in y1]
 !!if&y1=6|y1=7;                         [Attack or Shoot]
 
@@ -9419,29 +9420,33 @@ Caitlin, Aine, Grindan, Jenova, Octavia, (Damacon removed), Sephinroth
 !!SN:W^Commander_Kill_Attacking_Stack^/?y50;
 !!VRy1&y4=y1/y50>=0/y50<=41:Sy50;       [If Attacking Stack gleich Damage Recieving Stack it means Retaliation]
 !!SN:W^Commander_Kill_Attacking_Stack^/y4;
-
 !!BMy1:T?y2;                            [Creature Type]
-!!FU|y2<180/y2>191:E;                   [Exit if no Commander]
 !!MF:F?y3;
 !!FU&y3=0:E;                            [Exit if Zero damage]
 !!BG:H?y10;                             [Get current hero]
 !!BMy4:N?y5 H?y6 L?y7;                  [Get Number and Life of attacked Stack and lost Hitpoints]
 !!VRy5:*y6-y7;                          [Get total Life of attacked stack]
 !!FU&y5>y3:E;                           [Exit if not enough damage was dealt]
-
 !!if&y2>=174/y2<=191;                   [if any commander]
   !!SN:W^Commander_Kill_Counter_%Y10^/?y50;[Increase counter by one if kill happened]
   !!SN:W^Commander_Round_Counter^/?y11;
   !!FU&y11>=3:E;                        [Exit so increase cannot happen more than 3 times per combat]
+
+  !!VRy50:%4;                           [Modulo 4 so it only increases after 4 kills]
+  !!if&y50=0;
   !!BMy1|y2=174/y2=183:Ad1;             [for Paladin (Castle) increase attack by 1]
+  !!BMy1|y2=180/y2=189:Ad1;             [for Ogre Leader (Stronghold) increase attack by 1]
   !!BMy1|y2=175/y2=184:Dd1;             [for Hierophant (Rampart) increase defense by 1]
   !!BMy1|y2=176/y2=185:Dd1;             [for Temple Guardian (Tower) increase defense by 1]
+  !!en;
+
   !!BMy1|y2=177/y2=186:Hd5;             [for Succubus (Inferno) increase health by 5]
-  !!BMy1|y2=178/y2=187:U2/d1;           [for Brute (Dungeon) increase damage by 1]
   !!BMy1|y2=179/y2=188:Hd5;             [for Soul Eater (Necropolis) increase health by 5]
-  !!BMy1|y2=180/y2=189:Ad1;             [for Ogre Leader (Stronghold) increase attack by 1]
-  !!BMy1|y2=181/y2=190:U2/d1;           [for Shaman (Fortress) increase damage by 1]
   !!BMy1|y2=182/y2=191:Hd5;             [for Astral Spirit (Conflux) increase health by 5]
+
+  !!BMy1|y2=178/y2=187:U2/d1;           [for Brute (Dungeon) increase damage by 1]
+  !!BMy1|y2=181/y2=190:U2/d1;           [for Shaman (Fortress) increase damage by 1]
+
   !!BA:Q?f;
   !!VRz1&f=0:S^MAGCHDRN^;
   !!SN&f=0:Pz1;
@@ -9454,7 +9459,7 @@ Caitlin, Aine, Grindan, Jenova, Octavia, (Damacon removed), Sephinroth
 
 
 !?FU(Apply_Commander_Kill_Bonus);
-*Apply Bonus and recude casts by 1 for all commanders*
+*Apply Kill Count Bonus, recude casts by 1 for all commanders and reduce battlestats of commander to only 25% of hero prim stats*
 
 !!BMx16:T?y1 I?y2 N?y20;                [Creature Type]
 !!BHy2:N?y10;                           [Hero Number]
@@ -9462,7 +9467,7 @@ Caitlin, Aine, Grindan, Jenova, Octavia, (Damacon removed), Sephinroth
 
 !!if&y1>=174/y1<=191;                   [if any commander]
   !!SN:W^Commander_Kill_Counter_%Y10^/?y5; [Get number of total kills from commander]
-  !!VRy5::5;                            [For 5 kills get 1 att or def]
+  !!VRy5::4;                            [For 4 kills get 1 att or def]
   !!BMx16|y1=174/y1=183:Ady5;           [for Paladin (Castle) increase attack by 1]
   !!BMx16|y1=180/y1=189:Ady5;           [for Ogre Leader (Stronghold) increase attack by 1]
   !!BMx16|y1=175/y1=184:Ddy5;           [for Hierophant (Rampart) increase defense by 1]
@@ -9477,12 +9482,15 @@ Caitlin, Aine, Grindan, Jenova, Octavia, (Damacon removed), Sephinroth
   !!SN:W^Commander_Kill_Counter_%Y10^/?y5; [Get number of total kills from commander]
   !!BMx16|y1=178/y1=187:U2/dy5;         [for Brute (Dungeon) increase damage by 1]
   !!BMx16|y1=181/y1=190:U2/dy5;         [for Shaman (Fortress) increase damage by 1]
-!!en;
 
-!!if&y1>=174/y1<=191;                   [if any commander]
   !!BMx16:E?y20;                        [get casts]
   !!VRy20&y20>0:-1;                     [Reduce casts by 1 for all commanders]
   !!BMx16:Ey20;                         [Set new casts for commander]
+
+  !!HEy10:F?y40/?y41/?y42/?y43;         [Get Prim stats from Hero]
+  !!VRy50&y40>0:Sy40:4 *-1; !!VRy40:Sy40+y50 *-1; [Calc 25% of the Prim stats from Hero]
+  !!VRy51&y41>0:Sy41:4 *-1; !!VRy41:Sy41+y51 *-1;
+  !!BMx16:Ady40 Ddy41;                  [Reduce Attack and Defense of Commander to only 25% from Hero stats]
 !!en;
 
 
@@ -9536,13 +9544,13 @@ Caitlin, Aine, Grindan, Jenova, Octavia, (Damacon removed), Sephinroth
 !!if&y13<>y12;
   !!if&y5>=0/y5<=41;
     !!FU(H3_Calc_Crit_Chance_and_Damage):Py4/?y16/?y99/1/y31/y2/y5; [(Pass Hero Number/Returns Crit chance/Crit damage/Battle State/Enemy Hero/Spell/Target)]
-    !!VRy9:S0T99;                           [y9 chance to crit (0..99)]
-    !!if&y9<y16; if crit
+    !!VRy9:S0T99;                       [y9 chance to crit (0..99)]
+    !!if&y9<y16;                        [if crit]
       !!VRy20:*y99:100;
       *!IF:M^Returened Crit Chance %Y16 and Damage %Y99  and Random Roll %Y9 and Spell Damage y3 is %Y3^;
-      !!MR:Fy20;                              [apply new damage]
+      !!MR:Fy20;                        [apply new damage]
       !!BA:Q?f;
-      !!BMy5&f=0:V82;                         [show crit animation]
+      !!BMy5&f=0:V82;                   [show crit animation]
     !!en;
   !!en;
 !!en;
@@ -9559,7 +9567,7 @@ Caitlin, Aine, Grindan, Jenova, Octavia, (Damacon removed), Sephinroth
 ****************************************************************************************************
 *Kill Counter for all Commanders to show in Bonus list*
 !?MF1;
-
+!!FU:E;
 !!UN:C42149568/4/?y10;                  [Get Physical Damage type]
 !!if|y10=4462398/y10=4455011/y10=4456676:; [Only run when melee or shooting damage or Strikes all enemys around]
 
@@ -11775,13 +11783,18 @@ Show Bonus Table when clicking on Knowledge Icon in Hero Screen
 !!HEy4:A2/31/?y30/?y81;                 [31  Armor of Wonder]
 !!HEy4:A2/25/?y30/?y82;                 [25  Breastplate of Petrified Wood]
 !!HEy4:A2/163/?y30/?y83;                [163 Round Shield of Commander]
+!!HEy4:A2/37/?y30/?y84;                 [37 Quiet Eye of the Dragon]
+!!HEy4:A2/39/?y30/?y85;                 [39 Dragon Scale Shield]
+!!HEy4:A2/97/?y30/?y86;                 [97 Necklace of Swiftness]
+!!HEy4:A2/69/?y30/?y87;                 [69 Ring of the Wayfarer]
+!!HEy4:A2/99/?y30/?y88;                 [99 Cape of Velocity]
 
 !!VRy92:Sy91*4;                         [4 times hero level flat damage block for Druid]
 
 !!VRy70:S0; !!VRy70&y81=1:Sy91*2+20; !!VRy70&y83=1:+50; !!VRy70&y23=1/y24=1:+y92; [Range damage]
 !!VRy71:S0; !!VRy71&y82=1:Sy91*2+15; !!VRy71&y83=1:+50; !!VRy71&y23=1/y24=1:+y92; [Melee damage]
-!!VRy72:S0;                             [Magic damage]
-!!VRy73:S0;                             [Evade]
+!!VRy72:S0; !!VRy72&y84=1:+50; !!VRy72&y85=1:+50; [Magic damage]
+!!VRy73:S0; !!VRy73&y86=1:+4; !!VRy73&y87=1:+4; !!VRy73&y86=1/y87=1/y88=1:S15; [Evade]
 !!VRy74:S0; !!VRy74&y23=1:+15; !!VRy74&y21=1:+10; [Magic Pierce]
 
 !!COy4:T?y50 N?z10;                     [Get commander type and name]
@@ -13193,7 +13206,7 @@ Life Artifacts +2%, +4%, +6%
 !!VRy20:S0T99;                          [20% chance to cast curse on Attacks]
 !!BMy4:F?i;
 !!VRi:&262144;                          [just look at undead bit]
-!!if&y20<20/1000/i=0;                  [Only apply if alive]
+!!if&y20<20/1000/i=0;                   [Only apply if alive]
 !!BA:Q?j;
 !!BMy4:M42/2/3;
 !!BMy4&j=0/1000:V40;                    [Show Curse Animation]
@@ -13202,6 +13215,7 @@ Life Artifacts +2%, +4%, +6%
 !!en;
 !!en;
 !!en;
+
 
 !?MF1;
 * 102 Pendant of Free Will  cast Hypnotize with Attacks
@@ -13247,6 +13261,7 @@ Life Artifacts +2%, +4%, +6%
 !!en;
 !!en;
 
+
 !?MF1;
 *Bow of Elven Cherrywood increases any ranged damage by 4*Hero level damage points
 !!UN:C42149568/4/?y10;                  [Physical Damage]
@@ -13284,29 +13299,30 @@ Life Artifacts +2%, +4%, +6%
 !!FU&y80>0:E;
 
 !!BG:A?y1;
-!!if&y1=7;                             [or Shoot]
-  !!MF:N?y4;                              [damage receiving stack]
-  !!BMy4:I?y5;                            [Side index as for heroes (0:left, 1:right)]
+!!if&y1=7;                              [or Shoot]
+  !!MF:N?y4;                            [damage receiving stack]
+  !!BMy4:I?y5;                          [Side index as for heroes (0:left, 1:right)]
   !!BA:Hy5/?y99;
-  !!FU&y99<0:E;                           [Exit if no Hero]
-  !!BMy4:F?y78;                           [read flags]
-  !!VRy78:&4194304;                       [just look summoned bit]
-  !!FU&y78>0:E;                           [Exit if cloned or summoned]
-  !!HEy99:A2/31/?y3/?y4;                  [31 Armor of Wonder]
-  !!FU&y4=0:E;                            [Exit if no Shield equipped]
-  !!MF:F?y6;                              [Damage Dealt]
+  !!FU&y99<0:E;                         [Exit if no Hero]
+  !!BMy4:F?y78;                         [read flags]
+  !!VRy78:&4194304;                     [just look summoned bit]
+  !!FU&y78>0:E;                         [Exit if cloned or summoned]
+  !!HEy99:A2/31/?y3/?y4;                [31 Armor of Wonder]
+  !!FU&y4=0:E;                          [Exit if no Shield equipped]
+  !!MF:F?y6;                            [Damage Dealt]
   !!HEy99:E?y10/?y8/1;
-  !!VRy8:*2+20;                           [Armor Strength 20+2*Hero Level]
+  !!VRy8:*2+20;                         [Armor Strength 20+2*Hero Level]
 !!if&y8>=y6;
   !!MF:E0;
   !!MF:F0;
 !!en;
 
-!!if&y6>y8;                            [do if damage is bigger than shield]
+!!if&y6>y8;                             [do if damage is bigger than shield]
   !!VRy7:Sy6-y8;
   !!MF:Fy7;
 !!en;
 !!en;
+
 
 !?MF1;                                  [*Physical Combat *]
 *25 Breastplate of Petrified Wood reduces any melee damage by 15+2*HLvL points
@@ -13366,10 +13382,10 @@ Life Artifacts +2%, +4%, +6%
 !!FU&y81=0:E;
 !!BMy4:F?i;                             [read flags]
 !!VRi:&16;                              [just look alive bit]
-!!if&i>0;                              [if alive]
+!!if&i>0;                               [if alive]
   !!MF:F?y6;
   !!HEy99:E?y10/?y8/1;
-  !!VRy8:*2+25;                           [Extra Damage 25+2*Hero Level]
+  !!VRy8:*2+25;                         [Extra Damage 25+2*Hero Level]
   !!VRy7:Sy6+y8;
   !!MF:Fy7;
 !!en;
@@ -13399,10 +13415,10 @@ Life Artifacts +2%, +4%, +6%
 !!FU&y81=0:E;
 !!BMy4:F?i;                             [read flags]
 !!VRi:&262144;                          [just look undead bit]
-!!if&i>0;                              [if undead]
+!!if&i>0;                               [if undead]
   !!MF:F?y6;
   !!HEy99:E?y10/?y8/1;
-  !!VRy8:*2+30;                           [Extra Damage 30+2*Hero Level]
+  !!VRy8:*2+30;                         [Extra Damage 30+2*Hero Level]
   !!VRy7:Sy6+y8;
   !!MF:Fy7;
 !!en;
@@ -13426,7 +13442,9 @@ Life Artifacts +2%, +4%, +6%
 !!VRy1&y4=y1/y50>=0/y50<=41:Sy50;       [If Attacking Stack gleich Damage Recieving Stack it means Retaliation]
 !!SN:W^Tongue_Attacking_Stack^/y4;
 
-!!BMy4:T?y40;                           [Get Type in y40]
+!!BMy4:T?y40 F?i;                       [Get Type in y40]
+!!VRi:&16384;                           [Check for Immunity vs Fire]
+!!FU&i>0:E;                             [Exit if immune vs fire]
 !!FU|y40=33/y40=52/y40=53/y40=82/y40=83/y40=114/y40=116/y40=117/y40=121/y40=125:E;
 !!FU|y40=129/y40=130/y40=131/y40=155/y40=158/y40=164/y40=195:E;
 !!BMy4:G31/?y41/?y42;                   [Get Fire Resistance]
@@ -13484,6 +13502,41 @@ Life Artifacts +2%, +4%, +6%
 !!BMy4:M21/1/3;                         [apply incinerate to stack]
 !!BMy4&y4=0:M21/2/3;                    [fix?]
 !!SN:W^Burned_Stack_%Y4^/dy7;           [Add and Stack Damage to the Stack]
+
+
+!?MF1;
+*Chance to Evade/Dodge melee or ranged attacks*
+!!UN:C42149568/4/?y10;                  [Physical Damage]
+!!if|y10=4462398/y10=4455011/y10=4456676;[Only run when melee or shooting damage]
+  !!BG:A?y1;
+    !!if|y1=6/y1=7;                     [If Melee or Range]
+
+    !!MF:N?y4;                          [damage receiving stack]
+    !!BMy4:I?y5;                        [Monster Side Index]
+    !!BA:Hy5/?y99;
+    !!FU&y99<0:E;                       [Exit if no valid Hero]
+    !!HEy99:A2/97/?y30/?y86;            [97 Necklace of Swiftness]
+    !!HEy99:A2/69/?y30/?y87;            [69 Ring of the Wayfarer]
+    !!HEy99:A2/99/?y30/?y88;            [99 Cape of Velocity]
+    !!FU&y86=0/y87=0:E;                 [Exit if none of both artifacts equipped]
+    !!BA:Q?f;
+
+    !!VRy20:S0T100;                     [Generate Random number]
+    !!VRy22:S0;
+    !!VRy22&y86=1:+4;                   [add 4% chance to dodge per artifact]
+    !!VRy22&y87=1:+4;                   [add 4% chance to dodge per artifact]
+    !!VRy22&y86=1/y87=1/y88=1:S15;      [add +7% chance to dodge if complete set]
+
+    !!if&y20<=y22;                      [chance is ]
+      !!VRz-1&1000:S^AIRSHELD^;
+      !!SN&1000/f=0:Pz-1;
+      !!MF:E0;                          [apply reduced damage]
+      !!MF:F0;
+      !!SN:T^AC_Misc.Air Dodge^/?z-1;
+      !!BU&1000/f=0:Mz-1;               [show message in log]
+    !!en;
+  !!en;
+!!en;
 
 
 *********
@@ -13924,6 +13977,8 @@ The Champions Honor full set grants Warmachine Upgrades at level up with a 20%/5
 !!FU7701:P3/44/1/179860;                [Crown of Dragontooth]
 !!FU7701:P3/39/1/179861;                [Dragon Scale Shield]
 !!FU7701:P3/40/1/179862;                [Dragon Scale Armor]
+!!FU7701:P3/40/1/179863;                [Quiet Eye of the Dragon]
+
 *-------Moral-------*
 !!FU7701:P3/49/1/188112;                [Badge of Courage]
 !!FU7701:P3/50/1/188113;                [Crest of Valor]
@@ -16842,7 +16897,6 @@ Undead stacks heal and with next attack^;                                       
 !!SN:T^AC_Misc.Air Dodge^/?z-1;
 !!BU&1000/f=0:Mz-1;                                                             [show message in log]
 !!en;
-
 
 
 *******************************offense spells handling**************************
@@ -20961,10 +21015,10 @@ x1 - hero id; x2 - spell id; x3 - mode. -1 is remove, 1 - apply, 0 - print for d
 !!VRx2|x1=27/x1=28/x1=30/x1=31/x1=32/x1=33/x1=36/x1=54:S2; [Percentage spells, no Fire Shield]
 !!VRx2|x1=41/x1=42/x1=43/x1=44/x1=45/x1=46/x1=47/x1=48:S3; [Other stat spells]
 !!VRx2|x1=49/x1=50/x1=51/x1=52/x1=53/x1=55:S3; [Other stat spells]
-!!VRx2|x1=66/x1=67/x1=68/x1=69:S4; [Summon spells]
+!!VRx2|x1=66/x1=67/x1=68/x1=69:S4;      [Summon spells]
 
 
-
+****************************************************************************************************
 *Fire Shield Rework*
 !?MF1;
 !!UN:C42149568/4/?y10;                  [Physical Damage]
@@ -20979,10 +21033,12 @@ x1 - hero id; x2 - spell id; x3 - mode. -1 is remove, 1 - apply, 0 - print for d
 !!FU&y10<>4458589:E;                    [Exit if damage does not come from Fire Shield]
 !!BG:N?y1 E?y2 Q?y3;
 !!MF:N?y4;                              [Damage receiving stack]
-!!BMy4:T?y80;
+!!BMy4:T?y80 F?i;
+!!VRi:&16384;                           [Check for Immunity vs Fire]
 !!VRy90:S0;
+!!VRy90&i>0:S1;                         [If Immune vs Fire Exit]
 !!VRy90|y80=27/y80=33/y80=55/y80=69/y80=82/y80=83/y80=116/y80=117:S1;
-!!VRy90|y80=121/y80=151/y80=153/y80=155/y80=172/y80=195:S1;
+!!VRy90|y80=121/y80=151/y80=153/y80=155/y80=172/y80=195/y80=209/y80=231:S1;
 !!MF&y90=1:E0;                          [Apply Zero Damage if Immune]
 !!MF&y90=1:F0;                          [Apply Zero Damage if Immune]
 !!FU&y90=1:E;                           [Exit]
@@ -21002,6 +21058,10 @@ x1 - hero id; x2 - spell id; x3 - mode. -1 is remove, 1 - apply, 0 - print for d
 155 Darkness Dragon
 172 Nightmare
 195 Hell Steed
+
+TUM Creatures
+209 Steel Golems
+231 Black Dragons Upgrade
 
 !!VRy3:-1 *-1;
 !!BHy3:N?y5;                            [Hero Number]
@@ -21044,7 +21104,7 @@ x1 - hero id; x2 - spell id; x3 - mode. -1 is remove, 1 - apply, 0 - print for d
 
 !!VRx5:-1 *-1;
 !!BHx5:N?x1;                            [Hero Number]
-!!if&x1>=0;                            [Resistance]
+!!if&x1>=0;                             [Resistance]
 !!HEx1:S26/?y10;
 !!SN:W^H3_Resistance_0_Hero%X1^/?y11;
 !!SN:W^H3_Resistance_1_Hero%X1^/?y12;
@@ -25460,7 +25520,7 @@ First hit works 100%, the next Arrow only has 20% chance to hit
 
 !?MF1;
 !!UN:C42149568/4/?y10;                  [Get Physical Damage type]
-!!if|y10=4462398/y10=4456676;          [Only run when melee or surround damage]
+!!if|y10=4462398/y10=4456676;           [Only run when melee or surround damage]
 
 !!BG:N?y1;                              [Attacking Stack]
 !!MF:N?y4;                              [damage receiving stack]
@@ -25476,7 +25536,7 @@ First hit works 100%, the next Arrow only has 20% chance to hit
 !!BMy4:H?y10;                           [Get Health of Ammo Cart]
 !!MF:F?y6;
 !!BA:Q?f;
-!!if&y6>=y10;                          [If damage is biggger than Health of Ammo Cart]
+!!if&y6>=y10;                           [If damage is biggger than Health of Ammo Cart]
   !!VRz-1&f=0:S^ExplosionMine^;
   !!SN&f=0:Pz-1;                        [play quest sound before showing dialogue]
   !!BMy1&f=0:V9;                        [Play Inferno Animation]
@@ -25484,7 +25544,7 @@ First hit works 100%, the next Arrow only has 20% chance to hit
   !!VRy5:Sy2*y4:4+2000;
   !!BMy1:Ky5;                           [Strike with 25% of stacks health +1000 points]
   !!BMy1:N?y3;
-  !!if&y3=0/y2>0;                      [If monster would be killes set to summon so it vanishes]
+  !!if&y3=0/y2>0;                       [If monster would be killes set to summon so it vanishes]
     !!BMy1:F?i;
     !!VRi:|813694976;
     !!BMy1:Fi K1;                       [set new modified bit]
@@ -25853,7 +25913,7 @@ First hit works 100%, the next Arrow only has 20% chance to hit
 18 Catapult Slot
 3 Catapult
 !!HEy99:A2/3/d/?y15;                    [Check for 3 Catapult]
-!!if&v3=512/v4=18/v5=14/y15=1;         [if right click and specialty icon are clicked]
+!!if&v3=512/v4=18/v5=14/y15=1;          [if right click and specialty icon are clicked]
   !!SN:T^AC_Warmachine.All_Upg_1^/?z21; !!SN:W^WM_Fortification_%Y99^/?y10; !!VRz31&y10=0:S^Grey^; !!VRz31&y10=1:S^Gold^; [Check if hero has bought the upgrade and set color of text accordingly]
   !!SN:T^AC_Warmachine.All_Upg_2^/?z22; !!SN:W^WM_Maintainability_%Y99^/?y10; !!VRz32&y10=0:S^Grey^; !!VRz32&y10=1:S^Gold^;
   !!SN:T^AC_Warmachine.All_Upg_3^/?z23; !!SN:W^WM_Versatility_%Y99^/?y10; !!VRz33&y10=0:S^Grey^; !!VRz33&y10=1:S^Gold^;
@@ -25876,7 +25936,7 @@ First hit works 100%, the next Arrow only has 20% chance to hit
 16 Ammo Cart Slot
 5 Ammo Cart
 !!HEy99:A2/5/d/?y15;                    [Check for 5 Ammo Cart]
-!!if&v3=512/v4=16/v5=14/y15=1;         [if right click and specialty icon are clicked]
+!!if&v3=512/v4=16/v5=14/y15=1;          [if right click and specialty icon are clicked]
   !!SN:T^AC_Warmachine.Cart_Upg_1^/?z21; !!SN:W^Ammo_Supply_%Y99^/?y10; !!VRz31&y10=0:S^Grey^; !!VRz31&y10=1:S^Gold^;
   !!SN:T^AC_Warmachine.Cart_Upg_2^/?z22; !!SN:W^Ammo_Goblin_%Y99^/?y10; !!VRz32&y10=0:S^Grey^; !!VRz32&y10=1:S^Gold^;
   !!SN:T^AC_Warmachine.Cart_Upg_3^/?z23; !!SN:W^Ammo_Enhanced_Arrow_%Y99^/?y10; !!VRz33&y10=0:S^Grey^; !!VRz33&y10=1:S^Gold^;
@@ -25885,7 +25945,10 @@ First hit works 100%, the next Arrow only has 20% chance to hit
   !!SN:T^AC_Warmachine.Cart_Ench_3^/?z26; !!SN:W^Ammo_Burning_Arrow_%Y99^/?y10; !!VRz36&y10=0:S^Grey^; !!VRz36&y10=1:S^Gold^;
   !!UN:A5/10/0;
   !!SN:H^art^/5/1/?z2;
+  !!SN:T^AC_Warmachine.Ammo_Cart_Extra_Descr^/?z3;
   !!VRz1:S^%Z2
+
+  %Z3
 
   {~%Z31}%Z21{~}
   {~%Z32}%Z22{~}
@@ -25899,7 +25962,7 @@ First hit works 100%, the next Arrow only has 20% chance to hit
 15 Ballista Slot
 4 Ballista
 !!HEy99:A2/4/d/?y15;                    [Check for 4 Ballista]
-!!if&v3=512/v4=15/v5=14/y15=1;         [if right click and specialty icon are clicked]
+!!if&v3=512/v4=15/v5=14/y15=1;          [if right click and specialty icon are clicked]
   !!SN:T^AC_Warmachine.Bal_Upg_1^/?z21; !!SN:W^Ballista_Morale_%Y99^/?y10; !!VRz31&y10=0:S^Grey^; !!VRz31&y10=1:S^Gold^;
   !!SN:T^AC_Warmachine.Bal_Upg_2^/?z22; !!SN:W^Ballista_Add_Shots_%Y99^/?y10; !!VRz32&y10=0:S^Grey^; !!VRz32&y10=1:S^Gold^;
   !!SN:T^AC_Warmachine.Bal_Upg_3^/?z23; !!SN:W^Ballista_Crippling_%Y99^/?y10; !!VRz33&y10=0:S^Grey^; !!VRz33&y10=1:S^Gold^;
@@ -29013,3 +29076,15 @@ Change graphics of Meteor Shower and Implosion when at Master and GM level
   !!BMi:E0;
   !!en;
 !!en;
+
+
+********************************************************************************
+
+
+
+                                      TEST SECTION
+
+
+
+
+********************************************************************************
