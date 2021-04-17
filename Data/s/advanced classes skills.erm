@@ -1,5 +1,8 @@
 ZVSE2
 
+!?CM0;
+!!HE-1:W3000000;
+
 ********************************************************************************
                  Advanced Classes Mod for ERA 3.x
 ********************************************************************************
@@ -31,7 +34,7 @@ Name on Heroescommunity: RerryR (but please, call me Perry)
 
 !#SN:W^Advanced_Classes_Mod_Active^/1;  [Set Mod Active]
 
-!#SN:W^Game_Start_Value^/0;
+!#VRi^acm_isGameStarted^:S(FALSE);
 
 !#SN:W^Adept_Level_Global_Value^/10;
 !#SN:W^Expert_Level_Global_Value^/20;
@@ -111,7 +114,7 @@ Disable Various WoG Options which can conflict with Advanced Classes Mod
 
 !#UN:V?y1/?y2;                          [Check ERA version]
 !#SN:T^AC_Misc.ATTENTION GRANDPA^/?z2;
-!#IF&y2<3403:M^%Z2^;                    [Updated to version 3.4.3]
+!#IF&y2<3500:M^%Z2^;                    [Updated to version 3.5.0 with short boolean evaluation support]
 
 !#VRz-2:S^ACM Update 1.05^;             [User-defined section of WoG.ini file ("ACM Update 1.0X")]
 !#UN:N6/-1/1/-2;                        [Check if ACM Update 1.0X Message has already been displayed]
@@ -1901,7 +1904,7 @@ x1 - hero id, x2 - master rank, x3 - GM rank, x4 - skill id
 !!FU(acm_RecalcClassPoints):P(hero);
 
 !?FU(OnGameEnter);
-!!SN:W^Game_Start_Value^/10; [Activate First Click on Adventure Map activates Dialouge  [Works only after game start]
+!!VRi^acm_isGameStarted^:S(TRUE); [Activate First Click on Adventure Map activates Dialouge  [Works only after game start]
 
 !?FU(H3_Mod_Assign_Level_UP);
 
@@ -5633,11 +5636,10 @@ Till here Normal Necromancy
 
 !!HEx1:O?y3;                            [get owner of this hero]
 !!OW&y3<>-1:Iy3/?y4;                    [get AI (1) or human (0)]
-!!VRy5:S0;                              [assume AI]
-!!VRy5&y3<>-1/y4=0:S1;                  [human if has owner and that owner is human]
+!!VRy5:S(FALSE);                        [assume AI]
+!!VRy5&y3<>-1/y4=0:S(TRUE);             [human if has owner and that owner is human]
 
-!!SN:W^Game_Start_Value^/?y10;          [Message Works only after game start]
-!!IF&y5=1/1000/y10=10:Q2/y2/1/1/z-9;
+!!IF&y5/(ERM_FLAG_IS_HUMAN)/i^acm_isGameStarted^:Q2/y2/1/1/z-9;
 !!en;
 
 
@@ -9999,11 +10001,7 @@ Some animations, like projectiles (Lightning Bolt, Disrupting ray) and Armageddo
 This script sets the chance for Adventurer Heroes to gain Secondary Skills and Primary Skill Points
 Author: Alf :)
 ********************************************************************************
-!?FU(OnHeroGainLevel);
-
-!!SN:W^Game_Start_Value^/?y2;           [So it only runs after the map has started]
-!!FU&y2<>10:E;
-
+!?FU(OnHeroGainLevel)&i^acm_isGameStarted^; [So it only runs after the map has started]
 !!HE-1:N?y1;
 !!FU(Valid_Adventurer_Hero):Py1/?y60;   [Call Function to Check if Adventurer Hero]
 !!FU&y60<>1:E;
