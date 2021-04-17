@@ -1,5 +1,14 @@
 ZVSE2
 
+!?PI;
+!!re i/0/27;
+  !!HE0:Si/2;
+!!en;
+
+!!VRi^acm_optionChooseClass^:S(TRUE);
+!!VRi^acm_optionNoSkillDependenciesOnClass^:S(TRUE);
+!!HE0:Ed5000;
+
 ********************************************************************************
                  Advanced Classes Mod for ERA 3.x
 ********************************************************************************
@@ -111,7 +120,7 @@ Disable Various WoG Options which can conflict with Advanced Classes Mod
 
 !#UN:V?y1/?y2;                          [Check ERA version]
 !#SN:T^AC_Misc.ATTENTION GRANDPA^/?z2;
-!#IF&y2<3500:M^%Z2^;                    [Updated to version 3.5.0 with short boolean evaluation support]
+!#IF&y2<3501:M^%Z2^;                    [Updated to version 3.5.1 with short boolean evaluation support]
 
 !#VRz-2:S^ACM Update 1.05^;             [User-defined section of WoG.ini file ("ACM Update 1.0X")]
 !#UN:N6/-1/1/-2;                        [Check if ACM Update 1.0X Message has already been displayed]
@@ -788,7 +797,12 @@ This needs to be done to prevent an unkown crash with Kingdom Overview
 ; Desired class can be selected by player to force upgrading only that class points and ignore non-revevant skills
 !!VR(chosenClass:y):Si^acm_chosenClass_%(hero)^;
 
-!!if&(heroLevel)>=i^acm_dontAskToChooseClassTillLevel_%(hero)^;
+!!VR(shouldDelayClassSelection:y):S(FALSE);
+!!VR(shouldDelayClassSelection)&i^acm_dontAskToChooseClassTillMapStart_%(hero)^/i^acm_isGameStarted^=(FALSE):S(TRUE);
+!!VR(shouldDelayClassSelection)&(heroLevel)<i^acm_dontAskToChooseClassTillLevel_%(hero)^:S(TRUE);
+
+!!if&(shouldDelayClassSelection)=(FALSE);
+  !!VRi^acm_dontAskToChooseClassTillMapStart_%(hero)^:S(FALSE);
   !!FU(RadioDlg_Reset):P;
 
   !!if&(classPoints[ACM_WARRIOR_CLASS_IND])>=(masterClassRequiredPoints)/(chosenClass)=(ACM_NO_CLASS);
@@ -844,18 +858,20 @@ This needs to be done to prevent an unkown crash with Kingdom Overview
 
         !!SN:T^acm.class_selection_dlg.delay_selection_for^/?(text:z)/^levels^/5;
         !!FU(RadioDlg_AddItem):P(text)/-5;
-
-        !!SN:T^acm.class_selection_dlg.delay_selection_for^/?(text:z)/^levels^/5;
-        !!FU(RadioDlg_AddItem):P(text)/-5;
+        !!FU(RadioDlg_AddItem)&i^acm_isGameStarted^=(FALSE):P^%T(acm.class_selection_dlg.delay_selection_till_game_start)^/-1/^till_game_start^;
 
         !!SN:T^acm.class_name_%(chosenClass)^/?(className:z);
         !!SN:T^acm.class_selection_dlg.never_ask^/?(text:z)/^class_name^/(className);
         !!FU(RadioDlg_AddItem):P(text)/-1000;
 
-        !!FU(RadioDlg_Show):P?(itemInd:y)/?(dlgRes:y);
+        !!FU(RadioDlg_Show):P?(itemInd:y)/?(dlgRes:y)/?(dlgResTag:z);
 
         !!if&(dlgRes)<0;
-          !!VRi^acm_dontAskToChooseClassTillLevel_%(hero)^:S(heroLevel) -(dlgRes);
+          !!if&(dlgResTag)=^till_game_start^;
+            !!VRi^acm_dontAskToChooseClassTillMapStart_%(hero)^:S(TRUE);
+          !!el;
+            !!VRi^acm_dontAskToChooseClassTillLevel_%(hero)^:S(heroLevel) -(dlgRes);
+          !!en;
         !!el;
           !!VR(chosenClass):S(dlgRes);
           !!VRi^acm_chosenClass_%(hero)^:S(chosenClass);
@@ -921,12 +937,12 @@ This needs to be done to prevent an unkown crash with Kingdom Overview
 !!en;
 
 ; Show class promotion dialog if any main class is changed and a class is chosen to promote to
-!!if|i^Master_Warrior_Hero%(hero)^<>(prevWasMasterWarrior)/
-     i^Master_Mage_Hero%(hero)^<>(prevWasMasterMage)/
-     i^Master_Adventurer_Hero%(hero)^<>(prevWasMasterAdventurer)/
-     i^Grandmaster_Warrior_Hero%(hero)^<>(prevWasGrandmasterWarrior)/
-     i^Grandmaster_Mage_Hero%(hero)^<>(prevWasGrandmasterMage)/
-     i^Grandmaster_Adventurer_Hero%(hero)^<>(prevWasGrandmasterAdventurer);
+!!if|i^Master_Warrior_Hero%(hero)^         <> (prevWasMasterWarrior)/
+     i^Master_Mage_Hero%(hero)^            <> (prevWasMasterMage)/
+     i^Master_Adventurer_Hero%(hero)^      <> (prevWasMasterAdventurer)/
+     i^Grandmaster_Warrior_Hero%(hero)^    <> (prevWasGrandmasterWarrior)/
+     i^Grandmaster_Mage_Hero%(hero)^       <> (prevWasGrandmasterMage)/
+     i^Grandmaster_Adventurer_Hero%(hero)^ <> (prevWasGrandmasterAdventurer);
   !!FU(acm_ShowClassPromotionDlg)&(chosenClass)<>(ACM_NO_CLASS):P(hero)/(classPoints[ACM_WARRIOR_CLASS_IND])/(classPoints[ACM_MAGE_CLASS_IND])/(classPoints[ACM_ADVENTURER_CLASS_IND]);
 !!en;
 
@@ -1292,113 +1308,113 @@ This needs to be done to prevent an unkown crash with Kingdom Overview
 !!SN&x16=9/y1=3/y2=1/y3=0:H^secskill^/9/0/z199509; [M]
 !!SN&x16=9/y1=3/y2=1/y3=1:H^secskill^/9/0/z199609; [GM]
 
-!!SN&x16=10/y1=1/y2=0/y3=0H^secskill^0/10/0/z199210; [B                        [Ballistics]
-!!SN&x16=10/y1=2/y2=0/y3=0H^secskill^0/10/0/z199310; [A]
-!!SN&x16=10/y1=3/y2=0/y3=0H^secskill^0/10/0/z199410; [E]
-!!SN&x16=10/y1=3/y2=1/y3=0H^secskill^0/10/0/z199510; [M]
-!!SN&x16=10/y1=3/y2=1/y3=1H^secskill^0/10/0/z199610; [GM]
+!!SN&x16=10/y1=1/y2=0/y3=0:H^secskill^/10/0/z199210; [B                        [Ballistics]
+!!SN&x16=10/y1=2/y2=0/y3=0:H^secskill^/10/0/z199310; [A]
+!!SN&x16=10/y1=3/y2=0/y3=0:H^secskill^/10/0/z199410; [E]
+!!SN&x16=10/y1=3/y2=1/y3=0:H^secskill^/10/0/z199510; [M]
+!!SN&x16=10/y1=3/y2=1/y3=1:H^secskill^/10/0/z199610; [GM]
 
-!!SN&x16=11/y1=1/y2=0/y3=0H^secskill^0/11/0/z199211; [B                        [Eagle Eye]
-!!SN&x16=11/y1=2/y2=0/y3=0H^secskill^0/11/0/z199311; [A]
-!!SN&x16=11/y1=3/y2=0/y3=0H^secskill^0/11/0/z199411; [E]
-!!SN&x16=11/y1=3/y2=1/y3=0H^secskill^0/11/0/z199511; [M]
-!!SN&x16=11/y1=3/y2=1/y3=1H^secskill^0/11/0/z199611; [GM]
+!!SN&x16=11/y1=1/y2=0/y3=0:H^secskill^/11/0/z199211; [B                        [Eagle Eye]
+!!SN&x16=11/y1=2/y2=0/y3=0:H^secskill^/11/0/z199311; [A]
+!!SN&x16=11/y1=3/y2=0/y3=0:H^secskill^/11/0/z199411; [E]
+!!SN&x16=11/y1=3/y2=1/y3=0:H^secskill^/11/0/z199511; [M]
+!!SN&x16=11/y1=3/y2=1/y3=1:H^secskill^/11/0/z199611; [GM]
 
-!!SN&x16=12/y1=1/y2=0/y3=0H^secskill^0/12/0/z199212; [B                        [Necromancy]
-!!SN&x16=12/y1=2/y2=0/y3=0H^secskill^0/12/0/z199312; [A]
-!!SN&x16=12/y1=3/y2=0/y3=0H^secskill^0/12/0/z199412; [E]
-!!SN&x16=12/y1=3/y2=1/y3=0H^secskill^0/12/0/z199512; [M]
-!!SN&x16=12/y1=3/y2=1/y3=1H^secskill^0/12/0/z199612; [GM]
+!!SN&x16=12/y1=1/y2=0/y3=0:H^secskill^/12/0/z199212; [B                        [Necromancy]
+!!SN&x16=12/y1=2/y2=0/y3=0:H^secskill^/12/0/z199312; [A]
+!!SN&x16=12/y1=3/y2=0/y3=0:H^secskill^/12/0/z199412; [E]
+!!SN&x16=12/y1=3/y2=1/y3=0:H^secskill^/12/0/z199512; [M]
+!!SN&x16=12/y1=3/y2=1/y3=1:H^secskill^/12/0/z199612; [GM]
 
-!!SN&x16=13/y1=1/y2=0/y3=0H^secskill^0/13/0/z199213; [B                        [Estates]
-!!SN&x16=13/y1=2/y2=0/y3=0H^secskill^0/13/0/z199313; [A]
-!!SN&x16=13/y1=3/y2=0/y3=0H^secskill^0/13/0/z199413; [E]
-!!SN&x16=13/y1=3/y2=1/y3=0H^secskill^0/13/0/z199513; [M]
-!!SN&x16=13/y1=3/y2=1/y3=1H^secskill^0/13/0/z199613; [GM]
+!!SN&x16=13/y1=1/y2=0/y3=0:H^secskill^/13/0/z199213; [B                        [Estates]
+!!SN&x16=13/y1=2/y2=0/y3=0:H^secskill^/13/0/z199313; [A]
+!!SN&x16=13/y1=3/y2=0/y3=0:H^secskill^/13/0/z199413; [E]
+!!SN&x16=13/y1=3/y2=1/y3=0:H^secskill^/13/0/z199513; [M]
+!!SN&x16=13/y1=3/y2=1/y3=1:H^secskill^/13/0/z199613; [GM]
 
-!!SN&x16=14/y1=1/y2=0/y3=0H^secskill^0/14/0/z199214; [B                        [Fire Magic]
-!!SN&x16=14/y1=2/y2=0/y3=0H^secskill^0/14/0/z199314; [A]
-!!SN&x16=14/y1=3/y2=0/y3=0H^secskill^0/14/0/z199414; [E]
-!!SN&x16=14/y1=3/y2=1/y3=0H^secskill^0/14/0/z199514; [M]
-!!SN&x16=14/y1=3/y2=1/y3=1H^secskill^0/14/0/z199614; [GM]
+!!SN&x16=14/y1=1/y2=0/y3=0:H^secskill^/14/0/z199214; [B                        [Fire Magic]
+!!SN&x16=14/y1=2/y2=0/y3=0:H^secskill^/14/0/z199314; [A]
+!!SN&x16=14/y1=3/y2=0/y3=0:H^secskill^/14/0/z199414; [E]
+!!SN&x16=14/y1=3/y2=1/y3=0:H^secskill^/14/0/z199514; [M]
+!!SN&x16=14/y1=3/y2=1/y3=1:H^secskill^/14/0/z199614; [GM]
 
-!!SN&x16=15/y1=1/y2=0/y3=0H^secskill^0/15/0/z199215; [B                        [Air Magic]
-!!SN&x16=15/y1=2/y2=0/y3=0H^secskill^0/15/0/z199315; [A]
-!!SN&x16=15/y1=3/y2=0/y3=0H^secskill^0/15/0/z199415; [E]
-!!SN&x16=15/y1=3/y2=1/y3=0H^secskill^0/15/0/z199515; [M]
-!!SN&x16=15/y1=3/y2=1/y3=1H^secskill^0/15/0/z199615; [GM]
+!!SN&x16=15/y1=1/y2=0/y3=0:H^secskill^/15/0/z199215; [B                        [Air Magic]
+!!SN&x16=15/y1=2/y2=0/y3=0:H^secskill^/15/0/z199315; [A]
+!!SN&x16=15/y1=3/y2=0/y3=0:H^secskill^/15/0/z199415; [E]
+!!SN&x16=15/y1=3/y2=1/y3=0:H^secskill^/15/0/z199515; [M]
+!!SN&x16=15/y1=3/y2=1/y3=1:H^secskill^/15/0/z199615; [GM]
 
-!!SN&x16=16/y1=1/y2=0/y3=0H^secskill^0/16/0/z199216; [B                        [Water Magic]
-!!SN&x16=16/y1=2/y2=0/y3=0H^secskill^0/16/0/z199316; [A]
-!!SN&x16=16/y1=3/y2=0/y3=0H^secskill^0/16/0/z199416; [E]
-!!SN&x16=16/y1=3/y2=1/y3=0H^secskill^0/16/0/z199516; [M]
-!!SN&x16=16/y1=3/y2=1/y3=1H^secskill^0/16/0/z199616; [GM]
+!!SN&x16=16/y1=1/y2=0/y3=0:H^secskill^/16/0/z199216; [B                        [Water Magic]
+!!SN&x16=16/y1=2/y2=0/y3=0:H^secskill^/16/0/z199316; [A]
+!!SN&x16=16/y1=3/y2=0/y3=0:H^secskill^/16/0/z199416; [E]
+!!SN&x16=16/y1=3/y2=1/y3=0:H^secskill^/16/0/z199516; [M]
+!!SN&x16=16/y1=3/y2=1/y3=1:H^secskill^/16/0/z199616; [GM]
 
-!!SN&x16=17/y1=1/y2=0/y3=0H^secskill^0/17/0/z199217; [B                        [Earth Magic]
-!!SN&x16=17/y1=2/y2=0/y3=0H^secskill^0/17/0/z199317; [A]
-!!SN&x16=17/y1=3/y2=0/y3=0H^secskill^0/17/0/z199417; [E]
-!!SN&x16=17/y1=3/y2=1/y3=0H^secskill^0/17/0/z199517; [M]
-!!SN&x16=17/y1=3/y2=1/y3=1H^secskill^0/17/0/z199617; [GM]
+!!SN&x16=17/y1=1/y2=0/y3=0:H^secskill^/17/0/z199217; [B                        [Earth Magic]
+!!SN&x16=17/y1=2/y2=0/y3=0:H^secskill^/17/0/z199317; [A]
+!!SN&x16=17/y1=3/y2=0/y3=0:H^secskill^/17/0/z199417; [E]
+!!SN&x16=17/y1=3/y2=1/y3=0:H^secskill^/17/0/z199517; [M]
+!!SN&x16=17/y1=3/y2=1/y3=1:H^secskill^/17/0/z199617; [GM]
 
-!!SN&x16=18/y1=1/y2=0/y3=0H^secskill^0/18/0/z199218; [B                        [Scholar]
-!!SN&x16=18/y1=2/y2=0/y3=0H^secskill^0/18/0/z199318; [A]
-!!SN&x16=18/y1=3/y2=0/y3=0H^secskill^0/18/0/z199418; [E]
-!!SN&x16=18/y1=3/y2=1/y3=0H^secskill^0/18/0/z199518; [M]
-!!SN&x16=18/y1=3/y2=1/y3=1H^secskill^0/18/0/z199618; [GM]
+!!SN&x16=18/y1=1/y2=0/y3=0:H^secskill^/18/0/z199218; [B                        [Scholar]
+!!SN&x16=18/y1=2/y2=0/y3=0:H^secskill^/18/0/z199318; [A]
+!!SN&x16=18/y1=3/y2=0/y3=0:H^secskill^/18/0/z199418; [E]
+!!SN&x16=18/y1=3/y2=1/y3=0:H^secskill^/18/0/z199518; [M]
+!!SN&x16=18/y1=3/y2=1/y3=1:H^secskill^/18/0/z199618; [GM]
 
-!!SN&x16=19/y1=1/y2=0/y3=0H^secskill^0/19/0/z199219; [B                        [Warfare]
-!!SN&x16=19/y1=2/y2=0/y3=0H^secskill^0/19/0/z199319; [A]
-!!SN&x16=19/y1=3/y2=0/y3=0H^secskill^0/19/0/z199419; [E]
-!!SN&x16=19/y1=3/y2=1/y3=0H^secskill^0/19/0/z199519; [M]
-!!SN&x16=19/y1=3/y2=1/y3=1H^secskill^0/19/0/z199619; [GM]
+!!SN&x16=19/y1=1/y2=0/y3=0:H^secskill^/19/0/z199219; [B                        [Warfare]
+!!SN&x16=19/y1=2/y2=0/y3=0:H^secskill^/19/0/z199319; [A]
+!!SN&x16=19/y1=3/y2=0/y3=0:H^secskill^/19/0/z199419; [E]
+!!SN&x16=19/y1=3/y2=1/y3=0:H^secskill^/19/0/z199519; [M]
+!!SN&x16=19/y1=3/y2=1/y3=1:H^secskill^/19/0/z199619; [GM]
 
-!!SN&x16=20/y1=1/y2=0/y3=0H^secskill^0/20/0/z199220; [B                        [Artillery]
-!!SN&x16=20/y1=2/y2=0/y3=0H^secskill^0/20/0/z199320; [A]
-!!SN&x16=20/y1=3/y2=0/y3=0H^secskill^0/20/0/z199420; [E]
-!!SN&x16=20/y1=3/y2=1/y3=0H^secskill^0/20/0/z199520; [M]
-!!SN&x16=20/y1=3/y2=1/y3=1H^secskill^0/20/0/z199620; [GM]
+!!SN&x16=20/y1=1/y2=0/y3=0:H^secskill^/20/0/z199220; [B                        [Artillery]
+!!SN&x16=20/y1=2/y2=0/y3=0:H^secskill^/20/0/z199320; [A]
+!!SN&x16=20/y1=3/y2=0/y3=0:H^secskill^/20/0/z199420; [E]
+!!SN&x16=20/y1=3/y2=1/y3=0:H^secskill^/20/0/z199520; [M]
+!!SN&x16=20/y1=3/y2=1/y3=1:H^secskill^/20/0/z199620; [GM]
 
-!!SN&x16=21/y1=1/y2=0/y3=0H^secskill^0/21/0/z199221; [B                        [Learning]
-!!SN&x16=21/y1=2/y2=0/y3=0H^secskill^0/21/0/z199321; [A]
-!!SN&x16=21/y1=3/y2=0/y3=0H^secskill^0/21/0/z199421; [E]
-!!SN&x16=21/y1=3/y2=1/y3=0H^secskill^0/21/0/z199521; [M]
-!!SN&x16=21/y1=3/y2=1/y3=1H^secskill^0/21/0/z199621; [GM]
+!!SN&x16=21/y1=1/y2=0/y3=0:H^secskill^/21/0/z199221; [B                        [Learning]
+!!SN&x16=21/y1=2/y2=0/y3=0:H^secskill^/21/0/z199321; [A]
+!!SN&x16=21/y1=3/y2=0/y3=0:H^secskill^/21/0/z199421; [E]
+!!SN&x16=21/y1=3/y2=1/y3=0:H^secskill^/21/0/z199521; [M]
+!!SN&x16=21/y1=3/y2=1/y3=1:H^secskill^/21/0/z199621; [GM]
 
-!!SN&x16=22/y1=1/y2=0/y3=0H^secskill^0/22/0/z199222; [B                        [Offense]
-!!SN&x16=22/y1=2/y2=0/y3=0H^secskill^0/22/0/z199322; [A]
-!!SN&x16=22/y1=3/y2=0/y3=0H^secskill^0/22/0/z199422; [E]
-!!SN&x16=22/y1=3/y2=1/y3=0H^secskill^0/22/0/z199522; [M]
-!!SN&x16=22/y1=3/y2=1/y3=1H^secskill^0/22/0/z199622; [GM]
+!!SN&x16=22/y1=1/y2=0/y3=0:H^secskill^/22/0/z199222; [B                        [Offense]
+!!SN&x16=22/y1=2/y2=0/y3=0:H^secskill^/22/0/z199322; [A]
+!!SN&x16=22/y1=3/y2=0/y3=0:H^secskill^/22/0/z199422; [E]
+!!SN&x16=22/y1=3/y2=1/y3=0:H^secskill^/22/0/z199522; [M]
+!!SN&x16=22/y1=3/y2=1/y3=1:H^secskill^/22/0/z199622; [GM]
 
-!!SN&x16=23/y1=1/y2=0/y3=0H^secskill^0/23/0/z199223; [B                        [Armorer]
-!!SN&x16=23/y1=2/y2=0/y3=0H^secskill^0/23/0/z199323; [A]
-!!SN&x16=23/y1=3/y2=0/y3=0H^secskill^0/23/0/z199423; [E]
-!!SN&x16=23/y1=3/y2=1/y3=0H^secskill^0/23/0/z199523; [M]
-!!SN&x16=23/y1=3/y2=1/y3=1H^secskill^0/23/0/z199623; [GM]
+!!SN&x16=23/y1=1/y2=0/y3=0:H^secskill^/23/0/z199223; [B                        [Armorer]
+!!SN&x16=23/y1=2/y2=0/y3=0:H^secskill^/23/0/z199323; [A]
+!!SN&x16=23/y1=3/y2=0/y3=0:H^secskill^/23/0/z199423; [E]
+!!SN&x16=23/y1=3/y2=1/y3=0:H^secskill^/23/0/z199523; [M]
+!!SN&x16=23/y1=3/y2=1/y3=1:H^secskill^/23/0/z199623; [GM]
 
-!!SN&x16=24/y1=1/y2=0/y3=0H^secskill^0/24/0/z199224; [B                        [Intelligence]
-!!SN&x16=24/y1=2/y2=0/y3=0H^secskill^0/24/0/z199324; [A]
-!!SN&x16=24/y1=3/y2=0/y3=0H^secskill^0/24/0/z199424; [E]
-!!SN&x16=24/y1=3/y2=1/y3=0H^secskill^0/24/0/z199524; [M]
-!!SN&x16=24/y1=3/y2=1/y3=1H^secskill^0/24/0/z199624; [GM]
+!!SN&x16=24/y1=1/y2=0/y3=0:H^secskill^/24/0/z199224; [B                        [Intelligence]
+!!SN&x16=24/y1=2/y2=0/y3=0:H^secskill^/24/0/z199324; [A]
+!!SN&x16=24/y1=3/y2=0/y3=0:H^secskill^/24/0/z199424; [E]
+!!SN&x16=24/y1=3/y2=1/y3=0:H^secskill^/24/0/z199524; [M]
+!!SN&x16=24/y1=3/y2=1/y3=1:H^secskill^/24/0/z199624; [GM]
 
-!!SN&x16=25/y1=1/y2=0/y3=0H^secskill^0/25/0/z199225; [B                        [Sorcery]
-!!SN&x16=25/y1=2/y2=0/y3=0H^secskill^0/25/0/z199325; [A]
-!!SN&x16=25/y1=3/y2=0/y3=0H^secskill^0/25/0/z199425; [E]
-!!SN&x16=25/y1=3/y2=1/y3=0H^secskill^0/25/0/z199525; [M]
-!!SN&x16=25/y1=3/y2=1/y3=1H^secskill^0/25/0/z199625; [GM]
+!!SN&x16=25/y1=1/y2=0/y3=0:H^secskill^/25/0/z199225; [B                        [Sorcery]
+!!SN&x16=25/y1=2/y2=0/y3=0:H^secskill^/25/0/z199325; [A]
+!!SN&x16=25/y1=3/y2=0/y3=0:H^secskill^/25/0/z199425; [E]
+!!SN&x16=25/y1=3/y2=1/y3=0:H^secskill^/25/0/z199525; [M]
+!!SN&x16=25/y1=3/y2=1/y3=1:H^secskill^/25/0/z199625; [GM]
 
-!!SN&x16=26/y1=1/y2=0/y3=0H^secskill^0/26/0/z199226; [B                        [Resistance]
-!!SN&x16=26/y1=2/y2=0/y3=0H^secskill^0/26/0/z199326; [A]
-!!SN&x16=26/y1=3/y2=0/y3=0H^secskill^0/26/0/z199426; [E]
-!!SN&x16=26/y1=3/y2=1/y3=0H^secskill^0/26/0/z199526; [M]
-!!SN&x16=26/y1=3/y2=1/y3=1H^secskill^0/26/0/z199626; [GM]
+!!SN&x16=26/y1=1/y2=0/y3=0:H^secskill^/26/0/z199226; [B                        [Resistance]
+!!SN&x16=26/y1=2/y2=0/y3=0:H^secskill^/26/0/z199326; [A]
+!!SN&x16=26/y1=3/y2=0/y3=0:H^secskill^/26/0/z199426; [E]
+!!SN&x16=26/y1=3/y2=1/y3=0:H^secskill^/26/0/z199526; [M]
+!!SN&x16=26/y1=3/y2=1/y3=1:H^secskill^/26/0/z199626; [GM]
 
-!!SN&x16=27/y1=1/y2=0/y3=0H^secskill^0/27/0/z199227; [B                        [First Aid]
-!!SN&x16=27/y1=2/y2=0/y3=0H^secskill^0/27/0/z199327; [A]
-!!SN&x16=27/y1=3/y2=0/y3=0H^secskill^0/27/0/z199427; [E]
-!!SN&x16=27/y1=3/y2=1/y3=0H^secskill^0/27/0/z199527; [M]
-!!SN&x16=27/y1=3/y2=1/y3=1H^secskill^0/27/0/z199627; [GM]
+!!SN&x16=27/y1=1/y2=0/y3=0:H^secskill^/27/0/z199227; [B                        [First Aid]
+!!SN&x16=27/y1=2/y2=0/y3=0:H^secskill^/27/0/z199327; [A]
+!!SN&x16=27/y1=3/y2=0/y3=0:H^secskill^/27/0/z199427; [E]
+!!SN&x16=27/y1=3/y2=1/y3=0:H^secskill^/27/0/z199527; [M]
+!!SN&x16=27/y1=3/y2=1/y3=1:H^secskill^/27/0/z199627; [GM]
 !!en;
 
 

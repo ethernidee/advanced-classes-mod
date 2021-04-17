@@ -18,9 +18,10 @@
 		"class_level_5": "Grandmaster",
 
 		"class_selection_dlg": {
-			"title":               "Choose advanced class for @hero_name@:",
-			"delay_selection_for": "Delay choice for @levels@ levels",
-			"never_ask":           "Freeze current class (@class_name@) and never ask again"
+			"title":                           "Choose advanced class for @hero_name@:",
+			"delay_selection_for":             "Delay choice for @levels@ levels",
+			"delay_selection_till_game_start": "Delay choice till game start",
+			"never_ask":                       "Freeze current class (@class_name@) and never ask again"
 		}
 	},
 
