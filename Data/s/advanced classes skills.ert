@@ -385,19 +385,19 @@ Also shoots once at the enemies before combat.
 
 189563	{~Red}Basic Learning{~}
 
-Basic Learning increases a hero's earned experience by 20% and gives a small chance for an extra primary stat when visiting certain map objects.
+Basic Learning increases a hero's earned experience by 20% and gives a 25% chance for an extra primary stat when visiting certain map objects.
 189564	{~Red}Advanced Learning{~}
 
-Advanced Learning increases a hero's earned experience by 30% and gives a medium chance for an extra primary stat when visiting certain map objects.
+Advanced Learning increases a hero's earned experience by 30% and gives a 28% chance for an extra primary stat when visiting certain map objects.
 189565	{~Red}Expert Learning{~}
 
-Expert Learning increases a hero's earned experience by 40% and gives a good chance for an extra primary stat when visiting certain map objects.
+Expert Learning increases a hero's earned experience by 40% and gives a 33% chance for an extra primary stat when visiting certain map objects.
 189764	{~Red}Master Learning{~}
 
-Master Learning increases a hero's earned experience by 60% and gives a high chance for an extra primary stat when visiting certain map objects.
+Master Learning increases a hero's earned experience by 60% and gives a 35% chance for an extra primary stat when visiting certain map objects.
 189765	{~Red}Grandmaster Learning{~}
 
-Grandmaster Learning increases a hero's earned experience by 75% and gives a very high chance for an extra primary stat when visiting certain map objects.
+Grandmaster Learning increases a hero's earned experience by 75% and gives a 40% chance for an extra primary stat when visiting certain map objects.
 
 189566	{~Red}Basic Offense{~}
 
@@ -1253,7 +1253,7 @@ With 5 Pieces: +{20}% Crit damage +{2} Defense
 With 6 Pieces: +{10}% Spell damage +{2} to primary skills, {Dragon Fire Attacks}
 179859	{Necklace of Dragonteeth}
 
-Worn about the neck, this item increases your Knowledge and Power skills by +3.
+Worn about the neck, this item increases your Knowledge and Power skills by +3 and reduces all magic damage by 50 points.
 
 {~Red}Dragon's Fire{~}: 
 With 3 Pieces: +{3} Power and Knowledge
@@ -1271,7 +1271,7 @@ With 5 Pieces: +{20}% Crit damage +{2} Defense
 With 6 Pieces: +{10}% Spell damage +{2} to primary skills, {Dragon Fire Attacks}
 179861	{Dragon Scale Shield}
 
-Held with the left hand, this item increases your Attack and Defense skills by +3.
+Held with the left hand, this item increases your Attack and Defense skills by +3 and reduces all magic damage by 50 points.
 
 {~Red}Dragon's Fire{~}: 
 With 3 Pieces: +{3} Power and Knowledge
@@ -1287,7 +1287,9 @@ With 3 Pieces: +{3} Power and Knowledge
 With 4 Pieces: +{10}% Crit chance +{2} Attack 
 With 5 Pieces: +{20}% Crit damage +{2} Defense
 With 6 Pieces: +{10}% Spell damage +{2} to primary skills, {Dragon Fire Attacks}
-179863	free
+179863	{Quiet Eye of the Dragon}
+
+When worn on the finger, this item increases your Attack and Defense skills by +1 and reduces all magic damage by 50 points.
 188100	free
 188101	free
 188102	free
@@ -1386,7 +1388,7 @@ When worn, this item bestows +3 Luck and Morale to your hero's troops.
 
 {~Red}The Champion's Honor{~}:
 With 2 Pieces: -{1} enemy Luck,  20% chance to get a random warmachine upgrade for free at level up
-With 3 Pieces: -{1} enemy Moral, 20% chance for a radnom primary skill point at level up
+With 3 Pieces: -{1} enemy Moral, 20% chance for a random primary skill point at level up
 With 4 Pieces: All your units become {Fearless} and your level 1 troops gain the {Champion Strike} ability, 50% chance to get a random warmachine upgrade for free at level up
 188116	{The Clover of Fortune}
 
@@ -1458,7 +1460,7 @@ With 5 Pieces: +{1} to primary skills +{50}% to Resurrection Spell
 With 6 Pieces: +{20}% Spell damage +{50}% to Destroy Undead Spell +{4} to primary skills, {Blessed}
 188131	{Armor of Wonder}
 
-Worn on the torso, the Armor of Wonder increases all four primary skills by +1 and reduces all ranged damage by 20+2*HLvL points.
+Worn on the torso, the Armor of Wonder increases all four primary skills by +1 and reduces all ranged damage by 10+2*HLvL points.
 
 {~Red}Angelic Alliance{~}:
 With 4 Pieces:+{5}% crit chance, +{5}% crit damage
@@ -1620,22 +1622,22 @@ With 3 Pieces: -15% crit chance -20% crit damage, mass {Magic Mirror}, random Ba
 188159	free
 188160	{Necklace of Swiftness}
 
-Worn about the neck, this necklace increases the combat speed of all your units by +1.
+Worn about the neck, this necklace increases the combat speed of all your units by +1 and grants a 4% chance to completely evade attacks.
 
 {~Red}Pegasus Harness{~}:
-With 3 Pieces: {Speed Bonus} for the slowest unit in your army
+With 3 Pieces: {Speed Bonus} for the slowest unit in your army and a total of {15}% change to dodge attacks
 188161	{Ring of the Wayfarer}
 
-When placed on the finger, this ring increases the combat speed of all your units by +1.
+When placed on the finger, this ring increases the combat speed of all your units by +1 and grants a 4% chance to completely evade attacks.
 
 {~Red}Pegasus Harness{~}:
-With 3 Pieces: {Speed Bonus} for the slowest unit in your army
+With 3 Pieces: {Speed Bonus} for the slowest unit in your army and a total of {15}% change to dodge attacks
 188162	{Cape of Velocity}
 
 Worn about the shoulders, this cape increases the combat speed of all your units by +2.
 
 {~Red}Pegasus Harness{~}:
-With 3 Pieces: {Speed Bonus} for the slowest unit in your army
+With 3 Pieces: {Speed Bonus} for the slowest unit in your army and a total of {15}% change to dodge attacks
 188163	{Titan's Gladius }
 
 Held with the right hand, this massive relic increases your Attack skill by +12, but reduces your Defense skill by -3.
@@ -1714,7 +1716,7 @@ With 5 Pieces: +{1} to primary skills +{50}% to Resurrection Spell
 With 6 Pieces: +{20}% Spell damage +{50}% to Destroy Undead Spell +{4} to primary skills, {Blessed}
 188175	{Breastplate of Petrified Wood}
 
-Worn on the torso, this item increases your Power skill by +1 and reduces all melee damage by 15+2*HLvL points.
+Worn on the torso, this item increases your Power skill by +1 and reduces all melee damage by 5+2*HLvL points.
 
 {~Red}Priest of the Light{~}: 
 With 3 Pieces: +{2} Power and Knowledge
@@ -2084,7 +2086,7 @@ Held in the left hand, this Shield increases your defense by +2 and reduces all 
 
 {~DodgerBlue}Mage Class Set{~}
 With 2 Pieces: +20% HP and damage for the commander, +10% spell crit damage
-With 3 Pieces: Increases spell crit chance and crit damage for each 3 battles won, +{5} Mage Class Points, +{3} to all primary skills
+With 3 Pieces: Increases spell crit chance and crit damage for each 2 battles won, +{5} Mage Class Points, +{3} to all primary skills
 188252	{~LimeGreen}Noble Ring of Quicksand{~}
 
 This expensive ring reduces the speed of all enemys by 1 and gives you +1 attack and spellpower.
@@ -2098,7 +2100,7 @@ Worn on the finger, this noble ring gives +6 Spellpower but reduces your Attack 
 
 {~DodgerBlue}Mage Class Set{~}
 With 2 Pieces: +20% HP and damage for the commander, +10% spell crit damage
-With 3 Pieces: Increases spell crit chance and crit damage for each 3 battles won, +{5} Mage Class Points, +{3} to all primary skills
+With 3 Pieces: Increases spell crit chance and crit damage for each 2 battles won, +{5} Mage Class Points, +{3} to all primary skills
 188254	{~LimeGreen}Kings Necklace of the commander{~}
 
 Worn around the neck this expansive Necklace increases all primary skills by +1. Also increases the life and damage of your commander by +20%.
@@ -2119,7 +2121,7 @@ When equipped, this sparkling Surcoat reduces the speed of all enemies by 1 and 
 
 {~DodgerBlue}Mage Class Set{~}
 With 2 Pieces: +20% HP and damage for the commander, +10% spell crit damage
-With 3 Pieces: Increases spell crit chance and crit damage for each 3 battles won, +{5} Mage Class Points, +{3} to all primary skills
+With 3 Pieces: Increases spell crit chance and crit damage for each 2 battles won, +{5} Mage Class Points, +{3} to all primary skills
 188257	{~r}Heavy Boots of Quicksand{~}
 
 These rough boots reduce the speed of all enemies by 1 and gives you +1 attack and defense.
@@ -2137,7 +2139,7 @@ Increases you critical spell damage by {20}%.
 The Ammo Cart ensures that your missile troops never run out of ammunition in combat.
 
 Increases healing of First Aid tent after combat.
-Increases Artillery damage before combat.
+Increases Artillery/Eagle Eye damage before combat.
 Gives +2 Spell Points after combat.
 188260	Full Helmet of the commander {~Gold}Secret Set Piece{~}
 188261	Precious Longsword {~Gold}Secret Set Piece{~}
@@ -2182,7 +2184,7 @@ Worn about the shoulders, this cloak gives a 15% boost to the hero's Necromancy 
 
 	{Red Dragon Flame Tongue}
 
-Held with the right hand, this item increases hero's attack and defense +2 and adds fire damage to melee attacks.
+Held with the right hand, this item increases hero's attack and defense +2 and gives a chance to add {~r}fire{~} damage to melee attacks.
 188277
 	free
 188278
@@ -2213,7 +2215,7 @@ When equipped, this cart provides the kingdom with an additional +2 ore per day.
 188283
 	{Magic Wand}
 
-When equipped this powerful magic wand increases the Magic Strength of the hero by {+20}.
+When equipped, this powerful magic wand increases the Magic Strength of the hero by {+20} and gives +{5%} Magic Pierce.
 188284
 	{Ballista Arrow}
 
