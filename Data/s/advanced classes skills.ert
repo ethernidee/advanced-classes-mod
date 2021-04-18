@@ -1253,7 +1253,7 @@ With 5 Pieces: +{20}% Crit damage +{2} Defense
 With 6 Pieces: +{10}% Spell damage +{2} to primary skills, {Dragon Fire Attacks}
 179859	{Necklace of Dragonteeth}
 
-Worn about the neck, this item increases your Knowledge and Power skills by +3.
+Worn about the neck, this item increases your Knowledge and Power skills by +3 and reduces all magic damage by 50 points.
 
 {~Red}Dragon's Fire{~}: 
 With 3 Pieces: +{3} Power and Knowledge
@@ -1460,7 +1460,7 @@ With 5 Pieces: +{1} to primary skills +{50}% to Resurrection Spell
 With 6 Pieces: +{20}% Spell damage +{50}% to Destroy Undead Spell +{4} to primary skills, {Blessed}
 188131	{Armor of Wonder}
 
-Worn on the torso, the Armor of Wonder increases all four primary skills by +1 and reduces all ranged damage by 20+2*HLvL points.
+Worn on the torso, the Armor of Wonder increases all four primary skills by +1 and reduces all ranged damage by 10+2*HLvL points.
 
 {~Red}Angelic Alliance{~}:
 With 4 Pieces:+{5}% crit chance, +{5}% crit damage
@@ -1716,7 +1716,7 @@ With 5 Pieces: +{1} to primary skills +{50}% to Resurrection Spell
 With 6 Pieces: +{20}% Spell damage +{50}% to Destroy Undead Spell +{4} to primary skills, {Blessed}
 188175	{Breastplate of Petrified Wood}
 
-Worn on the torso, this item increases your Power skill by +1 and reduces all melee damage by 15+2*HLvL points.
+Worn on the torso, this item increases your Power skill by +1 and reduces all melee damage by 5+2*HLvL points.
 
 {~Red}Priest of the Light{~}: 
 With 3 Pieces: +{2} Power and Knowledge
@@ -2184,7 +2184,7 @@ Worn about the shoulders, this cloak gives a 15% boost to the hero's Necromancy 
 
 	{Red Dragon Flame Tongue}
 
-Held with the right hand, this item increases hero's attack and defense +2 and adds fire damage to melee attacks.
+Held with the right hand, this item increases hero's attack and defense +2 and gives a chance to add {~r}fire{~} damage to melee attacks.
 188277
 	free
 188278
@@ -2215,7 +2215,7 @@ When equipped, this cart provides the kingdom with an additional +2 ore per day.
 188283
 	{Magic Wand}
 
-When equipped this powerful magic wand increases the Magic Strength of the hero by {+20}.
+When equipped, this powerful magic wand increases the Magic Strength of the hero by {+20} and gives +{5%} Magic Pierce.
 188284
 	{Ballista Arrow}
 
