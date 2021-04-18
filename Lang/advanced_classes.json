@@ -670,23 +670,53 @@
 			"Statesman's Medal Bonus": 			"{Statesman's Medal Bonus}
 
 												After successfully clearing this creature bank the Statesman's Medal increases your gold reward by {@gold@} gold.",
+												
+			"Bonus_Table_Header":				"{~r}Bonus Table{~}",
 
-			"Bonus Table 1": 					"{~r}Bonus Table{~}
-
+			"Bonus_Table_Magic":				"{~r}Magic{~}
 												Magic Strength: {%Y61}
 												Spell Damage: {%Y98%%}
 												Spell Crit Chance: {%Y16%%}
 												Spell Crit Damage: {%Y99%%}
 												Spell Upgrades per Combat: {%Y95}
 												Chance for Spell Upgrade: {%Y96%%}
+												Magic Pierce: {%Y74%}",
 
-												Physical Crit Chance: {%Y13%%}
-												Physical Crit Damage: {%Y14%%}
-												Army Creature Growth: {%Y15%%}",
+			"Bonus_Table_Battle":				"{~r}Battle Stats{~}												
+												Battles won: {%Y40}	
+												Heroes killed: {%Y40}												
+												Physical damage dealt: {%Y40}
+												Magical damage dealt: {%Y41}",
 
-			"Spell_Upgrades": 					"{~r}Warrior{~} Set Bonus: {%Y10%%}
+			"Bonus_Table_Skills":				"{~r}Skills{~}			
+												Artillery pre-damage: {%Y58-%Y59}
+												Eagle Eye pre-damage: {%Y62-%Y63}
+												First Aid Tent heal in combat: {%Y66-%Y67}
+												First Aid Tent heal after combat: {%Y64-%Y65}
+												Heal Capacity: {%Y68}
+												Chance for scouting event: {17/%Y69%}",
+												
+			"Bonus_Table_Artifacts":			"{~r}Artifacts{~}
+												Flat melee damage block: {%Y71}
+												Flat range damage block: {%Y70}
+												Flat magic damage block: {%Y72}
+												Chance to evade attacks: {%Y73%}
+												Bonus Fire damage to attacks: {%Y75-%Y79}
+												Bonus damage vs. undeads units: {%Y76}
+												Bonus damage vs living units: {%Y77}
+												Bonus ranged damage to attacks: {%Y78}",
+												
+			"Bonus_Table_Class_Sets":			"{~r}Class Sets{~}												
+												{~r}Warrior{~} Set Bonus: {%Y10%%}
 												{~DodgerBlue}Mage{~} Set Bonus: {%Y11%%}
-												{~LimeGreen}Adventurer{~} Set Bonus: {%Y12%%}",
+												{~LimeGreen}Adventurer{~} Set Bonus: {%Y12%%}",												
+
+			"Bonus_Table_Commander":			"{~r}Commander{~}:			
+												Commander Kill Count: {%Y42}
+												Commander base spell damage: {%Y51}
+												Bonus HP to Tent and Ballista: {%Y52}
+												Bonus damage to Ballista: {%Y53}
+												Commander special ability: {%Y54}",
 
 			"Bonus Table 3": 					"Class Experience and class point table:",
 
