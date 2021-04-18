@@ -111,7 +111,7 @@ Disable Various WoG Options which can conflict with Advanced Classes Mod
 
 !#UN:V?y1/?y2;                          [Check ERA version]
 !#SN:T^AC_Misc.ATTENTION GRANDPA^/?z2;
-!#IF&y2<3500:M^%Z2^;                    [Updated to version 3.5.0 with short boolean evaluation support]
+!#IF&y2<3501:M^%Z2^;                    [Updated to version 3.5.1 with short boolean evaluation support]
 
 !#VRz-2:S^ACM Update 1.05^;             [User-defined section of WoG.ini file ("ACM Update 1.0X")]
 !#UN:N6/-1/1/-2;                        [Check if ACM Update 1.0X Message has already been displayed]
@@ -788,7 +788,12 @@ This needs to be done to prevent an unkown crash with Kingdom Overview
 ; Desired class can be selected by player to force upgrading only that class points and ignore non-revevant skills
 !!VR(chosenClass:y):Si^acm_chosenClass_%(hero)^;
 
-!!if&(heroLevel)>=i^acm_dontAskToChooseClassTillLevel_%(hero)^;
+!!VR(shouldDelayClassSelection:y):S(FALSE);
+!!VR(shouldDelayClassSelection)&i^acm_dontAskToChooseClassTillMapStart_%(hero)^/i^acm_isGameStarted^=(FALSE):S(TRUE);
+!!VR(shouldDelayClassSelection)&(heroLevel)<i^acm_dontAskToChooseClassTillLevel_%(hero)^:S(TRUE);
+
+!!if&(shouldDelayClassSelection)=(FALSE);
+  !!VRi^acm_dontAskToChooseClassTillMapStart_%(hero)^:S(FALSE);
   !!FU(RadioDlg_Reset):P;
 
   !!if&(classPoints[ACM_WARRIOR_CLASS_IND])>=(masterClassRequiredPoints)/(chosenClass)=(ACM_NO_CLASS);
@@ -844,6 +849,7 @@ This needs to be done to prevent an unkown crash with Kingdom Overview
 
         !!SN:T^acm.class_selection_dlg.delay_selection_for^/?(text:z)/^levels^/5;
         !!FU(RadioDlg_AddItem):P(text)/-5;
+        !!FU(RadioDlg_AddItem)&i^acm_isGameStarted^=(FALSE):P^%T(acm.class_selection_dlg.delay_selection_till_game_start)^/-1/^till_game_start^;
 
         !!SN:T^acm.class_selection_dlg.delay_selection_for^/?(text:z)/^levels^/5;
         !!FU(RadioDlg_AddItem):P(text)/-5;
@@ -852,10 +858,14 @@ This needs to be done to prevent an unkown crash with Kingdom Overview
         !!SN:T^acm.class_selection_dlg.never_ask^/?(text:z)/^class_name^/(className);
         !!FU(RadioDlg_AddItem):P(text)/-1000;
 
-        !!FU(RadioDlg_Show):P?(itemInd:y)/?(dlgRes:y);
+        !!FU(RadioDlg_Show):P?(itemInd:y)/?(dlgRes:y)/?(dlgResTag:z);
 
         !!if&(dlgRes)<0;
-          !!VRi^acm_dontAskToChooseClassTillLevel_%(hero)^:S(heroLevel) -(dlgRes);
+          !!if&(dlgResTag)=^till_game_start^;
+            !!VRi^acm_dontAskToChooseClassTillMapStart_%(hero)^:S(TRUE);
+          !!el;
+            !!VRi^acm_dontAskToChooseClassTillLevel_%(hero)^:S(heroLevel) -(dlgRes);
+          !!en;
         !!el;
           !!VR(chosenClass):S(dlgRes);
           !!VRi^acm_chosenClass_%(hero)^:S(chosenClass);
@@ -921,12 +931,12 @@ This needs to be done to prevent an unkown crash with Kingdom Overview
 !!en;
 
 ; Show class promotion dialog if any main class is changed and a class is chosen to promote to
-!!if|i^Master_Warrior_Hero%(hero)^<>(prevWasMasterWarrior)/
-     i^Master_Mage_Hero%(hero)^<>(prevWasMasterMage)/
-     i^Master_Adventurer_Hero%(hero)^<>(prevWasMasterAdventurer)/
-     i^Grandmaster_Warrior_Hero%(hero)^<>(prevWasGrandmasterWarrior)/
-     i^Grandmaster_Mage_Hero%(hero)^<>(prevWasGrandmasterMage)/
-     i^Grandmaster_Adventurer_Hero%(hero)^<>(prevWasGrandmasterAdventurer);
+!!if|i^Master_Warrior_Hero%(hero)^         <> (prevWasMasterWarrior)/
+     i^Master_Mage_Hero%(hero)^            <> (prevWasMasterMage)/
+     i^Master_Adventurer_Hero%(hero)^      <> (prevWasMasterAdventurer)/
+     i^Grandmaster_Warrior_Hero%(hero)^    <> (prevWasGrandmasterWarrior)/
+     i^Grandmaster_Mage_Hero%(hero)^       <> (prevWasGrandmasterMage)/
+     i^Grandmaster_Adventurer_Hero%(hero)^ <> (prevWasGrandmasterAdventurer);
   !!FU(acm_ShowClassPromotionDlg)&(chosenClass)<>(ACM_NO_CLASS):P(hero)/(classPoints[ACM_WARRIOR_CLASS_IND])/(classPoints[ACM_MAGE_CLASS_IND])/(classPoints[ACM_ADVENTURER_CLASS_IND]);
 !!en;
 
@@ -1905,7 +1915,6 @@ x1 - hero id, x2 - master rank, x3 - GM rank, x4 - skill id
 
 !?FU(OnGameEnter);
 !!VRi^acm_isGameStarted^:S(TRUE); [Activate First Click on Adventure Map activates Dialouge  [Works only after game start]
-
 
 !?FU(H3_Mod_Assign_Level_UP);
 
@@ -5620,28 +5629,27 @@ Till here Normal Necromancy
 ** End of level up trigger for learning
 
 !?FU(AC_Function_24);                   [Function to give learning bonus to hero -1]
-
 !!HEx1:S21/?y40;                        [get Learning level]
 !!FU&y40=0:E;
+
 !!if&y40>0;
-!!VRy1:S0T3;                            [random primary skill]
-!!VRy2:S31 +y1;                         [picture of skill]
-!!HEx1&y1=0:Fd1/d/d/d;                  [give appropriate bonus]
-!!HEx1&y1=1:Fd/d1/d/d;
-!!HEx1&y1=2:Fd/d/d1/d;
-!!HEx1&y1=3:Fd/d/d/d1;
-!!HEx1:B0/?z-10;                        [get hero name]
+  !!VRy1:S0T3;                            [random primary skill]
+  !!VRy2:S31 +y1;                         [picture of skill]
+  !!HEx1&y1=0:Fd1/d/d/d;                  [give appropriate bonus]
+  !!HEx1&y1=1:Fd/d1/d/d;
+  !!HEx1&y1=2:Fd/d/d1/d;
+  !!HEx1&y1=3:Fd/d/d/d1;
+  !!HEx1:B0/?z-10;                        [get hero name]
 
-!!SN&x2=0:T^AC_Misc.Learning 1^/?z-9;
-!!SN&x2=1:T^AC_Misc.Learning 2^/?z-9;
+  !!SN&x2=0:T^AC_Misc.Learning 1^/?z-9;
+  !!SN&x2=1:T^AC_Misc.Learning 2^/?z-9;
 
-!!HEx1:O?y3;                            [get owner of this hero]
-!!OW&y3<>-1:Iy3/?y4;                    [get AI (1) or human (0)]
-!!VRy5:S(FALSE);                        [assume AI]
-!!VRy5&y3<>-1/y4=0:S(TRUE);             [human if has owner and that owner is human]
+  !!HEx1:O?y3;                            [get owner of this hero]
+  !!OW&y3<>-1:Iy3/?y4;                    [get AI (1) or human (0)]
+  !!VRy5:S(FALSE);                        [assume AI]
+  !!VRy5&y3<>-1/y4=0:S(TRUE);             [human if has owner and that owner is human]
 
-!!IF&y5/(ERM_FLAG_IS_HUMAN)/i^acm_isGameStarted^:Q2/y2/1/1/z-9; [Message Works only after game start]
-                  
+  !!IF&y5/(ERM_FLAG_IS_HUMAN)/i^acm_isGameStarted^:Q2/y2/1/1/z-9; [Message Works only after game start]
 !!en;
 
 
@@ -6114,7 +6122,7 @@ Till here Normal Necromancy
     !!SN&y60=1:W^Tent_Capacity_Def^/?y21;
     !!SN&y60=0/y21<=0:W^Tent_Capacity_Att^/0; [If below zero set zero]
     !!SN&y60=1/y21<=0:W^Tent_Capacity_Def^/0;
-  !!en:;  
+  !!en:;
     *!IF:M^%Y8 %Y9 %Y10 Number:%Y13 Chance:%Y16 Roll:%Y15
     New Capacity is %Y21 and deduceted amount is %Y20^;
 !!en;
@@ -9440,7 +9448,7 @@ Caitlin, Aine, Grindan, Jenova, Octavia, (Damacon removed), Sephinroth
   !!BMy1|y2=180/y2=189:Ad1;             [for Ogre Leader (Stronghold) increase attack by 1]
   !!BMy1|y2=175/y2=184:Dd1;             [for Hierophant (Rampart) increase defense by 1]
   !!BMy1|y2=176/y2=185:Dd1;             [for Temple Guardian (Tower) increase defense by 1]
-  !!en;  
+  !!en;
 
   !!BMy1|y2=177/y2=186:Hd5;             [for Succubus (Inferno) increase health by 5]
   !!BMy1|y2=179/y2=188:Hd5;             [for Soul Eater (Necropolis) increase health by 5]
@@ -10002,7 +10010,6 @@ This script sets the chance for Adventurer Heroes to gain Secondary Skills and P
 Author: Alf :)
 ********************************************************************************
 !?FU(OnHeroGainLevel)&i^acm_isGameStarted^; [So it only runs after the map has started]
-
 !!HE-1:N?y1;
 !!FU(Valid_Adventurer_Hero):Py1/?y60;   [Call Function to Check if Adventurer Hero]
 !!FU&y60<>1:E;
@@ -13544,12 +13551,12 @@ Life Artifacts +2%, +4%, +6%
     !!FU&y99<0:E;                       [Exit if no valid Hero]
     !!HEy99:A2/97/?y30/?y86;            [97 Necklace of Swiftness]
     !!HEy99:A2/69/?y30/?y87;            [69 Ring of the Wayfarer]
-    !!HEy99:A2/99/?y30/?y88;            [99 Cape of Velocity]    
+    !!HEy99:A2/99/?y30/?y88;            [99 Cape of Velocity]
     !!FU&y86=0/y87=0:E;                 [Exit if none of both artifacts equipped]
     !!BA:Q?f;
 
     !!VRy20:S0T100;                     [Generate Random number]
-    !!VRy22:S0;       
+    !!VRy22:S0;
     !!VRy22&y86=1:+4;                   [add 4% chance to dodge per artifact]
     !!VRy22&y87=1:+4;                   [add 4% chance to dodge per artifact]
     !!VRy22&y86=1/y87=1/y88=1:S15;      [add +7% chance to dodge if complete set]
@@ -13577,8 +13584,8 @@ Life Artifacts +2%, +4%, +6%
 !!HEy99:A2/37/?y30/?y86;                [37  Quiet Eye of the Dragon]
 !!HEy99:A2/39/?y30/?y87;                [39  Dragon Scale Shield]
 *!HEy99:A2/43/?y30/?y88;                [43 Necklace of Dragonteeth]
-*!FU&y86=0/y87=0/y88=0:E; 
-!!FU&y86=0/y87=0:E; 
+*!FU&y86=0/y87=0/y88=0:E;
+!!FU&y86=0/y87=0:E;
 !!VRy11:S0;
 !!VRy11&y86=1:+50;                      [+50 magic damage block per artifact]
 !!VRy11&y87=1:+50;
@@ -14021,13 +14028,13 @@ The Champions Honor full set grants Warmachine Upgrades at level up with a 20%/5
 !!VRy5:S1;                              [Activate Eagle Eye Description Magic Artillery]
 
 *-------Books-------*
-!!SN:H^art^/86/1/z188108;               [Tome of Fire]
-!!SN:H^art^/87/1/z188109;               [Tome of Air]
-!!SN:H^art^/88/1/z188110;               [Tome of Water]
-!!SN:H^art^/89/1/z188111;               [Tome of Earth]
+!!SN:H^art^/86/1/z188108;                [Tome of Fire]
+!!SN:H^art^/87/1/z188109;                [Tome of Air]
+!!SN:H^art^/88/1/z188110;                [Tome of Water]
+!!SN:H^art^/89/1/z188111;                [Tome of Earth]
 *-------Armor-------*
-!!SN:H^art^/24/1/z188165;               [Thunder Helmet]
-!!SN:H^art^/30/1/z188166;               [Titan's Cuirass]
+!!SN:H^art^/24/1/z188165;                [Thunder Helmet]
+!!SN:H^art^/30/1/z188166;                [Titan's Cuirass]
 !!SN:H^art^/18/1/z188164;                [Sentinel's Shield]
 !!SN:H^art^/12/1/z188163;                [Titan's Gladius]
 !!SN:H^art^/135/1/z188167;               [Titan's Thunder]
@@ -14044,7 +14051,7 @@ The Champions Honor full set grants Warmachine Upgrades at level up with a 20%/5
 !!SN:H^art^/44/1/z179860;                [Crown of Dragontooth]
 !!SN:H^art^/39/1/z179861;                [Dragon Scale Shield]
 !!SN:H^art^/40/1/z179862;                [Dragon Scale Armor]
-!!SN:H^art^/37/1/z179863;                [Quiet Eye of the Dragon]
+!!SN:H^art^/40/1/z179863;                [Quiet Eye of the Dragon]
 
 *-------Moral-------*
 !!SN:H^art^/49/1/z188112;                [Badge of Courage]
@@ -14066,7 +14073,7 @@ The Champions Honor full set grants Warmachine Upgrades at level up with a 20%/5
 !!SN:H^art^/81/1/z188106;                [orb of tempestous fire]
 !!SN:H^art^/82/1/z188107;                [orb of driving rain]
 *------Ring of Magi-----*
-!!SN:H^art^/76/1/z188120;                [collar of conjuring]
+!!SN:H^art^/76/1/z188120;                [Changed Var Numers         [collar of conjuring]
 !!SN:H^art^/77/1/z188121;                [ring of conjuring]
 !!SN:H^art^/78/1/z188122;                [cape of conjuring]
 !!SN:H^art^/139/1/z188123;               [ring of the magi]
@@ -14202,6 +14209,7 @@ The Champions Honor full set grants Warmachine Upgrades at level up with a 20%/5
 !!SN:H^art^/168/0/z188267;               [Royal Blank Surcoat]
 !!SN:H^art^/169/0/z188268;               [Royal Blank Boots]
 *!SN:H^art^/170/0/z188269;               [Royal Blank Horn]
+
 *------- Ammo Cart -------*
 !!SN:H^art^/5/1/z188259;                 [Ammo Cart]
 
@@ -14224,6 +14232,7 @@ The Champions Honor full set grants Warmachine Upgrades at level up with a 20%/5
 
 
 !!if&y2=1;
+*!IF:M^Artifact Boost enabled y2^;
 !!SN:H^art^/56/1/z188143;                [Dead Man's Boots]
 *-------Resistance Set-------*
 !!SN:H^art^/57/1/z188157;                [Garniture of Interference]
@@ -14282,6 +14291,7 @@ The Champions Honor full set grants Warmachine Upgrades at level up with a 20%/5
 
 
 !!if&y3=1/y2=1;
+*!IF:M^Enhanced Artifact & Artifact Boost enabled y3 + y2^;
 !!SN:H^art^/103/1/z188128;               [Pendant of Life]
 !!SN:H^art^/104/1/z188168;               [Pendant of Death]
 !!SN:H^art^/56/1/z188143;                [Dead Man's Boots]

@@ -51,18 +51,20 @@ If you use the newest gaming assembly from Daemon_n (which I strongly recommend)
 resolution I recommend 1180x664 and any filter.
 You will notice the correct settings if secondary skill descrioptions have a red name. If they have a yellow name, colors are not working as intendet!
 - If you press F12 in-game, for whatever reason. Save and Reload game to restore proper skill/artifact descriptions.
+- The Help and Readme folder contains a lot of additional information about heroes, spells and skills. If you are in doubt how a skill work you can look it up there.
 
 
  2.1 Brief Overview of some important changes or difference to WoG mechanics
  
 Heroes:
-- most heroes specializations have been reworked and significantly improved in their usefulnes, especially magic heroes, there are also some new and unique specialities. Every hero should now be "mainable". Scaling per level decreased to 3% instead of 5%. Some heroes have changed starting secondary skills to better match their speciality. 
+- most heroes specializations have been reworked and significantly improved in their usefulnes, especially magic heroes, there are also some new and unique specialities. Every hero should now be "mainable". Speciality scaling per level decreased to 3% instead of 5%. Some heroes have changed starting secondary skills to better match their speciality. 
 
 Artifacts:
-- new unique effects for unused are boring artifacts added, also introduced new artifact sets. Set boni dont require the complete set anymore, however the strongest boni still needs the complete set. Also changed to class of several artifacts.
+- new unique effects for unused are boring artifacts added, also introduced new artifact sets. Set boni dont require the complete set anymore, however the strongest boni still needs the complete set. Also changed to class of several artifacts. Dont forget to read the artifact description.
 
 Warmachines:
-- cleaned up the mess with the buggy Warmachine scripts 1,2,3. Now only 1 Warmachine of each type and no more 20 Ballistas nonsense. Tents now resurrect but have a limited heal power, tied to your army strength, indicated by the "damage" value from your tent. Ammo Carts and Ballistas improved. You can buy over 20 unique upgrades for your WM in the towns. 
+- cleaned up the mess with the buggy Warmachine scripts 1,2,3. Now only 1 Warmachine of each type and no more 20 Ballistas nonsense. Functionallity of WoG Warmachine scripts I-III are included, just interpreted in a new way. 
+  Tents now resurrect in combat but have a limited heal power called "Heal Capacity". Heal Capacity is indicated by the "damage" value from your tent during combat and is 2% of your total army HP + other bonuses. Ammo Carts and Ballistas are improved and can be upgraded. You can buy over 20 unique upgrades for your WM in the towns. The upgrades are devided in "Enchantments" which can be bought at the Mage Guild and "Upgrades" which can be obtained at the Blacksmith.
 
 Spells:
 - by far the most work went into the rework of the magic system. Now all spells scale with spell power! The strength of your spells is dependant of your characters Magic Strength (MS), a new primary stat introduced in ACM. Caster heroes are now clearly better spellcasters than a Tazar with Earth Magic. Reduced the power of the Slow spell and moved to level 3. Spell point costs increased. Mulitcasting in the same battleround will increase spell point costs until the next battleround. 
@@ -108,6 +110,15 @@ Answer: Feel free to use any setting you like. There are no specific ACM setting
 - In Hero Screen why does is say "Skill Exp. Leadershi" and not Expert Leadership as it used to be? 
 Answer: To simulate the two new levels of every skill, for me, it was not possible to keep it the old way. Thats the price you pay, but you get used to it after one or two games :)
 
+- I cant click on the Kingdom Overview :(
+Answer: Yes, this overview must be disabled because of a possible crash. The poor Kingdom Overview will show your income including your spendings of the previous day. So keep that in mind, numbers might be negative if you spend more then you have income.
+
+- During combat troops deal zero damage. I better report that a dozen times in Discord hehe
+Answer: Carefully read your artifact description. Some artifacts or the Druid class have the ability to block a flat amount of damage. The amount of damage block is small and will be irrelevant at later stages of the game.
+
+- What damage does my Artillery do, how much will my Tent heal in combat? How much Magic Pierce has my hero? What is my total magical crit chance?
+Answer: Right-click on the Knowledge icon in your hero screen. Most numbers are displayed there.
+
 - Why can't I level up some skills to Master?
 Answer: You dont have enough class points to get offered Master level for that skill. Check your current class points and level.
 
@@ -116,6 +127,9 @@ Answer: No. When you unlearn secondary skills, you will lose M/GM level and mayb
 
 - What happens if I play with more then 10 secondary skills?
 Answer: You can try, but ACM does not support it. With more than 10 skills it will be much easier to reach several classes at once, making very strong heroes. Overall should work, but I dont know what happens. 
+
+- I want to learn all secondary skills to Master and Grandmaster regardles of my current class!
+Answer: Check out the new game mode made by Berserker. Activate it at map start.
 
 - What does Magic Strength do?
 Answer: It is a new stat for mainly caster Heroes which ensures that they are realy better casters than Warrior Heroes. The power of some spells now depend on your MS and not on your Spell Power. 1 SP equals 1 MS, also several secondary skills give you MS. - Magic Strength scaling factor for big and small maps (XXL-Maps 80%, XL-Maps 85%, L-Maps 100, M-Map 110% S-Maps 120%, this ensures somewhat similar power of spells on all map sizes)
