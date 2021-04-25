@@ -682,11 +682,14 @@
 												Chance for Spell Upgrade: {%Y96%%}
 												Magic Pierce: {%Y74%}",
 
-			"Bonus_Table_Battle":				"{~r}Battle Stats{~}												
-												Battles won: {%Y40}	
-												Heroes killed: {%Y40}												
+			"Bonus_Table_Battle":				"{~r}Battle Stats{~}			
+												Battles won: {%Y38}	
+												Heroes killed: {%Y39}												
 												Physical damage dealt: {%Y40}
-												Magical damage dealt: {%Y41}",
+												Magical damage dealt: {%Y41}
+												Physical Crit Chance: {%Y13%%}
+												Physical Crit Damage: {%Y14%%}
+												Army Creature Growth: {%Y15%%}",
 
 			"Bonus_Table_Skills":				"{~r}Skills{~}			
 												Artillery pre-damage: {%Y58-%Y59}
@@ -706,17 +709,61 @@
 												Bonus damage vs living units: {%Y77}
 												Bonus ranged damage to attacks: {%Y78}",
 												
-			"Bonus_Table_Class_Sets":			"{~r}Class Sets{~}												
-												{~r}Warrior{~} Set Bonus: {%Y10%%}
-												{~DodgerBlue}Mage{~} Set Bonus: {%Y11%%}
-												{~LimeGreen}Adventurer{~} Set Bonus: {%Y12%%}",												
-
-			"Bonus_Table_Commander":			"{~r}Commander{~}:			
+			"Bonus_Table_Class_Sets":			"{~r}Class Set Bonus{~}												
+												{~r}Warrior{~} Set: +{%Y10%%} physical crit
+												{~DodgerBlue}Mage{~} Set: +{%Y11%%} magical crit
+												{~LimeGreen}Adventurer{~} Set: +{%Y12%%} growth",					
+												
+			"Bonus_Table_Paladin":				"{~r}Commander{~}:			
 												Commander Kill Count: {%Y42}
-												Commander base spell damage: {%Y51}
-												Bonus HP to Tent and Ballista: {%Y52}
-												Bonus damage to Ballista: {%Y53}
-												Commander special ability: {%Y54}",
+												Commander special ability: 150% Hero Exp
+												Commander spell: {Cure} and {Resurrects}
+												Converts damage to Exp: {%Y52%}",
+												
+			"Bonus_Table_Hierophant":			"{~r}Commander{~}:			
+												Commander Kill Count: {%Y42}
+												Bonus HP to Tent: {%Y52}
+												Bonus Heal to Tent: {%Y53}
+												Bonus Heal Capacity: {%Y54}
+												Commander special spell: {%Y55} Shield",
+												
+			"Bonus_Table_TempleGuardian":		"{~r}Commander{~}:			
+												Commander Kill Count: {%Y42}
+												Damage Lightning Strike: {%Y51}
+												Restores Mana with attacks: {%Y52}",
+
+			"Bonus_Table_Succubus":				"{~r}Commander{~}:			
+												Commander Kill Count: {%Y42}
+												Commander Spell: {Fireshield}
+												Charms enemies HP threshold: {%Y52}",
+												
+			"Bonus_Table_Brute":				"{~r}Commander{~}:			
+												Commander Kill Count: {%Y42}
+												Damage Magic Arrow: {%Y51}
+												Converts damage to gold: {100%}",												
+
+			"Bonus_Table_SoulEater":			"{~r}Commander{~}:			
+												Commander Kill Count: {%Y42}
+												Commander Spell: {Animate Dead}
+												Raises Skeletons with attacks: {%Y52%}",
+
+			"Bonus_Table_OgreLeader":			"{~r}Commander{~}:			
+												Commander Kill Count: {%Y42}												
+												Bonus HP to Ballista: {%Y52}
+												Bonus base damage to Ballista: {%Y53}
+												Commander special spell: {%Y54} Bloodlust",
+
+			"Bonus_Table_Shaman":				"{~r}Commander{~}:			
+												Commander Kill Count: {%Y42}
+												Commander Spell: {Haste}
+												Chance to cripple enemies: {%Y52%}
+												Extra Att and Def from Hero: +{50%}",
+
+			"Bonus_Table_AstralSpirit":			"{~r}Commander{~}:			
+												Commander Kill Count: {%Y42}
+												Commander Spell: {Summon Air}
+												Commander special ability: Pacifist",												
+																								
 
 			"Bonus Table 3": 					"Class Experience and class point table:",
 
@@ -1335,7 +1382,7 @@
 
 			"Battlemage_Skill_1":				"Extra Cast",
 
-			"Battlemage_Skill_2":				"Critical Strike",
+			"Battlemage_Skill_2":				"Hard Training",
 
 			"Battlemage_Skill_3":				"Pre-Cast",
 
