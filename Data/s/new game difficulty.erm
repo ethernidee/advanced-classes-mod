@@ -658,14 +658,25 @@ This Section handels the Dialogue 45 were you can Configure_AI (Right Side)
   !!SN:T^Diff_Mod.Res_Bonus^/?z70; !!DL45:H16/70; [Hint Text for Hard button]
   !!SN:T^Diff_Mod.Crea_Bonus^/?z71; !!DL45:H17/71 H18/71 H19/71 H20/71 H21/71 H22/71 H23/71; [Hint Text for Creature button]
 
+  !!SN:W^H3_Game_Difficulty^/?y1;
+  !!VRv999&y1=0:S0; !!VRv999&y1=1:S1; !!VRv999&y1=2:S2; !!VRv999&y1=3:S3; !!VRv999&y1=4:S4; !!VRv999&y1=5:S5; [Preset difficulty to load cadres when difficulty was saved]
+  !!FU(Configure_AI_Preset):P1;
   !!DL45:S1;                            [Show complete Dialogue number 45]
 
 
 !?DL&v998=45/v999>0/v999<6/v1000=13;    [LMB on the faces]
+  !!FU(Configure_AI_Preset):P;
+
+!?FU(Configure_AI_Preset);
   !!VRz16:S^Button.wav^;
   !!SN:W^H3_Game_Difficulty^/?y1;
 
-!!if&v999=1/y1<>1;                     [set text for 1st]
+  !!if&x1=1;                              [Called from configuration window to preset cadres]
+  !!VRv999&y1=0:S0; !!VRv999&y1=1:S1; !!VRv999&y1=2:S2; !!VRv999&y1=3:S3; !!VRv999&y1=4:S4; !!VRv999&y1=5:S5;
+  !!VRy1:S0;
+  !!en;
+
+!!if&v999=1/y1<>1;                      [set text for 1st]
   !!FU(AI_reset):P;                     [reset all]
   !!SN:Pz16;                            [do not play sound again]
   !!VRz1:S^500^; !!VRz2:S^200^; !!SN:T^Diff_Mod.Zero_or_One^/?z3; !!VRz4:S^5^; !!VRz5:S^2000^; !!VRz6:S^1^;
