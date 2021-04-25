@@ -1,5 +1,30 @@
 Changelog
 ***************************************************************************************************************************************************************
+Version 1.061 (work in progress)
+
+- in online games artifact description will not be reset anymore
+- fix for Artillery specialists the number of shots after level 60
+- Learning now shows exact %chance to gain primary skill point when visiting map objects
+- Mage Secret-Set gains crit/crit damage for every 2 fights won instead of 3
+- New attributes for bonus lists when clicking on knowledge icon
+- Magic Wand +5% Magic Pierce, Pendant of Sorcery +10% Magic Pierce
+- Dragon Scale Shield, Quiet Eye of the Dragon +50 flat Magic damage block
+- New Game mode made by Berserker that allows to learn all skill to M/GM regardless of class
+- New Game mode made by Berserker that allows to learn any class
+- Breastplate of Petrified Wood damage block reduced, when all damage is blocked this will now be indicated by a sound
+- Armor of Wonder damage block reduced,
+- Poison Icon for Commander added in pac file, thanks to Archer
+- Removed FU 7701 from erm code to increase stability
+- Added a Battlelog entry when Heal Capacity is depleted
+- Removed the delay when healing units with First Aid Tent
+- In Dif mod AI-Difficulty and Payday are now saved
+- Removed FUN.erm from mod
+- Fixed M/GM Force Field effect (now works again)
+- Battlemage Hard Training/ Critical Hit wrong description
+- Fix when having several resource giving artifacts of the same type in backpack
+
+
+
 Version 1.06 (18.März 2021)
 
 When updating from 1.056 please delete old version before installing 1.06
