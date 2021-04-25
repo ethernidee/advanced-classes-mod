@@ -28,6 +28,8 @@ Name on Heroescommunity: RerryR (but please, call me Perry)
 
 ********************************************************************************
 
+!?CM0;
+!!HE-1:Ed10000; Test
 
 !#SN:W^Advanced_Classes_Mod_Active^/1;  [Set Mod Active]
 
@@ -91,17 +93,28 @@ Disable Various WoG Options which can conflict with Advanced Classes Mod
 !#MA:M146/4;                            [Ballista Dam Low 4]
 !#MA:E146/6;                            [Ballista Dam High 6]
 *#MA:C146/6/2500;                       [Ballista Cost 2500]
-
 !#MA:P147/150;                          [First Aid Tent HP 150]
 !#MA:C147/6/1000;                       [First Aid Tent Cost 1000]
-
 !#MA:P148/150;                          [Ammo Cart HP 150]
 !#MA:C148/6/1000;                       [Ammo Cart Cost 1000]
+
+!#UN:A146/2/4;                          [set axe of smashing - right hand]
+!#UN:A147/2/6;                          [set mithril mail - torso]
+!#UN:A148/2/4;                          [set sword of sharpness - right hand]
+!#UN:A149/2/1;                          [set helm of immortality - head]
+!#UN:A150/2/3;                          [set pendant of sorcery - neck]
+!#UN:A151/2/8;                          [set boots of haste - feet]
+!#UN:A152/2/5;                          [set bow of seeking - left hand]
+!#UN:A153/2/7;                          [set dragon eye ring - ring]
+!#UN:A154/2/5;                          [set hardened shield - left hand]
+!#UN:A155/2/7;                          [set slava's ring of power - ring]
 
 !#UN:C7785525/2/37008;                  [Disable Succubus Charming]
 !#UN:C7788148/4/195;                    [Disable Temple Guardian Mana Reg] bug free???]
 !#UN:C7788157/4/195;                    [Disable Temple Guardian Mana Reg]
 !#UN:C7772712/2/37008;                  [Disable Brute Gold Bonus]
+
+
 
 !#SN:L^era.dll^/?y1 Ay1/^ReadStrFromIni^/?y2;
 !#SN:Ey2/1/^Tactics^/^Player settings^/^Advanced Classes.ini^/?z1;
@@ -5324,8 +5337,8 @@ Till here Normal Necromancy
 !!DO(AC_Function_13)/21/41/1&y3>0:Py9/y10/y13;
 
 !?FU(AC_Function_13);
-!!BMx16:T?y1;
-!!FU|y1=145/y1=146/y1=147/y1=148/y1=149:E; [Execlude Warmachines]
+!!BMx16:T?y1 N?y2;
+!!FU|y1=145/y1=146/y1=147/y1=148/y1=149/y2=0:E; [Execlude Warmachines and no stacks]
 !!BMx16:Sdx2;                           [Speed]
 !!BMx16:Adx1;                           [Attack]
 !!BMx16:Ddx1;                           [Defense]
@@ -5973,7 +5986,8 @@ Till here Normal Necromancy
 !!en;
 
 
-!?FU(OnBattleRegeneratePhase);
+*?FU(OnBattleRegeneratePhase);
+!?FU(OnBattleStackObtainsTurn);
 
 !!SN:W^Improved_Tent^/?y1;
 !!FU&y1=-1:E;
@@ -6013,7 +6027,7 @@ Till here Normal Necromancy
 
 
 !?FU(AC_Function_35);                   [*Restore HP of Healed creatures*]
-
+*y10 holds the possible heal amount*
 !!if&x4=0:;                             [This part only runs in combat]
   !!BMx1:N?y1 H?y2 L?y3 B?y4;           [Get Battle Monsters parameters]
 
@@ -6050,8 +6064,8 @@ Till here Normal Necromancy
 !!CO-1:T?y41;                           [Check if Commander Type]
 !!if&y40=0/y41=1;                       [If Commander alive and is a Hierophant]
   !!CO-1:X2/?y42;                       [Get Commander Level]
-  !!VRy43:Sy42*10;                      [Multiply level of Commander with 10]
-  !!VRy10:+y43;                         [Add level*10 HP to heal for the First Aid Tent]
+  !!VRy43:Sy42*5;                       [Multiply level of Commander with 5]
+  !!VRy10:+y43;                         [Add level*5 HP to heal for the First Aid Tent]
 !!en;
 
 !!SN:W^Tent_Improved_%Y61^/?y70;
@@ -6085,7 +6099,7 @@ Till here Normal Necromancy
 !!VRy16:Sy15;
 !!VRy11:Sy10:y2;                        [Number of possible Revives]
 
-!!if&y12>=y3;                          [Calc correct rest life]
+!!if&y12>=y3;                           [Calc correct rest life]
 !!VRy16:*-1;
 !!VRy17:Sy2;
 !!VRy17:-y16;
@@ -6101,10 +6115,9 @@ Till here Normal Necromancy
 !!SN:W^Tent_Overheal_%Y61^/?y80;        [Overheal gives chance to additional raise troops when you heal them, over the current limit]
 !!BMx1:N?y8 B?y9 T?y10 H?y17 G4/?y18/?y19; [Check Monster Parameters and for Disguise]
 !!BMx1:Ny6 Ly16;                        [Heal happens Set Number and apply rest life]
-
 *!IF:L^y8 is %Y8 and y9 is %Y9 und y80 is %Y80 Disguse %Y18 und %Y19^;
 
-!!if&y80=1/y8<y9/y19=0;                [If below number as before fight, no Henchman and no Commander]
+!!if&y80=1/y8<y9/y19=0;                 [If below number as before fight, no Henchman and no Commander]
 !!if|y10<174/y10>191;
   !!MA:Ly10/?y11;                       [Get Monster Level]
   !!VRy13:S0; !!VRy13&y11=0:S6; !!VRy13&y11=1:S5; !!VRy13&y11=2:S4; !!VRy13&y11=3:S3; !!VRy13&y11=4:S2; !!VRy13&y11=5:S1; !!VRy13&y11=6:S1; [Number of possible revices based on creature level]
@@ -6113,7 +6126,7 @@ Till here Normal Necromancy
 
   !!SN&y60=0:W^Tent_Capacity_Att^/?y21; [Get current Heal capacity]
   !!SN&y60=1:W^Tent_Capacity_Def^/?y21;
-  !!if&y16>y15/y21>0;                  [If roll successfull and still heal capacity left]
+  !!if&y16>y15/y21>0;                   [If roll successfull and still heal capacity left]
     !!BMx1:Ndy13 Bdy13;                 [Add One Extra Creature if already full and roll is successfull]
     !!VRy20:Sy13*y17+100*-1;            [Get total HP over overheald creatures +100HP as Heal Capacity]
     !!SN&y60=0:W^Tent_Capacity_Att^/dy20;[Substract Resurrected Amount from current capacity]
@@ -6127,6 +6140,11 @@ Till here Normal Necromancy
     New Capacity is %Y21 and deduceted amount is %Y20^;
 !!en;
 !!en;
+
+!!VRz1&y21<=0/y60=0:S^{Attacker Heal Capacity depleted}^;
+!!VRz1&y21<=0/y60=1:S^{Defender Heal Capacity depleted}^;
+!!BU&f=0/1000/y21<=0:Mz1;
+
 !!BA:Q?f;
 !!BU&f=0:R;
 
@@ -6203,7 +6221,7 @@ and creature is %X1^;
   !!VRy53:S0;
   !!if&y50=0/y51=1;                     [If Alive and Hierophant]
     !!COy1:X2/?y52;                     [Get Commander Level]
-    !!VRy53:Sy52*10;                    [10*Commander Level to HP]
+    !!VRy53:Sy52*20;                    [20*Commander Level to Capacity]
   !!en;
   !!VRy10:+y53;                         [Add Bonus Capacity from Commander]
   !!SN:W^Tent_Capacity_Att^/y10;        [Set Heal Capacity]
@@ -6230,7 +6248,7 @@ and creature is %X1^;
     !!VRy53:S0;
     !!if&y50=0/y51=1;                   [If Alive and Hierophant]
       !!COy1:X2/?y52;                   [Get Commander Level]
-      !!VRy53:Sy52*10;                  [10*Commander Level to HP]
+      !!VRy53:Sy52*20;                  [20*Commander Level to Capacity]
     !!en;
     !!VRy10:+y53;                       [Add Bonus Capacity from Commander]
     !!SN:W^Tent_Capacity_Def^/y10;      [Set Heal Capacity]
@@ -6282,7 +6300,7 @@ and creature is %X1^;
 **Restores 3,4,5,7,10 Spell Points when heroes meets once per day and hero
 
 Before the interaction of the hero with the hero
-!?FU77010&1000;
+!?FU(OnBeforeHeroInteraction)&1000;
 !!SN:X?y1/?y2;                          [the number of the initiator hero, the number of the target hero.]
 
 !!HEy1:O?y5;
@@ -6361,7 +6379,8 @@ Before the interaction of the hero with the hero
 !!BHy2:N?y3;                            [get owner of other side]
 !!FU(Switch_Secondary_Skill_Level)&y1>=0/y1<=155:Py1/y3; [Pass Hero Number]
 
-!?FU7773;                               [afer stack attack]
+*?FU7773;                               [afer stack attack]
+!?FU(ACM_Event_AfterMeeleDamage);
 !!BA:Q?y1;
 !!FU&y1=1:E;                            [Exit in Quick Combat]
 !!BG:Q?y1;
@@ -6372,6 +6391,14 @@ Before the interaction of the hero with the hero
 !!FU(Switch_Secondary_Skill_Level)&y2>=0/y2<=155:Py2/y3; [Pass Hero Number]
 !!FU(Switch_Secondary_Skill_Level)&y2=-2:Py3/y3; [Pass Hero Number in case no enemy hero]
 
+!?FU(OnAfterErmInstructions);          
+!!SN:L^EraPlugins\erm_hooker.era^/?y1; 
+!!SN:Ay1/^SetHook^/?y2;                 
+!!SN:Ey2/1/4462998/(ACM_Event_AfterMeeleDamage); 
+!?FU(OnAfterLoadGame);                  
+!!SN:L^EraPlugins\erm_hooker.era^/?y1;  
+!!SN:Ay1/^SetHook^/?y2;                 
+!!SN:Ey2/1/4462998/(ACM_Event_AfterMeeleDamage);
 
 !?FU(Switch_Secondary_Skill_Level);
 
@@ -6382,7 +6409,7 @@ Before the interaction of the hero with the hero
 !!FU(SetSecSkillPercent)&y10=3/y11=1/y12=1:P1/3/75; [SS Werte skill Setzten      [Set Skillvalue to 75% for GrandMaster]
 !!FU(SetSecSkillPercent)&y11=0/y12=0:P1/3/50; [SS Werte skill Setzten            [Set back to normal Expert value 50% if no improvement]
 
-*!if&x2>=0/x2<=155; Game values are ignored, calculation happens in EE script
+*!if&x2>=0/x2<=155;                     Game values are ignored, calculation happens in EE script
   *!HEx2:S11/?y10;                        [Check for Eagle Eye]
   *!SN:W^H3_Eagle Eye_0_Hero%X2^/?y11;    [Checke ob der Held Master Eagle Eye hat und Speichere in y11]
   *!SN:W^H3_Eagle Eye_1_Hero%X2^/?y12;    [Checke ob der Held Grandmaster Eagle Eye hat und Speichere in y12]
@@ -9090,10 +9117,11 @@ Caitlin, Aine, Grindan, Jenova, Octavia, (Damacon removed), Sephinroth
 !!BG:A?y1;
 !!FU&y1<>6:E;                           [Exit if not Melee Attack]
 !!BG:H?y5;
+!!BG:H?y66;
 !!FU&y5<0:E;                            [Exit if no Hero]
 !!BG:N?y1;                              [Attacking Stack]
 !!BMy1:T?y2;                            [Creature Type]
-!!if|y2=177/y2=186;                    [if Succubus]
+!!if|y2=177/y2=186;                     [if Succubus]
 !!COy5:X2/?y30;                         [Get Commander Level]
 !!BG:E?y3;                              [Destination Poistion]
 !!FU&y3=-1:E;                           [Exit if no Monster there]
@@ -9108,6 +9136,7 @@ Caitlin, Aine, Grindan, Jenova, Octavia, (Damacon removed), Sephinroth
 !!VRy7:Sy5*y6;                          [Get total life of attacked Stack]
 !!VRy31:Sy30*75;
 !!VRy4:+y31;                            [Succubus life +75*Level times the hit points of Succubus]
+!!SN:W^Succubus_Charm_Value_%Y66^/y52;  [Save the value to show it in bonus list]
 !!BMy3&y7<y4:M60/2/3;                   [If value is lower apply hypno to stack]
 !!en;
 
@@ -9276,10 +9305,10 @@ Caitlin, Aine, Grindan, Jenova, Octavia, (Damacon removed), Sephinroth
 !!FU&y8>=y9:E;
 !!BMy4:T?y10;
 !!MA:Ly10/?y11;                         [Get Monster Level]
-!!VRy13:S0; !!VRy13&y11=0:S7; !!VRy13&y11=1:S6; !!VRy13&y11=2:S5; !!VRy13&y11=3:S4; !!VRy13&y11=4:S3; !!VRy13&y11=5:S2; !!VRy13&y11=6:S1; [Number of possible revices based on creature level]
+!!VRy13:S0; !!VRy13&y11=0:S7; !!VRy13&y11=1:S6; !!VRy13&y11=2:S5; !!VRy13&y11=3:S4; !!VRy13&y11=4:S3; !!VRy13&y11=5:S2; !!VRy13&y11=6:S1; [Number of possible revives based on creature level]
 !!VRy15:S0T99;
-!!VRy16&y11=0:S90; !!VRy16&y11=1:S87; !!VRy16&y11=2:S85; !!VRy16&y11=3:S83; !!VRy16&y11=4:S80; !!VRy16&y11=5:S70; !!VRy16&y11=6:S50; [Number of possible revices based on creature level]
-!!FU&y15>y16:E;                         [Exit if Roll not successfull ]
+!!VRy16&y11=0:S90; !!VRy16&y11=1:S87; !!VRy16&y11=2:S85; !!VRy16&y11=3:S83; !!VRy16&y11=4:S80; !!VRy16&y11=5:S70; !!VRy16&y11=6:S50; [Chance possible revives based on creature level]
+!!FU&y15>y16:E;                         [Exit if Roll not successfull]
 !!VRy12:Sy8+y13;                        [Add number to current number]
 !!VRy12&y12>=y9:Sy9;                    [Cannot grow more than to begin of the fight]
 !!BMy4:Ny12;
@@ -9523,7 +9552,6 @@ Caitlin, Aine, Grindan, Jenova, Octavia, (Damacon removed), Sephinroth
 !!COy50:X2/?y40;                        [Get Commander Level]
 
 !!VRy20:S50; !!VRy20&y60=1:S50; !!VRy20&y60=2:S100; !!VRy20&y60=3:S150; !!VRy20&y60=4:S250; !!VRy20&y60=5:S500; [Set Base damage of cast 60 for basic 500 for GM]
-!!SN:W^Commander_Base_Spell_%Y50^/y20;  [Base Spell damage]
 
 !!VRy60:+2;
 !!HEy50:S25/?y30;
@@ -9535,6 +9563,7 @@ Caitlin, Aine, Grindan, Jenova, Octavia, (Damacon removed), Sephinroth
 !!MR:S?y2;
 !!FU(H3_Calc_Normal_Spell_Damage):Py50/?y99/?y98/1/y2/0; [Pass Hero Number and Give Back Damage in y99 and Extra Damage Option and Spell Number]
 !!VRy20:*y99:100;
+!!SN:W^Commander_Base_Spell_%Y50^/y20;  [Base Spell damage]
 
 !!VRy20&y10<y60::2;                     [If Hero has not enough Mana cast deals only 50% damage. Each level of Commander magic incerases the cost to cast the spell]
 
@@ -11757,6 +11786,8 @@ Show Bonus Table when clicking on Knowledge Icon in Hero Screen
 !!VRy15:+y12;                           [+Creature Growth Chance from Set]
 *!VRy16:+y11;                           [+Spell Crit Chance from Set already handeld before]
 
+!!SN:W^Hero_%Y4_Fights_Won^/?y38;       [Fights won]
+!!SN:W^Hero_%Y4_Heroes_Killed^/?y39;    [Enemies killed]
 !!SN:W^Damage_Counter_Hero_%Y4^/?y40;   [Increase damage counter]
 !!SN:W^Magic_Damage_Counter_Hero_%Y4^/?y41; [Increase damage counter]
 !!SN:W^Commander_Kill_Counter_%Y4^/?y42;[Get commander kill counter from hero]
@@ -11801,8 +11832,6 @@ Show Bonus Table when clicking on Knowledge Icon in Hero Screen
 !!HEy4:A2/60/?y30/?y94;                 [60 Bow of Elven Cherrywood]
 !!HEy4:A2/141/?y30/?y31 A2/150/?y30/?y32;[141 Magic Wand 150 Pendant of Sorcery]
 
-
-
 !!VRy92:Sy91*4;                         [4 times hero level flat damage block for Druid]
 
 !!VRy70:S0; !!VRy70&y81=1:Sy91*2+10; !!VRy70&y83=1:+50; !!VRy70&y23=1/y24=1:+y92; [Range damage]
@@ -11818,22 +11847,67 @@ Show Bonus Table when clicking on Knowledge Icon in Hero Screen
 
 !!COy4:T?y50 N?z10;                     [Get commander type and name]
 !!VRy51:S0;
-!!COy4:S4/?y55;                         [Get Magic Level of Commander]
-!!COy4:X2/?y56;                         [Get Commander Level]
+!!COy4:S4/?y43;                         [Get Magic Level of Commander]
+!!COy4:X2/?y44;                         [Get Commander Level]
 
-*!if|y50=2/y50=5; If Temple Guardian or Brute
-*!VRy51:S50; *!VRy51&y55=1:S50; *!VRy51&y55=2:S100; *!VRy51&y55=3:S150; *!VRy51&y55=4:S250; *!VRy51&y55=5:S500; [Set Base damage of cast 60 for basic 500 for GM]
-*!en;
+!!if&y50=0;                             [If Paladin]
+  !!SN:T^AC_Misc.Bonus_Table_Paladin^/?z4;
+  !!VRy52:Sy44*5+200;
+!!en;
 
-!!SN:W^Commander_Base_Spell_%Y4^/?y51;  [Base Spell damage]
-!!SN:W^Commander_WM_Health_Bonus_%Y4^/?y52;  [Tent Bonus]
-!!SN:W^Commander_Ballista_Bonus_%Y4^/?y53; [Ballista Bonus]
-!!SN:W^Commander_Special_Ability_%Y4^/?y54; [Special Ability]
+!!if&y50=1;                             [If Hierophant]
+  !!SN:T^AC_Misc.Bonus_Table_Hierophant^/?z4;
+  *!SN:W^Commander_WM_Health_Bonus_%Y4^/?y52; [Tent Bonus]
+  !!VRy52:Sy44*10;                      [Tent Health Bonus]
+  !!VRy53:Sy44*5;                       [Bonus heal from commander]
+  !!VRy54:Sy44*20;                      [Bonus heal capacity from commander]
+  !!VRy55:Sy44*y43*2+50;                [Shield Power]
+!!en;
+
+!!if&y50=2;                             [If TempleGuardian]
+  !!SN:T^AC_Misc.Bonus_Table_TempleGuardian^/?z4;
+  !!SN:W^Commander_Base_Spell_%Y4^/?y51;[Base Spell damage]
+  !!VRy52&y44<20:S2; !!VRy52&y44>=20:S3; !!VRy52&y44>=35:S4; !!VRy52&y44>=50:S6; [Mana restored with attacks]
+!!en;
+
+!!if&y50=3;                             [If Succubus]
+  !!SN:T^AC_Misc.Bonus_Table_Succubus^/?z4;
+  !!SN:W^Succubus_Charm_Value_%Y4^/?y52;[Save the value to show it in bonus list Succubus life +75*Level times the hit points of Succubus]
+!!en;
+
+!!if&y50=5;                             [If Brute]
+  !!SN:T^AC_Misc.Bonus_Table_Brute^/?z4;
+  !!SN:W^Commander_Base_Spell_%Y4^/?y51;[Base Spell damage]
+!!en;
+
+!!if&y50=4;                             [If SoulEater]
+  !!SN:T^AC_Misc.Bonus_Table_SoulEater^/?z4;
+  !!VRy52:S20;                          [Rais skellis is 20%]
+!!en;
+
+!!if&y50=6;                             [If OgreLeader]
+  !!SN:T^AC_Misc.Bonus_Table_OgreLeader^/?z4;
+  !!VRy52:Sy44*10;                      [Ballista Health Bonus]
+  !!VRy53:Sy44:6;                       [Ballista damage bonus]
+  *!SN:W^Commander_WM_Health_Bonus_%Y4^/?y52; [Ballista Bonus]
+  *!SN:W^Commander_Ballista_Bonus_%Y4^/?y53; [Ballista Bonus]
+  !!VRy54:Sy44*y43*3+50;                [Bloodlust Power]
+!!en;
+
+!!if&y50=7;                             [If Shaman]
+  !!SN:T^AC_Misc.Bonus_Table_Shaman^/?z4;
+  !!VRy52:Sy44+50;                      [Chance to crush Level+50]
+!!en;
+
+!!if&y50=8;                             [If AstralSpirit]
+  !!SN:T^AC_Misc.Bonus_Table_AstralSpirit^/?z4;
+!!en;
+
+!!SN:Iz4/?z4;
 
 !!SN:T^AC_Misc.Bonus_Table_Magic^/?z1; !!SN:Iz1/?z1;
 !!SN:T^AC_Misc.Bonus_Table_Battle^/?z2; !!SN:Iz2/?z2;
 !!SN:T^AC_Misc.Bonus_Table_Skills^/?z3; !!SN:Iz3/?z3;
-!!SN:T^AC_Misc.Bonus_Table_Commander^/?z4; !!SN:Iz4/?z4;
 !!SN:T^AC_Misc.Bonus_Table_Header^/?z5; !!SN:Iz5/?z5;
 !!SN:T^AC_Misc.Bonus_Table_Artifacts^/?z6; !!SN:Iz6/?z6;
 !!SN:T^AC_Misc.Bonus_Table_Class_Sets^/?z7; !!SN:Iz7/?z7;
@@ -12766,13 +12840,13 @@ Glittering Surcoat of Quicksand 168
 
 
 ********************************************************************************
-*Precious Longsword 162 +1damage for all troops
+*Precious Longsword 162 +1 damage for all troops
 
 !?AE1&v998=162; Equip artifact    !!FU&761:E;
-!!HE-1:Fd7/d-2/d-2/d-2;
+!!HE-1:Fd6/d-3/d-3/d-3;
 
 !?AE0&v998=162; Unequip Artifact   !!FU&761:E;
-!!HE-1:Fd-7/d2/d2/d2;
+!!HE-1:Fd-6/d3/d3/d3;
 
 !?BF;
 !!BA:H0/?y1 H1/?y2;
@@ -13694,64 +13768,31 @@ That breakes immunities and allows to apply spells to creatures that are usually
 !!SN&y1=1:W^Creature Bank Reward^/1;
 
 
-!?FU(Res_Artifact_Backpack);
-!!OW:Hx1/1/x16; !!VRy21:Sv1;
-!!HEy21:A2/109/?y30/?y40 A2/110/?y31/?y41 A2/111/?y32/?y42 A2/112/?y33/?y43 A2/113/?y34/?y44;
-!!HEy21:A2/114/?y35/?y45 A2/115/?y36/?y46 A2/116/?y37/?y47 A2/117/?y38/?y48 A2/140/?y39/?y49;
-!!VRy30:-y40; !!VRy30&y30<0:S0;  !!VRy31:-y41; !!VRy31&y31<0:S0;
-!!VRy32:-y42; !!VRy32&y32<0:S0;  !!VRy33:-y43; !!VRy33&y33<0:S0;
-!!VRy34:-y44; !!VRy34&y34<0:S0;  !!VRy35:-y45; !!VRy35&y35<0:S0;
-!!VRy36:-y46; !!VRy36&y36<0:S0;  !!VRy37:-y47; !!VRy37&y37<0:S0;
-!!VRy38:-y48; !!VRy38&y38<0:S0;  !!VRy39:-y49; !!VRy39&y39<0:S0;
-!!VRy33:*2; !!VRy35:*2; !!VRy36:*1000; !!VRy37:*750; !!VRy38:*500; !!VRy39:*5;
-!!VRv4:+y35; !!VRv6:+y33; !!VRv10:+y36 +y37 +y38;
-!!VRv5:+y32 +y39; !!VRv7:+y34 +y39; !!VRv8:+y30 +y39; !!VRv9:+y31 +y39;
-
-!?FU7768;                               [AddGoldForArt (c)igrik]
-!!SN:X?y1/0;
-!!VRy2:Sy1 +0; !!UN:Cy2/4/?y3;
-!!VRy4:Sy1 +24;!!UN:Cy4/4/?y5;
-!!VRy6:Sy1 +8; !!UN:Cy6/4/?y7;
-!!VRy8:Sy7 -4;                          [!!UN:Cy8/4/?y9;]
-!!VRy10:Sy7 +8;!!UN:Cy10/4/?y11;
-!!OW:Hy11/1/0; !!VRy12:Sv1;
-!!VRv4:C0/0/0/0/0/0/0;
-!!DO(Res_Artifact_Backpack)/1/y12/1&y12>0:Py11;
-!!VRy5:+v10;
-!!UN:Cy2/4/0;
-!!UN:Cy8/4/y5;
-!!VRy9:Sy1 +32; !!UN:Cy9/4/5011269;
-
-!?FU7769;                               [AddResForArt]
-!!SN:X?y1;
-!!VRy2:Sy1 +4;   !!UN:Cy2/4/?y3;
-!!VRy2:Sy3 -268;                        [!!UN:Cy2/4/?y4;]
-!!VRy6:Sy1 +8;   !!UN:Cy6/4/?y7;
-!!VRy7:-4;       !!UN:Cy7/4/?y8;
-!!OW:Hy8/1/0; !!VRy9:Sv1;
-!!VRv4:C0/0/0/0/0/0/0;
-!!DO(Res_Artifact_Backpack)/1/y9/1&y9>0:Py8;
-!!VRy5:Sy3 -4;   !!UN:Cy5/4/dv4;
-!!VRy5:Sy3;      !!UN:Cy5/4/dv5;
-!!VRy5:Sy3 +4;   !!UN:Cy5/4/dv6;
-!!VRy5:Sy3 +8;   !!UN:Cy5/4/dv7;
-!!VRy5:Sy3 +12;  !!UN:Cy5/4/dv8;
-!!VRy5:Sy3 +16;  !!UN:Cy5/4/dv9;
-
-
-!?FU(OnEveryDay)&i^timerOnce^=1/i^timerDay^>1/i^timerIsAi^=0; [Trigger each monday]
+*Gold and Resource giving artifacs also work in backpack*
+!?FU(OnEveryDay)&i^timerOnce^=1/i^timerDay^>1/i^timerIsAi^=0; [Trigger each day]
 Fix for Cart of Lumber and Cart of Ore give +2 in total
 !!DO(AC_Function_40)/0/155/1:P;         [loop through heroes]
 
 !?FU(AC_Function_40);
 !!HEx16:O?y1;                           [Checke Hero Owner]
 !!FU&y1=-1:E;                           [Exit if none]
-!!HEx16:A2/114/?y30/?y40;               [114 Inexhaustible Cart of Lumber]
-!!HEx16:A2/112/?y30/?y41;               [112 Inexhaustible Cart of Ore]
-!!FU&y40=0/y41=0:E;                     [Exit if none of these artifacts equipped]
-!!OW&y40=1:Ry1/0/d1;                    [Add 1 Wood resource to player]
-!!OW&y41=1:Ry1/2/d1;                    [Add 1 Ore resource to player]
 
+!!HEx16:A2/112/?y30/?y40; !!OW&y40>0:Ry1/2/dy40; [112 Inexhaustible Cart of Ore gives +2 in total]
+!!HEx16:A2/114/?y30/?y40; !!OW&y40>0:Ry1/0/dy40; [114 Inexhaustible Cart of Lumber gives +2 in total]
+
+!!HEx16:A2/109/?y30/?y40; !!VRy31:Sy30-y40; !!VRy31:Sy31*1; !!OW&y31>0/y30<>y40:Ry1/4/dy31; [109 Everflowing Crystal Cloak Add 1 Crystal resource to player]
+!!HEx16:A2/110/?y30/?y40; !!VRy31:Sy30-y40; !!VRy31:Sy31*1; !!OW&y31>0/y30<>y40:Ry1/5/dy31; [110 Ring of Infinite Gems]
+!!HEx16:A2/111/?y30/?y40; !!VRy31:Sy30-y40; !!VRy31:Sy31*1; !!OW&y31>0/y30<>y40:Ry1/1/dy31; [111 Everpouring Vial of Mercury]
+!!HEx16:A2/112/?y30/?y40; !!VRy31:Sy30-y40; !!VRy31:Sy31*2; !!OW&y31>0/y30<>y40:Ry1/2/dy31; [112 Inexhaustible Cart of Ore]
+!!HEx16:A2/113/?y30/?y40; !!VRy31:Sy30-y40; !!VRy31:Sy31*1; !!OW&y31>0/y30<>y40:Ry1/3/dy31; [113 Eversmoking Ring of Sulfur]
+!!HEx16:A2/114/?y30/?y40; !!VRy31:Sy30-y40; !!VRy31:Sy31*2; !!OW&y31>0/y30<>y40:Ry1/0/dy31; [114 Inexhaustible Cart of Lumber]
+!!HEx16:A2/115/?y30/?y40; !!VRy31:Sy30-y40; !!VRy31:Sy31*1000; !!OW&y31>0/y30<>y40:Ry1/6/dy31; [115 Endless Sack of Gold]
+!!HEx16:A2/116/?y30/?y40; !!VRy31:Sy30-y40; !!VRy31:Sy31*750; !!OW&y31>0/y30<>y40:Ry1/6/dy31; [116 Endless Bag of Gold]
+!!HEx16:A2/117/?y30/?y40; !!VRy31:Sy30-y40; !!VRy31:Sy31*500; !!OW&y31>0/y30<>y40:Ry1/6/dy31; [117 Endless Purse of Gold]
+
+!!HEx16:A2/140/?y30/?y40; !!VRy30&y40=1:-5; [140 Cornucopia Adds 5 of each Resource]
+!!OW&y30>0:Ry1/4/d5; !!OW&y30>0:Ry1/5/d5; !!OW&y30>0:Ry1/1/d5; !!OW&y30>0:Ry1/3/d5;               
+                  
 
 ********************************************************************************
 *Luck reducing Artifacts
@@ -14187,6 +14228,7 @@ The Champions Honor full set grants Warmachine Upgrades at level up with a 20%/5
 !!SN:H^art^/96/1/z188243;                [Vial of Lifeblood]
 !!SN:H^art^/131/1/z188244;               [Elixir of Life]
 *-------Class Sets-------*
+description
 !!SN:H^art^/161/1/z188249;               [Royal Blank Helmet]
 !!SN:H^art^/162/1/z188250;               [Royal Blank Sword]
 !!SN:H^art^/163/1/z188251;               [Royal Blank Shield]
@@ -14198,7 +14240,7 @@ The Champions Honor full set grants Warmachine Upgrades at level up with a 20%/5
 !!SN:H^art^/169/1/z188257;               [Royal Blank Boots]
 !!SN:H^art^/170/1/z188258;               [Royal Blank Horn]
 
-*Names
+*Names class sets
 !!SN:H^art^/161/0/z188260;               [Royal Blank Helmet]
 !!SN:H^art^/162/0/z188261;               [Royal Blank Sword]
 !!SN:H^art^/163/0/z188262;               [Royal Blank Shield]
@@ -14210,8 +14252,20 @@ The Champions Honor full set grants Warmachine Upgrades at level up with a 20%/5
 !!SN:H^art^/169/0/z188268;               [Royal Blank Boots]
 *!SN:H^art^/170/0/z188269;               [Royal Blank Horn]
 
+*Commander artifacts description
+!!SN:H^art^/146/1/z188220;              [146  Axe of Smashing]
+!!SN:H^art^/147/1/z188221;              [147  Mithril Mail]
+!!SN:H^art^/148/1/z188222;              [148  Sword of Sharpness]
+!!SN:H^art^/149/1/z188223;              [149  Helm of Immortality]
+!!SN:H^art^/150/1/z188232;              [150  Pendant of Sorcery]
+!!SN:H^art^/151/1/z188233;              [151  Boots of Haste]
+!!SN:H^art^/152/1/z188234;              [152  Bow of Seeking]
+!!SN:H^art^/153/1/z188235;              [153  Dragon Eye Ring]
+!!SN:H^art^/154/1/z188212;              [154  Hardened Shield]
+!!SN:H^art^/155/1/z188213;              [155  Slava's Ring of Power]
+
 *------- Ammo Cart -------*
-!!SN:H^art^/5/1/z188259;                 [Ammo Cart]
+!!SN:H^art^/5/1/z188259;                [Ammo Cart]
 
 !!SN:H^art^/105/1/z188269;               [Pendant of Free Will]
 !!SN:H^art^/102/1/z188270;               [Pendant of Holiness]
@@ -14544,7 +14598,7 @@ Pendant of Courage
 
 !?BR&1000/-936;
 !!DO(AC_Function_106)/0/41/1&v997>0:P;  [call function to take bonus]
-!!DO(AC_Function_107)/0/41/1&v997=-1:P; [call function to remember HP for Force Field]
+!!DO(AC_Function_107)/0/41/1&v997=0:P;  [call function to remember HP for Force Field]
 
 !!SN:W^Heal_Var1^/1;                    [Reset Heal_Var1 Variable]
 !!SN:W^Heal_Var2^/1;                    [Reset Heal_Var2 Variable]
@@ -14558,9 +14612,8 @@ Pendant of Courage
 !!SN:W^Death_Ripple_Cast0^/0; !!SN:W^Death_Ripple_Cast1^/0; [Reset Death Ripple Cast]
 !!SN:W^Destroy_Undead_Cast1^/0; !!SN:W^Destroy_Undead_Cast0^/0;
 
-!?BR-1&v997>0;                          [At round End]
-*!IF:M^Round %V997^;
 
+!?BR-1&v997>0;                          [At round End]
 !!SN:W^Fire_Protection_Cast_0^/?y1;     [Attacker Cast]
 !!SN:W^Water_Protection_Cast_0^/?y2;
 !!SN:W^Earth_Protection_Cast_0^/?y3;
@@ -16332,7 +16385,7 @@ Undead stacks heal and with next attack^;                                       
 !!en;
 
 *-------------------------------Firewall ---------------------------------------*
-!?FU77012;
+!?FU(OnStackToStackDamage);
 
 !!SN:X?y1/?y2/?y3/?y4/?y5/?y6/?y7/?y8/?y9; [Prevents animation]
 !!SN&y9=1:W^Real_Attack_0^/0;
@@ -16478,7 +16531,7 @@ Undead stacks heal and with next attack^;                                       
 !!SN:W^Force_Field_Cast^/?y1;
 !!DO(AC_Function_100)/0/186/1&y1=1:P;   [Run Loop on Battlefield to check for Force Field and give Bonus]
 !!DO(AC_Function_119)/0/41/1&y1=1:P;    [Run Loop on Battlefield to check for Force Field and take Bonus]
-*!DO(AC_Function_119)/21/31/1&y1=1/v9280=1:P;                                               [Run Loop on Battlefield to check for Force Field and take Bonus]
+
 *-------------------------------Berserk ---------------------------------------*
 *When berserker wears off the attacking creature gets slowed
 
@@ -16503,7 +16556,7 @@ Undead stacks heal and with next attack^;                                       
 !!BMy1:I?y2;                            [Side index as for heroes (0:left, 1:right)]
 !!BG:Q?y40;
 
-!!if&y2=y40;                           [so it only works for attacking not defending]
+!!if&y2=y40;                            [so it only works for attacking not defending]
 !!BMy1:G60/?y13/?y14;                   [check for Hypnotize Duration]
 !!FU&y13=0:E;
 
@@ -16520,7 +16573,7 @@ Undead stacks heal and with next attack^;                                       
 !!VRy22:+20;
 !!VRy22&y87>0:+20;                      [+20% chance with GM Air]
 
-.!!if&y20<=y22;                        [chance is 20(40 with GM Air)% +SP% to blind]
+.!!if&y20<=y22;                         [chance is 20(40 with GM Air)% +SP% to blind]
 !!BG:E?y7;
 !!FU&y7=-1:E;
 
@@ -18577,8 +18630,8 @@ Cant Cleanse That Effect
 !!FU|y82<3/y16<>1:E;
 
 !!SN:W^H3_Water Magic_1_Hero%Y99^/?y87;
-!!VRy22::3;
-!!VRy22:+10;                                                                   [chance is 10% plus 1% per 3 Spellpower]
+!!VRy22::4;
+!!VRy22:+10;                                                                   [chance is 10% plus 1% per 4 Spellpower]
 !!VRy22&y87=1:+5;                                                              [+5% with GM Water]
 !!VRy1:S0T99;
 !!BMx16&y1<y22:M59/1/3;
@@ -18663,7 +18716,7 @@ Cant Cleanse That Effect
 !!VRy10:S0;
 !!BU:Ox16/?y1;                          [Check for Obstacle on Battlefield position]
 
-!!if&y1>10;                            [If Obstacle is Force Field run HP Bonus Routine]
+!!if&y1>10;                             [If Obstacle is Force Field run HP Bonus Routine]
 *!BG:N?y40;
 !!VRy2:Sx16 -1;
 *!VRy2&v9280=0:Sx16 -1;                                                         [Offset for left side]
@@ -18761,7 +18814,6 @@ Cant Cleanse That Effect
 
 
 !?FU(AC_Function_107);
-
 !!BMx16:H?y1;
 !!SN&x16=0:W^M0_HP^/y1; !!SN&x16=1:W^M1_HP^/y1; !!SN&x16=2:W^M2_HP^/y1; !!SN&x16=3:W^M3_HP^/y1; !!SN&x16=4:W^M4_HP^/y1; [**Save HP for first 11 creature of attacker]
 !!SN&x16=5:W^M5_HP^/y1; !!SN&x16=6:W^M6_HP^/y1; !!SN&x16=7:W^M7_HP^/y1; !!SN&x16=8:W^M8_HP^/y1; !!SN&x16=9:W^M9_HP^/y1; !!SN&x16=10:W^M10_HP^/y1;
@@ -20295,8 +20347,8 @@ Counterstrike: Increases retaliation damage based on your SP
 !!VRz783&x9=1:+z1; !!SN:Iz783/?z783; !!SS49:Dx6/z783;
 
 
-!!VRy61:Sx2:3;
-!!VRy61:+10;                            [chance is 10% plus 1% per 3 Spellpower]
+!!VRy61:Sx2:4;
+!!VRy61:+10;                            [chance is 10% plus 1% per 4 Spellpower]
 !!VRy61&x3>0:+5;                        [With GM Water]
 !!VRy61&y61>=100:S100;
 !!SN&x6>0/x4=1:T^AC_Spells.Forgetfulness_0^/?z771;
@@ -29150,6 +29202,17 @@ Change graphics of Meteor Shower and Implosion when at Master and GM level
 !!en;
 
 
+!?FU(OnAfterBattleUniversal);
+*Fights and Hero kill counter*
+!!BA:H0/?y1 H1/?y10;                    [Attacker Hero Number]
+!!FU&y1<0:E;                            [Exit if no attacking hero]
+!!HEy1:O?y2;                            [get owner of this hero]
+!!HEy10&y10>=0:O?y20;                   [get owner of defending hero]
+!!SN:W^Hero_Attacker_Owner0^/?y3;       [Check Owner Before Fight]
+!!FU&y2<>y3:E;                          [Prevent to give Bonus if retreat]
+!!FU&y2=-1:E;                           [Exit if no owner]
+!!SN:W^Hero_%Y1_Fights_Won^/d1;         [Increase counter by 1]
+!!SN&y10>=0:W^Hero_%Y1_Heroes_Killed^/d1;[Increase counter by 1]
 ********************************************************************************
 
 

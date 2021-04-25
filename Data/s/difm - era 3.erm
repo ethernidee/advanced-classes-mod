@@ -128,6 +128,16 @@ ZVSE2
 !!FU(ReadIniInts):P(filePath)/^advanced classes^/
   ^Spell_Duration_Mod^/?i^Spell_Duration_Mod^/0;
 
+!!FU(ReadIniInts):P(filePath)/^advanced classes^/
+  ^AI_Recover_Losses^/?i^AI_Recover_Losses^/0/
+  ^AI_Compensation^/?i^AI_Compensation^/0/
+  ^AI_Useful_Spells^/?i^AI_Useful_Spells^/0/
+  ^AI_has_no_DD^/?i^AI_has_no_DD^/0;  
+
+!!FU(ReadIniInts):P(filePath)/^advanced classes^/
+  ^AIPayday^/?i^AIPayday^/0/
+  ^H3_Game_Difficulty^/?i^H3_Game_Difficulty^/0;  
+
 
 
 !?FU(difm_SaveOptionsToIni);
@@ -229,5 +239,15 @@ ZVSE2
 
 !!FU(WriteIniInts):P(filePath)/^advanced classes^/
   ^Spell_Duration_Mod^/i^Spell_Duration_Mod^;
+
+!!FU(WriteIniInts):P(filePath)/^advanced classes^/
+  ^AI_Recover_Losses^/i^AI_Recover_Losses^/
+  ^AI_Compensation^/i^AI_Compensation^/
+  ^AI_Useful_Spells^/i^AI_Useful_Spells^/
+  ^AI_has_no_DD^/i^AI_has_no_DD^;
+
+!!FU(WriteIniInts):P(filePath)/^advanced classes^/
+  ^AIPayday^/i^AIPayday^/
+  ^H3_Game_Difficulty^/i^H3_Game_Difficulty^;    
 
 !!FU(SaveIni):P(filePath);
