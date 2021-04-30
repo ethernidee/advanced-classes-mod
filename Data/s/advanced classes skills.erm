@@ -28,9 +28,6 @@ Name on Heroescommunity: RerryR (but please, call me Perry)
 
 ********************************************************************************
 
-!?CM0;
-!!HE-1:Ed10000; Test
-
 !#SN:W^Advanced_Classes_Mod_Active^/1;  [Set Mod Active]
 
 !#VRi^acm_isGameStarted^:S(FALSE);
@@ -6391,13 +6388,13 @@ Before the interaction of the hero with the hero
 !!FU(Switch_Secondary_Skill_Level)&y2>=0/y2<=155:Py2/y3; [Pass Hero Number]
 !!FU(Switch_Secondary_Skill_Level)&y2=-2:Py3/y3; [Pass Hero Number in case no enemy hero]
 
-!?FU(OnAfterErmInstructions);          
-!!SN:L^EraPlugins\erm_hooker.era^/?y1; 
-!!SN:Ay1/^SetHook^/?y2;                 
-!!SN:Ey2/1/4462998/(ACM_Event_AfterMeeleDamage); 
-!?FU(OnAfterLoadGame);                  
-!!SN:L^EraPlugins\erm_hooker.era^/?y1;  
-!!SN:Ay1/^SetHook^/?y2;                 
+!?FU(OnAfterErmInstructions);
+!!SN:L^EraPlugins\erm_hooker.era^/?y1;
+!!SN:Ay1/^SetHook^/?y2;
+!!SN:Ey2/1/4462998/(ACM_Event_AfterMeeleDamage);
+!?FU(OnAfterLoadGame);
+!!SN:L^EraPlugins\erm_hooker.era^/?y1;
+!!SN:Ay1/^SetHook^/?y2;
 !!SN:Ey2/1/4462998/(ACM_Event_AfterMeeleDamage);
 
 !?FU(Switch_Secondary_Skill_Level);
@@ -13791,8 +13788,8 @@ Fix for Cart of Lumber and Cart of Ore give +2 in total
 !!HEx16:A2/117/?y30/?y40; !!VRy31:Sy30-y40; !!VRy31:Sy31*500; !!OW&y31>0/y30<>y40:Ry1/6/dy31; [117 Endless Purse of Gold]
 
 !!HEx16:A2/140/?y30/?y40; !!VRy30&y40=1:-5; [140 Cornucopia Adds 5 of each Resource]
-!!OW&y30>0:Ry1/4/d5; !!OW&y30>0:Ry1/5/d5; !!OW&y30>0:Ry1/1/d5; !!OW&y30>0:Ry1/3/d5;               
-                  
+!!OW&y30>0:Ry1/4/d5; !!OW&y30>0:Ry1/5/d5; !!OW&y30>0:Ry1/1/d5; !!OW&y30>0:Ry1/3/d5;
+
 
 ********************************************************************************
 *Luck reducing Artifacts
