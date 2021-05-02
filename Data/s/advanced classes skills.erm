@@ -27,7 +27,6 @@ Visit http://heroescommunity.com Advanced Classes Mod
 Name on Heroescommunity: RerryR (but please, call me Perry)
 
 ********************************************************************************
-
 !#SN:W^Advanced_Classes_Mod_Active^/1;  [Set Mod Active]
 
 !#VRi^acm_isGameStarted^:S(FALSE);
@@ -101,7 +100,7 @@ Disable Various WoG Options which can conflict with Advanced Classes Mod
 !#UN:A149/2/1;                          [set helm of immortality - head]
 !#UN:A150/2/3;                          [set pendant of sorcery - neck]
 !#UN:A151/2/8;                          [set boots of haste - feet]
-!#UN:A152/2/5;                          [set bow of seeking - left hand]
+!#UN:A152/2/2;                          [set bow of seeking - shoulder]
 !#UN:A153/2/7;                          [set dragon eye ring - ring]
 !#UN:A154/2/5;                          [set hardened shield - left hand]
 !#UN:A155/2/7;                          [set slava's ring of power - ring]
@@ -523,7 +522,7 @@ Close Dialouge
 
 !!DL271:N^GameOp.txt^;                  [parse dialogue]
 
-!!DL271:A8/4/v1/1;                      [Set checkbox for 10 SS if plugin is active]
+!!DL271:A41/4/v1/1;                     [Set checkbox for 10 SS if plugin is active]
 
 !!VRz1:S^Opt_1.pcx^; !!DL271:A1/11/z1/1;
 !!VRz2:S^Opt_2.pcx^; !!DL271:A2/11/z2/1;
@@ -531,14 +530,24 @@ Close Dialouge
 !!VRz4:S^Opt_4.pcx^; !!DL271:A4/11/z4/1;
 !!VRz5:S^Opt_5.pcx^; !!DL271:A5/11/z5/1;
 !!VRz6:S^Opt_6.pcx^; !!DL271:A6/11/z6/1;
+!!VRz7:S^Opt_7.pcx^; !!DL271:A7/11/z7/1;
+!!VRz8:S^Opt_8.pcx^; !!DL271:A8/11/z8/1;
+!!VRz9:S^Opt_9.pcx^; !!DL271:A9/11/z9/1;
+!!VRz10:S^Opt_10.pcx^; !!DL271:A10/11/z10/1;
+!!VRz11:S^Opt_11.pcx^; !!DL271:A11/11/z11/1;
 
-!!SN:T^AC_Misc.GameOpt_0^/?z7; !!DL271:A13/3/z7/1;
-!!SN:T^AC_Misc.GameOpt_1^/?z8; !!DL271:A14/3/z8/1;
-!!SN:T^AC_Misc.GameOpt_2^/?z9; !!DL271:A15/3/z9/1;
-!!SN:T^AC_Misc.GameOpt_3^/?z10; !!DL271:A16/3/z10/1;
-!!SN:T^AC_Misc.GameOpt_4^/?z11; !!DL271:A17/3/z11/1;
-!!SN:T^AC_Misc.GameOpt_5^/?z12; !!DL271:A18/3/z12/1;
-!!SN:T^AC_Misc.GameOpt_Text^/?z13; !!DL271:A20/3/z13/1;
+!!SN:T^AC_Misc.GameOpt_0^/?z20; !!DL271:A20/3/z20/1;
+!!SN:T^AC_Misc.GameOpt_1^/?z21; !!DL271:A21/3/z21/1;
+!!SN:T^AC_Misc.GameOpt_2^/?z22; !!DL271:A22/3/z22/1;
+!!SN:T^AC_Misc.GameOpt_3^/?z23; !!DL271:A23/3/z23/1;
+!!SN:T^AC_Misc.GameOpt_4^/?z24; !!DL271:A24/3/z24/1;
+!!SN:T^AC_Misc.GameOpt_5^/?z25; !!DL271:A25/3/z25/1;
+!!SN:T^AC_Misc.GameOpt_6^/?z26; !!DL271:A26/3/z26/1;
+!!SN:T^AC_Misc.GameOpt_7^/?z27; !!DL271:A27/3/z27/1;
+!!SN:T^AC_Misc.GameOpt_8^/?z28; !!DL271:A28/3/z28/1;
+!!SN:T^AC_Misc.GameOpt_9^/?z29; !!DL271:A29/3/z29/1;
+!!SN:T^AC_Misc.GameOpt_10^/?z30; !!DL271:A30/3/z30/1;
+!!SN:T^AC_Misc.GameOpt_Text^/?z60; !!DL271:A60/3/z60/1; heading additional game options
 
 !!SN:T^AC_Misc.GameOpt_Hint_0^/?z40; !!DL271:H1/40;
 !!SN:T^AC_Misc.GameOpt_Hint_1^/?z41; !!DL271:H2/41;
@@ -546,7 +555,12 @@ Close Dialouge
 !!SN:T^AC_Misc.GameOpt_Hint_3^/?z43; !!DL271:H4/43;
 !!SN:T^AC_Misc.GameOpt_Hint_4^/?z44; !!DL271:H5/44;
 !!SN:T^AC_Misc.GameOpt_Hint_5^/?z45; !!DL271:H6/45;
-!!SN:T^AC_Misc.GameOpt_Hint_6^/?z46; !!DL271:H30722/46;
+!!SN:T^AC_Misc.GameOpt_Hint_6^/?z46; !!DL271:H7/46;
+!!SN:T^AC_Misc.GameOpt_Hint_7^/?z47; !!DL271:H8/47;
+!!SN:T^AC_Misc.GameOpt_Hint_8^/?z48; !!DL271:H9/48;
+!!SN:T^AC_Misc.GameOpt_Hint_9^/?z49; !!DL271:H10/49;
+!!SN:T^AC_Misc.GameOpt_Hint_10^/?z50; !!DL271:H11/50;
+!!SN:T^AC_Misc.GameOpt_Hint_Play^/?z61; !!DL271:H30722/61;
 
 !!SN:W^Spell_Trainer_Mod^/?y1;          [Check if options have already been activated]
 *!SN:W^Play_with_10_Skills^/?y2;
@@ -556,18 +570,28 @@ Close Dialouge
 !!SN&y10=1:W^Alternative_Necromancy_Mod^/0;
 !!SN:W^Alternative_Necromancy_Mod^/?y5;
 !!SN:W^Spell_Duration_Mod^/?y6;
-!!DL271:A7/4/y1/1;
-*!DL271:A8/4/y2/1;
-!!DL271:A9/4/y3/1;
-!!DL271:A10/4/y4/1;
-!!DL271:A11/4/y5/1;
-!!DL271:A12/4/y6/1;                     [switch def cardre to 0 or 1]
+!!SN:W^acm_optionChooseClass^/?y7;
+!!SN:W^acm_optionNoSkillDependenciesOnClass^/?y8;
+!!SN:W^acm_ACM_Core^/?y9;
+!!SN:W^Tactics_enabled^/?y10;
+!!SN:W^acm_Weak_Commanders^/?y11;
+!!DL271:A40/4/y1/1;[switch def cardre to 0 or 1]
+*!DL271:A41/4/y2/1;
+!!DL271:A42/4/y3/1;
+!!DL271:A43/4/y4/1;
+!!DL271:A44/4/y5/1;
+!!DL271:A45/4/y6/1;  
+!!DL271:A46/4/y7/1;  
+!!DL271:A47/4/y8/1;  
+!!DL271:A48/4/y9/1; 
+!!DL271:A49/4/y10/1;  
+!!DL271:A50/4/y11/1;                      
 
 !!DL271:S;                              [Show Dialogue]
 
 !!FU(difm_SaveOptionsToIni):P;
 
-!?DL&v998=271/v999>=1/v999<=6/v1000=14; [right click on the three pictures to show text for upgrade and description]
+!?DL&v998=271/v999>=1/v999<=11/v1000=14; [right click on the options to show text for upgrade and description]
 
 !!SN|v999=1:T^AC_Misc.Play_Spell_Trainer^/?s^Text^; [set text for 1st]
 *!SN|v999=2:W^Master_Level_Global_Value^/?y30;
@@ -577,10 +601,15 @@ Close Dialouge
 !!SN|v999=4:T^AC_Misc.Play_Classic_Skin^/?s^Text^;
 !!SN|v999=5:T^AC_Misc.Play_Necro_Balancing^/?s^Text^;
 !!SN|v999=6:T^AC_Misc.Play_Spell_Duration^/?s^Text^;
+!!SN|v999=7:T^AC_Misc.Play_Berserker_Mode^/?s^Text^;
+!!SN|v999=8:T^AC_Misc.Play_No_Class_Mode^/?s^Text^;
+!!SN|v999=9:T^AC_Misc.Play_ACM_Core^/?s^Text^;
+!!SN|v999=10:T^AC_Misc.Play_Tactics^/?s^Text^;
+!!SN|v999=11:T^AC_Misc.Play_Commanders^/?s^Text^;
 !!IF:M0/4/^%S(Text)^;
 
 
-!?DL&v998=271/v999>=7/v999<=12/v1000=13;[LMB on the options icons ]
+!?DL&v998=271/v999>=40/v999<=50/v1000=13;[LMB on the options icons ]
 !!VRz1:S^Button.wav^;
 !!SN:Pz1;                               [Play Sound]
 
@@ -590,36 +619,62 @@ Close Dialouge
 !!SN:W^Classic_Skin_Mod^/?y4;
 !!SN:W^Alternative_Necromancy_Mod^/?y5;
 !!SN:W^Spell_Duration_Mod^/?y6;
-*!SN:W^Typhon_Third_Upgrade_Mod_Active^/?y10; [Check for Third Upgrade Mod]
+!!SN:W^acm_optionChooseClass^/?y7;
+!!SN:W^acm_optionNoSkillDependenciesOnClass^/?y8;
+!!SN:W^acm_ACM_Core^/?y9;
+!!SN:W^Tactics_enabled^/?y10;
+!!SN:W^acm_Weak_Commanders^/?y11;
 
-!!SN&v999=7/y1=0:W^Spell_Trainer_Mod^/1;[activate 1st]
-!!SN&v999=7/y1=1:W^Spell_Trainer_Mod^/0;[deactivate first]
-*!SN&v999=8/y2=0:W^Play_with_10_Skills^/1;
-*!SN&v999=8/y2=1:W^Play_with_10_Skills^/0;
-!!SN&v999=9/y3=0:W^Easier_Class_option^/1;
-!!SN&v999=9/y3=1:W^Easier_Class_option^/0;
-!!SN&v999=10/y4=0:W^Classic_Skin_Mod^/1;
-!!SN&v999=10/y4=1:W^Classic_Skin_Mod^/0;
-*!SN&v999=11/y5=0/y10=0:W^Alternative_Necromancy_Mod^/1;
-*!SN&v999=11/y5=1/y10=0:W^Alternative_Necromancy_Mod^/0;
-!!SN&v999=11/y5=0:W^Alternative_Necromancy_Mod^/1;
-!!SN&v999=11/y5=1:W^Alternative_Necromancy_Mod^/0;
-!!SN&v999=12/y6=0:W^Spell_Duration_Mod^/1;
-!!SN&v999=12/y6=1:W^Spell_Duration_Mod^/0;
+*!SN:W^Typhon_Third_Upgrade_Mod_Active^/?y20; [Check for Third Upgrade Mod]
 
-!!SN:W^Spell_Trainer_Mod^/?y1;
+!!SN&v999=40/y1=0:W^Spell_Trainer_Mod^/1;[activate 1st]
+!!SN&v999=40/y1=1:W^Spell_Trainer_Mod^/0;[deactivate first]
+*!SN&v999=41/y2=0:W^Play_with_10_Skills^/1;
+*!SN&v999=41/y2=1:W^Play_with_10_Skills^/0;
+!!SN&v999=42/y3=0:W^Easier_Class_option^/1;
+!!SN&v999=42/y3=1:W^Easier_Class_option^/0;
+!!SN&v999=43/y4=0:W^Classic_Skin_Mod^/1;
+!!SN&v999=43/y4=1:W^Classic_Skin_Mod^/0;
+*!SN&v999=44/y5=0/y20=0:W^Alternative_Necromancy_Mod^/1;
+*!SN&v999=44/y5=1/y20=0:W^Alternative_Necromancy_Mod^/0;
+!!SN&v999=44/y5=0:W^Alternative_Necromancy_Mod^/1;
+!!SN&v999=44/y5=1:W^Alternative_Necromancy_Mod^/0;
+!!SN&v999=45/y6=0:W^Spell_Duration_Mod^/1;
+!!SN&v999=45/y6=1:W^Spell_Duration_Mod^/0;
+!!SN&v999=46/y7=0:W^acm_optionChooseClass^/1;
+!!SN&v999=46/y7=1:W^acm_optionChooseClass^/0;
+!!SN&v999=47/y8=0:W^acm_optionNoSkillDependenciesOnClass^/1;
+!!SN&v999=47/y8=1:W^acm_optionNoSkillDependenciesOnClass^/0;
+!!SN&v999=48/y9=0:W^acm_ACM_Core^/1;
+!!SN&v999=48/y9=1:W^acm_ACM_Core^/0;
+!!SN&v999=49/y10=0:W^Tactics_enabled^/1;
+!!SN&v999=49/y10=1:W^Tactics_enabled^/0;
+!!SN&v999=50/y11=0:W^acm_Weak_Commanders^/1;
+!!SN&v999=50/y11=1:W^acm_Weak_Commanders^/0;
+
+!!SN:W^Spell_Trainer_Mod^/?y1;  [Check Status of options]
 *!SN:W^Play_with_10_Skills^/?y2;
 !!SN:W^Easier_Class_option^/?y3;
-!!SN:W^Classic_Skin_Mod^/?y4;           [Check Status of options]
+!!SN:W^Classic_Skin_Mod^/?y4;          
 !!SN:W^Alternative_Necromancy_Mod^/?y5;
 !!SN:W^Spell_Duration_Mod^/?y6;
-!!DL271:A7/4/y1/1;
-*!DL271:A8/4/y2/1;
-!!DL271:A9/4/y3/1;
-!!DL271:A10/4/y4/1;
-!!DL271:A11/4/y5/1;
-!!DL271:A12/4/y6/1;                     [switch def cardre to 0 or 1]
+!!SN:W^acm_optionChooseClass^/?y7;
+!!SN:W^acm_optionNoSkillDependenciesOnClass^/?y8;
+!!SN:W^acm_ACM_Core^/?y9;
+!!SN:W^Tactics_enabled^/?y10;
+!!SN:W^acm_Weak_Commanders^/?y11;
 
+!!DL271:A40/4/y1/1;                     [switch def cardre to 0 or 1]
+*!DL271:A41/4/y2/1;
+!!DL271:A42/4/y3/1;
+!!DL271:A43/4/y4/1;
+!!DL271:A44/4/y5/1;
+!!DL271:A45/4/y6/1;                     
+!!DL271:A46/4/y7/1;                     
+!!DL271:A47/4/y8/1;                   
+!!DL271:A48/4/y9/1;                     
+!!DL271:A49/4/y10/1;                     
+!!DL271:A50/4/y11/1; 
 
 Close Dialouge
 !?DL&v998=271/v999=30722/v1000=13;
@@ -6384,13 +6439,13 @@ Before the interaction of the hero with the hero
 !!FU(Switch_Secondary_Skill_Level)&y2>=0/y2<=155:Py2/y3; [Pass Hero Number]
 !!FU(Switch_Secondary_Skill_Level)&y2=-2:Py3/y3; [Pass Hero Number in case no enemy hero]
 
-!?FU(OnAfterErmInstructions);
-!!SN:L^EraPlugins\erm_hooker.era^/?y1;
-!!SN:Ay1/^SetHook^/?y2;
-!!SN:Ey2/1/4462998/(ACM_Event_AfterMeeleDamage);
-!?FU(OnAfterLoadGame);
-!!SN:L^EraPlugins\erm_hooker.era^/?y1;
-!!SN:Ay1/^SetHook^/?y2;
+!?FU(OnAfterErmInstructions);          
+!!SN:L^EraPlugins\erm_hooker.era^/?y1; 
+!!SN:Ay1/^SetHook^/?y2;                 
+!!SN:Ey2/1/4462998/(ACM_Event_AfterMeeleDamage); 
+!?FU(OnAfterLoadGame);                  
+!!SN:L^EraPlugins\erm_hooker.era^/?y1;  
+!!SN:Ay1/^SetHook^/?y2;                 
 !!SN:Ey2/1/4462998/(ACM_Event_AfterMeeleDamage);
 
 !?FU(Switch_Secondary_Skill_Level);
@@ -11807,7 +11862,9 @@ Show Bonus Table when clicking on Knowledge Icon in Hero Screen
 
 !!SN:W^Tent_Capacity_Att_Hero%Y4^/?y68;
 !!SN:W^Scouting_Event_Chance_%Y4^/?y69; [save scouting chance]
-!!VRy69&y69=0:S9999;
+!!VRy69&y69=0:S99999999;
+!!VRe1:S17:y69*100;
+
 
 !!HEy4:E?y90/?y91/1;                    [Get Hero level]
 !!HEy4:A2/31/?y30/?y81;                 [31  Armor of Wonder]
@@ -13681,6 +13738,42 @@ That breakes immunities and allows to apply spells to creatures that are usually
 !!MR:Fy5;                               [Apply decreased resistance chance to that stack temporarily]
 
 
+!?AE1&v998=146; Equip Artifact  !!FU&761:E;
+!!HE-1:Fd2/d/d/d;                      [axe of smashing +2 attack]
+!?AE0&v998=146; Unequip Artifact   !!FU&761:E;
+!!HE-1:Fd-2/d/d/d;                      
+
+!?AE1&v998=147; Equip Artifact  !!FU&761:E;
+!!HE-1:Fd/d2/d/d;                      [mithril mail +2 defense]
+!?AE0&v998=147; Unequip Artifact   !!FU&761:E;
+!!HE-1:Fd/d-2/d/d; 
+
+!?AE1&v998=154; Equip Artifact  !!FU&761:E;
+!!HE-1:Fd/d2/d/d;                      [hardened shield +2 defense]
+!?AE0&v998=154; Unequip Artifact   !!FU&761:E;
+!!HE-1:Fd/d-2/d/d; 
+
+!?AE1&v998=148; Equip Artifact  !!FU&761:E;
+!!HE-1:Fd2/d/d/d;                      [sword of sharpness +2 attack]
+!?AE0&v998=148; Unequip Artifact   !!FU&761:E;
+!!HE-1:Fd-2/d/d/d;  
+
+!?AE1&v998=149; Equip Artifact  !!FU&761:E;
+!!HE-1:Fd1/d1/d1/d1;                      [helm of immortality +1 to all]
+!?AE0&v998=149; Unequip Artifact   !!FU&761:E;
+!!HE-1:Fd-1/d-1/d-1/d-1;  
+
+!?AE1&v998=151; Equip Artifact  !!FU&761:E;
+!!HE-1:Fd/d/d2/d;                      [boots of haste +2 Spell Power]
+!?AE0&v998=151; Unequip Artifact   !!FU&761:E;
+!!HE-1:Fd/d/d-2/d; 
+
+!?AE1&v998=155; Equip Artifact  !!FU&761:E;
+!!HE-1:Fd/d/d2/d;                      [slava's ring of power +2 Spell Power]
+!?AE0&v998=155; Unequip Artifact   !!FU&761:E;
+!!HE-1:Fd/d/d-2/d;  
+
+
 *********
 *Increase Creature bank reward with Statesman's Medal
 !?OB16&1000;                            [16 Creature Bank]
@@ -13784,8 +13877,8 @@ Fix for Cart of Lumber and Cart of Ore give +2 in total
 !!HEx16:A2/117/?y30/?y40; !!VRy31:Sy30-y40; !!VRy31:Sy31*500; !!OW&y31>0/y30<>y40:Ry1/6/dy31; [117 Endless Purse of Gold]
 
 !!HEx16:A2/140/?y30/?y40; !!VRy30&y40=1:-5; [140 Cornucopia Adds 5 of each Resource]
-!!OW&y30>0:Ry1/4/d5; !!OW&y30>0:Ry1/5/d5; !!OW&y30>0:Ry1/1/d5; !!OW&y30>0:Ry1/3/d5;
-
+!!OW&y30>0:Ry1/4/d5; !!OW&y30>0:Ry1/5/d5; !!OW&y30>0:Ry1/1/d5; !!OW&y30>0:Ry1/3/d5;               
+                  
 
 ********************************************************************************
 *Luck reducing Artifacts
@@ -20593,12 +20686,10 @@ Counterstrike: Increases retaliation damage based on your SP
 !!SN:W^SpellTrainerHero%X1_Spell66^/?y35;
 !!SN&x9=1:T^AC_Spells.Trainer_HP_Casts^/?z1/^damage^/y34/^casts^/y35;
 !!VRz777&x9=1:+z1; !!SN:Iz777/?z777; !!VRm:Sx6 +(SPELL_TEXT_DESCR); !!SN:H^spell^/67/m/z777;
+*end of spell description section
 
 
-*end this shit
-
-***********
-
+****************************************************************************************************
 !?BF&1000;
 
 !!DO(AC_Function_69)/0/41/1:P1;         [When Battle Starts Set Number of Shield Blocks to 1 for every Stack]

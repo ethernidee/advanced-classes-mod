@@ -126,6 +126,9 @@ ZVSE2
   ^Alternative_Necromancy_Mod^/?i^Alternative_Necromancy_Mod^/0;
 
 !!FU(ReadIniInts):P(filePath)/^advanced classes^/
+  ^acm_ACM_Core^/?i^acm_ACM_Core^/0/
+  ^Tactics_enabled^/?i^Tactics_enabled^/0/
+  ^acm_Weak_Commanders^/?i^acm_Weak_Commanders^/0/
   ^Spell_Duration_Mod^/?i^Spell_Duration_Mod^/0;
 
 !!FU(ReadIniInts):P(filePath)/^advanced classes^/
@@ -136,8 +139,9 @@ ZVSE2
 
 !!FU(ReadIniInts):P(filePath)/^advanced classes^/
   ^AIPayday^/?i^AIPayday^/0/
+  ^acm_optionChooseClass^/?i^acm_optionChooseClass^/0/
+  ^acm_optionNoSkillDependenciesOnClass^/?i^acm_optionNoSkillDependenciesOnClass^/0/
   ^H3_Game_Difficulty^/?i^H3_Game_Difficulty^/0;  
-
 
 
 !?FU(difm_SaveOptionsToIni);
@@ -238,6 +242,9 @@ ZVSE2
   ^Alternative_Necromancy_Mod^/i^Alternative_Necromancy_Mod^;
 
 !!FU(WriteIniInts):P(filePath)/^advanced classes^/
+  ^acm_ACM_Core^/i^acm_ACM_Core^/
+  ^Tactics_enabled^/i^Tactics_enabled^/
+  ^acm_Weak_Commanders^/i^acm_Weak_Commanders^/
   ^Spell_Duration_Mod^/i^Spell_Duration_Mod^;
 
 !!FU(WriteIniInts):P(filePath)/^advanced classes^/
@@ -248,6 +255,8 @@ ZVSE2
 
 !!FU(WriteIniInts):P(filePath)/^advanced classes^/
   ^AIPayday^/i^AIPayday^/
+  ^acm_optionChooseClass^/i^acm_optionChooseClass^/
+  ^acm_optionNoSkillDependenciesOnClass^/i^acm_optionNoSkillDependenciesOnClass^/
   ^H3_Game_Difficulty^/i^H3_Game_Difficulty^;    
 
 !!FU(SaveIni):P(filePath);
