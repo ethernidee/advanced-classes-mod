@@ -28,9 +28,6 @@ Name on Heroescommunity: RerryR (but please, call me Perry)
 
 ********************************************************************************
 
-!?CM0;
-!!HE-1:Ed10000; Test
-
 !#SN:W^Advanced_Classes_Mod_Active^/1;  [Set Mod Active]
 
 !#VRi^acm_isGameStarted^:S(FALSE);
@@ -114,19 +111,15 @@ Disable Various WoG Options which can conflict with Advanced Classes Mod
 !#UN:C7788157/4/195;                    [Disable Temple Guardian Mana Reg]
 !#UN:C7772712/2/37008;                  [Disable Brute Gold Bonus]
 
-
-
-!#SN:L^era.dll^/?y1 Ay1/^ReadStrFromIni^/?y2;
-!#SN:Ey2/1/^Tactics^/^Player settings^/^Advanced Classes.ini^/?z1;
+!#SN:F^ReadStrFromIni^/^Tactics^/^Player settings^/^Advanced Classes.ini^/?z1;
 !#VRv2:Vz1;
-
-!#SN:W^Tactics_enabled^/v2;
+!#VRi^Tactics_enabled^:Sv2;
 
 !#UN:V?y1/?y2;                          [Check ERA version]
 !#SN:T^AC_Misc.ATTENTION GRANDPA^/?z2;
-!#IF&y2<3501:M^%Z2^;                    [Updated to version 3.5.1 with short boolean evaluation support]
+!#IF&y2<3700:M^%Z2^;                    [Updated to version 3.7.0 with png support and SN_H support for spells]
 
-!#VRz-2:S^ACM Update 1.05^;             [User-defined section of WoG.ini file ("ACM Update 1.0X")]
+!#VRz-2:S^ACM Update 1.06^;             [User-defined section of WoG.ini file ("ACM Update 1.0X")]
 !#UN:N6/-1/1/-2;                        [Check if ACM Update 1.0X Message has already been displayed]
 !#VRz-1:H2;                             [Set Flag 2 to True if z-1 isn't empty: Flag 2]
 !#SN:T^AC_Misc.First_Time^/?s^Text^;
@@ -6391,13 +6384,13 @@ Before the interaction of the hero with the hero
 !!FU(Switch_Secondary_Skill_Level)&y2>=0/y2<=155:Py2/y3; [Pass Hero Number]
 !!FU(Switch_Secondary_Skill_Level)&y2=-2:Py3/y3; [Pass Hero Number in case no enemy hero]
 
-!?FU(OnAfterErmInstructions);          
-!!SN:L^EraPlugins\erm_hooker.era^/?y1; 
-!!SN:Ay1/^SetHook^/?y2;                 
-!!SN:Ey2/1/4462998/(ACM_Event_AfterMeeleDamage); 
-!?FU(OnAfterLoadGame);                  
-!!SN:L^EraPlugins\erm_hooker.era^/?y1;  
-!!SN:Ay1/^SetHook^/?y2;                 
+!?FU(OnAfterErmInstructions);
+!!SN:L^EraPlugins\erm_hooker.era^/?y1;
+!!SN:Ay1/^SetHook^/?y2;
+!!SN:Ey2/1/4462998/(ACM_Event_AfterMeeleDamage);
+!?FU(OnAfterLoadGame);
+!!SN:L^EraPlugins\erm_hooker.era^/?y1;
+!!SN:Ay1/^SetHook^/?y2;
 !!SN:Ey2/1/4462998/(ACM_Event_AfterMeeleDamage);
 
 !?FU(Switch_Secondary_Skill_Level);
@@ -13791,8 +13784,8 @@ Fix for Cart of Lumber and Cart of Ore give +2 in total
 !!HEx16:A2/117/?y30/?y40; !!VRy31:Sy30-y40; !!VRy31:Sy31*500; !!OW&y31>0/y30<>y40:Ry1/6/dy31; [117 Endless Purse of Gold]
 
 !!HEx16:A2/140/?y30/?y40; !!VRy30&y40=1:-5; [140 Cornucopia Adds 5 of each Resource]
-!!OW&y30>0:Ry1/4/d5; !!OW&y30>0:Ry1/5/d5; !!OW&y30>0:Ry1/1/d5; !!OW&y30>0:Ry1/3/d5;               
-                  
+!!OW&y30>0:Ry1/4/d5; !!OW&y30>0:Ry1/5/d5; !!OW&y30>0:Ry1/1/d5; !!OW&y30>0:Ry1/3/d5;
+
 
 ********************************************************************************
 *Luck reducing Artifacts
@@ -19536,189 +19529,189 @@ Counterstrike: Increases retaliation damage based on your SP
 !?FU(H3_Set_Spell_Descriptions_Orginal);
 
 !!VRz125:Sz199705;                      [Magic Arrow]
-!!SS15:D0/z125;
+!!SN:H^spell^/15/(SPELL_TEXT_DESCR)/z125;
 
 ** Fire
 !!VRz121:Sz199701;                      [Land Mine]
-!!SS11:D0/z121;
+!!SN:H^spell^/11/(SPELL_TEXT_DESCR)/z121;
 
 !!VRz123:Sz199703;                      [Fire Wall]
-!!SS13:D0/z123;
+!!SN:H^spell^/13/(SPELL_TEXT_DESCR)/z123;
 
 !!VRz131:Sz199711;                      [Fireball]
-!!SS21:D0/z131;
+!!SN:H^spell^/21/(SPELL_TEXT_DESCR)/z131;
 
 !!VRz132:Sz199712;                      [Inferno]
-!!SS22:D0/z132;
+!!SN:H^spell^/22/(SPELL_TEXT_DESCR)/z132;
 
 !!VRz136:Sz199716;                      [Armageddon]
-!!SS26:D0/z136;
+!!SN:H^spell^/26/(SPELL_TEXT_DESCR)/z136;
 
 !!VRz139:Sz199719;                      [Fire Shield]
-!!SS29:D0/z139;
+!!SN:H^spell^/29/(SPELL_TEXT_DESCR)/z139;
 
 !!VRz481:Sz199720;                      [Protection from Fire]
-!!SS31:D0/z481;
+!!SN:H^spell^/31/(SPELL_TEXT_DESCR)/z481;
 
 !!VRz258:Sz199730;                      [Sacrifice]
-!!SS40:D0/z258;
+!!SN:H^spell^/40/(SPELL_TEXT_DESCR)/z258;
 
 !!VRz257:Sz199732;                      [Curse]
-!!SS42:D0/z257;
+!!SN:H^spell^/42/(SPELL_TEXT_DESCR)/z257;
 
 !!VRz256:Sz199733;                      [Bloodlust]
-!!SS43:D0/z256;
+!!SN:H^spell^/43/(SPELL_TEXT_DESCR)/z256;
 
 !!VRz255:Sz199742;                      [Misfortune]
-!!SS52:D0/z255;
+!!SN:H^spell^/52/(SPELL_TEXT_DESCR)/z255;
 
 !!VRz770:Sz199745;                      [Slayer]
-!!SS55:D0/z770;
+!!SN:H^spell^/55/(SPELL_TEXT_DESCR)/z770;
 
 !!VRz254:Sz199746;                      [Frenzy]
-!!SS56:D0/z254;
+!!SN:H^spell^/56/(SPELL_TEXT_DESCR)/z254;
 
 !!VRz730:Sz199749;                      [Berserk]
-!!SS59:D0/z730;
+!!SN:H^spell^/59/(SPELL_TEXT_DESCR)/z730;
 
 !!VRz772:Sz199752;                      [Blind]
-!!SS62:D0/z772;
+!!SN:H^spell^/62/(SPELL_TEXT_DESCR)/z772;
 
 !!VRz776:Sz199756;                      [Summon Fire Elemental]
-!!SS66:D0/z776;
+!!SN:H^spell^/66/(SPELL_TEXT_DESCR)/z776;
 **
 
 **Air
 !!VRz127:Sz199707;                      [Lightning Bolt}]
-!!SS17:D0/z127;
+!!SN:H^spell^/17/(SPELL_TEXT_DESCR)/z127;
 
 !!VRz129:Sz199709;                      [Chain Lightning}]
-!!SS19:D0/z129;
+!!SN:H^spell^/19/(SPELL_TEXT_DESCR)/z129;
 
 !!VRz135:Sz199715;                      [Destroy Undead}]
-!!SS25:D0/z135;
+!!SN:H^spell^/25/(SPELL_TEXT_DESCR)/z135;
 
 !!VRz138:Sz199718;                      [Air Shield}]
-!!SS28:D0/z138;
+!!SN:H^spell^/28/(SPELL_TEXT_DESCR)/z138;
 
 !!VRz140:Sz199720;                      [Protection from Air}]
-!!SS30:D0/z140;
+!!SN:H^spell^/30/(SPELL_TEXT_DESCR)/z140;
 
 !!VRz119:Sz199726;                      [Magic Mirror}]
-!!SS36:D0/z119;
+!!SN:H^spell^/36/(SPELL_TEXT_DESCR)/z119;
 
 !!VRz253:Sz199734;                      [Precision}]
-!!SS44:D0/z253;
+!!SN:H^spell^/44/(SPELL_TEXT_DESCR)/z253;
 
 !!VRz252:Sz199737;                      [Disrupting Ray}]
-!!SS47:D0/z252;
+!!SN:H^spell^/47/(SPELL_TEXT_DESCR)/z252;
 
 !!VRz251:Sz199741;                      [Fortune}]
-!!SS51:D0/z251;
+!!SN:H^spell^/51/(SPELL_TEXT_DESCR)/z251;
 
 !!VRz250:Sz199743;                      [Haste}]
-!!SS53:D0/z250;
+!!SN:H^spell^/53/(SPELL_TEXT_DESCR)/z250;
 
 !!VRz598:Sz199748;                      [Counterstrike}]
-!!SS58:D0/z598;
+!!SN:H^spell^/58/(SPELL_TEXT_DESCR)/z598;
 
 
 !!VRz731:Sz199750;                      [Hypnotize}]
-!!SS60:D0/z731;
+!!SN:H^spell^/60/(SPELL_TEXT_DESCR)/z731;
 
 !!VRz779:Sz199759;                      [Summon Air Elemental}]
-!!SS69:D0/z779;
+!!SN:H^spell^/69/(SPELL_TEXT_DESCR)/z779;
 **
 
 **Water
 !!VRz487:Sz199727;                      [Cure}]
-!!SS37:D0/z487;                         [set cure description]
+!!SN:H^spell^/37/(SPELL_TEXT_DESCR)/z487;                         [set cure description]
 
 !!VRz126:Sz199706;                      [Ice Bolt}]
-!!SS16:D0/z126;
+!!SN:H^spell^/16/(SPELL_TEXT_DESCR)/z126;
 
 !!VRz130:Sz199710;                      [Frost Ring}]
-!!SS20:D0/z130;
+!!SN:H^spell^/20/(SPELL_TEXT_DESCR)/z130;
 
 !!VRz482:Sz199722;                      [Protection from Water}]
-!!SS32:D0/z482;
+!!SN:H^spell^/32/(SPELL_TEXT_DESCR)/z482;
 
 !!VRz485:Sz199725;                      [Dispel}]
-!!SS35:D0/z485;
+!!SN:H^spell^/35/(SPELL_TEXT_DESCR)/z485;
 
 !!VRz780:Sz199731;                      [Bless}]
-!!SS41:D0/z780;
+!!SN:H^spell^/41/(SPELL_TEXT_DESCR)/z780;
 
 !!VRz781:Sz199735;                      [Weakness}]
-!!SS45:D0/z781;
+!!SN:H^spell^/45/(SPELL_TEXT_DESCR)/z781;
 
 !!VRz782:Sz199738;                      [Prayer}]
-!!SS48:D0/z782;
+!!SN:H^spell^/48/(SPELL_TEXT_DESCR)/z782;
 
 !!VRz783:Sz199739;                      [Mirth}]
-!!SS49:D0/z783;
+!!SN:H^spell^/49/(SPELL_TEXT_DESCR)/z783;
 
 !!VRz771:Sz199751;                      [Forgetfulness}]
-!!SS61:D0/z771;
+!!SN:H^spell^/61/(SPELL_TEXT_DESCR)/z771;
 
 !!VRz773:Sz199753;                      [Teleport}]
-!!SS63:D0/z773;
+!!SN:H^spell^/63/(SPELL_TEXT_DESCR)/z773;
 
 !!VRz774:Sz199754;                      [Remove Obstacle}]
-!!SS64:D0/z774;
+!!SN:H^spell^/64/(SPELL_TEXT_DESCR)/z774;
 
 !!VRz775:Sz199755;                      [Clone}]
-!!SS65:D0/z775;
+!!SN:H^spell^/65/(SPELL_TEXT_DESCR)/z775;
 
 !!VRz778:Sz199758;                      [Summon Water Elemental}]
-!!SS68:D0/z778;
+!!SN:H^spell^/68/(SPELL_TEXT_DESCR)/z778;
 **
 
 **Earth
 !!VRz120:Sz199700;                      [Quicksand}]
-!!SS10:D0/z120;
+!!SN:H^spell^/10/(SPELL_TEXT_DESCR)/z120;
 
 !!VRz122:Sz199702;                      [Force Field}]
-!!SS12:D0/z122;
+!!SN:H^spell^/12/(SPELL_TEXT_DESCR)/z122;
 
 !!VRz124:Sz199704;                      [Earthquake}]
-!!SS14:D0/z124;
+!!SN:H^spell^/14/(SPELL_TEXT_DESCR)/z124;
 
 !!VRz128:Sz199708;                      [Implosion}]
-!!SS18:D0/z128;
+!!SN:H^spell^/18/(SPELL_TEXT_DESCR)/z128;
 
 !!VRz133:Sz199713;                      [Meteor Shower}]
-!!SS23:D0/z133;
+!!SN:H^spell^/23/(SPELL_TEXT_DESCR)/z133;
 
 !!VRz134:Sz199714;                      [Death Ripple}]
-!!SS24:D0/z134;
+!!SN:H^spell^/24/(SPELL_TEXT_DESCR)/z134;
 
 !!VRz137:Sz199717;                      [Shield}]
-!!SS27:D0/z137;
+!!SN:H^spell^/27/(SPELL_TEXT_DESCR)/z137;
 
 !!VRz483:Sz199723;                      [Protection from Earth}]
-!!SS33:D0/z483;
+!!SN:H^spell^/33/(SPELL_TEXT_DESCR)/z483;
 
 !!VRz484:Sz199724;                      [Anti-Magic}]
-!!SS34:D0/z484;
+!!SN:H^spell^/34/(SPELL_TEXT_DESCR)/z484;
 
 !!VRz488:Sz199728;                      [Resurrection}]
-!!SS38:D0/z488;
+!!SN:H^spell^/38/(SPELL_TEXT_DESCR)/z488;
 
 !!VRz489:Sz199729;                      [Animate Dead}]
-!!SS39:D0/z489;
+!!SN:H^spell^/39/(SPELL_TEXT_DESCR)/z489;
 
 !!VRz786:Sz199736;                      [Stone Skin}]
-!!SS46:D0/z786;
+!!SN:H^spell^/46/(SPELL_TEXT_DESCR)/z786;
 
 !!VRz784:Sz199740;                      [Sorrow}]
-!!SS50:D0/z784;
+!!SN:H^spell^/50/(SPELL_TEXT_DESCR)/z784;
 
 !!VRz785:Sz199744;                      [Slow}]
-!!SS54:D0/z785;
+!!SN:H^spell^/54/(SPELL_TEXT_DESCR)/z785;
 
 !!VRz777:Sz199757;                      [Summon Earth Elemental}]
-!!SS67:D0/z777;
+!!SN:H^spell^/67/(SPELL_TEXT_DESCR)/z777;
 
 
 ****************************************************************************************************************************************************************
@@ -19748,10 +19741,10 @@ Counterstrike: Increases retaliation damage based on your SP
 !!SN&x9=1:T^AC_Spells.Trainer_Damage^/?z1/^damage^/y93;
 
 !!VRz125&x9=1:+z1;!!SN:Iz125/?z125;
-!!SS15|x2=0/x3=0/x4=0/x5=0:D0/z125;
-!!SS15|x2=1/x3=1/x4=1/x5=1:D1/z125;
-!!SS15|x2=2/x3=2/x4=2/x5=2:D2/z125;
-!!SS15|x2=3/x3=3/x4=3/x5=3:D3/z125;
+!!SN|x2=0/x3=0/x4=0/x5=0:H^spell^/15/(SPELL_TEXT_DESCR)/z125;
+!!SN|x2=1/x3=1/x4=1/x5=1:H^spell^/15/(SPELL_TEXT_DESCR_BASIC)/z125;
+!!SN|x2=2/x3=2/x4=2/x5=2:H^spell^/15/(SPELL_TEXT_DESCR_ADVANCED)/z125;
+!!SN|x2=3/x3=3/x4=3/x5=3:H^spell^/15/(SPELL_TEXT_DESCR_EXPERT)/z125;
 
 
 ***************************************
@@ -19830,7 +19823,7 @@ Counterstrike: Increases retaliation damage based on your SP
 !!SN:W^Hero%X1_Land Mine_Upgrade^/?y78;
 !!SN&x9=1:W^SpellTrainerHero%X1_Spell11^/?y79; !!VRy78&x9=1:Sy78*50;
 !!SN&x9=1:T^AC_Spells.Trainer_Damage_Casts^/?z1/^damage^/y78/^casts^/y79;
-!!VRz121&x9=1:+z1; !!SN:Iz121/?z121; !!SS11:Dx6/z121;
+!!VRz121&x9=1:+z1; !!SN:Iz121/?z121; !!VRm:Sx6 +(SPELL_TEXT_DESCR); !!SN:H^spell^/11/m/z121;
 
 
 !!SN&x4=1:T^AC_Spells.Fire_Wall_0^/?z123;
@@ -19838,7 +19831,7 @@ Counterstrike: Increases retaliation damage based on your SP
 !!SN:W^Hero%X1_Fire Wall_Upgrade^/?y80;
 !!SN:W^SpellTrainerHero%X1_Spell13^/?y81; !!VRy80&x9=1:Sy80*35;
 !!SN&x9=1:T^AC_Spells.Trainer_Damage_Casts^/?z1/^damage^/y80/^casts^/y81;
-!!VRz123&x9=1:+z1; !!SN:Iz123/?z123; !!SS13:Dx6/z123;
+!!VRz123&x9=1:+z1; !!SN:Iz123/?z123; !!VRm:Sx6 +(SPELL_TEXT_DESCR); !!SN:H^spell^/13/m/z123;
 
 
 !!VRy8&x4=1:S27;
@@ -19847,21 +19840,21 @@ Counterstrike: Increases retaliation damage based on your SP
 !!SN&x4=0:T^AC_Spells.Fire_Ball_1^/?z131;
 !!SN&x9=1:W^SpellTrainerHero%X1_Spell21^/?y93; !!VRy93&x9=1:Sy93*x10;
 !!SN&x9=1:T^AC_Spells.Trainer_Damage^/?z1/^damage^/y93;
-!!VRz131&x9=1:+z1; !!SN:Iz131/?z131; !!SS21:Dx6/z131;
+!!VRz131&x9=1:+z1; !!SN:Iz131/?z131; !!VRm:Sx6 +(SPELL_TEXT_DESCR); !!SN:H^spell^/21/m/z131;
 
 
 !!SN&x4=1:T^AC_Spells.Inferno_0^/?z132;
 !!SN&x4=0:T^AC_Spells.Inferno_1^/?z132;
 !!SN&x9=1:W^SpellTrainerHero%X1_Spell22^/?y94; !!VRy94&x9=1:Sy94*x10;
 !!SN&x9=1:T^AC_Spells.Trainer_Damage^/?z1/^damage^/y94;
-!!VRz132&x9=1:+z1; !!SN:Iz132/?z132; !!SS22:Dx6/z132;
+!!VRz132&x9=1:+z1; !!SN:Iz132/?z132; !!VRm:Sx6 +(SPELL_TEXT_DESCR); !!SN:H^spell^/22/m/z132;
 
 
 !!SN&x4=1:T^AC_Spells.Armageddon_0^/?z136;
 !!SN&x4=0:T^AC_Spells.Armageddon_1^/?z136;
 !!SN&x9=1:W^SpellTrainerHero%X1_Spell26^/?y95; !!VRy95&x9=1:Sy95*x10;
 !!SN&x9=1:T^AC_Spells.Trainer_Damage^/?z1/^damage^/y95;
-!!VRz136&x9=1:+z1; !!SN:Iz136/?z136; !!SS26:Dx6/z136;
+!!VRz136&x9=1:+z1; !!SN:Iz136/?z136; !!VRm:Sx6 +(SPELL_TEXT_DESCR); !!SN:H^spell^/26/m/z136;
 
 
 !!VRy92:Sx2 :2 +10;                     [+10% + 1% per 2SP]
@@ -19871,7 +19864,7 @@ Counterstrike: Increases retaliation damage based on your SP
 !!FU(Fire_Shield_Calculation):Px1/0/0/0/0/1/0/?y29/0;
 !!SN&x4=1:T^AC_Spells.Fire_Shield_0^/?z139;
 !!SN&x4=0:T^AC_Spells.Fire_Shield_1^/?z139;
-!!SN:Iz139/?z139; !!SS29:Dx6/z139;
+!!SN:Iz139/?z139; !!VRm:Sx6 +(SPELL_TEXT_DESCR); !!SN:H^spell^/29/m/z139;
 
 
 !!VRy16:Sx2:2 +10;                      [+SP/2% +10% chance to shake off]
@@ -19883,12 +19876,12 @@ Counterstrike: Increases retaliation damage based on your SP
 !!SN&x6<3/x4=0:T^AC_Spells.Fire_Protection_2^/?z481;
 !!SN:W^SpellTrainerHero%X1_Spell30^/?y70;
 !!SN&x9=1:T^AC_Spells.Trainer_Reduction_Casts^/?z1/^damage^/y71/^casts^/y70;
-!!VRz481&x9=1:+z1; !!SN:Iz481/?z481; !!SS31:Dx6/z481;
+!!VRz481&x9=1:+z1; !!SN:Iz481/?z481; !!VRm:Sx6 +(SPELL_TEXT_DESCR); !!SN:H^spell^/31/m/z481;
 
 
 !!SN&x6=3/x4=1:T^AC_Spells.Sacrifice_0^/?z258;
 !!SN|x6<3/x4=0:T^AC_Spells.Sacrifice_1^/?z258;
-!!SN:Iz258/?z258; !!SS40:Dx6/z258;
+!!SN:Iz258/?z258; !!VRm:Sx6 +(SPELL_TEXT_DESCR); !!SN:H^spell^/40/m/z258;
 
 
 !!SN&x9=1:W^Hero%X1_Curse_Upgrade^/?y72; !!VRy42&x9=1:+y72; Add Spell Trainer Effect
@@ -19897,7 +19890,7 @@ Counterstrike: Increases retaliation damage based on your SP
 !!SN&x6<3/x4=0:T^AC_Spells.Curse_2^/?z257;
 !!SN:W^SpellTrainerHero%X1_Spell42^/?y73;
 !!SN&x9=1:T^AC_Spells.Trainer_MinDmg_Casts^/?z1/^damage^/y72/^casts^/y73;
-!!VRz257&x9=1:+z1; !!SN:Iz257/?z257; !!SS42:Dx6/z257;
+!!VRz257&x9=1:+z1; !!SN:Iz257/?z257; !!VRm:Sx6 +(SPELL_TEXT_DESCR); !!SN:H^spell^/42/m/z257;
 
 
 
@@ -19909,7 +19902,7 @@ Counterstrike: Increases retaliation damage based on your SP
 !!SN&x6<3/x4=0:T^AC_Spells.Bloodlust_2^/?z256;
 !!SN:W^SpellTrainerHero%X1_Spell43^/?y75;
 !!SN&x9=1:T^AC_Spells.Trainer_Attack_Casts^/?z1/^damage^/y74/^casts^/y75;
-!!VRz256&x9=1:+z1; !!SN:Iz256/?z256; !!SS43:Dx6/z256;
+!!VRz256&x9=1:+z1; !!SN:Iz256/?z256; !!VRm:Sx6 +(SPELL_TEXT_DESCR); !!SN:H^spell^/43/m/z256;
 
 
 !!VRy78:Sx2 :2 +20;                     [Chance is 20% + 5% per 10SP]
@@ -19922,7 +19915,7 @@ Counterstrike: Increases retaliation damage based on your SP
 !!SN&x6<3/x4=0:T^AC_Spells.Misfortune_2^/?z255;
 !!SN:W^SpellTrainerHero%X1_Spell52^/?y77;
 !!SN&x9=1:T^AC_Spells.Trainer_Luck1_Casts^/?z1/^damage^/y76/^casts^/y77;
-!!VRz255&x9=1:+z1; !!SN:Iz255/?z255; !!SS52:Dx6/z255;
+!!VRz255&x9=1:+z1; !!SN:Iz255/?z255; !!VRm:Sx6 +(SPELL_TEXT_DESCR); !!SN:H^spell^/52/m/z255;
 
 
 !!VRy79:Sx2 :2 +20;                     [Chance for Crushing Blow is SP/2 + 20%]
@@ -19935,7 +19928,7 @@ Counterstrike: Increases retaliation damage based on your SP
 !!SN&x6<2/x4=0:T^AC_Spells.Slayer_3^/?z770;
 !!SN:W^SpellTrainerHero%X1_Spell52^/?y31;
 !!SN&x9=1:T^AC_Spells.Trainer_Attack_Casts^/?z1/^damage^/y30/^casts^/y31;
-!!VRz770&x9=1:+z1; !!SN:Iz770/?z770; !!SS55:Dx6/z770;
+!!VRz770&x9=1:+z1; !!SN:Iz770/?z770; !!VRm:Sx6 +(SPELL_TEXT_DESCR); !!SN:H^spell^/55/m/z770;
 
 
 !!SS56:Ex6/?y7;
@@ -19947,27 +19940,27 @@ Counterstrike: Increases retaliation damage based on your SP
 !!SN&x4=0:T^AC_Spells.Frenzy_1^/?z254;
 !!SN:W^SpellTrainerHero%X1_Spell56^/?y33;
 !!SN&x9=1:T^AC_Spells.Trainer_Attack_Casts^/?z1/^damage^/y32/^casts^/y33;
-!!VRz254&x9=1:+z1; !!SN:Iz254/?z254; !!SS56:Dx6/z254;
+!!VRz254&x9=1:+z1; !!SN:Iz254/?z254; !!VRm:Sx6 +(SPELL_TEXT_DESCR); !!SN:H^spell^/56/m/z254;
 
 
 !!SN&x6>0/x4=1:T^AC_Spells.Berserk_0^/?z730;
 !!SN&x6>2/x4=0:T^AC_Spells.Berserk_1^/?z730;
 !!SN&x6<3/x4=0:T^AC_Spells.Berserk_2^/?z730;
-!!SN:Iz730/?z730; !!SS59:Dx6/z730;
+!!SN:Iz730/?z730; !!VRm:Sx6 +(SPELL_TEXT_DESCR); !!SN:H^spell^/59/m/z730;
 
 
 !!VRy8:S3 -x6 *25;
 !!SN&x4=1:T^AC_Spells.Blind_0^/?z772;
 !!SN&x6=3/x4=0:T^AC_Spells.Blind_1^/?z772;
 !!SN&x6<3/x4=0:T^AC_Spells.Blind_2^/?z772;
-!!SN:Iz772/?z772; !!SS62:Dx6/z772;
+!!SN:Iz772/?z772; !!VRm:Sx6 +(SPELL_TEXT_DESCR); !!SN:H^spell^/62/m/z772;
 
 
 !!VRy64:Sx2 +30;
 !!VRy64&y64>=100:S100;                  [Cap at 100]
 !!SN&x4=1:T^AC_Spells.Remove_0^/?z774;
 !!SN&x4=0:T^AC_Spells.Remove_1^/?z774;
-!!SN:Iz774/?z774; !!SS64:Dx6/z774;
+!!SN:Iz774/?z774; !!VRm:Sx6 +(SPELL_TEXT_DESCR); !!SN:H^spell^/64/m/z774;
 
 
 !!VRy66:Sx2:2+10;
@@ -19980,7 +19973,7 @@ Counterstrike: Increases retaliation damage based on your SP
 !!SN&x4=0:T^AC_Spells.Fire_Element_1^/?z776;
 !!SN:W^SpellTrainerHero%X1_Spell66^/?y35;
 !!SN&x9=1:T^AC_Spells.Trainer_HP_Casts^/?z1/^damage^/y34/^casts^/y35;
-!!VRz776&x9=1:+z1; !!SN:Iz776/?z776; !!SS66:Dx6/z776;
+!!VRz776&x9=1:+z1; !!SN:Iz776/?z776; !!VRm:Sx6 +(SPELL_TEXT_DESCR); !!SN:H^spell^/66/m/z776;
 
 
 ****************************************
@@ -20057,7 +20050,7 @@ Counterstrike: Increases retaliation damage based on your SP
 !!SN&x4=0:T^AC_Spells.Lightning_1^/?z127;
 !!SN&x9=1:W^SpellTrainerHero%X1_Spell17^/?y93; !!VRy93&x9=1:Sy93*x10;
 !!SN&x9=1:T^AC_Spells.Trainer_Damage^/?z1/^damage^/y93;
-!!VRz127&x9=1:+z1; !!SN:Iz127/?z127; !!SS17:Dx6/z127;
+!!VRz127&x9=1:+z1; !!SN:Iz127/?z127; !!VRm:Sx6 +(SPELL_TEXT_DESCR); !!SN:H^spell^/17/m/z127;
 
 
 !!VRy61&x6=0/x4=0/x5=0:S4;              [No Rank]
@@ -20071,14 +20064,14 @@ Counterstrike: Increases retaliation damage based on your SP
 !!SN&x4=0:T^AC_Spells.Chain_1^/?z129;
 !!SN&x9=1:W^SpellTrainerHero%X1_Spell19^/?y95; !!VRy95&x9=1:Sy95*x10;
 !!SN&x9=1:T^AC_Spells.Trainer_Damage^/?z1/^damage^/y95;
-!!VRz129&x9=1:+z1; !!SN:Iz129/?z129; !!SS19:Dx6/z129;
+!!VRz129&x9=1:+z1; !!SN:Iz129/?z129; !!VRm:Sx6 +(SPELL_TEXT_DESCR); !!SN:H^spell^/19/m/z129;
 
 
 !!SN&x4=1:T^AC_Spells.Destroy_0^/?z135;
 !!SN&x4=0:T^AC_Spells.Destroy_1^/?z135;
 !!SN&x9=1:W^SpellTrainerHero%X1_Spell25^/?y94; !!VRy94&x9=1:Sy94*x10;
 !!SN&x9=1:T^AC_Spells.Trainer_Damage^/?z1/^damage^/y94;
-!!VRz135&x9=1:+z1; !!SN:Iz135/?z135; !!SS25:Dx6/z135;
+!!VRz135&x9=1:+z1; !!SN:Iz135/?z135; !!VRm:Sx6 +(SPELL_TEXT_DESCR); !!SN:H^spell^/25/m/z135;
 
 
 !!VRy5:Sx2:10 +5;                       [+SP/10% +5% chance to dodge]
@@ -20089,7 +20082,7 @@ Counterstrike: Increases retaliation damage based on your SP
 !!SN&x6<3/x4=0:T^AC_Spells.Air_Shield_2^/?z138;
 !!SN:W^SpellTrainerHero%X1_Spell28^/?y81;
 !!SN&x9=1:T^AC_Spells.Trainer_Reduction_Casts^/?z1/^damage^/y80/^casts^/y81;
-!!VRz138&x9=1:+z1; !!SN:Iz138/?z138; !!SS28:Dx6/z138;
+!!VRz138&x9=1:+z1; !!SN:Iz138/?z138; !!VRm:Sx6 +(SPELL_TEXT_DESCR); !!SN:H^spell^/28/m/z138;
 
 
 !!VRy11:Sx2:2 +10;                      [+SP/2% +10% chance to shake off]
@@ -20101,12 +20094,12 @@ Counterstrike: Increases retaliation damage based on your SP
 !!SN&x6<3/x4=0:T^AC_Spells.Air_Protect_2^/?z140;
 !!SN:W^SpellTrainerHero%X1_Spell30^/?y70;
 !!SN&x9=1:T^AC_Spells.Trainer_Reduction_Casts^/?z1/^damage^/y71/^casts^/y70;
-!!VRz140&x9=1:+z1; !!SN:Iz140/?z140; !!SS30:Dx6/z140;
+!!VRz140&x9=1:+z1; !!SN:Iz140/?z140; !!VRm:Sx6 +(SPELL_TEXT_DESCR); !!SN:H^spell^/30/m/z140;
 
 
 !!SN&x4=1:T^AC_Spells.Magic_Mirror_0^/?z119;
 !!SN&x4=0:T^AC_Spells.Magic_Mirror_1^/?z119;
-!!SN:Iz119/?z119; !!SS36:Dx6/z119;
+!!SN:Iz119/?z119; !!VRm:Sx6 +(SPELL_TEXT_DESCR); !!SN:H^spell^/36/m/z119;
 
 
 !!VRy6:Sx2:5+20;                        [AOE Damage is 20%+1% per 5 SP]
@@ -20116,7 +20109,7 @@ Counterstrike: Increases retaliation damage based on your SP
 !!SN&x6<3/x4=0:T^AC_Spells.Precision_2^/?z253;
 !!SN:W^SpellTrainerHero%X1_Spell44^/?y83;
 !!SN&x9=1:T^AC_Spells.Trainer_Attack_Casts^/?z1/^damage^/y82/^casts^/y83;
-!!VRz253&x9=1:+z1; !!SN:Iz253/?z253; !!SS44:Dx6/z253;
+!!VRz253&x9=1:+z1; !!SN:Iz253/?z253; !!VRm:Sx6 +(SPELL_TEXT_DESCR); !!SN:H^spell^/44/m/z253;
 
 
 !!VRy60&x4=1/x5=0:S1;                   [+1 chance with Master]
@@ -20126,7 +20119,7 @@ Counterstrike: Increases retaliation damage based on your SP
 !!SN&x4=0:T^AC_Spells.Disrupting_1^/?z252;
 !!SN:W^SpellTrainerHero%X1_Spell47^/?y85;
 !!SN&x9=1:T^AC_Spells.Trainer_reduce_Casts^/?z1/^damage^/y84/^casts^/y85;
-!!VRz252&x9=1:+z1; !!SN:Iz252/?z252; !!SS47:Dx6/z252;
+!!VRz252&x9=1:+z1; !!SN:Iz252/?z252; !!VRm:Sx6 +(SPELL_TEXT_DESCR); !!SN:H^spell^/47/m/z252;
 
 
 !!VRy77:Sx2:2;
@@ -20139,7 +20132,7 @@ Counterstrike: Increases retaliation damage based on your SP
 !!SN&x6<3/x4=0:T^AC_Spells.Fortune_2^/?z251;
 !!SN:W^SpellTrainerHero%X1_Spell51^/?y89;
 !!SN&x9=1:T^AC_Spells.Trainer_Luck2_Casts^/?z1/^damage^/y88/^casts^/y89;
-!!VRz251&x9=1:+z1; !!SN:Iz251/?z251; !!SS51:Dx6/z251;
+!!VRz251&x9=1:+z1; !!SN:Iz251/?z251; !!VRm:Sx6 +(SPELL_TEXT_DESCR); !!SN:H^spell^/51/m/z251;
 
 
 !!SN&x9=1:W^Hero%X1_Haste_Upgrade^/?y86; !!VRy53&x9=1:+y86; Add Spell Trainer Effect
@@ -20148,7 +20141,7 @@ Counterstrike: Increases retaliation damage based on your SP
 !!SN&x6<3/x4=0:T^AC_Spells.Haste_2^/?z250;
 !!SN:W^SpellTrainerHero%X1_Spell53^/?y87;
 !!SN&x9=1:T^AC_Spells.Trainer_Haste_Casts^/?z1/^damage^/y86/^casts^/y87;
-!!VRz250&x9=1:+z1; !!SN:Iz250/?z250; !!SS53:Dx6/z250;
+!!VRz250&x9=1:+z1; !!SN:Iz250/?z250; !!VRm:Sx6 +(SPELL_TEXT_DESCR); !!SN:H^spell^/53/m/z250;
 
 
 !!VRy49:Sx2:3+10;                       [Chance is 10% + 1% per 3SP]
@@ -20156,7 +20149,7 @@ Counterstrike: Increases retaliation damage based on your SP
 !!SN&x6>0/x4=1:T^AC_Spells.Counterstrike_0^/?z598/^damage^/y49;
 !!SN&x6=3/x4=0:T^AC_Spells.Counterstrike_1^/?z598;
 !!SN&x6<3/x4=0:T^AC_Spells.Counterstrike_2^/?z598;
-!!SN:Iz598/?z598; !!SS58:Dx6/z598;
+!!SN:Iz598/?z598; !!VRm:Sx6 +(SPELL_TEXT_DESCR); !!SN:H^spell^/58/m/z598;
 
 
 !!VRy60:Sx2 +20;                        [20% base + SP%]
@@ -20164,7 +20157,7 @@ Counterstrike: Increases retaliation damage based on your SP
 !!VRy60&y60>=100:S100;
 !!SN&x4=1:T^AC_Spells.Hypnotize_0^/?z731;
 !!SN&x4=0:T^AC_Spells.Hypnotize_1^/?z731;
-!!SN:Iz731/?z731; !!SS60:Dx6/z731;
+!!SN:Iz731/?z731; !!VRm:Sx6 +(SPELL_TEXT_DESCR); !!SN:H^spell^/60/m/z731;
 
 
 !!VRy69:Sx2:2+10;
@@ -20177,7 +20170,7 @@ Counterstrike: Increases retaliation damage based on your SP
 !!SN&x4=0:T^AC_Spells.Summon_Air_1^/?z779;
 !!SN:W^SpellTrainerHero%X1_Spell66^/?y35;
 !!SN&x9=1:T^AC_Spells.Trainer_HP_Casts^/?z1/^damage^/y34/^casts^/y35;
-!!VRz779&x9=1:+z1; !!SN:Iz779/?z779; !!SS69:Dx6/z779;
+!!VRz779&x9=1:+z1; !!SN:Iz779/?z779; !!VRm:Sx6 +(SPELL_TEXT_DESCR); !!SN:H^spell^/69/m/z779;
 
 
 ****************************************
@@ -20263,7 +20256,7 @@ Counterstrike: Increases retaliation damage based on your SP
 !!SN&x6<3/x4=0:T^AC_Spells.Cure_2^/?z487;
 !!SN:W^SpellTrainerHero%X1_Spell37^/?y81;
 !!SN&x9=1:T^AC_Spells.Trainer_HP_Casts^/?z1/^damage^/y80/^casts^/y81;
-!!VRz487&x9=1:+z1; !!SN:Iz487/?z487; !!SS37:Dx6/z487;      [set cure description]
+!!VRz487&x9=1:+z1; !!SN:Iz487/?z487; !!VRm:Sx6 +(SPELL_TEXT_DESCR); !!SN:H^spell^/37/m/z487;      [set cure description]
 
 
 !!VRy20:S1;
@@ -20272,7 +20265,7 @@ Counterstrike: Increases retaliation damage based on your SP
 !!SN&x4=0:T^AC_Spells.Ice_Bolt_1^/?z126;
 !!SN&x9=1:W^SpellTrainerHero%X1_Spell16^/?y93; !!VRy93&x9=1:Sy93*x10;
 !!SN&x9=1:T^AC_Spells.Trainer_Damage^/?z1/^damage^/y93;
-!!VRz126&x9=1:+z1; !!SN:Iz126/?z126; !!SS16:Dx6/z126;
+!!VRz126&x9=1:+z1; !!SN:Iz126/?z126; !!VRm:Sx6 +(SPELL_TEXT_DESCR); !!SN:H^spell^/16/m/z126;
 
 
 !!VRy20:S1;
@@ -20281,7 +20274,7 @@ Counterstrike: Increases retaliation damage based on your SP
 !!SN&x4=0:T^AC_Spells.Frost_Ring_1^/?z130;
 !!SN&x9=1:W^SpellTrainerHero%X1_Spell20^/?y94; !!VRy94&x9=1:Sy94*x10;
 !!SN&x9=1:T^AC_Spells.Trainer_Damage^/?z1/^damage^/y94;
-!!VRz130&x9=1:+z1; !!SN:Iz130/?z130; !!SS20:Dx6/z130;
+!!VRz130&x9=1:+z1; !!SN:Iz130/?z130; !!VRm:Sx6 +(SPELL_TEXT_DESCR); !!SN:H^spell^/20/m/z130;
 
 
 !!VRy14:Sx2:2 +10;                      [+SP/2% +10% chance to shake off]
@@ -20293,14 +20286,14 @@ Counterstrike: Increases retaliation damage based on your SP
 !!SN&x6<3/x4=0:T^AC_Spells.Water_Protection_2^/?z482;
 !!SN:W^SpellTrainerHero%X1_Spell30^/?y70;
 !!SN&x9=1:T^AC_Spells.Trainer_Reduction_Casts^/?z1/^damage^/y71/^casts^/y70;
-!!VRz482&x9=1:+z1; !!SN:Iz482/?z482; !!SS32:Dx6/z482;
+!!VRz482&x9=1:+z1; !!SN:Iz482/?z482; !!VRm:Sx6 +(SPELL_TEXT_DESCR); !!SN:H^spell^/32/m/z482;
 
 
 !!SN&x6>0/x4=1:T^AC_Spells.Disple_0^/?z485;
 !!SN&x6=3/x4=0:T^AC_Spells.Disple_1^/?z485;
 !!SN&x6=2/x4=0:T^AC_Spells.Disple_2^/?z485;
 !!SN&x6<2/x4=0:T^AC_Spells.Disple_3^/?z485;
-!!SN:Iz485/?z485; !!SS35:Dx6/z485;
+!!SN:Iz485/?z485; !!VRm:Sx6 +(SPELL_TEXT_DESCR); !!SN:H^spell^/35/m/z485;
 
 !!HEx1:I?y98/1;              [Get current Hero Spell Points]
 !!SN&x9=1:W^Hero%X1_Bless_Upgrade^/?y82; !!VRy41&x9=1:+y82; Add Spell Trainer Effect
@@ -20309,7 +20302,7 @@ Counterstrike: Increases retaliation damage based on your SP
 !!SN&x6<3/x4=0:T^AC_Spells.Bless_2^/?z780;
 !!SN:W^SpellTrainerHero%X1_Spell41^/?y83;
 !!SN&x9=1:T^AC_Spells.Trainer_MaxDmg_Casts^/?z1/^damage^/y82/^casts^/y83;
-!!VRz780&x9=1:+z1; !!SN:Iz780/?z780; !!SS41:Dx6/z780;
+!!VRz780&x9=1:+z1; !!SN:Iz780/?z780; !!VRm:Sx6 +(SPELL_TEXT_DESCR); !!SN:H^spell^/41/m/z780;
 
 
 !!SN&x9=1:W^Hero%X1_Weakness_Upgrade^/?y84; !!VRy45&x9=1:+y84; Add Spell Trainer Effect
@@ -20318,7 +20311,7 @@ Counterstrike: Increases retaliation damage based on your SP
 !!SN&x6<3/x4=0:T^AC_Spells.Weakness_2^/?z781;
 !!SN:W^SpellTrainerHero%X1_Spell45^/?y85;
 !!SN&x9=1:T^AC_Spells.Trainer_Attack2_Casts^/?z1/^damage^/y84/^casts^/y85;
-!!VRz781&x9=1:+z1; !!SN:Iz781/?z781; !!SS45:Dx6/z781;
+!!VRz781&x9=1:+z1; !!SN:Iz781/?z781; !!VRm:Sx6 +(SPELL_TEXT_DESCR); !!SN:H^spell^/45/m/z781;
 
 
 !!FU(Count_Set_Pieces):Px1/0/0/0/0/0/0/0/0/0/0/0/0/?y90; [Count Set Pieces function X14]
@@ -20333,7 +20326,7 @@ Counterstrike: Increases retaliation damage based on your SP
 !!SN&x6<3/x4=0:T^AC_Spells.Prayer_2^/?z782;
 !!SN:W^SpellTrainerHero%X1_Spell48^/?y87;
 !!SN&x9=1:T^AC_Spells.Trainer_Prayer_Casts^/?z1/^damage^/y86/^casts^/y87;
-!!VRz782&x9=1:+z1; !!SN:Iz782/?z782; !!SS48:Dx6/z782;
+!!VRz782&x9=1:+z1; !!SN:Iz782/?z782; !!VRm:Sx6 +(SPELL_TEXT_DESCR); !!SN:H^spell^/48/m/z782;
 
 
 !!VRy12:Sx2 :2;
@@ -20344,7 +20337,7 @@ Counterstrike: Increases retaliation damage based on your SP
 !!SN&x6<3/x4=0:T^AC_Spells.Mirth_2^/?z783;
 !!SN:W^SpellTrainerHero%X1_Spell49^/?y89;
 !!SN&x9=1:T^AC_Spells.Trainer_Morale_Casts^/?z1/^damage^/y88/^casts^/y89;
-!!VRz783&x9=1:+z1; !!SN:Iz783/?z783; !!SS49:Dx6/z783;
+!!VRz783&x9=1:+z1; !!SN:Iz783/?z783; !!VRm:Sx6 +(SPELL_TEXT_DESCR); !!SN:H^spell^/49/m/z783;
 
 
 !!VRy61:Sx2:4;
@@ -20355,14 +20348,14 @@ Counterstrike: Increases retaliation damage based on your SP
 !!SN&x6=3/x4=0:T^AC_Spells.Forgetfulness_1^/?z771;
 !!SN&x6=2/x4=0:T^AC_Spells.Forgetfulness_2^/?z771;
 !!SN&x6<2/x4=0:T^AC_Spells.Forgetfulness_3^/?z771;
-!!SN:Iz771/?z771; !!SS61:Dx6/z771;
+!!SN:Iz771/?z771; !!VRm:Sx6 +(SPELL_TEXT_DESCR); !!SN:H^spell^/61/m/z771;
 
 
 !!SN&x6>2/x4=1:T^AC_Spells.Teleport_0^/?z773;
 !!SN&x6=3/x4=0:T^AC_Spells.Teleport_1^/?z773;
 !!SN&x6=2/x4=0:T^AC_Spells.Teleport_2^/?z773;
 !!SN&x6<2/x4=0:T^AC_Spells.Teleport_3^/?z773;
-!!SN:Iz773/?z773; !!SS63:Dx6/z773;
+!!SN:Iz773/?z773; !!VRm:Sx6 +(SPELL_TEXT_DESCR); !!SN:H^spell^/63/m/z773;
 
 
 !!VRy6&x6=0:S5; !!VRy6&x6=1:S5; !!VRy6&x6=2:S6; !!VRy6&x6=3:S7;
@@ -20370,7 +20363,7 @@ Counterstrike: Increases retaliation damage based on your SP
 !!VRy65&x3>0:+10;                       [with GM Water]
 !!SN&x6>0/x4=1:T^AC_Spells.Clone_0^/?z775;
 !!SN&x4=0:T^AC_Spells.Clone_1^/?z775;
-!!SN:Iz775/?z775; !!SS65:Dx6/z775;
+!!SN:Iz775/?z775; !!VRm:Sx6 +(SPELL_TEXT_DESCR); !!SN:H^spell^/65/m/z775;
 
 
 !!VRy68:Sx2:2+10;
@@ -20384,7 +20377,7 @@ Counterstrike: Increases retaliation damage based on your SP
 !!SN&x4=0:T^AC_Spells.Summon_Water_1^/?z778;
 !!SN:W^SpellTrainerHero%X1_Spell66^/?y35;
 !!SN&x9=1:T^AC_Spells.Trainer_HP_Casts^/?z1/^damage^/y34/^casts^/y35;
-!!VRz778&x9=1:+z1; !!SN:Iz778/?z778; !!SS68:Dx6/z778;
+!!VRz778&x9=1:+z1; !!SN:Iz778/?z778; !!VRm:Sx6 +(SPELL_TEXT_DESCR); !!SN:H^spell^/68/m/z778;
 
 
 
@@ -20460,13 +20453,13 @@ Counterstrike: Increases retaliation damage based on your SP
 !!VRy6&x6=0:S4; !!VRy6&x6=1:S4; !!VRy6&x6=2:S6; !!VRy6&x6=3:S8;
 !!SN&x6>0/x4=1:T^AC_Spells.Quicksand_0^/?z120;
 !!SN&x4=0:T^AC_Spells.Quicksand_1^/?z120;
-!!SN:Iz120/?z120; !!SS10:Dx6/z120;
+!!SN:Iz120/?z120; !!VRm:Sx6 +(SPELL_TEXT_DESCR); !!SN:H^spell^/10/m/z120;
 
 
 !!VRy11&x6<=1:S2; !!VRy11&x6>1:S3;
 !!SN&x6>0/x4=1:T^AC_Spells.Force_Field_0^/?z122;
 !!SN&x4=0:T^AC_Spells.Force_Field_1^/?z122;
-!!SN:Iz122/?z122; !!SS12:Dx6/z122;
+!!SN:Iz122/?z122; !!VRm:Sx6 +(SPELL_TEXT_DESCR); !!SN:H^spell^/12/m/z122;
 
 
 !!VRy7&x6=0:S2; !!VRy7&x6=1:S2; !!VRy7&x6=2:S3; !!VRy7&x6=3:S4;
@@ -20475,7 +20468,7 @@ Counterstrike: Increases retaliation damage based on your SP
 !!VRy14&y14>30:S30;
 !!SN&x6>0/x4=1:T^AC_Spells.Earthquake_0^/?z124;
 !!SN&x4=0:T^AC_Spells.Earthquake_1^/?z124;
-!!SN:Iz124/?z124; !!SS14:Dx6/z124;
+!!SN:Iz124/?z124; !!VRm:Sx6 +(SPELL_TEXT_DESCR); !!SN:H^spell^/14/m/z124;
 
 
 !!VRy8:S2;
@@ -20484,7 +20477,7 @@ Counterstrike: Increases retaliation damage based on your SP
 !!SN&x4=0:T^AC_Spells.Implosion_1^/?z128;
 !!SN&x9=1:W^SpellTrainerHero%X1_Spell18^/?y93; !!VRy93&x9=1:Sy93*x10;
 !!SN&x9=1:T^AC_Spells.Trainer_Damage^/?z1/^damage^/y93;
-!!VRz128&x9=1:+z1; !!SN:Iz128/?z128; !!SS18:Dx6/z128;
+!!VRz128&x9=1:+z1; !!SN:Iz128/?z128; !!VRm:Sx6 +(SPELL_TEXT_DESCR); !!SN:H^spell^/18/m/z128;
 
 
 !!VRy8:S2;
@@ -20493,14 +20486,14 @@ Counterstrike: Increases retaliation damage based on your SP
 !!SN&x4=0:T^AC_Spells.Meteor_1^/?z133;
 !!SN&x9=1:W^SpellTrainerHero%X1_Spell23^/?y94; !!VRy94&x9=1:Sy94*x10;
 !!SN&x9=1:T^AC_Spells.Trainer_Damage^/?z1/^damage^/y94;
-!!VRz133&x9=1:+z1; !!SN:Iz133/?z133; !!SS23:Dx6/z133;
+!!VRz133&x9=1:+z1; !!SN:Iz133/?z133; !!VRm:Sx6 +(SPELL_TEXT_DESCR); !!SN:H^spell^/23/m/z133;
 
 
 !!SN&x6>0/x4=1:T^AC_Spells.Death_Ripple_0^/?z134;
 !!SN&x4=0:T^AC_Spells.Death_Ripple_1^/?z134;
 !!SN&x9=1:W^SpellTrainerHero%X1_Spell24^/?y95; !!VRy95&x9=1:Sy95*x10;
 !!SN&x9=1:T^AC_Spells.Trainer_Damage^/?z1/^damage^/y95;
-!!VRz134&x9=1:+z1; !!SN:Iz134/?z134; !!SS24:Dx6/z134;
+!!VRz134&x9=1:+z1; !!SN:Iz134/?z134; !!VRm:Sx6 +(SPELL_TEXT_DESCR); !!SN:H^spell^/24/m/z134;
 
 
 !!VRy71:Sx2 *10 +100;
@@ -20511,7 +20504,7 @@ Counterstrike: Increases retaliation damage based on your SP
 !!SN&x6<3/x4=0:T^AC_Spells.Shield_2^/?z137;
 !!SN:W^SpellTrainerHero%X1_Spell27^/?y81;
 !!SN&x9=1:T^AC_Spells.Trainer_Reduction_Casts^/?z1/^damage^/y80/^casts^/y81;
-!!VRz137&x9=1:+z1; !!SN:Iz137/?z137; !!SS27:Dx6/z137;
+!!VRz137&x9=1:+z1; !!SN:Iz137/?z137; !!VRm:Sx6 +(SPELL_TEXT_DESCR); !!SN:H^spell^/27/m/z137;
 
 
 !!VRy15:Sx2:2 +10;                      [+SP/2% +10% chance to shake off]
@@ -20523,13 +20516,13 @@ Counterstrike: Increases retaliation damage based on your SP
 !!SN&x6<3/x4=0:T^AC_Spells.Earth_Protection_2^/?z483;
 !!SN:W^SpellTrainerHero%X1_Spell30^/?y70;
 !!SN&x9=1:T^AC_Spells.Trainer_Reduction_Casts^/?z1/^damage^/y71/^casts^/y70;
-!!VRz483&x9=1:+z1; !!SN:Iz483/?z483; !!SS33:Dx6/z483;
+!!VRz483&x9=1:+z1; !!SN:Iz483/?z483; !!VRm:Sx6 +(SPELL_TEXT_DESCR); !!SN:H^spell^/33/m/z483;
 
 
 !!VRy9&x6=0:S2; !!VRy9&x6=1:S3; !!VRy9&x6=2:S4; !!VRy9&x6=3:S5;
 !!SN&x4=1:T^AC_Spells.Anti_Magic_0^/?z484;
 !!SN&x4=0:T^AC_Spells.Anti_Magic_1^/?z484;
-!!SN:Iz484/?z484; !!SS34:Dx6/z484;
+!!SN:Iz484/?z484; !!VRm:Sx6 +(SPELL_TEXT_DESCR); !!SN:H^spell^/34/m/z484;
 
 
 !!FU(Count_Set_Pieces):Px1/0/0/0/0/0/?y90;   [Check for Priest of Light Set]
@@ -20543,7 +20536,7 @@ Counterstrike: Increases retaliation damage based on your SP
 !!SN&x6<2/x4=0:T^AC_Spells.Resurrection_2^/?z488;
 !!SN:W^SpellTrainerHero%X1_Spell38^/?y83;
 !!SN&x9=1:T^AC_Spells.Trainer_HP_Casts^/?z1/^damage^/y82/^casts^/y83;
-!!VRz488&x9=1:+z1; !!SN:Iz488/?z488; !!SS38:Dx6/z488;
+!!VRz488&x9=1:+z1; !!SN:Iz488/?z488; !!VRm:Sx6 +(SPELL_TEXT_DESCR); !!SN:H^spell^/38/m/z488;
 
 
 !!FU(Count_Set_Pieces):Px1/0/0/0/0/0/0/?y90;  [Priest of the Dark Set Darzogs Armor]
@@ -20559,7 +20552,7 @@ Counterstrike: Increases retaliation damage based on your SP
 !!SN&x4=0:T^AC_Spells.Animate_Dead_1^/?z489;
 !!SN:W^SpellTrainerHero%X1_Spell39^/?y85;
 !!SN&x9=1:T^AC_Spells.Trainer_HP_Casts^/?z1/^damage^/y84/^casts^/y85;
-!!VRz489&x9=1:+z1; !!SN:Iz489/?z489; !!SS39:Dx6/z489;
+!!VRz489&x9=1:+z1; !!SN:Iz489/?z489; !!VRm:Sx6 +(SPELL_TEXT_DESCR); !!SN:H^spell^/39/m/z489;
 
 
 !!SN&x9=1:W^Hero%X1_Stoneskin_Upgrade^/?y86; !!VRy46&x9=1:+y86; Add Spell Trainer Effect
@@ -20568,7 +20561,7 @@ Counterstrike: Increases retaliation damage based on your SP
 !!SN&x6<3/x4=0:T^AC_Spells.Stone_Skin_2^/?z786;
 !!SN:W^SpellTrainerHero%X1_Spell46^/?y87;
 !!SN&x9=1:T^AC_Spells.Trainer_Defense_Casts^/?z1/^damage^/y86/^casts^/y87;
-!!VRz786&x9=1:+z1; !!SN:Iz786/?z786; !!SS46:Dx6/z786;
+!!VRz786&x9=1:+z1; !!SN:Iz786/?z786; !!VRm:Sx6 +(SPELL_TEXT_DESCR); !!SN:H^spell^/46/m/z786;
 
 
 !!SN&x9=1:W^Hero%X1_Sorrow_Upgrade^/?y88; !!VRy50&x9=1:+y88; Add Spell Trainer Effect
@@ -20577,7 +20570,7 @@ Counterstrike: Increases retaliation damage based on your SP
 !!SN&x6<3/x4=0:T^AC_Spells.Sorrow_2^/?z784;
 !!SN:W^SpellTrainerHero%X1_Spell50^/?y89;
 !!SN&x9=1:T^AC_Spells.Trainer_Morale_Casts^/?z1/^damage^/y88/^casts^/y89;
-!!VRz784&x9=1:+z1; !!SN:Iz784/?z784; !!SS50:Dx6/z784;
+!!VRz784&x9=1:+z1; !!SN:Iz784/?z784; !!VRm:Sx6 +(SPELL_TEXT_DESCR); !!SN:H^spell^/50/m/z784;
 
 
 !!SN&x9=1:W^Hero%X1_Slow_Upgrade^/?y90; !!VRy54&x9=1:+y90; Add Spell Trainer Effect
@@ -20586,7 +20579,7 @@ Counterstrike: Increases retaliation damage based on your SP
 !!SN&x6<3/x4=0:T^AC_Spells.Slow_2^/?z785;
 !!SN:W^SpellTrainerHero%X1_Spell54^/?y91;
 !!SN&x9=1:T^AC_Spells.Trainer_Reduction_Casts^/?z1/^damage^/y90/^casts^/y91;
-!!VRz785&x9=1:+z1; !!SN:Iz785/?z785; !!SS54:Dx6/z785;
+!!VRz785&x9=1:+z1; !!SN:Iz785/?z785; !!VRm:Sx6 +(SPELL_TEXT_DESCR); !!SN:H^spell^/54/m/z785;
 
 
 !!VRy67:Sx2:2+10;
@@ -20599,7 +20592,7 @@ Counterstrike: Increases retaliation damage based on your SP
 !!SN&x4=0:T^AC_Spells.Summon_Earth_1^/?z777;
 !!SN:W^SpellTrainerHero%X1_Spell66^/?y35;
 !!SN&x9=1:T^AC_Spells.Trainer_HP_Casts^/?z1/^damage^/y34/^casts^/y35;
-!!VRz777&x9=1:+z1; !!SN:Iz777/?z777; !!SS67:Dx6/z777;
+!!VRz777&x9=1:+z1; !!SN:Iz777/?z777; !!VRm:Sx6 +(SPELL_TEXT_DESCR); !!SN:H^spell^/67/m/z777;
 
 
 *end this shit
