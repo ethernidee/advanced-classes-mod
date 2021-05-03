@@ -686,83 +686,83 @@
 												Battles won: {%Y38}	
 												Heroes killed: {%Y39}												
 												Physical damage dealt: {%Y40}
-												Magical damage dealt: {%Y41}
-												Physical Crit Chance: {%Y13%%}
-												Physical Crit Damage: {%Y14%%}
-												Army Creature Growth: {%Y15%%}",
+												Magical damage dealt: {%Y41}",
 
 			"Bonus_Table_Skills":				"{~r}Skills{~}			
 												Artillery pre-damage: {%Y58-%Y59}
 												Eagle Eye pre-damage: {%Y62-%Y63}
-												First Aid Tent heal in combat: {%Y66-%Y67}
-												First Aid Tent heal after combat: {%Y64-%Y65}
-												Heal Capacity: {%Y68}
-												Chance for scouting event: {17/%Y69%}",
+												Tent heal in combat: {%Y66-%Y67}
+												Tent heal after combat: {%Y64-%Y65}
+												Heal Capacity: {%Y68}												
+												Chance for scouting event: {%E1%}",
 												
 			"Bonus_Table_Artifacts":			"{~r}Artifacts{~}
 												Flat melee damage block: {%Y71}
 												Flat range damage block: {%Y70}
 												Flat magic damage block: {%Y72}
 												Chance to evade attacks: {%Y73%}
-												Bonus Fire damage to attacks: {%Y75-%Y79}
-												Bonus damage vs. undeads units: {%Y76}
-												Bonus damage vs living units: {%Y77}
-												Bonus ranged damage to attacks: {%Y78}",
+												Fire damage to attacks: {%Y75-%Y79}
+												Damage vs. undeads units: {%Y76}
+												Damage vs living units: {%Y77}
+												Ranged damage to attacks: {%Y78}",
 												
-			"Bonus_Table_Class_Sets":			"{~r}Class Set Bonus{~}												
-												{~r}Warrior{~} Set: +{%Y10%%} physical crit
-												{~DodgerBlue}Mage{~} Set: +{%Y11%%} magical crit
-												{~LimeGreen}Adventurer{~} Set: +{%Y12%%} growth",					
+			"Bonus_Table_Class_Sets":			"{~r}Class Bonus{~}
+												Physical Crit Chance: {%Y13%%}
+												Physical Crit Damage: {%Y14%%}
+												Army Creature Growth: {%Y15%%}			
+												Class Set: +{%Y10%%} physical crit
+												Class Set: +{%Y11%%} magical crit
+												Class Set: +{%Y12%%} growth",					
 												
 			"Bonus_Table_Paladin":				"{~r}Commander{~}:			
-												Commander Kill Count: {%Y42}
-												Commander special ability: 150% Hero Exp
-												Commander spell: {Cure} and {Resurrects}
+												Kill Count: {%Y42}
+												Special ability: 150% Hero Exp
+												Spell: {Cure} and {Resurrects}
 												Converts damage to Exp: {%Y52%}",
 												
 			"Bonus_Table_Hierophant":			"{~r}Commander{~}:			
-												Commander Kill Count: {%Y42}
+												Kill Count: {%Y42}
 												Bonus HP to Tent: {%Y52}
 												Bonus Heal to Tent: {%Y53}
 												Bonus Heal Capacity: {%Y54}
-												Commander special spell: {%Y55} Shield",
+												Spell: {%Y55} Shield",
 												
 			"Bonus_Table_TempleGuardian":		"{~r}Commander{~}:			
-												Commander Kill Count: {%Y42}
+												Kill Count: {%Y42}
 												Damage Lightning Strike: {%Y51}
 												Restores Mana with attacks: {%Y52}",
 
 			"Bonus_Table_Succubus":				"{~r}Commander{~}:			
-												Commander Kill Count: {%Y42}
-												Commander Spell: {Fireshield}
+												Kill Count: {%Y42}
+												Spell: {Fireshield}
 												Charms enemies HP threshold: {%Y52}",
 												
 			"Bonus_Table_Brute":				"{~r}Commander{~}:			
-												Commander Kill Count: {%Y42}
+												Kill Count: {%Y42}
 												Damage Magic Arrow: {%Y51}
 												Converts damage to gold: {100%}",												
 
 			"Bonus_Table_SoulEater":			"{~r}Commander{~}:			
-												Commander Kill Count: {%Y42}
-												Commander Spell: {Animate Dead}
+												Kill Count: {%Y42}
+												Spell: {Animate Dead}
 												Raises Skeletons with attacks: {%Y52%}",
 
 			"Bonus_Table_OgreLeader":			"{~r}Commander{~}:			
-												Commander Kill Count: {%Y42}												
+												Kill Count: {%Y42}												
 												Bonus HP to Ballista: {%Y52}
 												Bonus base damage to Ballista: {%Y53}
-												Commander special spell: {%Y54} Bloodlust",
+												Spell: {%Y54} Bloodlust",
 
 			"Bonus_Table_Shaman":				"{~r}Commander{~}:			
-												Commander Kill Count: {%Y42}
-												Commander Spell: {Haste}
+												Kill Count: {%Y42}
+												Spell: {Haste}
 												Chance to cripple enemies: {%Y52%}
 												Extra Att and Def from Hero: +{50%}",
 
 			"Bonus_Table_AstralSpirit":			"{~r}Commander{~}:			
-												Commander Kill Count: {%Y42}
-												Commander Spell: {Summon Air}
-												Commander special ability: Pacifist",												
+												Kill Count: {%Y42}
+												Spell: {Summon Air}
+												Special ability: Pacifist",												
 																								
 
 			"Bonus Table 3": 					"Class Experience and class point table:",
@@ -1263,6 +1263,27 @@
 			"Play_Easier_Class":				"{~red}Easier Classes{~}
 
 												Play with bonus class points. This option makes it easier to reach Master and Grandmaster level by providing {5} extra class points for all classes. One point is given for every two level starting at level 20 until level 30.",
+												
+			"Play_Berserker_Mode":				"{~red}Berserker Mode{~}
+
+												Option allow to disable restriction, according to which you need master/grandmaster level class in order to upgrade fixed set of skills to master/grandmaster.",
+
+			"Play_No_Class_Mode":				"{~red}Choose Class{~}
+
+												Option allows to delay class selection and choose desired class when enough points are accumulated. If it's off, class selection occurs automaticlly based on highest points.",
+
+			"Play_ACM_Core":					"{~red}Advanced Classes{~}
+
+												Bla bla bla",
+
+			"Play_Tactics":						"{~red}Restore Tactics{~}
+
+												If you activate this option the Tactics skill will work as in original Heroes 3, letting you setup your troops in the Tactics phase. The bonus from Warfare is not affected and will be applied.",
+
+			"Play_Commanders":					"{~red}Weaker Commanders{~}
+
+												Commanders are cool and interesting but one cannot deny that in combination with a strong hero your commander can do the one-man show and clear the whole map alone. To address this problem I offer the Weaker Commander option that will reduce the power of the commanders. 
+												With this option enabled, commanders receive only 25% of the hero's primary stats (instead of 100%) and their hit points and damage gets reduced by 25%. Abilities and skills are not affected.",												
 
 			"GameOpt_Text":						"{~red}Additional Game Options{~}",
 
@@ -1277,8 +1298,18 @@
 			"GameOpt_Hint_4":					"Alternative Necromancy Option",
 
 			"GameOpt_Hint_5":					"Spell Duration Option",
+			
+			"GameOpt_Hint_6":					"Berserker Mode",
 
-			"GameOpt_Hint_6":					"Play",
+			"GameOpt_Hint_7":					"Choose Class",
+
+			"GameOpt_Hint_8":					"Adv. Classes",
+
+			"GameOpt_Hint_9":					"Tactics",
+
+			"GameOpt_Hint_10":					"Commanders",			
+
+			"GameOpt_Hint_Play":				"Play",
 
 			"GameOpt_0":						"Spell Trainer",
 
@@ -1291,6 +1322,16 @@
 			"GameOpt_4":						"Necromancy",
 
 			"GameOpt_5":						"Spell Duration",
+			
+			"GameOpt_6":						"Berserker Mode",
+
+			"GameOpt_7":						"Choose Class",
+
+			"GameOpt_8":						"Adv. Classes",
+
+			"GameOpt_9":						"Tactics",
+
+			"GameOpt_10":						"Commanders",			
 
 			"No_Kingdom_Overview":				"{~r}Poor Kingdom Overview{~}
 
