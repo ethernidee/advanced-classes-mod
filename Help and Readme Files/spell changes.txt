@@ -1,12 +1,12 @@
 ﻿Scalings. Every value here and in spells is rounded down.
-Percentage: 15->3, 25->8, 50->15, 50->17, 85->20, 100->25, extra 3 per 10 MS after.
+Percentage: 15->3, 25->8, 50->15, 50->17, 85->20, 100->25, extra 3 per 10 MS after. (Shield27, Air Shield28, 4 Protections from Element30-33, Magic Mirror36, Slow54.)
 Slow: 2% per 5MS
 Attack/Defence: 25->1, 30->2, 35->3, 45->4, 55->5, 70->6, 90->7, 105->8, extra 1 per 10 MS after.
-Damage: 25->1, 60->2, 100->3, 150->4 MS.
+Bless Curse Damage: 25->1, 60->2, 100->3, 150->4 MS.
 Morale/Luck/Retals: 40->1, 70->2, then 3 after 110 MS.
 Haste/Prayer: 35->1, 45->2, 75->3, then 4 after 110 MS.
-Summons: 30->1, 50->2, then 1 per 25 MS.
-Fire Shield: 10% +10*SP+25 damage is returned
+Summons: +20HP per Magic Strength.
+Fire Shield: 10%-melee-damage +10*SP+(Level of Fire Magic) damage is returned
 
 
 Offensive spells.
@@ -56,7 +56,7 @@ School of Water Magic.
 	
 	Weakness
 		Reduces the attack rating of affected units by 2/2/4/3. Expert effect is mass.
-		M/GM: Decreases damage dealt of affected enemies by 4% per battle round, maximum of 10 instances or 40% total damage reduction.
+		M/GM: Decreases damage dealt of affected enemies by 4% per battle round, maximum of 10 instances or 25% total damage reduction. (currently bugged)
 		NEW: Scales as Attack/Defence.
 		Cost: 8/6/6/10.
 	
@@ -69,7 +69,7 @@ School of Water Magic.
 	
 	Forgetfulness
 		50/50/100/100% of the targetted stack will forget to shoot. Expert effect is mass.
-		M/GM: Enemies are so confused that they forget who is friend or enemy. Targets have 15/20% + SP/2% chance to berserk.
+		M/GM: Enemies are so confused that they forget who is friend or enemy. Targets have 10/15% + SP/4% chance to berserk.
 		Cost: 12/10/10/20.
 	
 	Teleport
@@ -78,7 +78,7 @@ School of Water Magic.
 		Cost: 14/13/12/12.
 	
 	Summon Water Elemental
-		Creates 1/1/2/3*SP water elementals. Once cast, no other elemental types may be summoned.
+		Summons x-amount of Water Elements based on your MS. The formula for summoning Water is (20*MS+Level of Magic School) * 1,0. Once cast, no other elemental types may be summoned. As long as summoned Water Elements are present on the battlefield all damage is increased by 5%.
 		M/GM: Summoned elementals grow by 0/10+SP% of current amount each battleround for 1 turns or until killed.
 		NEW: Scales as Summons.
 		Cost: 15/16/18/20.
@@ -154,14 +154,14 @@ School of Air Magic.
 		Cost: 15/12/12/12.
 	
 	Summon Air Elemental
-		Creates 1/1/2/3*SP air elementals. Once cast, no other elemental types may be summoned.
+		Summons x-amount of Air Elements based on your MS. The formula for summoning Air is (20*MS+Level of Magic School) * 0,75. Once cast, no other elemental types may be summoned. When summoned Air Elements receive +2 speed.
 		M/GM: Summoned elementals grow by 0/10+SP% of current amount each battleround for 1 turns or until killed.
 		NEW: Scales as Summons.
 		Cost: 15/16/18/20.
 	
 	Haste
 		Increases stack's speed by 2/2/3/3. Expert effect is mass.
-		M/GM: Increases speed of all affected units by +1 during the first turn after being casted.
+		M/GM: Increases speed of all affected units by additional +1 (undispelable).
 		Cost: 9/7/7/14.
 	
 	Level 4
@@ -199,7 +199,7 @@ School of Earth Magic.
 	
 	Stone Skin
 		Increases allied stack defence rating by 2/2/4/3. Expert effect is mass.
-		M/GM: Doubles defence gained for the round casted.
+		M/GM: Creatures gets +5 defense for the current battleround and +1/2 undispelable defense for each 2 hits vs that creature
 		NEW: Scales as Attack/Defence.
 		Cost: 8/6/6/10.
 	
@@ -224,7 +224,7 @@ School of Earth Magic.
 		
 	Shield
 		Decreases hand-to-hand damage taken by an ally by 15/20/30/15%. Expert effect is mass.
-		M/GM: Also shield allies for 10/15 *(SP+10) HP, preventing any damage.
+		M/GM: Also shield allies for 10/15 *(SP+10) HP, preventing any damage. Shield blocks only one attack.
 		NEW: Scales as Percentage.
 		Cost: 9/7/7/14.
 		
@@ -242,13 +242,13 @@ School of Earth Magic.
 	
 	Slow
 		Decreases speed of enemy by 20/25/30/15%. Expert effect is mass.
-		M/GM: Affected enemies lose {-1} extra speed for the current battle round.
+		M/GM: Affected enemies lose {-1} extra speed. Undispelable.
 		NEW: Scales as Percentage.
 		Cost: 9/7/7/14.
 	
 	Anti-magic
 		Protects the selected stack from level 1-2/1-3/1-4/1-5 spells. Additionally, it removes negative spell effects (e.g. Weakness) but not positive spell effects (e.g. Bless). Only spell powerful enough to pierce through anti-magic spell's protection is dispel.
-		M/GM: Your creature gets dispell ability for the current battle round.
+		M/GM: As long as Anit Magic is active all creatures get additional +15% Magic Resistance.
 		Cost: 20/15/15/15.
 	
 	Level 4
@@ -275,7 +275,7 @@ School of Earth Magic.
 		Cost: 35/30/30/30.
 	
 	Summon Earth Elemental
-		Creates 1/1/2/3*SP earth elementals. Once cast, no other elemental types may be summoned.
+		Summons x-amount of Earth Elements based on your MS. The formula for summoning Earth is (20*MS+Level of Magic School) * 2. Once cast, no other elemental types may be summoned. As long as summoned Earth Elements are present on the battlefield all damage is reduced by 5%.
 		M/GM: Summoned elementals grow by 0/10+SP% of current amount each battleround for 1 turns or until killed.
 		NEW: Scales as Summons.
 		Cost: 15/16/18/20.
@@ -328,7 +328,7 @@ School of Fire Magic.
 	
 	Frenzy
 		Selected allied troop intentionally lowers its defence to 0 to increase the ferocity of its attack. Attack rating is increased by 50/100/150/200% of the sacrificed defence.
-		M/GM: Gives {~Red}Attack and Return{~} ability for the affected allied creatures.
+		M/GM: Gives a 10/15% +5/SP% chance to avoid retaliation.
 		Cost: 12/12/12/12.
 	
 	Level 3
@@ -352,7 +352,7 @@ School of Fire Magic.
 	Level 4
 	
 	Summon Fire Elemental
-		Creates 1/1/2/3*SP fire elementals. Once cast, no other elemental types may be summoned.
+		Summons x-amount of Fire Elements based on your MS. The formula for summoning Fire is (20*MS+Level of Magic School) * 1,5. Once cast, no other elemental types may be summoned. Summoned Fire Elements get a free Fire Shield.
 		M/GM: Summoned elementals grow by 0/10+SP% of current amount each battleround for 1 turns or until killed.
 		NEW: Scales as Summons.
 		Cost: 15/16/18/20.

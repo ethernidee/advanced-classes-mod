@@ -1,4 +1,5 @@
 **Spell Trainer**
+Readme Updated on Mai 2021
 
 Let me explain some of the internal mechanics of the Spell Trainer mod with some examples.
 
@@ -7,6 +8,8 @@ Some spells can not level up when killing low-level tier units. E.g. to level up
 Spells can be leveled equally to hero level with 100% success rate. For every level higher then hero level chances are decreasing for level up.
 Example: Your hero has level 10 and you want to level your implosion to level 11 you only have 90% chance to level up.
 If your spell is level 11 and you want to reach 12 your chance is only 80%... and so on. So your spell can never be 10 levels ahead from your hero level. Also, your hero has to be an expert in the corresponding magic school. You cannot level basic Haste for example.
+
+**To change the value open the script with ERM editor and change the value in line: !#SN:W^Damage_Spells_Increment^/3;  [Change the Increment for Damage Spells in this Line e.g. change 3 to 2 or 3 to 5]
 
 Level-ups are set individually for every spell.
 It mostly follows this pattern: Level ups at 3,6,15,25,40,70 ect... uses
@@ -26,7 +29,9 @@ Colar of Conjuring Artifact:+15%
 Remember there are three different hero classes in ACM mod and not two. Eg.: Solmyr=Mage Class, Kyrre=Adventurer class, Crag Hack=Warrior class. To check the current chance right click your spellbook or right-click the Knowledge icon in the Hero screen.
 
 Example:
-Solmyr with 20 Mage Class points and the Colar of Conjuring artifact equipped and expert Air Magic would have a (50%+17%+15%) 82% chance that when casting Haste in combat his counter for Haste casts increased by 1. If Solymr does that 10 times successfully and his counter reaches 10 casts his Haste spell will improve by +1 and the effect is improved by 1 speed. That means he used 1 spell upgrade per combat. If Solymr is able to perform 2 spell upgrades per combat he could also increase the effectiveness of his Lightning Bolt spell by 3% by killing some enemies. That would mean he has used 2 spell upgrades this combat.
+Solmyr with 20 Mage Class points and the Colar of Conjuring artifact equipped and expert Air Magic would have a (50%+17%+15%) 82% chance that when casting Haste in combat his counter for Haste casts increased by 1. If Solymr does that 10 times successfully and his counter reaches 10 casts his Haste spell will improve by +1 and the effect is improved by 1 speed.
+That means he used 1 spell upgrade per combat. If Solymr is able to perform 2 spell upgrades per combat he could also increase the effectiveness of his Lightning Bolt spell by 3% by killing some enemies. That would mean he has used 2 spell upgrades this combat.
+
 
 The number of possible Spell Upgrades per Combat determines as follows:
 Warrior Class:0
@@ -142,4 +147,3 @@ Update version 1.63:
 - Better compatibility with Advanced Classes Mod
 
 
-**To change the value open the script with ERM editor and change the value in line 020: !#SN:W^Damage_Spells_Increment^/3;             [Change the Increment for Damage Spells in this Line e.g. change 3 to 2 or 3 to 5]
