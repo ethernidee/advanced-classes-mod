@@ -343,7 +343,7 @@ Master Scholar allows heroes to teach each other any spell up to 4rd level and r
 Also adds +15% to your crit chance, +20% to your crit damage, +6 to your Magic Strength, allows +2 spell upgrades per combat and gives +25% chance for spell upgrades in combat.
 189756	{~Red}Grandmaster Scholar{~}
 
-Grandmaster Scholar allows heroes to teach each other any spell up to 4th level and regenerate 10 spell points for both heroes when they meet.
+Grandmaster Scholar allows heroes to teach each other any spell up to 5th level and regenerate 10 spell points for both heroes when they meet.
 Also adds +20% to your crit chance, +25% to your crit damage, +8 to your Magic Strength, allows +3 spell upgrades per combat and gives +25% chance for spell upgrades in combat.
 
 189557	{~Red}Basic Warfare{~}
@@ -1908,7 +1908,7 @@ plus +1 Defense after 6 victorious battles.
 
 {~Gold}Commander{~}: Gives Commander all six Primary Skills at Advanced level.
 
-{~Gold}Hero{~}:  Increases number of spells of all your creatures by +1 at the beginning of each combat.
+{~Gold}Hero{~}: +2 Spell Power and increases number of spells of all your creatures by +1 at the beginning of each combat.
 188214	free
 188215	free
 188216	{The Clover of Fortune}
@@ -1951,24 +1951,24 @@ Together witch Luck Skill: Upgrades your "Luck Cast" to Lightning Bolt.
 {~Gold}Commander{~}: Gives +5 Attack
 plus +1 Attack after 6 victorious battles.
 
-{~Gold}Hero{~}: Melee attacks have 10% chance to cripple the target. 
+{~Gold}Hero{~}: +2 Attack and melee attacks have 10% chance to cripple the target. 
 188221	{Mithril Mail}
 
 {~Gold}Commander{~}: Gives +12% Health
 plus +1% Health after every victorious battle.
 
-{~Gold}Hero{~}: Your level 1 troops receive only 50% damage.
+{~Gold}Hero{~}: +2 Defense and your level 1 troops receive only 50% damage.
 188222	{Sword of Sharpness}
 
 {~Gold}Commander{~}: Gives +12% Damage
 plus +1% Damage after every victorious battle.
 
-{~Gold}Hero{~}: +30% damage vs creatures that have more than 500HP. 
+{~Gold}Hero{~}: +2 Attack and +25% damage vs creatures that have more than 500HP. 
 188223	{Helm of Immortality}
 
 {~Gold}Commander{~}: Revives a slain Commander immediately after battle and increases the maximum commander boost level by +50%.
 
-{~Gold}Hero{~}: Gives your Commander the {~Orange}Aura of Command{~}.
+{~Gold}Hero{~}: +1 to all Primary Stats and gives your Commander the {~Orange}Aura of Command{~}.
 188232	{Pendant of Sorcery}
 
 {~Gold}Commander{~}: Gives +1 Magic Power
@@ -1980,7 +1980,7 @@ plus +1 Magic Power after 10 victorious battles.
 {~Gold}Commander{~}: Gives +1 Speed
 plus +1 Speed after 10 victorious battles.
 
-{~Gold}Hero{~}: Your Haste spell is cast with +2 speed.
+{~Gold}Hero{~}: + 2 Spell Power and your Haste spell is cast with +2 speed.
 188234	{Bow of Seeking}
 
 {~Gold}Commander{~}: Gives "No Obstacle Penalty"
@@ -1991,7 +1991,7 @@ plus "No Long-Range Penalty" after 25 victorious battles.
 
 {~Gold}Commander{~}: Gives Commander {~r}Breath Attack{~} and {~r}Dragon Nature{~}.
 
-{~Gold}Hero{~}: +15% damage versus any Dragon.
+{~Gold}Hero{~}: +25% damage versus any Dragon.
 188224	{Legs of Legion}
 
 This item, when equipped by a hero in a town, increases the growth of your 2nd level units (in that town) by 5 per week.
