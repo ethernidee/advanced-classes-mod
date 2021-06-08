@@ -554,9 +554,9 @@
 
 			"Precast ability": 					"Battlemage Precast ability!",
 
-			"Warcry ability": 					"{~LimeGreen}%Z-10s Warcry reduces the HP of all enemies by %Y12 percent{~}",
+			"Warcry ability": 					"@name@s Warcry ability reduces the HP of all enemies by @damage@%!",
 
-			"First Shot": 						"{~LimeGreen}%Z-10s First Shot Ability and Magic Block activated!{~}",
+			"First Shot": 						"@name@s First-Shot ability and Magic Block activated!",
 
 			"Temple Guardian": 					"{Temple Guardian restores @points@ Spell Points}",
 
@@ -715,55 +715,66 @@
 												Class Set: +{%Y12%%} growth",					
 												
 			"Bonus_Table_Paladin":				"{~r}Commander{~}:			
-												Kill Count: {%Y42}
+												Kill Count: {%Y42} For Mastery: {%Y17} Max: {%Y97}												
 												Special ability: 150% Hero Exp
 												Spell: {Cure} and {Resurrects}
 												Converts damage to Exp: {%Y52%}",
 												
 			"Bonus_Table_Hierophant":			"{~r}Commander{~}:			
-												Kill Count: {%Y42}
+												Kill Count: {%Y42} For Mastery: {%Y17} Max: {%Y97}												
 												Bonus HP to Tent: {%Y52}
 												Bonus Heal to Tent: {%Y53}
 												Bonus Heal Capacity: {%Y54}
-												Spell: {%Y55} Shield",
+												Spell: {Shield} (%Y55)",
 												
 			"Bonus_Table_TempleGuardian":		"{~r}Commander{~}:			
-												Kill Count: {%Y42}
-												Damage Lightning Strike: {%Y51}
-												Restores Mana with attacks: {%Y52}",
+												Kill Count: {%Y42} For Mastery: {%Y17} Max: {%Y97}										
+												Restores Mana with attacks: {%Y52}
+												Spell: {Lightning Strike} (%Y51)",
 
 			"Bonus_Table_Succubus":				"{~r}Commander{~}:			
-												Kill Count: {%Y42}
-												Spell: {Fireshield}
-												Charms enemies HP threshold: {%Y52}",
+												Kill Count: {%Y42} For Mastery: {%Y17} Max: {%Y97}																								
+												Charms enemies HP threshold: {%Y52}
+												Spell: {Fireshield}",
 												
 			"Bonus_Table_Brute":				"{~r}Commander{~}:			
-												Kill Count: {%Y42}
-												Damage Magic Arrow: {%Y51}
-												Converts damage to gold: {100%}",												
+												Kill Count: {%Y42} For Mastery: {%Y17} Max: {%Y97}																								
+												Converts damage to gold: {%Y52}
+												Spell: {Magic Arrow} (%Y51)",												
 
 			"Bonus_Table_SoulEater":			"{~r}Commander{~}:			
-												Kill Count: {%Y42}
-												Spell: {Animate Dead}
-												Raises Skeletons with attacks: {%Y52%}",
+												Kill Count: {%Y42} For Mastery: {%Y17} Max: {%Y97}																								
+												Raises Skeletons with attacks: {%Y52%}
+												Spell: {Animate Dead}",
 
 			"Bonus_Table_OgreLeader":			"{~r}Commander{~}:			
-												Kill Count: {%Y42}												
+												Kill Count: {%Y42} For Mastery: {%Y17} Max: {%Y97}																								
 												Bonus HP to Ballista: {%Y52}
 												Bonus base damage to Ballista: {%Y53}
-												Spell: {%Y54} Bloodlust",
+												Spell: {Bloodlust} (%Y54)",
 
 			"Bonus_Table_Shaman":				"{~r}Commander{~}:			
-												Kill Count: {%Y42}
-												Spell: {Haste}
+												Kill Count: {%Y42} For Mastery: {%Y17} Max: {%Y97}																						
 												Chance to cripple enemies: {%Y52%}
-												Extra Att and Def from Hero: +{50%}",
+												Extra Att and Def from Hero: +{50%}
+												Spell: {Haste}",
 
 			"Bonus_Table_AstralSpirit":			"{~r}Commander{~}:			
-												Kill Count: {%Y42}
-												Spell: {Summon Air}
-												Special ability: Pacifist",												
-																								
+												Kill Count: {%Y42} For Mastery: {%Y17} Max: {%Y97}																
+												Special ability: Pacifist {%Y52%}
+												Spell: {Summon Air}",	
+												
+			"Bonus_Table_Commander_Class":		"Attack: {%Y90%}
+												Defense: {%Y91%}
+												Damage: {%Y92%}
+												Health: {%Y93%}
+												",
+
+			"Bonus_Table_Commander_ClassII":	"Speed: {%Y20%}
+												Spell Damage: {%Y21%}
+												Passive: {%Y22%}
+												Aura: {%Y23%}
+												",												
 
 			"Bonus Table 3": 					"Class Experience and class point table:",
 
@@ -1264,21 +1275,30 @@
 
 												Play with bonus class points. This option makes it easier to reach Master and Grandmaster level by providing {5} extra class points for all classes. One point is given for every two level starting at level 20 until level 30.",
 												
-			"Play_Berserker_Mode":				"{~red}Berserker Mode{~}
-
-												Option allow to disable restriction, according to which you need master/grandmaster level class in order to upgrade fixed set of skills to master/grandmaster.",
+			"Play_Berserker_Mode":				"{~red}Berserker Mode{~}												
+												
+												You want to get rid of the restrictive class system and you want to be able to level every skill up to the maximum immediately, regradles of any class? This option will allow you to learn any skill up to Grandmaster level and disable the sets of native class skills.
+												
+												{Balance Warning}
+												but now its time to have some fun!
+												
+												Additional game mode developed and provided by the creator of ERA: 
+												{~Gold}Berserker{~}",
 
 			"Play_No_Class_Mode":				"{~red}Choose Class{~}
-
-												Option allows to delay class selection and choose desired class when enough points are accumulated. If it's off, class selection occurs automaticlly based on highest points.",
+																						
+												You want to play a certain class and be more flexible with your secondary skill choices? Then activate this option to delay class selection during level up and choose a desired class when enough points are accumulated. Once you picked your class there is no way back, so choose carefully.",
 
 			"Play_ACM_Core":					"{~red}Advanced Classes{~}
 
-												Bla bla bla",
+												The original Advanced Classes gameplay. 
+												Choose a career path and try to climp until you reach the top of your profession. Warrior, Mage or Adventurer, the choice is up to you! 
+												Only by picking your native class skills you can accumulate enough class points to reach the highest levels. Your reward will be unique class perks and you will be able to learn all skills to the Grandmaster level. 
+												Each class comes with destingtuive strength and weaknesses. Can you master them all?",
 
 			"Play_Tactics":						"{~red}Restore Tactics{~}
 
-												If you activate this option the Tactics skill will work as in original Heroes 3, letting you setup your troops in the Tactics phase. The bonus from Warfare is not affected and will be applied.",
+												If you activate this option the Tactics skill will work as in original Heroes 3, letting you setup your troops in the Tactics phase. The bonus from Warfare is not affected and will be applied. When this option is disabled no Tactics ohase will happen.",
 
 			"Play_Commanders":					"{~red}Weaker Commanders{~}
 
@@ -1301,13 +1321,13 @@
 			
 			"GameOpt_Hint_6":					"Berserker Mode",
 
-			"GameOpt_Hint_7":					"Choose Class",
+			"GameOpt_Hint_7":					"Choose Class Option",
 
-			"GameOpt_Hint_8":					"Adv. Classes",
+			"GameOpt_Hint_8":					"Advanced Classes Mod",
 
-			"GameOpt_Hint_9":					"Tactics",
+			"GameOpt_Hint_9":					"Restore old Tactics Option",
 
-			"GameOpt_Hint_10":					"Commanders",			
+			"GameOpt_Hint_10":					"Weaker Commanders Option",			
 
 			"GameOpt_Hint_Play":				"Play",
 
@@ -1331,7 +1351,188 @@
 
 			"GameOpt_9":						"Tactics",
 
-			"GameOpt_10":						"Commanders",			
+			"GameOpt_10":						"Commanders",
+
+
+
+			"Commander_Opt_Text":				"{~red}Choose a role for your Commander{~}",
+
+			"Commander_Opt_Hint_0":				"Play as Fighter",
+
+			"Commander_Opt_Hint_1":				"Play as Ranger",
+
+			"Commander_Opt_Hint_2":				"Play as Defender",
+
+			"Commander_Opt_Hint_3":				"Play as Caster",
+
+			"Commander_Opt_Hint_4":				"Play as Supporter",
+
+			"Commander_Opt_Hint_5":				"Play as Leader",
+			
+			"Commander_Opt_Hint_6":				"Play as Scout",
+
+			"Commander_Opt_Hint_7":				"Play as Vampire",
+
+			"Commander_Opt_Hint_8":				"Play as Fire Mage",
+
+			"Commander_Opt_Hint_Secret":		"Play as Secret Class",
+			
+
+			"Commander_Opt_Hint_Play":			"Confirm",
+
+			"Commander_Opt_0":					"Fighter",
+
+			"Commander_Opt_1":					"Ranger",
+
+			"Commander_Opt_2":					"Defender",
+
+			"Commander_Opt_3":					"Caster",
+
+			"Commander_Opt_4":					"Supporter",
+
+			"Commander_Opt_5":					"Leader",
+			
+			"Commander_Opt_6":					"Scout",
+
+			"Commander_Opt_7":					"Vampire",
+
+			"Commander_Opt_8":					"Fire Mage",
+			
+			"Commander_Opt_Secret":				"Secret Class",			
+			
+			
+
+			"Play_Com_Opt_0":					"{~r}Fighter{~}
+			
+												Usually focuses on melee attacks and dealing damage.
+												
+												Fighters have the following attributes:
+												+20% damage												
+												-30% defense
+												-1 speed
+												Gains +1% damage for every kill.
+												
+												{~Gold}Mastery{~}: +50% chance for additional strike in close combat.",										
+										
+			"Play_Com_Opt_1":					"{~r}Ranger{~}
+			
+												Usually focuses on shooting and ranged attacks.
+												
+												Rangers have the following attributes:
+												Can shoot
+												+20% attack												
+												-30% defense
+												-1 speed																				
+												Gains +1% attack for every kill.
+												
+												{~Gold}Mastery{~}: +50% chance for additional strike with ranged attacks.",
+
+			"Play_Com_Opt_2":					"{~r}Defender{~}
+			
+												Usually focuses on defense and disrupting the enemies.
+												
+												Defenders have the following attributes:
+												+25% defense												
+												+20% health
+												+1 speed
+												- 25% damage
+												Gains +1% defense and 0,5% health for every kill. 
+												Kill count gets doubled.
+												
+												{~Gold}Mastery{~}: +50% chance to permanently reduce enemy speed with attacks.",
+
+			"Play_Com_Opt_3":					"{~r}Caster{~}
+			
+												Usually focuses on casting damage spells.
+												
+												Casters have the following attributes:
+												+ 1 cast
+												- 25% attack
+												- 25% damage
+												- 15% defense
+												Gains +2% spell damage and 0,5% health for every kill.
+												
+												{~Gold}Mastery{~}: +50% crit chance for commander spells {+20% for the hero}.",
+
+			"Play_Com_Opt_4":					"{~r}Supporter{~}
+			
+												Usually focuses on casting supportive spells and using the commander passive ability.
+												Can have different bonus for each commander type.
+												
+												Supporters have the following attributes:
+												+ 20% passive
+												- 25% attack
+												- 10% damage
+												+ 15% defense/health												
+												+ 2 speed
+												Gains +1% speed and +0,5% passive for every kill. Kill count gets doubled.
+												
+												{~Gold}Mastery{~}: +25% increased effectiveness of passive and +20% Magic Strength for the hero.",
+
+			"Play_Com_Opt_5":					"{~r}Leader{~}
+			
+												Usually focuses on leading the army by providing certain boosts to your army.
+												
+												Leaders have the following attributes:
+												Gains: {Aura of Command} - Gives +4 Att/Def and +2 Speed for creatures standing next to the commander
+												+ 15% attack
+												+ 15% defense
+												+ 15% health
+												+ 1 speed
+												Improves the effects from Aura of Command by +1% for every kill.
+												
+												{~Gold}Mastery{~}: Aura of Command is 2 hex wide.",
+			
+			"Play_Com_Opt_6":					"{~r}Scout{~}
+			
+												Usually focuses on multiple attacks and generating resources in combat.
+												Each succefull attack has a chance to genreate a random amount of resources for your kingdom.
+
+												Scouts have the following attributes:
+												+ 1 attack
+												- 50% damage
+												- 20% attack
+												+ 10% defense/health/speed											
+												+ 2 speed																				
+												Gains +0,5% speed and 0,5% health for every kill.
+												
+												{~Gold}Mastery{~}: + extra attack and resource generation is increased",
+
+			"Play_Com_Opt_7":					"{~r}Vampire{~}
+			
+												Your commander becomes partly undead, losing 33% of its total health. Vampires restore 25% of the damage dealt as HP.
+												
+												Gains +0,5% attack and 0,5% health for every kill.
+												
+												{~Gold}Mastery{~}: +50% of damage dealt is restored as HP.",
+
+			"Play_Com_Opt_8":					"{~r}Fire Mage{~}
+																
+												Fire Mages loses all attack and damage but gain the ability to attack with AOE spells in melee combat.
+												The damage of the Fireball attack is based on the spell power of your hero.
+												
+												Has the following attributes:
+												Gains: {Fireball attack}
+												- 99% attack and damage
+												+ 10% defense/health/speed
+												+ 20% passive
+												+ 20% spell damage
+												+ 1 speed										
+												
+												{~Gold}Mastery{~}: Inferno attack",
+
+			"Play_Com_Opt_Secret":				"{~r}Secret Class{~}
+																
+												Secret Commander Class. Must be unlocked first.
+												
+												Has the following attributes:												
+												Gains: {~Gold}XXX{~}
+												- 99% XXX
+												+ XXX
+												+ XXX
+												+ XXX										
+												
+												{~Gold}Mastery{~}: Upgrades to XXX",												
 
 			"No_Kingdom_Overview":				"{~r}Poor Kingdom Overview{~}
 
@@ -1437,9 +1638,29 @@
 
 			"Druid_Skill_4":					"Concentration",
 
-			"Bless_SP_Damage":					"Blessed attacks deal additional {@damage@} damage."
+			"Bless_SP_Damage":					"Blessed attacks deal additional {@damage@} damage.",
+			
+			"sword_of_sharpness": 				"With the Sword of Sharpness you deal {@damage@} extra damage.",
 
+			"Mithril_Avoid": 					"The Mithril Mail reduced the damage of this attack by {50%}.",
+			
+			"Dragon_Ring_damage": 				"With the Dragon Eyed Ring you deal {@damage@} extra damage.",
 
+			"Hardened_Shield_Block": 			"The Hardened Shield blocked {50%} of the damage from the first attack.",
+
+			"GM_Scholar_Teach": 				"{~r}Grandmaster Scholar{~}
+    
+												{@H1name@} teaches all level level 5th spells to {@H2name@}.",
+												
+			"Com_Scout_Res": 					"The Scout generated {@amount@} {@resources@} with his attack.",
+
+			"Pacifist_Ability": 				"Astral Spirit Pacifist ability: Health and damage reduced to {@damage@}%!",
+
+			"Fire_Mage_Unlocked": 				"{~r}Fire Mage unlocked!{~}
+			
+												Congratulations you have just unlocked the {~Gold}secret commander class{~}. 
+												From now on you can select this class in all your games!"			
+												
 				},
 
 
