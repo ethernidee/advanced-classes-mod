@@ -1,7 +1,7 @@
 
-Advanced Classes Mod 1.06
+Advanced Classes Mod 1.07
 
-A Mod by Perry R, for Heroes 3 ERA 3.4 
+A Mod by Perry R, for Heroes 3 ERA 3.8 
 with the help of AlfWithCake, anti-victor, Daemon_n, Sandris and Berserker
 _________________________________________________
  
@@ -37,21 +37,16 @@ Now it is possible to play three very distinct classes, each with their own stre
 - Most artifacts are improved and are part of a set with interesting bonuses
 - Added 3 new secret class sets
 - New settings for increased difficulty of Neutral Units and computer players (AI)
+- 9 new Commander classes, each with unique abilities
 - Good compatibility with WoG options
 
 
- 2. Important Informations
- 
-- Inside the mod folder, you can find help files that will explain most changes and things you might want to know. Especially for the Difficult options its important to read them. All options provide additional information when right-clicked ingame.
+ 2. Important Informations 
+
+- The Help and Readme folder contains a lot of additional information about heroes, spells and skills. If you are in doubt how a skill work you can look it up there. All ingame options provide additional information when right-clicked ingame.
 - Right and left-click on Hero Portrait in hero-screen will show you important information about your current class points and skills, which determine your hero development. Use this often!
-- Correct color of skills and artifact sets:
-Depending on which version of the HD mod you use, you have to set the correct color mode for the colors to work correct ingame.
-If you use the newest gaming assembly from Daemon_n (which I strongly recommend) and work with the HD mod Version 5 please set this video-mode in HD-Mod launcher:
-(stretchable) 16-bit OpenGL by Verok
-resolution I recommend 1180x664 and any filter.
-You will notice the correct settings if secondary skill descrioptions have a red name. If they have a yellow name, colors are not working as intendet!
 - If you press F12 in-game, for whatever reason. Save and Reload game to restore proper skill/artifact descriptions.
-- The Help and Readme folder contains a lot of additional information about heroes, spells and skills. If you are in doubt how a skill work you can look it up there.
+
 
 
  2.1 Brief Overview of some important changes or difference to WoG mechanics
@@ -71,6 +66,7 @@ Spells:
 
 Commanders:
 - disabled most of the old WoG commander features and remade them. Commanders now require at least 1 point in Magic skill to be able to cast. Spells are made much more useful, read description. All Commanders now profit from carring out actual attacks in combat, some can even increase their damage or health permanently by killing whole squads.
+- When doing your first kill in combat you can choose a commander class. Each class has different attributes.
 
 Fire Shield:
 - Returned damage is now additionaly dependant on your Spell Power and can exceede the original damage amount, this gives much more tactical depth to this spell. Some creatures are now immune to Fire Shield, like Dragons and other fire affinite units.  
@@ -79,7 +75,7 @@ Summoning Elementals:
 - HP of summons is now dependant on your MS, also summons can grant buffs to your army while alive on the battlefield. Summoing Air is available early but therefore very weak.
 
 Eagle Eye:
-- Spells are now learned directly in combat. And some more goodies are on this skill.
+- Spells are now learned directly in combat and you get permanent spell power. And some more goodies are on this skill.
 
 Luck/Morale:
 - Morale now cappes at +6, each point of Morale increases you chance to gain extra move by ~3%. Luck increased to +6 max but damage scaling for Luck>6. Chance to land a lucky hit is capped by 15%. At some point only the damage of your Luck hits will increase. Check out the new window in the Heros Screen.
@@ -113,11 +109,14 @@ Answer: To simulate the two new levels of every skill, for me, it was not possib
 - I cant click on the Kingdom Overview :(
 Answer: Yes, this overview must be disabled because of a possible crash. The poor Kingdom Overview will show your income including your spendings of the previous day. So keep that in mind, numbers might be negative if you spend more then you have income.
 
+- There are many new effects on artifacts, spells and skills, how the they scale? I want to do the math!
+Answer: Nearly all new effects have a scaling of some sort. Check the information window by right-clicking the experience icon. Also check out the help and readme files for skills and spells. They are up to date and formulas can be found there.
+
 - During combat troops deal zero damage. I better report that a dozen times in Discord hehe
 Answer: Carefully read your artifact description. Some artifacts or the Druid class have the ability to block a flat amount of damage. The amount of damage block is small and will be irrelevant at later stages of the game.
 
 - What damage does my Artillery do, how much will my Tent heal in combat? How much Magic Pierce has my hero? What is my total magical crit chance?
-Answer: Right-click on the Knowledge icon in your hero screen. Most numbers are displayed there.
+Answer: Right-click on the Experience icon in your hero screen. Most numbers are displayed there.
 
 - Why can't I level up some skills to Master?
 Answer: You dont have enough class points to get offered Master level for that skill. Check your current class points and level.
@@ -174,14 +173,13 @@ The mod is intended to be played with only 8 hero secondary skills. If you want 
 
 5. Known Bugs:
 - In two hero meeting screen, some secondary skills are displayed wrong
-- Pressing F12 will mess up skill and artifact descriptions. Please save and reload to restore.
 - Wells will show incorrect amount of Spell Points recovered
 - AOE damage spells can show wrong damage in battle log, but the increased damage is calculated correct.
-
+- Clicking on Kingdom Overview results in a crash, thus it is disabled
 
 6. Credits
 -Whole Heroes Community for support 
--Berserker for creating ERA, without him the mod would not be possible
+-Berserker for creating ERA, without him the mod would not be possible.
 -AlfWithCake and anti-victor as team members
 -Daemon_n for testing and super translation into Russian language! Community support and designing the Difficulty Mod.
 -Sandris for amazing pictures for class skills and Warmachine upgrades pictures.
@@ -189,14 +187,4 @@ The mod is intended to be played with only 8 hero secondary skills. If you want 
 
 
 **********************************************************************************************
-
-
-*Rework of Fire Shield:
-Tried to greatly improve the fun and use of Fire Shield spell.
-The problem with that spell was that it actually required your troops to take damage to have any usefulness, also it was very difficult to calculate the reflected damage because it also depends on attack and defense value of the hero. Also, several creatures which should be immune to Fire Shield damage were not.
-
-The new Fire Shield now is more like a spell and the damage depends on the spell power of your hero. The new formula for reflected damage is:
-10% of melee damage +20*SP+50 with no magic school.
-Sorcery, Fire Magic, Orb of Fire, Resistance, Protection from Fire all in the damage formula now.  Also, several creatures are now completely immune to Fire Shield, like Black Dragons.
-These changes make the spell much more useful early on and it is not so big pain to fight Effret-Sultans anymore. Remember it is a level 4 spell now.
 

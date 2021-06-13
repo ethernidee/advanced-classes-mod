@@ -1,28 +1,48 @@
 Changelog
 ***************************************************************************************************************************************************************
-Version 1.061 (work in progress)
+Version 1.07 (6. Juni 2021)
 
+When updating from 1.06 please delete old version before installing 1.07
+
+New:
++ New status list when clicking on the experience icon which includes many numbers and statistics
++ New Game mode made by Berserker that allows to learn all skill to M/GM regardless of class
++ New Game mode made by Berserker that allows to learn any class
++ Implemented new Commander Class System with 9 different classes for the commander, including a secret class that can be unlocked
++ All Commander artifacts received a rework and can now be worn by the hero again. Added 9 new unique properties.
++ Astral Spirit now has different passive: Instead of Enemy running away the damage and health of all enemies is reduced by 5%+C_LvL:5, resulting in a similar effect
++ Grandmaster Scholar now teaches level 5 spells
+
+Fixes:
 - in online games artifact description will not be reset anymore
 - fix for Artillery specialists the number of shots after level 60
-- Learning now shows exact %chance to gain primary skill point when visiting map objects
-- Mage Secret-Set gains crit/crit damage for every 2 fights won instead of 3
-- New attributes for bonus lists when clicking on knowledge icon
-- Magic Wand +5% Magic Pierce, Pendant of Sorcery +10% Magic Pierce
-- Dragon Scale Shield, Quiet Eye of the Dragon +50 flat Magic damage block
-- New Game mode made by Berserker that allows to learn all skill to M/GM regardless of class
-- New Game mode made by Berserker that allows to learn any class
-- Breastplate of Petrified Wood damage block reduced, when all damage is blocked this will now be indicated by a sound
-- Armor of Wonder damage block reduced,
-- Poison Icon for Commander added in pac file, thanks to Archer
-- Removed FU 7701 from erm code to increase stability
-- Added a Battlelog entry when Heal Capacity is depleted
 - Removed the delay when healing units with First Aid Tent
-- In Dif mod AI-Difficulty and Payday are now saved
-- Removed FUN.erm from mod
+- Fix when having several resource giving artifacts of the same type in backpack
 - Fixed M/GM Force Field effect (now works again)
 - Battlemage Hard Training/ Critical Hit wrong description
-- Fix when having several resource giving artifacts of the same type in backpack
 
+Balance:
+- Reduced the power of all commanders to work with the new class system
+- Breastplate of Petrified Wood damage block reduced, when all damage is blocked this will now be indicated by a sound
+- Armor of Wonder damage block reduced
+- Dragon Scale Shield, Quiet Eye of the Dragon +50 flat Magic damage block
+- A few changes in SPTRAITS.txt (reduced the power of some AOE spells)
+- Multicasting is now slightly more expensive
+- Magic Wand +5% Magic Pierce, Pendant of Sorcery +10% Magic Pierce
+- Mage Secret-Set gains crit/crit damage for every 2 fights won instead of 3
+- Warrior Secret set slighlty nerfed 
+
+Misc:
+- Learning now shows exact %chance to gain primary skill point when visiting map objects
+- Added a Battlelog entry when Heal Capacity is depleted
+- Disable Tactics option now available in the map start option and fixed outdated trigger
+- updated some help files
+- Poison Icon for Commander added, thanks to Archer
+- Removed FU 7701 from erm code to increase stability
+- In Dif mod AI-Difficulty and Payday are now saved
+- Removed FUN.erm from game folder, increasing compabitility and stability of the mod
+- removed "BattleAIvsAIFix.dll", "remove theoretical battle ai vs ai.dll", "RK primary skill overflow.dll"0kb Now it is in your own responsibility to play with these plugins or not
+- Information about classes when clicking on Att/Def/SP/Know icon removed, it is now all available in the Class-Table
 
 
 Version 1.06 (18.März 2021)
