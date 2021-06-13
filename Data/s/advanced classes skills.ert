@@ -1907,8 +1907,10 @@ plus +1 Defense after 6 victorious battles.
 188213	{Slava's Ring of Power}
 
 {~Gold}Commander{~}: Gives Commander all six Primary Skills at Advanced level.
++10% to all Commander attributes.
 
 {~Gold}Hero{~}: +2 Spell Power and increases number of spells of all your creatures by +1 at the beginning of each combat.
++10% to all Commander attributes.
 188214	free
 188215	free
 188216	{The Clover of Fortune}
@@ -1966,13 +1968,14 @@ plus +1% Damage after every victorious battle.
 {~Gold}Hero{~}: +2 Attack and +25% damage vs creatures that have more than 500HP. 
 188223	{Helm of Immortality}
 
-{~Gold}Commander{~}: Revives a slain Commander immediately after battle and increases the maximum commander boost level by +50%.
+{~Gold}Commander{~}: Revives a slain Commander immediately after battle and increases the maximum commander boost level by +30.
 
 {~Gold}Hero{~}: +1 to all Primary Stats and gives your Commander the {~Orange}Aura of Command{~}.
 188232	{Pendant of Sorcery}
 
 {~Gold}Commander{~}: Gives +1 Magic Power
 plus +1 Magic Power after 10 victorious battles.
++30% Commander spell effectiveness.
 
 {~Gold}Hero{~}: +{10}% to Magic Pierce
 188233	{Boots of Haste}
@@ -1980,18 +1983,20 @@ plus +1 Magic Power after 10 victorious battles.
 {~Gold}Commander{~}: Gives +1 Speed
 plus +1 Speed after 10 victorious battles.
 
-{~Gold}Hero{~}: + 2 Spell Power and your Haste spell is cast with +2 speed.
+{~Gold}Hero{~}: + 2 Spell Power and your Haste spell is cast with +2 speed. +25% Commander spell and passive effectiveness
 188234	{Bow of Seeking}
 
 {~Gold}Commander{~}: Gives "No Obstacle Penalty"
 plus "No Long-Range Penalty" after 25 victorious battles.
++10% to all Commander attributes.
 
 {~Gold}Hero{~}: Range attacks have a 10% chance to cripple the target.
 188235	{Dragon Eye Ring}
 
 {~Gold}Commander{~}: Gives Commander {~r}Breath Attack{~} and {~r}Dragon Nature{~}.
++10% to all Commander attributes.
 
-{~Gold}Hero{~}: +25% damage versus any Dragon.
+{~Gold}Hero{~}: +25% damage versus any Dragon. +10% to all Commander attributes.
 188224	{Legs of Legion}
 
 This item, when equipped by a hero in a town, increases the growth of your 2nd level units (in that town) by 5 per week.

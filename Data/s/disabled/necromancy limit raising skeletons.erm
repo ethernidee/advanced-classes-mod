@@ -48,8 +48,19 @@ x1=Hero, x2=battle indicator start/end
 !!SN:W^ACM_Skellies_battle_end^/?y21;
 !!VRy22:Sy21-y20;
 !!FU&y22<=0:E;                          [Exit if no skeletons gained]
+
+!!if&y20<15000; less than 15k it is max 10% per battle
 !!VRy23:Sy20:10;                        [y23 is max allowed gain per combat]
 !!FU&y22<y23:E;                         [Exit if gain was less than 10 percent]
 !!VRy24:Sy22-y23;                       [The amount substracted is the difference minus the allowed gain]
 !!VRy25:Sy24*-1;                        [Get negative value for substraction]
 !!DO(ACM_Count_Skeletons)/0/6/1:Py1/3/y24/y25; [loop hero slots and count skeletons]
+!!en;
+
+!!if&y20>15000; less than 15k it is max 5% per battle
+!!VRy23:Sy20:20;                        [y23 is max allowed gain per combat]
+!!FU&y22<y23:E;                         [Exit if gain was less than 10 percent]
+!!VRy24:Sy22-y23;                       [The amount substracted is the difference minus the allowed gain]
+!!VRy25:Sy24*-1;                        [Get negative value for substraction]
+!!DO(ACM_Count_Skeletons)/0/6/1:Py1/3/y24/y25; [loop hero slots and count skeletons]
+!!en;

@@ -62,6 +62,7 @@ Mage skills.
 		NEW: Gives bonus 3/4/5/7/10% critical strike chance and 6/8/10/15/20% critical damage and increases MS increases your MS.
 		
 	Scholar
+		NEW: Grandmaster teaches level 5 spells
 		NEW: When you meet other heroes, now you also replenish mana points by 3/4/5/7/10 for both of you, once per day.
 		NEW: Increases critical strike chance by 6/8/10/15/20% and critical damage by 5/10/15/20/25% and increases your MS.
 		NEW: Spell Trainer Mod: Increases the limit for spell upgrades in combat by 1/1/2/2/3 and your chance to perform a spell upgrade by +25%.

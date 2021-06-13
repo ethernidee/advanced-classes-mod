@@ -234,7 +234,7 @@ Causes a bolt of magical energy to strike the selected unit.
 
 Damage inflicted is 20 points more than Basic Magic Arrow.
 "	 COMBAT_SPELL|CREATURE_TARGET
-Ice Bolt	Ice Bolt	2	 	x	 	 	12	9	9	9	15	0	40	60	80	50	50	6	0	6	6	4	50	25	20	20	20	20	"{Ice Bolt}
+Ice Bolt	Ice Bolt	2	 	x	 	 	12	9	9	9	20	0	40	60	80	50	50	6	0	6	6	4	50	25	20	20	20	20	"{Ice Bolt}
 
 Drains the body heat from the selected enemy unit.
 "	"{Basic Ice Bolt}
@@ -268,7 +268,7 @@ Causes a bolt of lightning to strike the selected unit.
 
 Damage inflicted is 40 points more than Basic Lightning Bolt.
 "	 COMBAT_SPELL|CREATURE_TARGET
-Implosion	Implosion	5	x	 	 	 	35	30	30	30	70	0	0	0	0	0	16	14	16	20	12	0	0	13	75	75	75	75	"{Implosion}
+Implosion	Implosion	5	x	 	 	 	35	30	30	30	65	0	0	0	0	0	16	14	16	20	12	0	0	13	75	75	75	75	"{Implosion}
 
 Inflicts massive damage to a single creature stack.
 "	"{Basic Implosion}
@@ -285,7 +285,7 @@ Inflicts massive damage to a single creature stack.
 
 Damage inflicted 200 points more than Basic Implosion.
 "	 COMBAT_SPELL|CREATURE_TARGET
-Chain Lightning	Chain Lightning	4	 	 	 	x	25	20	20	25	35	0	20	30	50	10	10	10	10	10	10	0	0	10	75	75	75	75	"{Chain Lightning}
+Chain Lightning	Chain Lightning	4	 	 	 	x	25	20	20	25	30	0	20	30	50	10	10	10	10	10	10	0	0	10	75	75	75	75	"{Chain Lightning}
 
 Fires a bolt of lightning at the selected unit which then travels to the nearest adjacent unit, inflicting half damage before traveling to the next adjacent unit, again inflicting half damage, etc.  Strikes four units.
 "	"{Basic Chain Lightning}
@@ -302,7 +302,7 @@ Fires a bolt of lightning at the selected unit which then travels to the nearest
 
 Base Damage inflicted is 75 points more than Basic Chain Lightning.
 "	 COMBAT_SPELL|CREATURE_TARGET
-Frost Ring	Frost Ring	3	 	x	 	 	12	9	9	9	15	0	25	50	100	16	16	16	0	12	12	12	4	12	12	12	12	12	"{Frost Ring}
+Frost Ring	Frost Ring	3	 	x	 	 	12	9	9	9	20	0	25	50	100	16	16	16	0	12	12	12	4	12	12	12	12	12	"{Frost Ring}
 
 Drains the body heat of any units adjacent to the target location, without inflicting damage on the target.
 "	"{Basic Frost Ring}
@@ -336,7 +336,7 @@ Causes the selected target to burst into flames, inflicting fire damage to the t
 
 Damage inflicted is 45 points more than Basic Fireball.
 "	 COMBAT_SPELL|LOCATION_TARGET
-Inferno	Inferno	4	 	 	x	 	20	18	18	20	40	0	20	40	80	5	5	5	10	5	5	0	0	10	20	20	20	20	"{Inferno}
+Inferno	Inferno	4	 	 	x	 	20	18	18	20	30	0	20	40	80	5	5	5	10	5	5	0	0	10	20	20	20	20	"{Inferno}
 
 Causes a huge blast of fire to strike the selected target.  Don't be near this when it goes off!
 "	"{Basic Inferno}
@@ -353,7 +353,7 @@ Causes a huge blast of fire to strike the selected target.  Don't be near this w
 
 Damage inflicted is 60 points more than Basic Inferno.
 "	 COMBAT_SPELL|LOCATION_TARGET
-Meteor Shower	Meteor Shower	4	x	 	 	 	18	14	14	14	35	0	25	50	100	10	10	10	10	10	10	0	0	10	37	37	37	37	"{Meteor Shower}
+Meteor Shower	Meteor Shower	4	x	 	 	 	18	14	14	14	30	0	25	50	100	10	10	10	10	10	10	0	0	10	37	37	37	37	"{Meteor Shower}
 
 Causes a meteor shower to rain down on the selected target and any adjacent units.
 "	"{Basic Meteor Shower}
@@ -404,7 +404,7 @@ Attempts to destroy any undead creatures on the battlefield.
 
 Damage inflicted is 40 points more than Basic Destroy Undead.
 "	 COMBAT_SPELL
-Armageddon	Armageddon	5	 	 	x	 	40	35	35	35	40	0	0	0	0	0	0	0	5	5	10	0	0	0	100	100	100	100	"{Armageddon}
+Armageddon	Armageddon	5	 	 	x	 	40	35	35	35	30	0	0	0	0	0	0	0	5	5	10	0	0	0	100	100	100	100	"{Armageddon}
 
 Rains fire down upon the battlefield, damaging all units.
 "	"{Basic Armageddon}
@@ -476,7 +476,7 @@ Cast on a friendly unit, it does not provide any additional protection, but any 
 
 Damage to attacking enemy units is 10% more than Basic Fire Shield.
 "	 COMBAT_SPELL|CREATURE_TARGET
-Protection from Air	Prot. from Air	1	 	 	 	x	8	6	6	12	0	80	80	65	75	2	2	2	4	2	2	2	2	2	2	2	4	4	"{Protection from Air}
+Protection from Air	Prot. from Air	1	 	 	 	x	8	6	6	12	0	75	70	65	70	2	2	2	4	2	2	2	2	2	2	2	4	4	"{Protection from Air}
 
 Protects the selected unit, reducing damage received from Air spells.
 "	"{Basic Protection from Air}
@@ -493,7 +493,7 @@ Protects the selected unit, reducing damage received from Air spells.
 
 Protection is nearly twice that of Basic Protection from Air.
 "	 COMBAT_SPELL|CREATURE_TARGET_2
-Protection from Fire	Prot. from Fire	1	 	 	x	 	8	6	6	12	0	80	80	65	75	3	3	3	3	3	3	3	3	3	2	2	4	4	"{Protection from Fire}
+Protection from Fire	Prot. from Fire	1	 	 	x	 	8	6	6	12	0	75	70	65	70	3	3	3	3	3	3	3	3	3	2	2	4	4	"{Protection from Fire}
 
 Protects the selected unit, reducing damage received from Fire spells.
 "	"{Basic Protection from Fire}
@@ -510,7 +510,7 @@ Protects the selected unit, reducing damage received from Fire spells.
 
 Protection is nearly twice that of Basic Protection from Fire.
 "	 COMBAT_SPELL|CREATURE_TARGET_2
-Prot. from Water	Prot. from Water	1	 	x	 	 	8	6	6	12	0	80	80	65	75	3	3	3	3	3	3	3	3	3	2	2	4	4	"{Protection from Water}
+Prot. from Water	Prot. from Water	1	 	x	 	 	8	6	6	12	0	75	70	65	70	3	3	3	3	3	3	3	3	3	2	2	4	4	"{Protection from Water}
 
 Protects the selected unit, reducing damage received from Water spells.
 "	"{Basic Protection from Water}
@@ -527,7 +527,7 @@ Protects the selected unit, reducing damage received from Water spells.
 
 Protection is nearly twice that of Basic Protection from Water.
 "	 COMBAT_SPELL|CREATURE_TARGET_2
-Prot. from Earth	Prot. from Earth	1	x	 	 	 	8	6	6	12	0	80	80	65	75	4	4	4	2	4	4	4	0	4	2	2	4	4	"{Protection from Earth}
+Prot. from Earth	Prot. from Earth	1	x	 	 	 	8	6	6	12	0	75	70	65	70	4	4	4	2	4	4	4	0	4	2	2	4	4	"{Protection from Earth}
 
 Protects the selected unit, reducing damage received from Earth spells.
 "	"{Basic Protection from Earth}

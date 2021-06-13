@@ -240,19 +240,19 @@
 
 			"SirMullich_Specialist": 			"{~r}Speed Specialist{~}
 
-												%Z-1 increases the speed of all his units by +{2}."
+												%Z-1 increases the speed of all his units by +{2}.",
 
 			"Dracon_Specialist": 				"{~r}Enchanter Specialist{~}
 
-												%Z-1 can upgrade Monks, Zealots, Magi or Arch Magi to {Enchanters}."
+												%Z-1 can upgrade Monks, Zealots, Magi or Arch Magi to {Enchanters}.",
 
 			"Gelu_Specialist": 					"{~r}Sharpshooter Specialist{~}
 
-												%Z-1 can upgrade Archers, Marksmen, Wood Elves or Grand Elves to {Sharpshooters}."
+												%Z-1 can upgrade Archers, Marksmen, Wood Elves or Grand Elves to {Sharpshooters}.",
 
 			"Mutare_Specialist": 				"{~r}Dragon Specialist{~}
 
-												%Z-1 increases the power of all dragons under his command."
+												%Z-1 increases the power of all dragons under his command.",
 
 			"Luck_Specialists": 				"{~r}%Z-3 Specialist{~}
 
@@ -717,7 +717,7 @@
 			"Bonus_Table_Paladin":				"{~r}Commander{~}:			
 												Kill Count: {%Y42} For Mastery: {%Y17} Max: {%Y97}												
 												Special ability: 150% Hero Exp
-												Spell: {Cure} and {Resurrects}
+												Spell: {Power Cure}
 												Converts damage to Exp: {%Y52%}",
 												
 			"Bonus_Table_Hierophant":			"{~r}Commander{~}:			
@@ -735,7 +735,7 @@
 			"Bonus_Table_Succubus":				"{~r}Commander{~}:			
 												Kill Count: {%Y42} For Mastery: {%Y17} Max: {%Y97}																								
 												Charms enemies HP threshold: {%Y52}
-												Spell: {Fireshield}",
+												Spell: {Fireball} (%Y51)",
 												
 			"Bonus_Table_Brute":				"{~r}Commander{~}:			
 												Kill Count: {%Y42} For Mastery: {%Y17} Max: {%Y97}																								
@@ -770,8 +770,8 @@
 												Health: {%Y93%}
 												",
 
-			"Bonus_Table_Commander_ClassII":	"Speed: {%Y20%}
-												Spell Damage: {%Y21%}
+			"Bonus_Table_Commander_ClassII":	"Speed: {%Y20%} (%Y24)
+												Spells: {%Y21%}
 												Passive: {%Y22%}
 												Aura: {%Y23%}
 												",												
@@ -1300,10 +1300,12 @@
 
 												If you activate this option the Tactics skill will work as in original Heroes 3, letting you setup your troops in the Tactics phase. The bonus from Warfare is not affected and will be applied. When this option is disabled no Tactics ohase will happen.",
 
-			"Play_Commanders":					"{~red}Weaker Commanders{~}
-
-												Commanders are cool and interesting but one cannot deny that in combination with a strong hero your commander can do the one-man show and clear the whole map alone. To address this problem I offer the Weaker Commander option that will reduce the power of the commanders. 
-												With this option enabled, commanders receive only 25% of the hero's primary stats (instead of 100%) and their hit points and damage gets reduced by 25%. Abilities and skills are not affected.",												
+			"Play_Commanders":					"{~red}Strong Commanders{~}
+												 
+												With the introduction of the Commander class-system all commander stats are reduced by default. Commanders receive only 25% of the hero's primary stats (instead of 100%) and their hit points and damage gets reduced by 25%. Abilities and skills are not affected. 
+												With this option enabled commanders receive no penalty in combat and the change is reverted. 
+												
+												This option is not required for the commander class system to work. It will always be enabled, regardless of the Strong Commanders option.",												
 
 			"GameOpt_Text":						"{~red}Additional Game Options{~}",
 
@@ -1327,7 +1329,7 @@
 
 			"GameOpt_Hint_9":					"Restore old Tactics Option",
 
-			"GameOpt_Hint_10":					"Weaker Commanders Option",			
+			"GameOpt_Hint_10":					"Stronger Commanders Option",			
 
 			"GameOpt_Hint_Play":				"Play",
 
@@ -1351,11 +1353,12 @@
 
 			"GameOpt_9":						"Tactics",
 
-			"GameOpt_10":						"Commanders",
+			"GameOpt_10":						"Strong Commanders",
+			
+			"Commander_Opt_No_Class":			"No Class",
+			
 
-
-
-			"Commander_Opt_Text":				"{~red}Choose a role for your Commander{~}",
+			"Commander_Opt_Text":				"{~red}Choose a class for your Commander{~}",
 
 			"Commander_Opt_Hint_0":				"Play as Fighter",
 
@@ -1404,99 +1407,77 @@
 
 			"Play_Com_Opt_0":					"{~r}Fighter{~}
 			
-												Usually focuses on melee attacks and dealing damage.
+												Fighter-class usually focuses on melee attacks and dealing damage.
 												
-												Fighters have the following attributes:
-												+20% damage												
-												-30% defense
-												-1 speed
-												Gains +1% damage for every kill.
+												Gains +1% damage for every kill.												
 												
-												{~Gold}Mastery{~}: +50% chance for additional strike in close combat.",										
+												{~Gold}Mastery{~}: +50% chance for additional strike in close combat.
+												
+												
+												Fighters have the following attributes:",										
 										
 			"Play_Com_Opt_1":					"{~r}Ranger{~}
 			
-												Usually focuses on shooting and ranged attacks.
+												Ranger-class usually focuses on shooting and ranged attacks.
+																																								
+												Can shoot, gains +0,5% attack for every kill.
 												
-												Rangers have the following attributes:
-												Can shoot
-												+20% attack												
-												-30% defense
-												-1 speed																				
-												Gains +1% attack for every kill.
+												{~Gold}Mastery{~}: +50% chance for additional strike with ranged attacks.
 												
-												{~Gold}Mastery{~}: +50% chance for additional strike with ranged attacks.",
+												
+												Rangers have the following attributes:",
 
 			"Play_Com_Opt_2":					"{~r}Defender{~}
 			
-												Usually focuses on defense and disrupting the enemies.
+												Defender-class usually focuses on defense and disrupting the enemies.										
 												
-												Defenders have the following attributes:
-												+25% defense												
-												+20% health
-												+1 speed
-												- 25% damage
-												Gains +1% defense and 0,5% health for every kill. 
-												Kill count gets doubled.
+												Gains +0,5% defense and 1% health for every kill. Kill count gets doubled.
 												
-												{~Gold}Mastery{~}: +50% chance to permanently reduce enemy speed with attacks.",
+												{~Gold}Mastery{~}: +50% chance to permanently reduce enemy speed with attacks.
+																								
+												Defenders have the following attributes:",
 
 			"Play_Com_Opt_3":					"{~r}Caster{~}
 			
-												Usually focuses on casting damage spells.
+												Caster-class usually focuses on casting spells.
+																								
+												+ 1 cast, gains +2% spell-efficiency for every kill.
 												
-												Casters have the following attributes:
-												+ 1 cast
-												- 25% attack
-												- 25% damage
-												- 15% defense
-												Gains +2% spell damage and 0,5% health for every kill.
+												{~Gold}Mastery{~}: +50% crit chance for commander spells {+20% for the hero}.
 												
-												{~Gold}Mastery{~}: +50% crit chance for commander spells {+20% for the hero}.",
+												
+												Casters have the following attributes:",
 
 			"Play_Com_Opt_4":					"{~r}Supporter{~}
 			
-												Usually focuses on casting supportive spells and using the commander passive ability.
-												Can have different bonus for each commander type.
+												Supporter-class usually focuses on casting supportive spells and using the commander passive ability.
+												Can have different bonus for each commander type.									
 												
-												Supporters have the following attributes:
-												+ 20% passive
-												- 25% attack
-												- 10% damage
-												+ 15% defense/health												
-												+ 2 speed
-												Gains +1% speed and +0,5% passive for every kill. Kill count gets doubled.
+												Gains +0,5% speed and +1% passive for every kill. Kill count gets doubled.
 												
-												{~Gold}Mastery{~}: +25% increased effectiveness of passive and +20% Magic Strength for the hero.",
+												{~Gold}Mastery{~}: +25% increased effectiveness of passive and +20 Magic Strength for the hero.
+																								
+												Supporters have the following attributes:",
 
 			"Play_Com_Opt_5":					"{~r}Leader{~}
 			
-												Usually focuses on leading the army by providing certain boosts to your army.
+												Leader-class usually focuses on leading the army by providing certain boosts to your army.												
 												
-												Leaders have the following attributes:
-												Gains: {Aura of Command} - Gives +4 Att/Def and +2 Speed for creatures standing next to the commander
-												+ 15% attack
-												+ 15% defense
-												+ 15% health
-												+ 1 speed
-												Improves the effects from Aura of Command by +1% for every kill.
+												Gains: {Aura of Command} - Gives +4 Att/Def and +2 Speed for creatures standing next to the commander. Improves the effects from Aura of Command by +1% for every kill.
 												
-												{~Gold}Mastery{~}: Aura of Command is 2 hex wide.",
+												{~Gold}Mastery{~}: Aura of Command is 2 hex wide.
+																								
+												Leaders have the following attributes:",
 			
 			"Play_Com_Opt_6":					"{~r}Scout{~}
 			
-												Usually focuses on multiple attacks and generating resources in combat.
-												Each succefull attack has a chance to genreate a random amount of resources for your kingdom.
-
-												Scouts have the following attributes:
-												+ 1 attack
-												- 50% damage
-												- 20% attack
-												+ 10% defense/health/speed											
-												+ 2 speed																				
-												Gains +0,5% speed and 0,5% health for every kill.
+												Scout-class usually focuses on multiple attacks and generating resources in combat.
+												Each succefull attack has a chance to genreate a random amount of resources for your kingdom.												
+												+ 1 attack, gains +0,5% speed and 0,5% health for every kill.
 												
-												{~Gold}Mastery{~}: + extra attack and resource generation is increased",
+												{~Gold}Mastery{~}: + extra attack and resource generation is increased.
+																								
+												Scouts have the following attributes:",
 
 			"Play_Com_Opt_7":					"{~r}Vampire{~}
 			
@@ -1504,22 +1485,23 @@
 												
 												Gains +0,5% attack and 0,5% health for every kill.
 												
-												{~Gold}Mastery{~}: +50% of damage dealt is restored as HP.",
+												{~Gold}Mastery{~}: 50% of damage dealt is restored as HP.
+												
+												
+												Vampires have the following attributes:",
 
 			"Play_Com_Opt_8":					"{~r}Fire Mage{~}
 																
 												Fire Mages loses all attack and damage but gain the ability to attack with AOE spells in melee combat.
-												The damage of the Fireball attack is based on the spell power of your hero.
-												
-												Has the following attributes:
+												The damage of the Fireball attack is based on the spell power of your hero (SP*15).												
+
 												Gains: {Fireball attack}
-												- 99% attack and damage
-												+ 10% defense/health/speed
-												+ 20% passive
-												+ 20% spell damage
-												+ 1 speed										
+												Fire Mages have a 33% chance to gain a kill count with attacks.				
 												
-												{~Gold}Mastery{~}: Inferno attack",
+												{~Gold}Mastery{~}: Inferno attack.
+												
+												
+												Fire Mages have the following attributes:",
 
 			"Play_Com_Opt_Secret":				"{~r}Secret Class{~}
 																
@@ -2988,7 +2970,7 @@
 			"Cart_Ench_3_Description":			"{~r}%Z-1 Enchantment{~}
 
 
-												This powerful fire spell sets all your projectiles on fire, so that all ranged attacks ignite your enemies. Burning enemies take {10%%} of the damage taken as additional fire damage in the next round. Creatures immune to Fire Magic take no additional damage."
+												This powerful fire spell sets all your projectiles on fire, so that all ranged attacks ignite your enemies. Burning enemies take {10%%} of the damage taken as additional fire damage in the next round. Creatures immune to Fire Magic take no additional damage.",
 
 			"Tent_Upg_1_Description":			"{~r}%Z-1 Upgrade{~}
 
