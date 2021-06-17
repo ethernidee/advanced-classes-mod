@@ -1,5 +1,11 @@
 Changelog
 ***************************************************************************************************************************************************************
+Version 1.0701 (17. Juni 2021)
+
+- fix wrong description of Dragon Scale Armor 
+- small changes to commander artifacts and descriptions, bonus of set now shows in commander stat list
+
+
 Version 1.07 (6. Juni 2021)
 
 When updating from 1.06 please delete old version before installing 1.07
