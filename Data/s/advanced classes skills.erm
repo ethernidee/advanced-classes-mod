@@ -13174,11 +13174,11 @@ x1=hero number, x2-15 returns set pieces
 
 *of the commanders artifacts* 161 Helmet, 163 Round Shield, 166 Necklace and combination sets
 !?BF;
+!!FU:E;                                 [Bonus Moved to Commander attributes table]
 !!BA:H0/?y1 H1/?y2;
 !!HEy1:A2/161/?y3/?y4 A2/163/?y3/?y5 A2/166/?y3/?y6;
 !!FU(Count_Set_Pieces_2):Py1/0/0/?y90/?y91/?y92; [Count Set Pieces function]
 !!VRy51:S100; !!VRy51&y4=1:+20; !!VRy51&y5=1:+20; !!VRy51&y6=1:+20; !!VRy51&y90>=2:+20; !!VRy51&y91>=2:+20; !!VRy51&y92>=2:+20;
-*!IF:M^y4 is%Y4 y5 is%Y5 y6 is%Y6 y90 is%Y90 y91 is%Y91 y92 is%Y92 aaaand y51 is%Y51^;
 !!DO(AC_Function_33)/0/20/1&y51>100:P0/0/0/y51/y51; [Pass  Health and Damage]
 
 !!FU&y2<0:E;
@@ -13186,9 +13186,6 @@ x1=hero number, x2-15 returns set pieces
 !!FU(Count_Set_Pieces_2):Py2/0/0/?y90/?y91/?y92; [Count Set Pieces function]
 !!VRy51:S100; !!VRy51&y4=1:+20; !!VRy51&y5=1:+20; !!VRy51&y6=1:+20; !!VRy51&y90>=2:+20; !!VRy51&y91>=2:+20; !!VRy51&y92>=2:+20;
 !!DO(AC_Function_33)/21/41/1&y51>100:P0/0/0/y51/y51; [Pass  Health and Damage]
-
-
-
 
 
 ********************************************************************************
@@ -14534,7 +14531,32 @@ All changes to these parameters should be done here. Values can be called anytim
     !!VRy50:+10; !!VRy51:+10; !!VRy52:+10; !!VRy53:+10; !!VRy54:+10; !!VRy55:+10; !!VRy56:+10; !!VRy57:+10;
   !!en;
 
-  !!re i/0/5;                          
+  !!HEx1:A2/50/?y80/?y81;               [50  Crest of Valor Attacker +15% to all attributes]
+  !!if&y81=1;
+    !!VRy50:+15; !!VRy51:+15; !!VRy52:+15; !!VRy53:+15; !!VRy54:+15; !!VRy55:+15; !!VRy56:+15; !!VRy57:+15;
+  !!en;
+
+  !!HEx1:A2/161/?y80/?y81;              [161  Blank Helmet +15% to all attributes]
+  !!if&y81=1;
+    !!VRy50:+15; !!VRy51:+15; !!VRy52:+15; !!VRy53:+15; !!VRy54:+15; !!VRy55:+15; !!VRy56:+15; !!VRy57:+15;
+  !!en;
+
+  !!HEx1:A2/163/?y80/?y81;              [163  Blank Shield +15% to all attributes]
+  !!if&y81=1;
+    !!VRy50:+15; !!VRy51:+15; !!VRy52:+15; !!VRy53:+15; !!VRy54:+15; !!VRy55:+15; !!VRy56:+15; !!VRy57:+15;
+  !!en;
+
+  !!HEx1:A2/166/?y80/?y81;              [66 Blank Neck Broach +15% to all attributes]
+  !!if&y81=1;
+    !!VRy50:+15; !!VRy51:+15; !!VRy52:+15; !!VRy53:+15; !!VRy54:+15; !!VRy55:+15; !!VRy56:+15; !!VRy57:+15;
+  !!en;
+
+  !!FU(Count_Set_Pieces_2):Px1/0/0/?y90/?y91/?y92; [Count Set Pieces function]
+  !!if|y90>=2/y91>=2/y92>=2;            [If 2 set pieces equipped +20% to all attributes]
+    !!VRy50:+20; !!VRy51:+20; !!VRy52:+20; !!VRy53:+20; !!VRy54:+20; !!VRy55:+20; !!VRy56:+20; !!VRy57:+20;
+  !!en;
+
+  !!re i/0/5;                           [Commander Artifacts, check all slots]
     !!COx1:A3/i/?y82/?y83; 
     !!VRy55&y82=150:+30;                [+30% Commander spell effectiveness]
     !!VRy99&y82=149:+30;                [149 Helm of Immortality +30 to max kill count]
@@ -14825,7 +14847,8 @@ Fix for Cart of Lumber and Cart of Ore give +2 in total
 !!if&y2=1;
   !!re i/0/10;
   !!BMi:T?y3 P?y4;                      [Get Creature Type and Position]
-    !!if&y3>=174/y3<=182|y4=20;        [If Commander or Henchmen found for Attacker]
+    *!if&y3>=174/y3<=182|y4=20;         [If Commander or Henchmen found for Attacker]
+    !!if&y4=20;                         [If Henchmen found for Attacker]
     !!VRy10:S115;                       [Coefficient for parameter increase +15%]
     !!BMi:A?y5; !!VRy5:*y10:100; !!BMi:Ay5; [Set Attack]
     !!BMi:D?y5; !!VRy5:*y10:100; !!BMi:Dy5; [Set Defense]
@@ -14843,7 +14866,8 @@ Fix for Cart of Lumber and Cart of Ore give +2 in total
 !!if&y2=1;
   !!re i/21/31;
   !!BMi:T?y3 P?y4;                      [Get Creature Type and Position]
-    !!if&y3>=183/y3<=191|y4=30;        [If Commander or Henchmen found for Defender]
+    *!if&y3>=183/y3<=191|y4=30;         [If Commander or Henchmen found for Defender]
+    !!if&y4=30;                         [If Henchmen found for Defender]
     !!VRy10:S115;                       [Coefficient for parameter increase +15%]
     !!BMi:A?y5; !!VRy5:*y10:100; !!BMi:Ay5; [Set Attack]
     !!BMi:D?y5; !!VRy5:*y10:100; !!BMi:Dy5; [Set Defense]
@@ -15004,7 +15028,7 @@ The Champions Honor full set grants Warmachine Upgrades at level up with a 20%/5
 !!SN:H^art^/44/1/z179860;                [Crown of Dragontooth]
 !!SN:H^art^/39/1/z179861;                [Dragon Scale Shield]
 !!SN:H^art^/40/1/z179862;                [Dragon Scale Armor]
-!!SN:H^art^/40/1/z179863;                [Quiet Eye of the Dragon]
+!!SN:H^art^/45/1/z179863;                [Quiet Eye of the Dragon]
 
 *-------Moral-------*
 !!SN:H^art^/49/1/z188112;                [Badge of Courage]
@@ -22039,7 +22063,7 @@ x1 - hero id; x2 - spell id; x3 - mode. -1 is remove, 1 - apply, 0 - print for d
 !!VRy90:S0;
 !!VRy90&i>0:S1;                         [If Immune vs Fire Exit]
 !!VRy90|y80=27/y80=33/y80=55/y80=69/y80=82/y80=83/y80=116/y80=117:S1;
-!!VRy90|y80=121/y80=151/y80=153/y80=155/y80=172/y80=195/y80=209/y80=231:S1;
+!!VRy90|y80=121/y80=151/y80=153/y80=155/y80=172/y80=195/y80=207/y80=209/y80=231:S1;
 !!MF&y90=1:E0;                          [Apply Zero Damage if Immune]
 !!MF&y90=1:F0;                          [Apply Zero Damage if Immune]
 !!FU&y90=1:E;                           [Exit]
@@ -22061,6 +22085,7 @@ x1 - hero id; x2 - spell id; x3 - mode. -1 is remove, 1 - apply, 0 - print for d
 195 Hell Steed
 
 TUM Creatures
+207 Pure Diamond Dragon
 209 Steel Golems
 231 Black Dragons Upgrade
 
@@ -25055,16 +25080,14 @@ Weakness, Stone Skin, Prayer, Mirth, Sorrow, Fortune, Misfortune, Haste, Slow, S
 !!FU&y99=-2:E;
 
 !!BG:D?y3;                              [Get hex id that was affected]
-*!IF:M^Hex ID is %Y3^;
 !!SSy2:O?y4;                            [Get which type of stack does the spell affect]
 !!BG:Q?y5;                              [Get hero side]
 !!FU(Calc_Spell_Duration):Py99/y2/?y6/?y7; [Get spell duration with new and old formula, accordingly.]
 !!DO(Battle_Stacks_Valid_Spellcast)/0/41/1&y3=-1:Py99/y2/y4/y5/y6/y7; [Run Function and loop through all Battle stacks if not mass spell]
-!!if&y3>-1;                            [If casted spell is not mass and current stack is the target]
-!!BU:Ey3/?y1;                           [Get stack id standing on hex]
-!!BMy1:Gy2/?y3/?y4;                     [Get current duration and power of the spell]
-*!IF:M^%Y3 %Y7^;
-!!BMy1&y3=y7:Gy2/y6/y4;                 [Set duration if spell target valid]
+!!if&y3>-1/y3<187;                      [If casted spell is not mass and current stack is the target]
+  !!BU:Ey3/?y1;                         [Get stack id standing on hex]
+  !!BMy1&y1>=0:Gy2/?y3/?y4;             [Get current duration and power of the spell]
+  !!BMy1&y3=y7/y1>=0:Gy2/y6/y4;         [Set duration if spell target valid]
 !!en;
 !!SN:W^Duration_Mod_Changed^/1;
 
