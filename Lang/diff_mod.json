@@ -312,7 +312,7 @@
 												
 			"Anzahl_Abilities":					"{Additional Abilities Option}
 			
-												Will apply up to {4} random abilities to neutrals, to increase the difficulty of combats.",
+												This option is currently disabled because it can cause a bug.",
 			
 		
 		
@@ -604,6 +604,6 @@
 
 			"Two_or_Three":						"2 or 3"		
 
-				},	
+				}	
   
 }

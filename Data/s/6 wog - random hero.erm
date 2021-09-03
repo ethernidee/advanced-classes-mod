@@ -114,17 +114,14 @@ ZVSE
 !!BA:M1/x16/y1/y2; //give the hero to fight for monsters
 
 ********************************************************************************
-!?FU870520&786/v846=1;
-*?FU(OnBattleReplay)&786/v846=1;
+!?FU(OnBattleReplay)&786/v846=1;
 !!SN:W^Disable_Battle_Replay^/?y1;
 !!FU&y1=1:E;
 !!SN:W^Random_Hero_Active^/?y1;
 !!DO(Replay_Battle_Monster1)/0/6/1&y1=1:P;
 !!IF:V786/0;
 
-
-!?FU870530&v846=1;
-*?FU(OnBeforeBattleReplay)&v846=1;
+!?FU(OnBeforeBattleReplay)&v846=1;
 !!SN:W^Disable_Battle_Replay^/?y1;
 !!FU&y1=1:E;
 !!SN:W^Random_Hero_Active^/?y1;

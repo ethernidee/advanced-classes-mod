@@ -91,8 +91,7 @@ ZVSE
 !!VRw49&w49=0:S1;   ** prevent 0-stacks if hero gets attacked by Tim`s WM
 !!VRw49&v490<>0:+1; ** count w49 up, if battlescript called
 
-!?FU870520&1000/v491=1;
-*?FU(OnBattleReplay)&1000/v491=1;
+!?FU(OnBattleReplay)&1000/v491=1;
 !!SN:W^Disable_Battle_Replay^/?y1;
 !!FU&y1=1:E;
 
