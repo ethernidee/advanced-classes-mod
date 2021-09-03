@@ -343,7 +343,7 @@ Master Scholar allows heroes to teach each other any spell up to 4rd level and r
 Also adds +15% to your crit chance, +20% to your crit damage, +6 to your Magic Strength, allows +2 spell upgrades per combat and gives +25% chance for spell upgrades in combat.
 189756	{~Red}Grandmaster Scholar{~}
 
-Grandmaster Scholar allows heroes to teach each other any spell up to 4th level and regenerate 10 spell points for both heroes when they meet.
+Grandmaster Scholar allows heroes to teach each other any spell up to 5th level and regenerate 10 spell points for both heroes when they meet.
 Also adds +20% to your crit chance, +25% to your crit damage, +8 to your Magic Strength, allows +3 spell upgrades per combat and gives +25% chance for spell upgrades in combat.
 
 189557	{~Red}Basic Warfare{~}
@@ -1460,7 +1460,7 @@ With 5 Pieces: +{1} to primary skills +{50}% to Resurrection Spell
 With 6 Pieces: +{20}% Spell damage +{50}% to Destroy Undead Spell +{4} to primary skills, {Blessed}
 188131	{Armor of Wonder}
 
-Worn on the torso, the Armor of Wonder increases all four primary skills by +1 and reduces all ranged damage by 10+2*HLvL points.
+Worn on the torso, the Armor of Wonder increases all four primary skills by +1 and reduces all ranged damage by 5+2*HLvL points.
 
 {~Red}Angelic Alliance{~}:
 With 4 Pieces:+{5}% crit chance, +{5}% crit damage
@@ -1716,7 +1716,7 @@ With 5 Pieces: +{1} to primary skills +{50}% to Resurrection Spell
 With 6 Pieces: +{20}% Spell damage +{50}% to Destroy Undead Spell +{4} to primary skills, {Blessed}
 188175	{Breastplate of Petrified Wood}
 
-Worn on the torso, this item increases your Power skill by +1 and reduces all melee damage by 5+2*HLvL points.
+Worn on the torso, this item increases your Power skill by +1 and reduces all melee damage by 2*HLvL points.
 
 {~Red}Priest of the Light{~}: 
 With 3 Pieces: +{2} Power and Knowledge
@@ -1907,8 +1907,10 @@ plus +1 Defense after 6 victorious battles.
 188213	{Slava's Ring of Power}
 
 {~Gold}Commander{~}: Gives Commander all six Primary Skills at Advanced level.
++10% to all Commander attributes.
 
-{~Gold}Hero{~}:  Increases number of spells of all your creatures by +1 at the beginning of each combat.
+{~Gold}Hero{~}: +2 Spell Power and increases number of spells of all your creatures by +1 at the beginning of each combat.
++10% to all Commander attributes.
 188214	free
 188215	free
 188216	{The Clover of Fortune}
@@ -1951,28 +1953,29 @@ Together witch Luck Skill: Upgrades your "Luck Cast" to Lightning Bolt.
 {~Gold}Commander{~}: Gives +5 Attack
 plus +1 Attack after 6 victorious battles.
 
-{~Gold}Hero{~}: Melee attacks have 10% chance to cripple the target. 
+{~Gold}Hero{~}: +2 Attack and melee attacks have 10% chance to cripple the target. 
 188221	{Mithril Mail}
 
 {~Gold}Commander{~}: Gives +12% Health
 plus +1% Health after every victorious battle.
 
-{~Gold}Hero{~}: Your level 1 troops receive only 50% damage.
+{~Gold}Hero{~}: +2 Defense and your level 1 troops receive only 50% damage.
 188222	{Sword of Sharpness}
 
 {~Gold}Commander{~}: Gives +12% Damage
 plus +1% Damage after every victorious battle.
 
-{~Gold}Hero{~}: +30% damage vs creatures that have more than 500HP. 
+{~Gold}Hero{~}: +2 Attack and +25% damage vs creatures that have more than 500HP. 
 188223	{Helm of Immortality}
 
-{~Gold}Commander{~}: Revives a slain Commander immediately after battle and increases the maximum commander boost level by +50%.
+{~Gold}Commander{~}: Revives a slain Commander immediately after battle and increases the maximum commander boost level by +30.
 
-{~Gold}Hero{~}: Gives your Commander the {~Orange}Aura of Command{~}.
+{~Gold}Hero{~}: +1 to all Primary Stats and gives your Commander the {~Orange}Aura of Command{~}.
 188232	{Pendant of Sorcery}
 
 {~Gold}Commander{~}: Gives +1 Magic Power
 plus +1 Magic Power after 10 victorious battles.
++30% Commander spell effectiveness.
 
 {~Gold}Hero{~}: +{10}% to Magic Pierce
 188233	{Boots of Haste}
@@ -1980,18 +1983,20 @@ plus +1 Magic Power after 10 victorious battles.
 {~Gold}Commander{~}: Gives +1 Speed
 plus +1 Speed after 10 victorious battles.
 
-{~Gold}Hero{~}: Your Haste spell is cast with +2 speed.
+{~Gold}Hero{~}: + 2 Spell Power and your Haste spell is cast with +2 speed. +25% Commander spell and passive effectiveness
 188234	{Bow of Seeking}
 
 {~Gold}Commander{~}: Gives "No Obstacle Penalty"
 plus "No Long-Range Penalty" after 25 victorious battles.
++10% to all Commander attributes.
 
 {~Gold}Hero{~}: Range attacks have a 10% chance to cripple the target.
 188235	{Dragon Eye Ring}
 
 {~Gold}Commander{~}: Gives Commander {~r}Breath Attack{~} and {~r}Dragon Nature{~}.
++10% to all Commander attributes.
 
-{~Gold}Hero{~}: +15% damage versus any Dragon.
+{~Gold}Hero{~}: +25% damage versus any Dragon. +10% to all Commander attributes.
 188224	{Legs of Legion}
 
 This item, when equipped by a hero in a town, increases the growth of your 2nd level units (in that town) by 5 per week.
@@ -2115,70 +2120,70 @@ Reduced hiring costs {-30%} in total.
 188248	free	
 188249	{~r}Full Helmet of the commander{~}
 
-Worn on the head this heavy Helmet increases all primary skills by +1. Also increases the life and damage of your commander by +20%.
+Worn on the head this heavy Helmet increases all primary skills by +1. Also increases all commander attributes by +15%.
 
 {~r}Warrior Class Set{~}
-With 2 Pieces: +20% HP and damage for the commander, +5% max damage for all troops 
+With 2 Pieces: +20% to all commander attributes, +5% max damage for all troops 
 With 3 Pieces: Increases physical crit chance and crit damage for each 3 battles won, +{5} Warrior Class Points, +{3} to all primary skills
 188250	{~r}Precious Longsword{~}
 
 When held in the right hand, this glorious sword gives +6 attack and +1 maximum damage to all your troops but reduces your Defense, Spellpower and Knowledge by -3.
 
 {~r}Warrior Class Set{~}
-With 2 Pieces: +20% HP and damage for the commander, +5% max damage for all troops 
+With 2 Pieces: +20% to all commander attributes, +5% max damage for all troops 
 With 3 Pieces: Increases physical crit chance and crit damage for each 3 battles won, +{5} Warrior Class Points, +{3} to all primary skills
 188251	{~DodgerBlue}Round Shield of the commander{~}
 
-Held in the left hand, this Shield increases your defense by +2 and reduces all physical damage by 50 points. Also increases the life and damage of your commander by +20%. 
+Held in the left hand, this Shield increases your defense by +2 and reduces all physical damage by 50 points. Also increases all commander attributes by +15%.
 
 {~DodgerBlue}Mage Class Set{~}
-With 2 Pieces: +20% HP and damage for the commander, +10% spell crit damage
+With 2 Pieces: +20% to all commander attributes, +10% spell crit damage
 With 3 Pieces: Increases spell crit chance and crit damage for each 2 battles won, +{5} Mage Class Points, +{3} to all primary skills
 188252	{~LimeGreen}Noble Ring of Quicksand{~}
 
 This expensive ring reduces the speed of all enemys by 1 and gives you +1 attack and spellpower.
 
 {~LimeGreen}Adventurer Class Set{~}
-With 2 Pieces: +20% HP and damage for the commander, +1% chance to find hidden treasures and other secrets 
+With 2 Pieces: +20% to all commander attributes, +1% chance to find hidden treasures and other secrets 
 With 3 Pieces: Increases creature growth for each 20 battles won, +{5} Adventurer Class Points, +{3} to all primary skills
 188253	{~DodgerBlue}Crystal Ring of Magic{~}
 
 Worn on the finger, this noble ring gives +6 Spellpower but reduces your Attack and Defense by 1. 
 
 {~DodgerBlue}Mage Class Set{~}
-With 2 Pieces: +20% HP and damage for the commander, +10% spell crit damage
+With 2 Pieces: +20% to all commander attributes, +10% spell crit damage
 With 3 Pieces: Increases spell crit chance and crit damage for each 2 battles won, +{5} Mage Class Points, +{3} to all primary skills
 188254	{~LimeGreen}Kings Necklace of the commander{~}
 
-Worn around the neck this expansive Necklace increases all primary skills by +1. Also increases the life and damage of your commander by +20%.
+Worn around the neck this expansive Necklace increases all primary skills by +1. Also increases all commander attributes by +15%.
 
 {~LimeGreen}Adventurer Class Set{~}
-With 2 Pieces: +20% HP and damage for the commander, +1% chance to find hidden treasures and other secrets 
+With 2 Pieces: +20% to all commander attributes, +1% chance to find hidden treasures and other secrets 
 With 3 Pieces: Increases creature growth for each 20 battles won, +{5} Adventurer Class Points, +{3} to all primary skills
 188255	{~LimeGreen}Royal Armor{~}
 
 Worn on the chest, this wonderfull Armor increases the HP of all your troops by 10% in combat but reduces all primary skills by -1.
 
 {~LimeGreen}Adventurer Class Set{~}
-With 2 Pieces: +20% HP and damage for the commander, +1% chance to find hidden treasures and other secrets 
+With 2 Pieces: +20% to all commander attributes, +1% chance to find hidden treasures and other secrets 
 With 3 Pieces: Increases creature growth for each 20 battles won, +{5} Adventurer Class Points, +{3} to all primary skills
 188256	{~DodgerBlue}Glittering Surcoat of Quicksand{~}
 
 When equipped, this sparkling Surcoat reduces the speed of all enemies by 1 and gives you +1 Luck and Moral 
 
 {~DodgerBlue}Mage Class Set{~}
-With 2 Pieces: +20% HP and damage for the commander, +10% spell crit damage
+With 2 Pieces: +20% to all commander attributes, +10% spell crit damage
 With 3 Pieces: Increases spell crit chance and crit damage for each 2 battles won, +{5} Mage Class Points, +{3} to all primary skills
 188257	{~r}Heavy Boots of Quicksand{~}
 
 These rough boots reduce the speed of all enemies by 1 and gives you +1 attack and defense.
 
 {~r}Warrior Class Set{~}
-With 2 Pieces: +20% HP and damage for the commander, +5% max damage for all troops 
+With 2 Pieces: +20% to all commander attributes, +5% max damage for all troops 
 With 3 Pieces: Increases physical crit chance and crit damage for each 3 battles won, +{5} Warrior Class Points, +{3} to all primary skills
 188258	{Horn of Magic Energy}
 
-When equipped, this magic Horn gives +3 spell power and +3 to wisdom.
+When equipped, this magic Horn gives +3 Spell Power and +3 to Knowledge.
 Increase your chance for a critical spell by {10}%.
 Increases you critical spell damage by {20}%.
 188259	{Ammo Cart}
@@ -2272,9 +2277,12 @@ When used as ammunition this powerful arrow adds {+1} additional shot to your ba
 
 When equipped this powerful scroll increases the effectiveness of all your summoning spells by {+1000 HP}.
 188286
-	{Gate Key}
+	{Fiery Gate Key}
 
 A key to your heart :)
+
+{~Gold}Hint for Naxefir:{~}
+Carry this Key in your inventory while having more than 125 kill count on your commander to unlock the secret commander class.
 188287
 	Magic Wand
 188288
